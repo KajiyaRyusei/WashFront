@@ -1,0 +1,16 @@
+﻿2015/10/05 15:23:24 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\ms_project.vcxproj" (Rebuild ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\Source" /Zi /nologo /W4 /WX /MP /O2 /Oy- /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Develop\ms_project.pch" /Fo"Develop\\" /Fd"Develop\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt source\stdafx.cpp source\main.cpp
+     1>cl : コマンド ライン warning D9030: '/Yc' はマルチプロセシングと互換性がありません。/MP スイッチを無視します
+         stdafx.cpp
+         main.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\ms_project\Develop\ms_project.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\Users\龍成\Documents\fourth\MS\ms_project\Develop\ms_project.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\ms_project\Develop\ms_project.lib" /MACHINE:X86 /SAFESEH Develop\stdafx.obj
+         Develop\main.obj
+         ms_project.vcxproj -> C:\Users\龍成\Documents\fourth\MS\ms_project\Develop\ms_project.exe
+     1>プロジェクト "C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\ms_project.vcxproj" (Rebuild ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:02.24

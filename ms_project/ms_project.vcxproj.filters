@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="source\stdafx.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="Source\Error\assert.cpp">
+      <Filter>Error</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Windows\window.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Windows\window_operation_wrapper.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Windows\window_procedure.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\directx9.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\application.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\system_flow.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\scene_manager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Scene\scene_game.cpp">
+      <Filter>Scene\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera\camera_manager.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera\Camera\camera_2d.cpp">
+      <Filter>Camera\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera\Camera\camera_game_main.cpp">
+      <Filter>Camera\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input\input_event_buffer.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input\input_manager.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input\input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input\keyboard\input_keyboard.cpp">
+      <Filter>Input\keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DevelopTool\DevelopTool\debug_print.cpp">
+      <Filter>DevelopTool\DevelopTool</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DevelopTool\develop_tool_manager.cpp">
+      <Filter>DevelopTool</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\index_buffer.cpp">
+      <Filter>Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\vertex_buffer.cpp">
+      <Filter>Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\effect_handle_holder.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\effect_handle_manager.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\shader_base.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DrawCommand\command_buffer.cpp">
+      <Filter>DrawCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DrawCommand\command_buffer_holder.cpp">
+      <Filter>DrawCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DrawCommand\command_processor.cpp">
+      <Filter>DrawCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\world.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\space_grid.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\unit.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\test_unit.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Scene\scene_title.cpp">
+      <Filter>Scene\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Scene\scene_result.cpp">
+      <Filter>Scene\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\lambert.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\mesh_buffer.cpp">
+      <Filter>Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_sprite.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_cube.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\PostEffect\screen_shader.cpp">
+      <Filter>Shader\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\screen_unit.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\PostEffect\fade_shader.cpp">
+      <Filter>Shader\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Fade\fade.cpp">
+      <Filter>Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_smo.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\static_model_unit.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_amo.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\animation_model_unit.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\animation_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Animation\animation_system.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\stdafx.h" />
+    <ClInclude Include="Source\type_alias.h" />
+    <ClInclude Include="Source\Common\safe_delete.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Common\safe_release.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Error\assert.h">
+      <Filter>Error</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Windows\window.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Windows\window_operation_wrapper.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Windows\window_procedure.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\directx9.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\application.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\system_flow.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Common\reference.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\scene_manager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\scene_spawner.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Scene\scene.h">
+      <Filter>Scene\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Scene\scene_game.h">
+      <Filter>Scene\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera\Camera\camera.h">
+      <Filter>Camera\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera\camera_manager.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera\Camera\camera_2d.h">
+      <Filter>Camera\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera\Camera\camera_game_main.h">
+      <Filter>Camera\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\input_event_buffer.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\input_manager.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\input_alias.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\keyboard\input_keyboard.h">
+      <Filter>Input\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\resource_box.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DevelopTool\DevelopTool\debug_print.h">
+      <Filter>DevelopTool\DevelopTool</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DevelopTool\develop_tool_manager.h">
+      <Filter>DevelopTool</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\index_buffer.h">
+      <Filter>Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\vertex_buffer.h">
+      <Filter>Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\effect_handle_holder.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\effect_handle_manager.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\shader_base.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\light_direction.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\world_view_projection.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DrawCommand\command_buffer.h">
+      <Filter>DrawCommand</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DrawCommand\command_buffer_holder.h">
+      <Filter>DrawCommand</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DrawCommand\command_processor.h">
+      <Filter>DrawCommand</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\unit.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\World\world.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\World\space_grid.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_projection.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_view.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\test_unit.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Scene\scene_title.h">
+      <Filter>Scene\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Scene\scene_result.h">
+      <Filter>Scene\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\lambert.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\mesh_buffer.h">
+      <Filter>Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_sprite.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_cube.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\PostEffect\screen_shader.h">
+      <Filter>Shader\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\screen_size.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\screen_unit.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\screen_matrix.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\ambient_color.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\PostEffect\fade_shader.h">
+      <Filter>Shader\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Fade\fade.h">
+      <Filter>Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_smo.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\static_model_unit.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_amo.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\animation_model_unit.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\animation_matrix.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\animation_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_oaf.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation\animation_system.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{19dca1f0-23b5-42c2-8444-e4f55173a53f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Error">
+      <UniqueIdentifier>{a2540fbd-457b-45f1-a0f9-e5498ccdbfd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{4212c5dd-a5fd-45dd-b62d-585681a831c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{6caa4885-761c-42d8-8bc1-b851595a5cb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{6f8213bb-9c47-4a28-96b3-cf065e1a5b62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{4e117013-47ef-45a2-86d5-e46a62634d99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Scene">
+      <UniqueIdentifier>{ec1fecf0-233a-4027-9663-9c0dfff4f453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{4d3a5881-96d5-41c9-ba61-df178f15a325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera\Camera">
+      <UniqueIdentifier>{11542dc3-5d10-4567-a2b9-aa5e59480788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{ab330028-2826-4dc0-91c1-d549e2c71912}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{3c1239e6-3ecd-4514-9dbe-606c3367f02b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\dinput">
+      <UniqueIdentifier>{62ad40a0-6357-4c92-8894-f4b45163d12b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\xinput">
+      <UniqueIdentifier>{4cd70195-c566-411f-a7ad-e3cef0cfd640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\mouse">
+      <UniqueIdentifier>{008cc357-e7d0-49b3-8642-e57494c90896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\keyboard">
+      <UniqueIdentifier>{132565dc-0a0b-49f3-ad25-34d0c26dd575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{30cedf8f-cd71-454d-a6ba-46e3ee8af9ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DevelopTool">
+      <UniqueIdentifier>{570c386e-ea43-4fc5-9684-a156d3a9109a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DevelopTool\DevelopTool">
+      <UniqueIdentifier>{1fc1940d-19e8-4711-a4d9-1e63ed5a3af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{dbd95ecc-59de-4135-a26e-f2a7be3b7bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh">
+      <UniqueIdentifier>{8310f220-3844-4b78-8920-e3be80ac0f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Shader">
+      <UniqueIdentifier>{2592aef7-d5ff-414b-96d7-926083a662a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Component">
+      <UniqueIdentifier>{3b5c18fe-0c2d-483c-b5df-50653b3e54f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\PostEffect">
+      <UniqueIdentifier>{24bf4c37-847e-4d86-941a-25e586a3c7e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DrawCommand">
+      <UniqueIdentifier>{fe79385d-0047-42b2-95ff-3ff45d5bc033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{068fac79-bbb3-460d-b80b-9b423993c9bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit">
+      <UniqueIdentifier>{d1c7da82-255d-4bd4-96e0-6d68a96e36f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh\Factory">
+      <UniqueIdentifier>{76d12a37-db0d-4987-baf9-f34afa5c5710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fade">
+      <UniqueIdentifier>{aca16d16-de1c-42ff-949d-4414a47fa549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{615b3fe9-7613-4729-981e-cbe06c5f9e80}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
