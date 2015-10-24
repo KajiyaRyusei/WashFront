@@ -1,0 +1,79 @@
+﻿2015/10/25 5:30:56 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\ms_project.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\Source" /Zi /nologo /W4 /WX /MP /O2 /Oy- /D WIN32 /D _DEVELOP /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Develop\ms_project_develop.pch" /Fo"Develop\\" /Fd"Develop\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\DevelopTool\develop_tool_manager.cpp Source\DevelopTool\DevelopTool\debug_print.cpp Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\System\application.cpp Source\Unit\Game\player.cpp Source\World\world.cpp
+         develop_tool_manager.cpp
+         debug_print.cpp
+         scene_game.cpp
+         scene_result.cpp
+         scene_title.cpp
+         application.cpp
+         player.cpp
+         world.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\\ms_project_develop.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\\ms_project_develop.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\\ms_project_develop.lib" /MACHINE:X86 /SAFESEH Develop\often_use.obj
+         Develop\animation_system.obj
+         Develop\camera_2d.obj
+         Develop\camera_game_main.obj
+         Develop\camera_game_player.obj
+         Develop\camera_manager.obj
+         Develop\debug_line.obj
+         Develop\debug_line_box.obj
+         Develop\develop_tool_manager.obj
+         Develop\debug_print.obj
+         Develop\command_buffer.obj
+         Develop\command_buffer_holder.obj
+         Develop\command_processor.obj
+         Develop\assert.obj
+         Develop\fade.obj
+         Develop\input.obj
+         Develop\input_event_buffer.obj
+         Develop\input_manager.obj
+         Develop\input_keyboard.obj
+         Develop\directx9.obj
+         Develop\index_buffer.obj
+         Develop\mesh_factory_amo.obj
+         Develop\mesh_factory_cube.obj
+         Develop\mesh_factory_smo.obj
+         Develop\mesh_factory_sprite.obj
+         Develop\mesh_buffer.obj
+         Develop\vertex_buffer.obj
+         Develop\scene_game.obj
+         Develop\scene_result.obj
+         Develop\scene_title.obj
+         Develop\scene_manager.obj
+         Develop\effect_handle_holder.obj
+         Develop\effect_handle_manager.obj
+         Develop\fade_shader.obj
+         Develop\back_ground_shader.obj
+         Develop\lambert.obj
+         Develop\animation_shader.obj
+         Develop\PBL_animation_shader.obj
+         Develop\screen_shader.obj
+         Develop\shader_base.obj
+         Develop\speaker.obj
+         Develop\speaker_3d.obj
+         Develop\speaker_bgm.obj
+         Develop\xact_manager.obj
+         Develop\stdafx.obj
+         Develop\main.obj
+         Develop\application.obj
+         Develop\system_flow.obj
+         Develop\animation_model_unit.obj
+         Develop\back_ground.obj
+         Develop\player.obj
+         Develop\screen_unit.obj
+         Develop\static_model_unit.obj
+         Develop\test_unit.obj
+         Develop\unit.obj
+         Develop\window.obj
+         Develop\window_operation_wrapper.obj
+         Develop\window_procedure.obj
+         Develop\space_grid.obj
+         Develop\world.obj
+         ms_project.vcxproj -> C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\\ms_project_develop.exe
+     1>プロジェクト "C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:01.64

@@ -1,0 +1,74 @@
+﻿2015/10/25 5:30:27 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\ms_project.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\Source" /Zi /nologo /W4 /WX /sdl /O2 /Oi /Oy- /GL /D _RELEASE /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\ms_project.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Sound\xact\xact_manager.cpp
+         xact_manager.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\\ms_project.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\\ms_project.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\\ms_project.lib" /MACHINE:X86 /SAFESEH Release\often_use.obj
+         Release\animation_system.obj
+         Release\camera_2d.obj
+         Release\camera_game_main.obj
+         Release\camera_game_player.obj
+         Release\camera_manager.obj
+         Release\debug_line.obj
+         Release\debug_line_box.obj
+         Release\develop_tool_manager.obj
+         Release\debug_print.obj
+         Release\command_buffer.obj
+         Release\command_buffer_holder.obj
+         Release\command_processor.obj
+         Release\assert.obj
+         Release\fade.obj
+         Release\input.obj
+         Release\input_event_buffer.obj
+         Release\input_manager.obj
+         Release\input_keyboard.obj
+         Release\directx9.obj
+         Release\index_buffer.obj
+         Release\mesh_factory_amo.obj
+         Release\mesh_factory_cube.obj
+         Release\mesh_factory_smo.obj
+         Release\mesh_factory_sprite.obj
+         Release\mesh_buffer.obj
+         Release\vertex_buffer.obj
+         Release\scene_game.obj
+         Release\scene_result.obj
+         Release\scene_title.obj
+         Release\scene_manager.obj
+         Release\effect_handle_holder.obj
+         Release\effect_handle_manager.obj
+         Release\fade_shader.obj
+         Release\back_ground_shader.obj
+         Release\lambert.obj
+         Release\animation_shader.obj
+         Release\PBL_animation_shader.obj
+         Release\screen_shader.obj
+         Release\shader_base.obj
+         Release\speaker.obj
+         Release\speaker_3d.obj
+         Release\speaker_bgm.obj
+         Release\xact_manager.obj
+         Release\stdafx.obj
+         Release\main.obj
+         Release\application.obj
+         Release\system_flow.obj
+         Release\animation_model_unit.obj
+         Release\back_ground.obj
+         Release\player.obj
+         Release\screen_unit.obj
+         Release\static_model_unit.obj
+         Release\test_unit.obj
+         Release\unit.obj
+         Release\window.obj
+         Release\window_operation_wrapper.obj
+         Release\window_procedure.obj
+         Release\space_grid.obj
+         Release\world.obj
+         コード生成しています。
+         コード生成が終了しました。
+         ms_project.vcxproj -> C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\\ms_project.exe
+     1>プロジェクト "C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:02.18
