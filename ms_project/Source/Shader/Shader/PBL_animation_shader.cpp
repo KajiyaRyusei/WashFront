@@ -33,7 +33,16 @@ void ShaderPBLAnimation::Initialize()
 
 void ShaderPBLAnimation::AssignExceptMaterial() const
 {
-	SendLightDirection(_effect_handle_holder->effect_handle());
 	SendWorldViewProjection(_effect_handle_holder->effect_handle());
+	SendWorld(_effect_handle_holder->effect_handle());
+	SendLightDirection(_effect_handle_holder->effect_handle());
 	SendAnimationMatrix(_effect_handle_holder->effect_handle());
+	SendEyePosition(_effect_handle_holder->effect_handle());
+	SendRoughness(_effect_handle_holder->effect_handle());
+	SendMetalness(_effect_handle_holder->effect_handle());
+	SendFresnel(_effect_handle_holder->effect_handle());
+	SendAmbientColor(_effect_handle_holder->effect_handle());
+	SendDiffuseCubeMap(_effect_handle_holder->effect_handle());
+	SendSpecularCubeMap(_effect_handle_holder->effect_handle());
+	SendAlbedoTexture(_effect_handle_holder->effect_handle());
 }

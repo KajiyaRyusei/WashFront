@@ -14,6 +14,7 @@
 // include
 #include "Unit/unit.h"
 #include "Data/data_oaf.h"
+#include "Data/data_world.h"
 
 //*****************************************************************************
 // 前方宣言
@@ -48,8 +49,12 @@ private:
 	data::ObjectAnimationFile _animation;
 	// アニメーションシステム
 	AnimationSystem* _animation_system;
-
 	// シェーダパラメーターの設定
 	void SettingShaderParameter();
+	data::World _world;
+	D3DXMATRIX _matrix_world_view_projection;
+	LPDIRECT3DCUBETEXTURE9 _diffuse_cube_map;
+	LPDIRECT3DCUBETEXTURE9 _specular_cube_map;
+	LPDIRECT3DTEXTURE9 _albedo_map;
 
 };

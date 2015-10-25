@@ -1,70 +1,11 @@
-﻿2015/10/25 13:50:18 にビルドを開始しました。
+﻿2015/10/25 13:37:52 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt source\stdafx.cpp
-         stdafx.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Algorithm\often_use.cpp Source\Animation\animation_system.cpp Source\Camera\Camera\camera_2d.cpp Source\Camera\Camera\camera_game_main.cpp Source\Camera\Camera\camera_game_player.cpp Source\Camera\camera_manager.cpp Source\DevelopTool\DevelopTool\debug_line.cpp Source\DevelopTool\DevelopTool\debug_line_box.cpp Source\DevelopTool\develop_tool_manager.cpp Source\DevelopTool\DevelopTool\debug_print.cpp Source\DrawCommand\command_buffer.cpp Source\DrawCommand\command_buffer_holder.cpp Source\DrawCommand\command_processor.cpp Source\Error\assert.cpp Source\Fade\fade.cpp Source\Input\input.cpp Source\Input\input_event_buffer.cpp Source\Input\input_manager.cpp Source\Input\keyboard\input_keyboard.cpp Source\Renderer\directx9.cpp Source\Resource\Mesh\index_buffer.cpp Source\Resource\Mesh\Mesh\mesh_factory_amo.cpp Source\Resource\Mesh\Mesh\mesh_factory_cube.cpp Source\Resource\Mesh\Mesh\mesh_factory_smo.cpp Source\Resource\Mesh\Mesh\mesh_factory_sprite.cpp Source\Resource\Mesh\mesh_buffer.cpp Source\Resource\Mesh\vertex_buffer.cpp Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Scene\scene_manager.cpp Source\Shader\effect_handle_holder.cpp Source\Shader\effect_handle_manager.cpp Source\Shader\PostEffect\fade_shader.cpp Source\Shader\Shader\back_ground_shader.cpp Source\Shader\Shader\lambert.cpp Source\Shader\Shader\animation_shader.cpp Source\Shader\Shader\PBL_animation_shader.cpp Source\Shader\Shader\screen_shader.cpp Source\Shader\shader_base.cpp Source\Sound\speaker\speaker.cpp Source\Sound\speaker\speaker_3d.cpp Source\Sound\speaker\speaker_bgm.cpp Source\Sound\xact\xact_manager.cpp source\main.cpp Source\System\application.cpp Source\System\system_flow.cpp Source\Unit\animation_model_unit.cpp Source\Unit\Game\back_ground.cpp Source\Unit\Game\player.cpp Source\Unit\screen_unit.cpp Source\Unit\static_model_unit.cpp Source\Unit\test_unit.cpp Source\Unit\unit.cpp Source\Windows\window.cpp Source\Windows\window_operation_wrapper.cpp Source\Windows\window_procedure.cpp Source\World\space_grid.cpp Source\World\world.cpp
-         often_use.cpp
-         animation_system.cpp
-         camera_2d.cpp
-         camera_game_main.cpp
-         camera_game_player.cpp
-         camera_manager.cpp
-         debug_line.cpp
-         debug_line_box.cpp
-         develop_tool_manager.cpp
-         debug_print.cpp
-         command_buffer.cpp
-         command_buffer_holder.cpp
-         command_processor.cpp
-         assert.cpp
-         fade.cpp
-         input.cpp
-         input_event_buffer.cpp
-         input_manager.cpp
-         input_keyboard.cpp
-         directx9.cpp
-         コードを生成中...
-         コンパイル中...
-         index_buffer.cpp
-         mesh_factory_amo.cpp
-         mesh_factory_cube.cpp
-         mesh_factory_smo.cpp
-         mesh_factory_sprite.cpp
-         mesh_buffer.cpp
-         vertex_buffer.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Unit\unit.cpp Source\World\space_grid.cpp Source\World\world.cpp
          scene_game.cpp
          scene_result.cpp
          scene_title.cpp
-         scene_manager.cpp
-         effect_handle_holder.cpp
-         effect_handle_manager.cpp
-         fade_shader.cpp
-         back_ground_shader.cpp
-         lambert.cpp
-         animation_shader.cpp
-         PBL_animation_shader.cpp
-         screen_shader.cpp
-         shader_base.cpp
-         コードを生成中...
-         コンパイル中...
-         speaker.cpp
-         speaker_3d.cpp
-         speaker_bgm.cpp
-         xact_manager.cpp
-         main.cpp
-         application.cpp
-         system_flow.cpp
-         animation_model_unit.cpp
-         back_ground.cpp
-         player.cpp
-         screen_unit.cpp
-         static_model_unit.cpp
-         test_unit.cpp
          unit.cpp
-         window.cpp
-         window_operation_wrapper.cpp
-         window_procedure.cpp
          space_grid.cpp
          world.cpp
          コードを生成中...
@@ -129,10 +70,9 @@
          Debug\window_procedure.obj
          Debug\space_grid.obj
          Debug\world.obj
-         LINK : 前回のインクリメンタル リンクで C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
          ms_project.vcxproj -> C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe
      1>プロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:05.96
+経過時間 00:00:01.17

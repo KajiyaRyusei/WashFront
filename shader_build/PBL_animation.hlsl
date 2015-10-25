@@ -93,7 +93,15 @@ float Beckmann(float roughness, float dot_normal_half)
 	float dot_normal_half2 = dot_normal_half * dot_normal_half;
 	return exp((dot_normal_half2 - 1) / (roughness2 * dot_normal_half2)) / (roughness2 * dot_normal_half2 * dot_normal_half2);
 }
-
+//-------------------------------------
+// Trowbridge-Reitz(GGX)
+float GGX(float roughness,float dot_normal_half)
+{
+	float roughness2 = roughness * roughness;
+	float D = (dot_normal_half * dot_normal_half) * (roughness2 - 1) + 1;
+	D = 3.141592 *(D * D);
+	return roughness2 / D;
+}
 //-------------------------------------
 // 幾何学減衰率
 float GeometricalAttenuationFactor(
@@ -125,7 +133,8 @@ float3 CookTorrance(
 	float dot_normal_light = dot(normal, light_direction);
 	float dot_normal_eye = dot(normal, eye);
 
-	float D = Beckmann(uniform_roughness, dot_normal_half);
+	float D = GGX(uniform_roughness, dot_normal_half);
+	//float D = Beckmann(uniform_roughness, dot_normal_half);
 	float F = Fresnel(uniform_fresnel, dot_eye_half);
 	float G = GeometricalAttenuationFactor(dot_normal_half, dot_normal_eye, dot_eye_half, dot_normal_light);
 
@@ -206,6 +215,7 @@ VertexShaderOutput VS(VertexShaderInput input)
 
 	// 法線もアニメーションに合わせてあとにワールド変換
 	float4 normal = float4(input.normal.x, input.normal.y, input.normal.z, 0.f);
+	normal = normalize(normal);
 	normal = mul(normal, composition_matrix);
 	normal = mul(normal, uniform_world);
 	output.normal = normalize(normal).xyz;
@@ -229,17 +239,21 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	// アルベド色
 	float3 albedo = tex2D(uniform_diffuse_sampler, input.texcoord).xyz;
 	// 拡散反射色
-	float3 diffuse = OrenNayar(light_direction, eye, input.normal, uniform_ambient_color.xyz);
+	//float3 diffuse = OrenNayar(light_direction, eye, input.normal, uniform_ambient_color.xyz);
+	float3 diffuse = Burley(light_direction, eye, input.normal, uniform_ambient_color.xyz);
 	// 鏡面反射色
 	float3 specular = CookTorrance(light_direction, eye, input.normal);
 	// 環境光色
 	float3 R = reflect(eye, input.normal);
 	float4 specular_cube_ambient = texCUBE(uniform_specular_cube_sampler, R);
-	float4 diffuse_cube_ambient = texCUBE(uniform_diffuse_cube_sampler, R);
+	float4 diffuse_cube_ambient = texCUBE(uniform_diffuse_cube_sampler, input.normal);
 
 	output.render_target0.xyz = (diffuse + specular) * albedo;
 	output.render_target0.xyz = lerp(diffuse_cube_ambient.xyz, specular_cube_ambient.xyz, uniform_metalness) * output.render_target0.xyz;
-	output.render_target0.a = uniform_ambient_color.a;
+	output.render_target0.a = uniform_ambient_color.w;
+
+	// ガンマ補正
+	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 1.5f);
 
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);
