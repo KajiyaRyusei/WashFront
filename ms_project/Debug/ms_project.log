@@ -1,4 +1,4 @@
-﻿2015/10/25 14:09:33 にビルドを開始しました。
+﻿2015/10/25 14:17:47 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Unit\Game\player.cpp
@@ -64,9 +64,10 @@
          Debug\window_procedure.obj
          Debug\space_grid.obj
          Debug\world.obj
+         LINK : 前回のインクリメンタル リンクで C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
          ms_project.vcxproj -> C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe
      1>プロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:00.97
+経過時間 00:00:01.15
