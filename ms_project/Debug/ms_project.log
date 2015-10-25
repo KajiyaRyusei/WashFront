@@ -1,14 +1,8 @@
-﻿2015/10/25 13:37:52 にビルドを開始しました。
+﻿2015/10/25 14:09:33 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Unit\unit.cpp Source\World\space_grid.cpp Source\World\world.cpp
-         scene_game.cpp
-         scene_result.cpp
-         scene_title.cpp
-         unit.cpp
-         space_grid.cpp
-         world.cpp
-         コードを生成中...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Unit\Game\player.cpp
+         player.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\often_use.obj
          Debug\animation_system.obj
@@ -75,4 +69,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:01.17
+経過時間 00:00:00.97
