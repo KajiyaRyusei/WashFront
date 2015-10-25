@@ -63,7 +63,7 @@ public:
 private:
 
 	static const s32 kMaxCell = 5;
-	static const s32 kSizeCell = 20;
+	static const s32 kSizeCell = 50;
 	static const s32 kAttackDistance = 5;
 
 	Unit* _cells[kMaxCell][kMaxCell][kMaxCell];
