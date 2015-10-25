@@ -125,7 +125,7 @@ void PlayerUnit::SettingShaderParameter()
 	_shader->SetSpecularCubeMap(_specular_cube_map);
 	_shader->SetEyePosition(eye);
 	_shader->SetFresnel(0.3f);
-	_shader->SetMetalness(1.0f);
+	_shader->SetMetalness(0.0f);
 	_shader->SetRoughness(1.0f);
 	_shader->SetWorld(_world.matrix);
 }
