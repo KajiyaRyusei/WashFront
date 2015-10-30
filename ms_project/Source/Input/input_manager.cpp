@@ -11,6 +11,7 @@
 #include "input_manager.h"
 #include "input_event_buffer.h"
 #include "keyboard/input_keyboard.h"
+#include "xinput\input_x.h"
 
 //*****************************************************************************
 // 定数
@@ -35,6 +36,9 @@ void InputManager::Initialize(
 
 	// キーボード生成
 	_input_device_list.push_back(new InputKeyboard(_input_event_buffer));
+
+	// XInput
+	_input_device_list.push_back( new InputX( _input_event_buffer ) );
 
 	for (auto it = _input_device_list.begin(); it < _input_device_list.end(); ++it)
 	{// デバイスの初期化
@@ -95,4 +99,16 @@ bool InputManager::CheckRelease(INPUT_EVENT input_event)
 bool InputManager::CheckRepeat(INPUT_EVENT input_event)
 {
 	return _input_event_buffer->GetInputEventList(input_event) & kRepeateBit ? true : false;
+}
+//=============================================================================
+// データセット
+void InputManager::SetEventValue(INPUT_EVENT_VALUE input_event_value ,s32 Value)
+{
+	_input_event_buffer->SetInputEventValue( input_event_value , Value );
+}
+//=============================================================================
+// データ取得
+s32 InputManager::GetEventValue(INPUT_EVENT_VALUE input_event_value)
+{
+	return _input_event_buffer->GetInputEventValue( input_event_value );
 }
