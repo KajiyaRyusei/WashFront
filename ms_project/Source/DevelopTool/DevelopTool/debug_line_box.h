@@ -1,8 +1,8 @@
 ﻿//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
-// デバッグ用ラインキューブ
+// デバッグ用ラインBOX
 //
-// Created by Ryusei Kajiya on 20151023
+// Created by Ryusei Kajiya on 20151028
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -42,7 +42,7 @@ private:
 		D3DXVECTOR3 scaling;
 	};
 
-	struct VERTEX_CUBE
+	struct VERTEX_BOX
 	{
 		D3DXVECTOR3 position;
 		D3DCOLOR color;
@@ -50,7 +50,7 @@ private:
 
 	static const u32 kMaxBox = 1000;
 	LineBox _boxs[kMaxBox];
-	VERTEX_CUBE vertices[22];
+	VERTEX_BOX vertices[22];
 
 	u32 _current_line_box_index;
 

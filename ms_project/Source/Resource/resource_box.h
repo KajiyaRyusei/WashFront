@@ -2,7 +2,7 @@
 //
 // リソースボックス
 // 
-// Created by Ryusei Kajiya on 20151025
+// Created by Ryusei Kajiya on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -65,6 +65,8 @@ public:
 	}
 
 private:
+
 	using ResourceMap = std::map<int, T>;
+	ResourceMap _map;
 	s32 _current_id;
 };

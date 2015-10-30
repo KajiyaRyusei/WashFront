@@ -50,11 +50,13 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <FxCompile Include="aim.hlsl" />
     <FxCompile Include="animation.hlsl" />
     <FxCompile Include="back_ground.hlsl" />
     <FxCompile Include="fade.hlsl" />
     <FxCompile Include="lambert_lighting.hlsl" />
     <FxCompile Include="PBL_animation.hlsl" />
+    <FxCompile Include="PBL_static.hlsl" />
     <FxCompile Include="screen_shader.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

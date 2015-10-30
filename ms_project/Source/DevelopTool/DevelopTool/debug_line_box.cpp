@@ -1,8 +1,8 @@
 ﻿//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
-// デバッグ用ラインキューブ
+// デバッグ用ラインBOX
 //
-// Created by Ryusei Kajiya on 20151023
+// Created by Ryusei Kajiya on 20151028
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -96,7 +96,7 @@ void DebugLineBox::Draw()
 		device->SetTransform(D3DTS_WORLD, &world);
 
 		device->SetFVF(D3DFVF_XYZ | D3DFVF_DIFFUSE);
-		device->DrawPrimitiveUP(D3DPT_LINESTRIP, kVertexMax-1, vertices, sizeof(VERTEX_CUBE));
+		device->DrawPrimitiveUP(D3DPT_LINESTRIP, kVertexMax - 1, vertices, sizeof(VERTEX_BOX));
 
 	}
 	device->SetRenderState(D3DRS_LIGHTING, TRUE);

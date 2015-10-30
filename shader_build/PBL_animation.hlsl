@@ -74,9 +74,9 @@ uniform sampler uniform_specular_cube_sampler = sampler_state {
 	AddressV = WRAP;
 };
 
-uniform texture uniform_diffuse_texture;
-uniform sampler uniform_diffuse_sampler = sampler_state {
-	Texture = <uniform_diffuse_texture>;
+uniform texture uniform_albedo_texture;
+uniform sampler uniform_albedo_sampler = sampler_state {
+	Texture = <uniform_albedo_texture>;
 	MinFilter = ANISOTROPIC;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
@@ -237,7 +237,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	// 視線ベクトル
 	float3 eye = normalize(uniform_eye_position - input.world_position);
 	// アルベド色
-	float3 albedo = tex2D(uniform_diffuse_sampler, input.texcoord).xyz;
+	float3 albedo = tex2D(uniform_albedo_sampler, input.texcoord).xyz;
 	// 拡散反射色
 	//float3 diffuse = OrenNayar(light_direction, eye, input.normal, uniform_ambient_color.xyz);
 	float3 diffuse = Burley(light_direction, eye, input.normal, uniform_ambient_color.xyz);

@@ -2,7 +2,7 @@
 //
 // シーン：タイトル
 //
-// Created by Ryusei Kajiya on 20151011
+// Created by Ryusei Kajiya on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -11,7 +11,6 @@
 #include "scene_title.h"
 #include "DevelopTool/develop_tool_manager.h"
 #include "World/world.h"
-#include "World/space_grid.h"
 
 // input
 #include "Input/input_manager.h"
@@ -22,7 +21,7 @@
 #include "Scene/Scene/scene_game.h"
 
 // unit
-#include "Unit/test_unit.h"
+#include "Unit/screen_unit.h"
 
 //=============================================================================
 // コンストラクタ
@@ -35,11 +34,10 @@ SceneTitle::SceneTitle(Application *application) :
 // 初期化
 void SceneTitle::Initialize()
 {
-	SpaceGrid* grid = new SpaceGrid();
+	_world = new World();
 	std::list<Unit*> unit_list;
-	unit_list.push_back(new TestUnit(_application, grid));
-
-	_world = new World(std::move(unit_list), grid);
+	unit_list.push_back(new ScreenUnit(_application, _world));
+	_world->PushUnit(std::move(unit_list));
 
 }
 //=============================================================================

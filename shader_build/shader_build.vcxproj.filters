@@ -25,5 +25,11 @@
     <FxCompile Include="PBL_animation.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
+    <FxCompile Include="aim.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="PBL_static.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -44,12 +44,17 @@ void CommandProcessor::ProccessBackGround(void) const
 	Proccess(RENDER_STATE_BACKGROUND);
 }
 //=============================================================================
+// è∆èÄ
+void CommandProcessor::ProccessAIM(void) const
+{
+	Proccess(RENDER_STATE_AIM);
+}
+//=============================================================================
 // 2D
 void CommandProcessor::Proccess2D(void) const
 {
 	Proccess(RENDER_STATE_2D);
 }
-
 
 //=============================================================================
 // ï`âÊèàóù

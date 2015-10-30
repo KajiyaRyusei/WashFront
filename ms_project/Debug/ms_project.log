@@ -1,8 +1,10 @@
-﻿2015/10/25 14:17:47 にビルドを開始しました。
+﻿2015/10/30 12:57:18 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Unit\Game\player.cpp
-         player.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Scene\Scene\scene_game.cpp Source\Unit\Game\building.cpp
+         scene_game.cpp
+         building.cpp
+         コードを生成中...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\often_use.obj
          Debug\animation_system.obj
@@ -10,8 +12,19 @@
          Debug\camera_game_main.obj
          Debug\camera_game_player.obj
          Debug\camera_manager.obj
+         Debug\collision_system.obj
+         Debug\command_fire.obj
+         Debug\command_handler.obj
+         Debug\command_move_back.obj
+         Debug\command_move_down.obj
+         Debug\command_move_front.obj
+         Debug\command_move_left.obj
+         Debug\command_move_right.obj
+         Debug\command_move_up.obj
+         Debug\debug_box.obj
          Debug\debug_line.obj
          Debug\debug_line_box.obj
+         Debug\debug_sphere.obj
          Debug\develop_tool_manager.obj
          Debug\debug_print.obj
          Debug\command_buffer.obj
@@ -38,10 +51,12 @@
          Debug\effect_handle_holder.obj
          Debug\effect_handle_manager.obj
          Debug\fade_shader.obj
+         Debug\aim_shader.obj
          Debug\back_ground_shader.obj
          Debug\lambert.obj
          Debug\animation_shader.obj
          Debug\PBL_animation_shader.obj
+         Debug\PBL_static_shader.obj
          Debug\screen_shader.obj
          Debug\shader_base.obj
          Debug\speaker.obj
@@ -52,22 +67,25 @@
          Debug\main.obj
          Debug\application.obj
          Debug\system_flow.obj
-         Debug\animation_model_unit.obj
+         Debug\aim.obj
+         Debug\aim_draw.obj
+         Debug\aim_line.obj
          Debug\back_ground.obj
+         Debug\building.obj
+         Debug\bullet.obj
+         Debug\dirt.obj
          Debug\player.obj
          Debug\screen_unit.obj
-         Debug\static_model_unit.obj
-         Debug\test_unit.obj
          Debug\unit.obj
          Debug\window.obj
          Debug\window_operation_wrapper.obj
          Debug\window_procedure.obj
-         Debug\space_grid.obj
+         Debug\collision_grid.obj
+         Debug\grid_2D.obj
          Debug\world.obj
-         LINK : 前回のインクリメンタル リンクで C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
          ms_project.vcxproj -> C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe
      1>プロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:01.15
+経過時間 00:00:01.66

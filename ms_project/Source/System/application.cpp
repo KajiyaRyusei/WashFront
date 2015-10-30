@@ -133,6 +133,7 @@ void Application::Draw()
 	_command_processor->ProccessField();
 	_command_processor->ProccessShadow();
 	_command_processor->ProccessBackGround();
+	_command_processor->ProccessAIM();
 	_command_processor->Proccess2D();
 	_command_buffer->Clear();
 

@@ -40,5 +40,15 @@ namespace algo
 		const D3DXVECTOR4& vector,
 		const D3DXMATRIX& world);
 
+	//====================================
+	// ÉxÉWÉFã»ê¸
+	D3DXVECTOR3& BezierCurve2D(
+		D3DXVECTOR3& out_point,
+		const D3DXVECTOR3& start_point,
+		const D3DXVECTOR3& end_point,
+		const D3DXVECTOR3& control_point,
+		const fx32 frame);
+
+
 }
 

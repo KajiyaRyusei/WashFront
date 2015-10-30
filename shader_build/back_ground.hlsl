@@ -40,9 +40,9 @@ struct PixelShaderOutput
 uniform float4x4 uniform_world_view_projection;
 
 // テクスチャ
-texture uniform_albedo_texture;
-sampler uniform_albedo_sampler = sampler_state {
-	Texture = <uniform_albedo_texture>;
+texture uniform_albedo_cube_texture;
+sampler uniform_albedo_cube_sampler = sampler_state {
+	Texture = <uniform_albedo_cube_texture>;
 	MinFilter = ANISOTROPIC;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
@@ -72,7 +72,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 {
 	PixelShaderOutput output = (PixelShaderOutput)0;
 
-	output.render_target0 = texCUBE(uniform_albedo_sampler, input.normal);
+	output.render_target0 = texCUBE(uniform_albedo_cube_sampler, input.normal);
 	//output.render_target0 = float4(input.normal, 1);
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);

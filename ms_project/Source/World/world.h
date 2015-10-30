@@ -2,7 +2,7 @@
 //
 // 世界
 // 
-// Created by Ryusei Kajiya on 20151009
+// Created by Ryusei Kajiya on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -13,7 +13,8 @@
 //*****************************************************************************
 // 前方宣言
 class Unit;
-class SpaceGrid;
+class CollisionGrid;
+template<class T>class ResourceBox;
 
 //*****************************************************************************
 // クラス設計
@@ -21,9 +22,7 @@ class World
 {
 public:
 
-	World(std::list<Unit*>&& unit_list, SpaceGrid* grid) :
-		_unit_list(unit_list),
-		_grid(grid)
+	World()
 	{
 		Initialize();
 	}
@@ -35,9 +34,20 @@ public:
 	void Finalize();
 	void Update();
 	void Draw();
+	void PushUnit(std::list<Unit*>&& unit_list)
+	{
+		_unit_list = unit_list;
+	}
+
+	CollisionGrid* GetCollisionGrid(){ return _collision_grid; }
+	ResourceBox<LPDIRECT3DTEXTURE9>* GetTextureResourceBox(){ return _texture_resource_box; }
+	ResourceBox<LPDIRECT3DCUBETEXTURE9>* GetCubeTextureResourceBox(){ return _texture_cube_resource_box; }
+
 
 private:
 
 	std::list<Unit*> _unit_list;
-	SpaceGrid* _grid;
+	CollisionGrid* _collision_grid;
+	ResourceBox<LPDIRECT3DTEXTURE9>* _texture_resource_box;
+	ResourceBox<LPDIRECT3DCUBETEXTURE9>* _texture_cube_resource_box;
 };

@@ -25,9 +25,8 @@ public:
 
 	// これで登録してください
 	void RegisteLine(
-		const fx32 length,
-		const D3DXVECTOR3& position,
-		const D3DXVECTOR3& rotation);
+		const D3DXVECTOR3& start_point,
+		const D3DXVECTOR3& end_point);
 
 private:
 
@@ -37,8 +36,6 @@ private:
 	struct LINE
 	{
 		D3DXVECTOR3 vertices[2];
-		D3DXVECTOR3 position;
-		D3DXVECTOR3 rotation;
 	};
 
 	static const u32 kMaxLine = 1000;

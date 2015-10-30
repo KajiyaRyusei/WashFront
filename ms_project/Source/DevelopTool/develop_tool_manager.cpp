@@ -18,6 +18,8 @@ void DevelopToolManager::Initialize()
 	_debug_print.Initialize();
 	_debug_line.Initialize();
 	_debug_line_box.Initialize();
+	_debug_box.Initialize();
+	_debug_sphere.Initialize();
 #endif
 }
 
@@ -29,6 +31,8 @@ void DevelopToolManager::Finalize()
 	_debug_print.Finalize();
 	_debug_line.Finalize();
 	_debug_line_box.Finalize();
+	_debug_box.Finalize();
+	_debug_sphere.Finalize();
 #endif
 }
 
@@ -48,6 +52,8 @@ void DevelopToolManager::Draw()
 #ifndef _RELEASE
 	_debug_line.Draw();
 	_debug_line_box.Draw();
+	_debug_box.Draw();
+	_debug_sphere.Draw();
 	_debug_print.Draw();
 #endif
 }

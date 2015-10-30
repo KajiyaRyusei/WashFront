@@ -25,7 +25,7 @@ namespace component
 		// ハンドル取得を行います。
 		void InitializeAlbedoCubeTexture(LPD3DXEFFECT effect)
 		{
-			_handle_albedo_cube_texture = effect->GetParameterByName(nullptr, "uniform_albedo_texture");
+			_handle_albedo_cube_texture = effect->GetParameterByName(nullptr, "uniform_albedo_cube_texture");
 			ASSERT(_handle_albedo_cube_texture != nullptr, "ハンドル読み込みに失敗しました。");
 		}
 
@@ -36,9 +36,9 @@ namespace component
 		}
 
 		// ミューテータ
-		void SetAlbedoCubeTexture(const LPDIRECT3DCUBETEXTURE9& albedo_texture)
+		void SetAlbedoCubeTexture(const LPDIRECT3DCUBETEXTURE9& albedo_cube_texture)
 		{
-			_albedo_cube_texture = albedo_texture;
+			_albedo_cube_texture = albedo_cube_texture;
 		}
 
 	private:

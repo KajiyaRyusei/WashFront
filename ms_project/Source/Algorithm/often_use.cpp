@@ -56,4 +56,20 @@ namespace algo
 		return inverse_vector;
 	}
 
+	//====================================
+	// ÉxÉWÉFã»ê¸
+	D3DXVECTOR3& BezierCurve2D(
+		D3DXVECTOR3& out_point,
+		const D3DXVECTOR3& start_point,
+		const D3DXVECTOR3& end_point,
+		const D3DXVECTOR3& control_point,
+		const fx32 frame)
+	{
+		out_point.x = (1 - frame) * (1 - frame) * start_point.x + 2 * (1 - frame) *frame * control_point.x + frame * frame * end_point.x;
+		out_point.y = (1 - frame) * (1 - frame) * start_point.y + 2 * (1 - frame) *frame * control_point.y + frame * frame * end_point.y;
+		out_point.z = (1 - frame) * (1 - frame) * start_point.z + 2 * (1 - frame) *frame * control_point.z + frame * frame * end_point.z;
+
+		return out_point;
+	}
+
 }

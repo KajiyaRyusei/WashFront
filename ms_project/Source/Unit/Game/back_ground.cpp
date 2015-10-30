@@ -2,18 +2,16 @@
 //
 // ”wŒi—p“V‹…
 // 
-// Created by Ryusei Kajiya on 20151022
+// Created by Ryusei Kajiya on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //*****************************************************************************
 // include
 #include "back_ground.h"
-#include "System/application.h"
 #include "Shader/Shader/back_ground_shader.h"
 #include "Shader/Shader/lambert.h"
 #include "Resource/Mesh/Mesh/mesh_factory_cube.h"
-#include "DrawCommand/command_buffer.h"
 #include "Camera/camera_manager.h"
 #include "Camera/Camera/camera_game_player.h"
 #include "Resource/resource_box.h"
