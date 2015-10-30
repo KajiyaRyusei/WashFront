@@ -22,7 +22,7 @@
 // ’è”
 namespace
 {
-	static const fx32 kCenterPointHeight = 4.f;
+	static const fx32 kCenterPointHeight = 5.f;
 	static const fx32 kVelocityCoefficient = 0.90f;
 	static const fx32 kLengthCenterAndLookAt = 30.f;
 	static const fx32 kLengthCenterAndEye = -15.f;
