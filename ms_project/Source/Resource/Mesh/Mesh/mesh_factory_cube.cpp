@@ -100,27 +100,32 @@ MeshBuffer* MeshFactoryCube::Create(RendererDevice* renderer_device)
 	vertex[1].texcoord = oz;
 	vertex[2].texcoord = zo;
 	vertex[3].texcoord = oo;
+
 	vertex[4].texcoord = zz;
-	vertex[5].texcoord = zz;
-	vertex[6].texcoord = oz;
-	vertex[7].texcoord = zo;
+	vertex[5].texcoord = oz;
+	vertex[6].texcoord = zo;
+	vertex[7].texcoord = oo;
 	vertex[8].texcoord = oo;
+
 	vertex[9].texcoord = zz;
 	vertex[10].texcoord = zz;
 	vertex[11].texcoord = oz;
 	vertex[12].texcoord = zo;
 	vertex[13].texcoord = oo;
+
 	vertex[14].texcoord = zz;
 	vertex[15].texcoord = zz;
 	vertex[16].texcoord = zz;
 	vertex[17].texcoord = oz;
 	vertex[18].texcoord = zo;
 	vertex[19].texcoord = oo;
+
 	vertex[20].texcoord = zz;
 	vertex[21].texcoord = zz;
 	vertex[22].texcoord = oz;
 	vertex[23].texcoord = zo;
 	vertex[24].texcoord = oo;
+
 	vertex[25].texcoord = zz;
 	vertex[26].texcoord = zz;
 	vertex[27].texcoord = oz;

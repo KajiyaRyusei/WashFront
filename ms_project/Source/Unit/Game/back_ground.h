@@ -2,7 +2,7 @@
 //
 // 背景用天球
 // 
-// Created by Ryusei Kajiya on 20151022
+// Created by Ryusei Kajiya on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -18,7 +18,6 @@
 //*****************************************************************************
 // 前方宣言
 class ShaderBackGround;
-class ShaderLambert;
 class MeshBuffer;
 
 //*****************************************************************************
@@ -27,7 +26,7 @@ class BackGroundUnit : public Unit
 {
 public:
 
-	BackGroundUnit(Application* application, SpaceGrid* grid) : Unit(application, grid)
+	BackGroundUnit(Application* application, World* world) : Unit(application, world)
 	{
 		Initialize();
 	}
@@ -37,12 +36,11 @@ public:
 	virtual void Finalize() override;
 	virtual void Update() override;
 	virtual void Draw() override;
-
+	virtual void CollisionUpdate() override{};
 private:
 
 	// シェーダー
 	ShaderBackGround* _shader;
-	//ShaderLambert* _shader;
 	// メッシュ
 	MeshBuffer* _mesh;
 

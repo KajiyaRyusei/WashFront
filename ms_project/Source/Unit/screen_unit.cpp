@@ -10,13 +10,9 @@
 // include
 #include "screen_unit.h"
 
-#include "System/application.h"
-
 #include "Shader/Shader/screen_shader.h"
 
 #include "Resource/Mesh/Mesh/mesh_factory_sprite.h"
-
-#include "DrawCommand/command_buffer.h"
 
 #include "Windows/window.h"
 

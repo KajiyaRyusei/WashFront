@@ -21,6 +21,8 @@
 #include "Shader/Shader/animation_shader.h"
 #include "Shader/Shader/back_ground_shader.h"
 #include "Shader/Shader/PBL_animation_shader.h"
+#include "Shader/Shader/PBL_static_shader.h"
+#include "Shader/Shader/aim_shader.h"
 
 //==============================================================================
 // コンストラクタ
@@ -39,6 +41,8 @@ EffectHandleManager::EffectHandleManager(RendererDevice* renderer_device)
 	EntryList<ShaderAnimation>("Data/Shader/animation.cso", renderer_device);
 	EntryList<ShaderBackGround>("Data/Shader/back_ground.cso", renderer_device);
 	EntryList<ShaderPBLAnimation>("Data/Shader/PBL_animation.cso", renderer_device);
+	EntryList<ShaderPBLStatic>("Data/Shader/PBL_static.cso", renderer_device);
+	EntryList<ShaderAim>("Data/Shader/aim.cso", renderer_device);
 
 }
 

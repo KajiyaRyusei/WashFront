@@ -2,7 +2,7 @@
 //
 // プレイヤー用カメラ
 // 
-// Created by Ryusei Kajiya on 20151022
+// Created by Ryusei Kajiya on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -23,12 +23,13 @@
 namespace
 {
 	static const fx32 kCenterPointHeight = 4.f;
-	static const fx32 kVelocityCoefficient = 0.95f;
-	static const fx32 kLengthCenterAndLookAt = 12.f;
-	static const fx32 kCameraRotationVelocityX = 0.02f;
-	static const fx32 kCameraRotationVelocityY = 0.1f;
-	static const fx32 kCameraRotationLimitX = 0.15f;// 3.14のパーセンテージ
-	static const fx32 kCameraRotationLimitY = 0.5f;	// 3.14のパーセンテージ
+	static const fx32 kVelocityCoefficient = 0.90f;
+	static const fx32 kLengthCenterAndLookAt = 30.f;
+	static const fx32 kLengthCenterAndEye = -15.f;
+	static const fx32 kCameraRotationVelocityX = 0.01f;
+	static const fx32 kCameraRotationVelocityY = 0.05f;
+	static const fx32 kCameraRotationLimitX = 1.15f;// 3.14のパーセンテージ
+	static const fx32 kCameraRotationLimitY = 1.5f;	// 3.14のパーセンテージ
 }
 //=============================================================================
 // 初期化
@@ -76,7 +77,7 @@ void CameraGamePlayer::Chase()
 
 	// 中心点から視点を作成
 	D3DXMatrixRotationYawPitchRoll(&rotation_matrix, _rotation.y, _rotation.x, _rotation.z);
-	D3DXMatrixTranslation(&translation_matrix, 0.f, 0.f, -kLengthCenterAndLookAt);
+	D3DXMatrixTranslation(&translation_matrix, 0.f, 0.f, kLengthCenterAndEye);
 	D3DXMatrixTranslation(&position_matrix, _player_position.x, _player_position.y + kCenterPointHeight, _player_position.z);
 	world_matrix = translation_matrix * rotation_matrix * position_matrix;
 	D3DXVec3TransformCoord(&_view.eye, &center_point, &world_matrix);
@@ -110,23 +111,23 @@ void CameraGamePlayer::Input()
 	_rotation_velocity += (_destnation_rotation_velocity - _rotation_velocity) * kVelocityCoefficient;
 	_destnation_rotation_velocity *= kVelocityCoefficient;
 
-	if( _rotation.x >= D3DX_PI * kCameraRotationLimitX )
-	{
-		_rotation.x = D3DX_PI * kCameraRotationLimitX;
-	}
-	else if( _rotation.x <= -D3DX_PI * kCameraRotationLimitX )
-	{
-		_rotation.x = -D3DX_PI * kCameraRotationLimitX;
-	}
-
-	if( _rotation.y >= D3DX_PI * kCameraRotationLimitY )
-	{
-		_rotation.y = D3DX_PI * kCameraRotationLimitY;
-	}
-	else if( _rotation.y <= -D3DX_PI * kCameraRotationLimitY )
-	{
-		_rotation.y = -D3DX_PI * kCameraRotationLimitY;
-	}
+	//if( _rotation.x >= D3DX_PI * kCameraRotationLimitX )
+	//{
+	//	_rotation.x = D3DX_PI * kCameraRotationLimitX;
+	//}
+	//else if( _rotation.x <= -D3DX_PI * kCameraRotationLimitX )
+	//{
+	//	_rotation.x = -D3DX_PI * kCameraRotationLimitX;
+	//}
+	//
+	//if( _rotation.y >= D3DX_PI * kCameraRotationLimitY )
+	//{
+	//	_rotation.y = D3DX_PI * kCameraRotationLimitY;
+	//}
+	//else if( _rotation.y <= -D3DX_PI * kCameraRotationLimitY )
+	//{
+	//	_rotation.y = -D3DX_PI * kCameraRotationLimitY;
+	//}
 
 	_rotation += _rotation_velocity;
 }

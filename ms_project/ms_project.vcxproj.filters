@@ -84,13 +84,7 @@
     <ClCompile Include="Source\World\world.cpp">
       <Filter>World</Filter>
     </ClCompile>
-    <ClCompile Include="Source\World\space_grid.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Unit\unit.cpp">
-      <Filter>Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Unit\test_unit.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Scene\scene_title.cpp">
@@ -123,14 +117,8 @@
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_smo.cpp">
       <Filter>Resource\Mesh\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Unit\static_model_unit.cpp">
-      <Filter>Unit</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_amo.cpp">
       <Filter>Resource\Mesh\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Unit\animation_model_unit.cpp">
-      <Filter>Unit</Filter>
     </ClCompile>
     <ClCompile Include="Source\Shader\Shader\animation_shader.cpp">
       <Filter>Shader\Shader</Filter>
@@ -176,6 +164,69 @@
     </ClCompile>
     <ClCompile Include="Source\Shader\Shader\PBL_animation_shader.cpp">
       <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\collision_system.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\aim_draw.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\aim_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\aim.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\aim_line.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\collision_grid.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\grid_2D.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DevelopTool\DevelopTool\debug_box.cpp">
+      <Filter>DevelopTool\DevelopTool</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DevelopTool\DevelopTool\debug_sphere.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\building.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\PBL_static_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Command\command_fire.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Command\command_handler.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Command\command_move_right.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Command\command_move_up.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Command\command_move_back.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Command\command_move_down.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Command\command_move_front.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Command\command_move_left.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\bullet.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\dirt.cpp">
+      <Filter>Unit\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,17 +346,11 @@
     <ClInclude Include="Source\World\world.h">
       <Filter>World</Filter>
     </ClInclude>
-    <ClInclude Include="Source\World\space_grid.h">
-      <Filter>World</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Data\data_projection.h">
       <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="Source\Data\data_view.h">
       <Filter>Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Unit\test_unit.h">
-      <Filter>Unit</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene\Scene\scene_title.h">
       <Filter>Scene\Scene</Filter>
@@ -349,14 +394,8 @@
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_smo.h">
       <Filter>Resource\Mesh\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Unit\static_model_unit.h">
-      <Filter>Unit</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_amo.h">
       <Filter>Resource\Mesh\Factory</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Unit\animation_model_unit.h">
-      <Filter>Unit</Filter>
     </ClInclude>
     <ClInclude Include="Source\Shader\Component\animation_matrix.h">
       <Filter>Shader\Component</Filter>
@@ -438,6 +477,87 @@
     </ClInclude>
     <ClInclude Include="Source\Data\data_world.h">
       <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\collision_system.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\aim_draw.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\aim_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\aim.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\aim_line.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\World\collision_grid.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_position.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\World\grid_2D.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_box.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_shpere.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_line.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DevelopTool\DevelopTool\debug_box.h">
+      <Filter>DevelopTool\DevelopTool</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DevelopTool\DevelopTool\debug_sphere.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\building.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\PBL_static_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command_fire.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command_handler.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command_move_right.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command_move_up.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command_move_back.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command_move_down.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command_move_front.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command_move_left.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\normal_texture.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\bullet.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\dirt.h">
+      <Filter>Unit\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -542,6 +662,12 @@
     </Filter>
     <Filter Include="Algorithm">
       <UniqueIdentifier>{0657806c-a5b5-4dbc-bc4d-30120e539dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{a854b6ef-010b-498c-82d2-147607bf3d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Command">
+      <UniqueIdentifier>{d0671d7b-0485-498d-b719-908250635096}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

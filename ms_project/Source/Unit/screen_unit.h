@@ -25,7 +25,7 @@ class ScreenUnit : public Unit
 {
 public:
 
-	ScreenUnit(Application* application, SpaceGrid* grid) : Unit(application, grid)
+	ScreenUnit(Application* application, World* world) : Unit(application, world)
 	{
 		Initialize();
 	}
@@ -35,6 +35,7 @@ public:
 	virtual void Finalize() override;
 	virtual void Update() override;
 	virtual void Draw() override;
+	virtual void CollisionUpdate() override{}
 
 private:
 

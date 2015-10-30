@@ -24,7 +24,7 @@ namespace component
 		// ハンドル取得を行います。
 		void InitializeAlbedoTexture(LPD3DXEFFECT effect)
 		{
-			_handle_albedo_texture = effect->GetParameterByName(nullptr, "uniform_diffuse_texture");
+			_handle_albedo_texture = effect->GetParameterByName(nullptr, "uniform_albedo_texture");
 			ASSERT(_handle_albedo_texture != nullptr, "ハンドル読み込みに失敗しました。");
 		}
 
