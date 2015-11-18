@@ -27,7 +27,7 @@
 // íËêî
 namespace
 {
-	static const fx32 kPassFrameVelocity = 0.004f;
+	static const fx32 kPassFrameVelocity = 0.005f;
 }
 
 //=============================================================================
@@ -78,7 +78,7 @@ void PlayerUnit::Initialize()
 
 	// ç≈èâÇÃå¸Ç¢ÇƒÇ¢ÇÈÉxÉNÉgÉã
 	_front_vector = _pass_point_list[1] - _pass_point_list[0];
-	_lower_body_rotation = 0.f;
+	_lower_body_rotation = D3DX_PI/2;
 }
 
 //=============================================================================
@@ -143,7 +143,7 @@ void PlayerUnit::Draw()
 	CameraGamePlayer* camera = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER));
 	for( auto it : _mesh_list )
 	{
-		_animation_system->ComputeHumanPose(animation_matrix_list, ShaderPBLAnimation::kMatrixMax, _animation, camera->GetCameraRotation(), D3DXVECTOR3(0.f, 0.f, 0.f));
+		_animation_system->ComputeHumanPose(animation_matrix_list, ShaderPBLAnimation::kMatrixMax, _animation, camera->GetCameraRotation(), D3DXVECTOR3(0.f, _lower_body_rotation, 0.f));
 		_shader->SetAnimationMatrix(animation_matrix_list);
 		S_GetCommandBuffer()->PushRenderState(RENDER_STATE_DEFAULT, GetID());
 		S_GetCommandBuffer()->PushShader(_shader, GetID());
@@ -245,7 +245,10 @@ void PlayerUnit::LowerBodyControl()
 
 	D3DXVec3Normalize(&normal_eye_look_at, &vector_eye_look_at);
 	D3DXVec3Normalize(&normal_front_vector, &_front_vector);
+	D3DXVECTOR3 normal_minus_front_vector = -normal_front_vector;
 	float dot = D3DXVec3Dot(&normal_eye_look_at, &normal_front_vector);
+
+	//float dot2 = D3DXVec3Dot(&normal_eye_look_at, &normal_minus_front_vector);
 
 	if( dot <= 0 )
 	{
@@ -255,10 +258,12 @@ void PlayerUnit::LowerBodyControl()
 		D3DXVec3Cross(&eye_look_at_12_cross, &normal_eye_look_at, &normal_front_vector);
 		if( eye_look_at_12_cross.y <= 0 )
 		{
+			_front_vector *= -1;
 			_lower_body_rotation += D3DX_PI;
 		}
 		if( eye_look_at_12_cross.y > 0 )
 		{
+			_front_vector *= -1;
 			_lower_body_rotation -= D3DX_PI;
 		}
 	}

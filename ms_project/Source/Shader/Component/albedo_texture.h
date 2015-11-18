@@ -38,6 +38,7 @@ namespace component
 		void SetAlbedoTexture(const LPDIRECT3DTEXTURE9& albedo_texture)
 		{
 			_albedo_texture = albedo_texture;
+
 		}
 
 	private:

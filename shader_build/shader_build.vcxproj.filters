@@ -31,5 +31,8 @@
     <FxCompile Include="PBL_static.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
+    <FxCompile Include="shader_2d.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

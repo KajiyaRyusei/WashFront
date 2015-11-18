@@ -1,5 +1,12 @@
-﻿2015/10/30 12:08:00 にビルドを開始しました。
+﻿2015/11/13 18:16:58 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "D:\4年\未来創造展\shader_build\shader_build.vcxproj" (Build ターゲット)。
+     1>FxCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\fxc.exe /nologo /E"main" /T fx_2_0 /Fo "D:\4年\未来創造展\ms_project\Data\Shader\shader_2d.cso" /Od /Zi shader_2d.hlsl 
+     1>FXC : warning X4717: Effects deprecated for D3DCompiler_47
+         
+         compilation object save succeeded; see D:\4年\未来創造展\ms_project\Data\Shader\shader_2d.cso
+     1>プロジェクト "D:\4年\未来創造展\shader_build\shader_build.vcxproj" (Build ターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:01.06
+経過時間 00:00:00.41
