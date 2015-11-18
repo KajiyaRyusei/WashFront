@@ -10,18 +10,6 @@
 // include
 #include "map.h"
 
-#include "Renderer/directx9.h"
-#include "System/application.h"
-
-
-#include "Shader/Shader/screen_shader.h"
-#include "Shader/Shader/screen_2d_shader.h"
-
-
-#include "Resource/Mesh/Mesh/mesh_factory_2d_sprite.h"
-
-#include "Windows/window.h"
-
 //íËêî
 static const D3DXVECTOR3 position = D3DXVECTOR3(300.0f, 300.0f, 0.0f);
 static const D3DXVECTOR3 scaling = D3DXVECTOR3(300.0f, 300.0f, 1.0f);
@@ -61,37 +49,6 @@ void Map::Update()
 	
 	ScreenUnit::Update();
 
-
-/*	if (_alpha_flag)
-	{
-		_texture_alpha -= 0.1f;
-
-		if (_texture_alpha < 0.0f)
-		{
-			_texture_alpha = 0.0f;
-			_alpha_flag = false;
-		}
-	}
-	else
-	{
-		_texture_alpha += 0.1f;
-
-		if (_texture_alpha > 1.0f)
-		{
-			_texture_alpha = 1.0f;
-			_alpha_flag = true;
-		}
-
-	}
-
-	_shader->SetScreenTextureUv(D3DXVECTOR2(static_cast<fx32>(_texture_uv.x), static_cast<fx32>(_texture_uv.y)));
-	_shader->SetScreenTextureOffset(D3DXVECTOR2(static_cast<fx32>(_texture_offset.x), static_cast<fx32>(_texture_offset.y)));
-	_shader->SetScreenTextureAlpha(_texture_alpha);
-
-	_shader->SetScreenSize(D3DXVECTOR2(
-		static_cast<fx32>(_application->GetWindow()->GetSizeWindowWidth()),
-		static_cast<fx32>(_application->GetWindow()->GetSizeWindowHeight())));
-*/
 }
 
 //=============================================================================

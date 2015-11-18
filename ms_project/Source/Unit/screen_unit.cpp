@@ -34,11 +34,12 @@ void ScreenUnit::Initialize()
 }
 
 //=============================================================================
-// èIóπ
+// èI
 void ScreenUnit::Finalize()
 {
 	SafeDelete(_shader);
 	SafeDelete(_mesh);
+	SafeDelete(_texture);
 }
 
 //=============================================================================
