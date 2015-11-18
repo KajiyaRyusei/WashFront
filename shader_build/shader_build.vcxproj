@@ -58,6 +58,7 @@
     <FxCompile Include="PBL_animation.hlsl" />
     <FxCompile Include="PBL_static.hlsl" />
     <FxCompile Include="screen_shader.hlsl" />
+    <FxCompile Include="shader_2d.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

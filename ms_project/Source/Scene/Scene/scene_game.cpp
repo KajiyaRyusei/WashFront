@@ -25,6 +25,7 @@
 #include "Unit/Game/back_ground.h"
 #include "Unit/Game/building.h"
 #include "Unit/Game/dirt.h"
+#include "Unit/Game/map.h"
 
 #include "World/collision_grid.h"
 
@@ -118,7 +119,7 @@ void SceneGame::Initialize()
 
 
 	// ‚²‚Ý
-	DirtUnit* dirt_0 = new DirtUnit(_application, _world);
+	/*DirtUnit* dirt_0 = new DirtUnit(_application, _world);
 	DirtUnit* dirt_1 = new DirtUnit(_application, _world);
 	DirtUnit* dirt_2 = new DirtUnit(_application, _world);
 	DirtUnit* dirt_3 = new DirtUnit(_application, _world);
@@ -170,6 +171,10 @@ void SceneGame::Initialize()
 	unit_list.push_back(dirt_7);
 	unit_list.push_back(dirt_8);
 	unit_list.push_back(dirt_9);
+*/
+	//ƒ}ƒbƒv
+	unit_list.push_back(new Map(_application, _world));
+
 
 	_world->PushUnit(std::move(unit_list));
 }

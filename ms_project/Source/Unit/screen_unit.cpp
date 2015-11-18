@@ -10,9 +10,14 @@
 // include
 #include "screen_unit.h"
 
-#include "Shader/Shader/screen_shader.h"
+#include "Renderer/directx9.h"
+#include "System/application.h"
 
-#include "Resource/Mesh/Mesh/mesh_factory_sprite.h"
+
+#include "Shader/Shader/screen_shader.h"
+#include "Shader/Shader/screen_2d_shader.h"
+
+#include "Resource/Mesh/Mesh/mesh_factory_2d_sprite.h"
 
 #include "Windows/window.h"
 
@@ -21,10 +26,10 @@
 void ScreenUnit::Initialize()
 {
 	// シェーダの作成
-	_shader = new ShaderScreen();
+	_shader = new Shader2D();
 
 	// 頂点バッファの作成
-	MeshFactorySprite sprite_factory;
+	MeshFactory2DSprite sprite_factory;
 	_mesh = sprite_factory.Create(_application->GetRendererDevice());
 }
 
@@ -43,19 +48,28 @@ void ScreenUnit::Update()
 	D3DXMATRIX matrix_screen, matrix_rotation, matrix_scale, matrix_translation;
 	D3DXMatrixIdentity(&matrix_screen);
 
-	static const fx32 scaling(100.f);
-	static fx32 rotation(0.f);
-	rotation += 0.01f;
-	static D3DXVECTOR3 position(100.f, 100.f, 0.f);
+	//場所を整える
+	D3DXVECTOR3 pos = _position;
+	pos *= 2;
 
-	D3DXMatrixScaling(&matrix_scale, scaling, scaling, scaling);
-	D3DXMatrixRotationZ(&matrix_rotation, rotation);
-	D3DXMatrixTranslation(&matrix_translation, position.x, position.y, position.z);
+	//行列作成
+	D3DXMatrixScaling(&matrix_scale, _scaling.x, _scaling.y, _scaling.z);
+	D3DXMatrixRotationZ(&matrix_rotation, _rotation);
+	D3DXMatrixTranslation(&matrix_translation, pos.x, pos.y, pos.z);
+
 
 	matrix_screen = matrix_rotation * matrix_scale * matrix_translation;
 
+	//行列を送る
 	_shader->SetScreenMatrix(matrix_screen);
 
+
+	//テクスチャ関連の値を送る
+	_shader->SetScreenTextureUv(D3DXVECTOR2(static_cast<fx32>(_texture_uv.x), static_cast<fx32>(_texture_uv.y)));
+	_shader->SetScreenTextureOffset(D3DXVECTOR2(static_cast<fx32>(_texture_offset.x), static_cast<fx32>(_texture_offset.y)));
+	_shader->SetScreenTextureAlpha(_texture_alpha);
+
+	//スクリーンサイズを送る
 	_shader->SetScreenSize(D3DXVECTOR2(
 		static_cast<fx32>(_application->GetWindow()->GetSizeWindowWidth()),
 		static_cast<fx32>(_application->GetWindow()->GetSizeWindowHeight())));
@@ -65,9 +79,22 @@ void ScreenUnit::Update()
 // 描画
 void ScreenUnit::Draw()
 {
-
 	// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_2D,GetID());
 	S_GetCommandBuffer()->PushShader(_shader, GetID());
 	S_GetCommandBuffer()->PushMesh(_mesh, GetID());
+}
+
+//=============================================================================
+// テクスチャ作成
+void ScreenUnit::CreateTexture(LPCWSTR texture_filename)
+{
+	//デバイス
+	LPDIRECT3DDEVICE9 device = _application->GetRendererDevice()->GetDevice();
+
+	//テクスチャ作成
+	D3DXCreateTextureFromFile(device, texture_filename, &_texture);
+
+	//テクスチャ登録
+	_shader->SetAmbientTexture(_texture);
 }
