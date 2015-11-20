@@ -1,0 +1,14 @@
+#NUM
+5
+#FILE
+0 ItemPlus.x C:\Users\Keita\Desktop\MapGenerator_ver0.1\MapGenerator\Resource\Model\Game\Item\ItemPlus.x
+1 Model000.x C:\Users\Keita\Desktop\MapGenerator_ver0.1\MapGenerator\Resource\Model\Game\Model000.x
+2 LeftWing001.x C:\Users\Keita\Desktop\MapGenerator_ver0.1\MapGenerator\Resource\Model\Game\Player\Bird\LeftWing001.x
+3 Tail.x C:\Users\Keita\Desktop\MapGenerator_ver0.1\MapGenerator\Resource\Model\Game\Player\Bird\Tail.x
+4 StencilShadow.x C:\Users\Keita\Desktop\MapGenerator_ver0.1\MapGenerator\Resource\Model\Game\Shadow\StencilShadow.x
+#OBJNUM
+3
+#OBJ
+0 10.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 1.000000 1.000000
+1 0.000000 10.000000 0.000000 0.000000 0.000000 0.000000 1.000000 1.000000 1.000000
+4 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 1.000000 1.000000

@@ -1,0 +1,44 @@
+﻿2015/11/20 14:06:01 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\Keita\Desktop\MapGenerator_ver0.1\MapGenerator\MapGenerator.vcxproj" (Build ターゲット)。
+     1>ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /l"0x0409" /nologo /fo"Debug\MapGenerator.res" MapGenerator.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Keita\Desktop\MapGenerator_ver0.1\Debug\MapGenerator.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Keita\Desktop\MapGenerator_ver0.1\Debug\MapGenerator.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Keita\Desktop\MapGenerator_ver0.1\Debug\MapGenerator.lib" /MACHINE:X86 Debug\MapGenerator.res
+         Debug\BoxAndBox.obj
+         Debug\BoxAndSphere.obj
+         Debug\Building.obj
+         Debug\Camera.obj
+         Debug\CameraManager.obj
+         Debug\CollisionManager.obj
+         Debug\Debug.obj
+         Debug\EditorCamera.obj
+         Debug\ImportFileManager.obj
+         Debug\Input.obj
+         Debug\Keyboard.obj
+         Debug\Light.obj
+         Debug\Main.obj
+         Debug\Manager.obj
+         Debug\MeshCylinder.obj
+         Debug\MeshDome.obj
+         Debug\MeshField.obj
+         Debug\Model.obj
+         Debug\ModelFactory.obj
+         Debug\Mouse.obj
+         Debug\ObjectManager.obj
+         Debug\Player.obj
+         Debug\Renderer.obj
+         Debug\Scene.obj
+         Debug\Scene2D.obj
+         Debug\Scene3D.obj
+         Debug\SceneAnimation2D.obj
+         Debug\SceneBillboard.obj
+         Debug\SceneX.obj
+         Debug\SphereAndSphere.obj
+         Debug\StencilShadow.obj
+         Debug\TextureFactory.obj
+         MapGenerator.vcxproj -> C:\Users\Keita\Desktop\MapGenerator_ver0.1\Debug\MapGenerator.exe
+     1>プロジェクト "C:\Users\Keita\Desktop\MapGenerator_ver0.1\MapGenerator\MapGenerator.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:01.39

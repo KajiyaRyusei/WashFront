@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\BoundingBox.h" />
+    <ClInclude Include="Source\BoundingSphere.h" />
+    <ClInclude Include="Source\BoxAndBox.h" />
+    <ClInclude Include="Source\BoxAndSphere.h" />
+    <ClInclude Include="Source\Building.h" />
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\CameraManager.h" />
+    <ClInclude Include="Source\Collision.h" />
+    <ClInclude Include="Source\CollisionManager.h" />
+    <ClInclude Include="Source\Debug.h" />
+    <ClInclude Include="Source\EditorCamera.h" />
+    <ClInclude Include="Source\ImportFileManager.h" />
+    <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\Keyboard.h" />
+    <ClInclude Include="Source\Light.h" />
+    <ClInclude Include="Source\Main.h" />
+    <ClInclude Include="Source\Manager.h" />
+    <ClInclude Include="Source\MeshCylinder.h" />
+    <ClInclude Include="Source\MeshDome.h" />
+    <ClInclude Include="Source\MeshField.h" />
+    <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\ModelFactory.h" />
+    <ClInclude Include="Source\Mouse.h" />
+    <ClInclude Include="Source\ObjectManager.h" />
+    <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\Renderer.h" />
+    <ClInclude Include="Source\Scene.h" />
+    <ClInclude Include="Source\Scene2D.h" />
+    <ClInclude Include="Source\Scene3D.h" />
+    <ClInclude Include="Source\SceneAnimation2D.h" />
+    <ClInclude Include="Source\SceneBillboard.h" />
+    <ClInclude Include="Source\SceneX.h" />
+    <ClInclude Include="Source\Shape.h" />
+    <ClInclude Include="Source\SphereAndSphere.h" />
+    <ClInclude Include="Source\StencilShadow.h" />
+    <ClInclude Include="Source\TextureFactory.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\BoxAndBox.cpp" />
+    <ClCompile Include="Source\BoxAndSphere.cpp" />
+    <ClCompile Include="Source\Building.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\CameraManager.cpp" />
+    <ClCompile Include="Source\CollisionManager.cpp" />
+    <ClCompile Include="Source\Debug.cpp" />
+    <ClCompile Include="Source\EditorCamera.cpp" />
+    <ClCompile Include="Source\ImportFileManager.cpp" />
+    <ClCompile Include="Source\Input.cpp" />
+    <ClCompile Include="Source\Keyboard.cpp" />
+    <ClCompile Include="Source\Light.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Manager.cpp" />
+    <ClCompile Include="Source\MeshCylinder.cpp" />
+    <ClCompile Include="Source\MeshDome.cpp" />
+    <ClCompile Include="Source\MeshField.cpp" />
+    <ClCompile Include="Source\Model.cpp" />
+    <ClCompile Include="Source\ModelFactory.cpp" />
+    <ClCompile Include="Source\Mouse.cpp" />
+    <ClCompile Include="Source\ObjectManager.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\Renderer.cpp" />
+    <ClCompile Include="Source\Scene.cpp" />
+    <ClCompile Include="Source\Scene2D.cpp" />
+    <ClCompile Include="Source\Scene3D.cpp" />
+    <ClCompile Include="Source\SceneAnimation2D.cpp" />
+    <ClCompile Include="Source\SceneBillboard.cpp" />
+    <ClCompile Include="Source\SceneX.cpp" />
+    <ClCompile Include="Source\SphereAndSphere.cpp" />
+    <ClCompile Include="Source\StencilShadow.cpp" />
+    <ClCompile Include="Source\TextureFactory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MapGenerator.rc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A3240B99-38ED-4E5F-A66A-7C73891B3DBF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MapGenerator</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Users\Keita\Documents\TH44\MS展\プログラム\MapGenerator\MapGenerator\Source;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <ReferencePath>C:\Users\Keita\Documents\TH44\MS展\プログラム\MapGenerator_ver0.1\MapGenerator\Resource;$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

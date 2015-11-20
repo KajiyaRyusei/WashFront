@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source\Collision">
+      <UniqueIdentifier>{5373b6d3-c247-4f26-aa2f-a95adba81dba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Mesh">
+      <UniqueIdentifier>{aa78ad4f-3908-4e3f-9e9e-ebae40f2a3fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Camera">
+      <UniqueIdentifier>{1d869b24-3389-4275-99a5-b617da7341fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Debug">
+      <UniqueIdentifier>{34a56c18-ca47-4408-9f80-f7147eb061c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Input">
+      <UniqueIdentifier>{4ee5a5e2-fb18-4a47-a349-797508ec82c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Light">
+      <UniqueIdentifier>{5bb9ae14-91d0-4e70-bb32-b8c806559b01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Factory">
+      <UniqueIdentifier>{1a0e2c86-8dc7-41f8-82b6-4c33c4109c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\System">
+      <UniqueIdentifier>{5fb14f65-e134-4ce9-a396-4624f6377ae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Object">
+      <UniqueIdentifier>{20d54268-24c2-4272-aa0e-9ecbe5701038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scene">
+      <UniqueIdentifier>{798cdeb2-cbd6-469d-b712-bfdf04d994ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Collision">
+      <UniqueIdentifier>{babdd795-43ff-4065-b9e4-97ebfba76259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Mesh">
+      <UniqueIdentifier>{fdfcc66a-e82d-40e7-bc25-0145197d10b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Camera">
+      <UniqueIdentifier>{4879ad97-8b00-4a37-9c24-88fc0c99a0d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Debug">
+      <UniqueIdentifier>{488a49a2-6b26-4328-9892-dda7819d2e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Input">
+      <UniqueIdentifier>{5a162e6b-c827-44d4-8260-4a67506e1678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Light">
+      <UniqueIdentifier>{c2241dd6-0488-46eb-8bfc-c466470eb26c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Factory">
+      <UniqueIdentifier>{94c91fbb-0b96-4a94-a6d9-9f9c8a4b5ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Scene">
+      <UniqueIdentifier>{04d5bdda-05aa-4c1d-96c0-e269370bfba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Object">
+      <UniqueIdentifier>{ac774377-4d36-4e56-82bc-0a9fded3af35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\System">
+      <UniqueIdentifier>{66fd573c-cc1f-4c04-99c9-1b8d2bb0f13c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\BoundingBox.h">
+      <Filter>Header\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BoundingSphere.h">
+      <Filter>Header\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BoxAndBox.h">
+      <Filter>Header\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BoxAndSphere.h">
+      <Filter>Header\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshCylinder.h">
+      <Filter>Header\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshDome.h">
+      <Filter>Header\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshField.h">
+      <Filter>Header\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Model.h">
+      <Filter>Header\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CameraManager.h">
+      <Filter>Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision.h">
+      <Filter>Header\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollisionManager.h">
+      <Filter>Header\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Debug.h">
+      <Filter>Header\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>Header\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Keyboard.h">
+      <Filter>Header\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Light.h">
+      <Filter>Header\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Main.h">
+      <Filter>Header\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Manager.h">
+      <Filter>Header\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModelFactory.h">
+      <Filter>Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mouse.h">
+      <Filter>Header\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer.h">
+      <Filter>Header\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene2D.h">
+      <Filter>Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene3D.h">
+      <Filter>Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneAnimation2D.h">
+      <Filter>Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneBillboard.h">
+      <Filter>Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneX.h">
+      <Filter>Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shape.h">
+      <Filter>Header\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SphereAndSphere.h">
+      <Filter>Header\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StencilShadow.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextureFactory.h">
+      <Filter>Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ObjectManager.h">
+      <Filter>Header\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EditorCamera.h">
+      <Filter>Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImportFileManager.h">
+      <Filter>Header\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Building.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\BoxAndBox.cpp">
+      <Filter>Source\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BoxAndSphere.cpp">
+      <Filter>Source\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SphereAndSphere.cpp">
+      <Filter>Source\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CollisionManager.cpp">
+      <Filter>Source\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshCylinder.cpp">
+      <Filter>Source\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshDome.cpp">
+      <Filter>Source\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshField.cpp">
+      <Filter>Source\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CameraManager.cpp">
+      <Filter>Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Debug.cpp">
+      <Filter>Source\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Keyboard.cpp">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mouse.cpp">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Light.cpp">
+      <Filter>Source\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModelFactory.cpp">
+      <Filter>Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextureFactory.cpp">
+      <Filter>Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Manager.cpp">
+      <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer.cpp">
+      <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene.cpp">
+      <Filter>Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene2D.cpp">
+      <Filter>Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene3D.cpp">
+      <Filter>Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneAnimation2D.cpp">
+      <Filter>Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneBillboard.cpp">
+      <Filter>Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneX.cpp">
+      <Filter>Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StencilShadow.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Model.cpp">
+      <Filter>Source\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ObjectManager.cpp">
+      <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EditorCamera.cpp">
+      <Filter>Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImportFileManager.cpp">
+      <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Building.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MapGenerator.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
