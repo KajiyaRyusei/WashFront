@@ -161,6 +161,7 @@
     <ClCompile Include="Source\Input\keyboard\input_keyboard.cpp" />
     <ClCompile Include="Source\Renderer\directx9.cpp" />
     <ClCompile Include="Source\Resource\Mesh\index_buffer.cpp" />
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_amo.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_cube.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_smo.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="Source\Shader\Shader\animation_shader.cpp" />
     <ClCompile Include="Source\Shader\Shader\PBL_animation_shader.cpp" />
     <ClCompile Include="Source\Shader\Shader\PBL_static_shader.cpp" />
+    <ClCompile Include="Source\Shader\Shader\screen_2d_shader.cpp" />
     <ClCompile Include="Source\Shader\Shader\screen_shader.cpp" />
     <ClCompile Include="Source\Shader\shader_base.cpp" />
     <ClCompile Include="Source\Sound\speaker\speaker.cpp" />
@@ -201,6 +203,7 @@
     <ClCompile Include="Source\Unit\Game\building.cpp" />
     <ClCompile Include="Source\Unit\Game\bullet.cpp" />
     <ClCompile Include="Source\Unit\Game\dirt.cpp" />
+    <ClCompile Include="Source\Unit\Game\map.cpp" />
     <ClCompile Include="Source\Unit\Game\player.cpp" />
     <ClCompile Include="Source\Unit\screen_unit.cpp" />
     <ClCompile Include="Source\Unit\unit.cpp" />
@@ -259,6 +262,7 @@
     <ClInclude Include="Source\Renderer\directx9.h" />
     <ClInclude Include="Source\Resource\Mesh\index_buffer.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory.h" />
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_amo.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_cube.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_smo.h" />
@@ -275,6 +279,7 @@
     <ClInclude Include="Source\Shader\Component\albedo_cube_texture.h" />
     <ClInclude Include="Source\Shader\Component\albedo_texture.h" />
     <ClInclude Include="Source\Shader\Component\ambient_color.h" />
+    <ClInclude Include="Source\Shader\Component\ambient_texture.h" />
     <ClInclude Include="Source\Shader\Component\animation_matrix.h" />
     <ClInclude Include="Source\Shader\Component\eye_position.h" />
     <ClInclude Include="Source\Shader\Component\diffuse_cube_texture.h" />
@@ -285,6 +290,9 @@
     <ClInclude Include="Source\Shader\Component\roughness.h" />
     <ClInclude Include="Source\Shader\Component\screen_matrix.h" />
     <ClInclude Include="Source\Shader\Component\screen_size.h" />
+    <ClInclude Include="Source\Shader\Component\screen_texture_alpha.h" />
+    <ClInclude Include="Source\Shader\Component\screen_texture_offset.h" />
+    <ClInclude Include="Source\Shader\Component\screen_texture_uv.h" />
     <ClInclude Include="Source\Shader\Component\specular_cube_texture.h" />
     <ClInclude Include="Source\Shader\Component\world.h" />
     <ClInclude Include="Source\Shader\Component\world_view_projection.h" />
@@ -297,6 +305,7 @@
     <ClInclude Include="Source\Shader\Shader\animation_shader.h" />
     <ClInclude Include="Source\Shader\Shader\PBL_animation_shader.h" />
     <ClInclude Include="Source\Shader\Shader\PBL_static_shader.h" />
+    <ClInclude Include="Source\Shader\Shader\screen_2d_shader.h" />
     <ClInclude Include="Source\Shader\Shader\screen_shader.h" />
     <ClInclude Include="Source\Shader\shader_base.h" />
     <ClInclude Include="Source\Sound\speaker\speaker.h" />
@@ -314,6 +323,7 @@
     <ClInclude Include="Source\Unit\Game\building.h" />
     <ClInclude Include="Source\Unit\Game\bullet.h" />
     <ClInclude Include="Source\Unit\Game\dirt.h" />
+    <ClInclude Include="Source\Unit\Game\map.h" />
     <ClInclude Include="Source\Unit\Game\player.h" />
     <ClInclude Include="Source\Unit\screen_unit.h" />
     <ClInclude Include="Source\Unit\unit.h" />

@@ -1,12 +1,12 @@
-﻿2015/10/30 17:01:47 にビルドを開始しました。
-     1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
+﻿2015/11/18 10:07:03 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "D:\4年\未来創造展\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\System\application.cpp Source\Unit\Game\back_ground.cpp
-         application.cpp
-         back_ground.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\4年\未来創造展\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Unit\Game\map.cpp Source\Unit\screen_unit.cpp
+         map.cpp
+         screen_unit.cpp
          コードを生成中...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\often_use.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\4年\未来創造展\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\4年\未来創造展\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\4年\未来創造展\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\often_use.obj
          Debug\animation_system.obj
          Debug\camera_2d.obj
          Debug\camera_game_main.obj
@@ -38,6 +38,7 @@
          Debug\input_keyboard.obj
          Debug\directx9.obj
          Debug\index_buffer.obj
+         Debug\mesh_factory_2d_sprite.obj
          Debug\mesh_factory_amo.obj
          Debug\mesh_factory_cube.obj
          Debug\mesh_factory_smo.obj
@@ -57,6 +58,7 @@
          Debug\animation_shader.obj
          Debug\PBL_animation_shader.obj
          Debug\PBL_static_shader.obj
+         Debug\screen_2d_shader.obj
          Debug\screen_shader.obj
          Debug\shader_base.obj
          Debug\speaker.obj
@@ -74,6 +76,7 @@
          Debug\building.obj
          Debug\bullet.obj
          Debug\dirt.obj
+         Debug\map.obj
          Debug\player.obj
          Debug\screen_unit.obj
          Debug\unit.obj
@@ -83,9 +86,9 @@
          Debug\collision_grid.obj
          Debug\grid_2D.obj
          Debug\world.obj
-         ms_project.vcxproj -> C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe
-     1>プロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが完了しました。
+         ms_project.vcxproj -> D:\4年\未来創造展\ms_project\\ms_project_debug.exe
+     1>プロジェクト "D:\4年\未来創造展\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:01.06
+経過時間 00:00:19.65
