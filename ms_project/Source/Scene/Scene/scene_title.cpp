@@ -53,31 +53,33 @@ void SceneTitle::Initialize()
 	unit_list.push_back(new LogoUnit(_application, _world));
 
 	// ƒrƒ‹
-	BuildingUnit* bill_0 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_1 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_2 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_3 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_4 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_5 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_6 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_7 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_8 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_9 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_10 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_11 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_12 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_13 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_14 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_15 = new BuildingUnit(_application, _world);
-	BuildingUnit* bill_16 = new BuildingUnit(_application, _world);
-
+	D3DXVECTOR3 bill_rotation(0.f,0.f,0.f);
+	D3DXVECTOR3 bill_scaling(0.f, 0.f, 0.f);
 	D3DXVECTOR3 bull_position = _world->GetCollisionGrid()->CellCenterPoint(0, 0);
-	bill_0->SetPosition(bull_position);
+	BuildingUnit* bill_0 = new BuildingUnit(_application, _world, bull_position, bill_rotation);
 	bull_position = _world->GetCollisionGrid()->CellCenterPoint(1, 0);
-	bill_1->SetPosition(bull_position);
+	BuildingUnit* bill_1 = new BuildingUnit(_application, _world, bull_position);
 	bull_position = _world->GetCollisionGrid()->CellCenterPoint(2, 0);
-	bill_2->SetPosition(bull_position);
+	BuildingUnit* bill_2 = new BuildingUnit(_application, _world, bull_position);
 	bull_position = _world->GetCollisionGrid()->CellCenterPoint(3, 0);
+	BuildingUnit* bill_3 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_4 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_5 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_6 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_7 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_8 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_9 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_10 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_11 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_12 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_13 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_14 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_15 = new BuildingUnit(_application, _world, bull_position);
+	BuildingUnit* bill_16 = new BuildingUnit(_application, _world, bull_position);
+
+
+	
+	
 	bill_3->SetPosition(bull_position);
 	bull_position = _world->GetCollisionGrid()->CellCenterPoint(4, 0);
 	bill_4->SetPosition(bull_position);

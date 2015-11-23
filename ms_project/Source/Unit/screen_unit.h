@@ -16,12 +16,9 @@
 
 //*****************************************************************************
 // 前方宣言
-<<<<<<< HEAD
 class ShaderScreen;
-=======
 class Shader2D;
 class MeshBuffer;
->>>>>>> origin/Mochizuki-desk
 
 //*****************************************************************************
 // クラス設計
@@ -76,9 +73,6 @@ protected:
 private:
 
 	// シェーダー
-<<<<<<< HEAD
-	ShaderScreen* _shader;
-=======
 	Shader2D* _shader;
 
 	// メッシュ
@@ -87,6 +81,4 @@ private:
 	//テクスチャ
 	LPDIRECT3DTEXTURE9 _texture;
 
-
->>>>>>> origin/Mochizuki-desk
 };

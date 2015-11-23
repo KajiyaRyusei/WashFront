@@ -9,7 +9,6 @@
 //*****************************************************************************
 // include
 #include "screen_unit.h"
-<<<<<<< HEAD
 #include "Shader/Shader/screen_shader.h"
 #include "Windows/window.h"
 
@@ -19,17 +18,14 @@
 
 #include "Resource/Mesh/vertex_buffer.h"
 #include "Resource/Mesh/mesh_buffer.h"
-=======
 
 #include "Renderer/directx9.h"
 #include "System/application.h"
 
 
-#include "Shader/Shader/screen_shader.h"
 #include "Shader/Shader/screen_2d_shader.h"
 
 #include "Resource/Mesh/Mesh/mesh_factory_2d_sprite.h"
->>>>>>> origin/Mochizuki-desk
 
 
 //=============================================================================
@@ -39,14 +35,11 @@ void ScreenUnit::Initialize()
 	// シェーダの作成
 	_shader = new Shader2D();
 
-<<<<<<< HEAD
 	// メッシュの作成
 	_game_world->GetMeshResource()->Create(MESH_RESOURE_SPRITE, _application->GetRendererDevice());
-=======
 	// 頂点バッファの作成
 	MeshFactory2DSprite sprite_factory;
 	_mesh = sprite_factory.Create(_application->GetRendererDevice());
->>>>>>> origin/Mochizuki-desk
 }
 
 //=============================================================================
@@ -54,11 +47,8 @@ void ScreenUnit::Initialize()
 void ScreenUnit::Finalize()
 {
 	SafeDelete(_shader);
-<<<<<<< HEAD
-=======
 	SafeDelete(_mesh);
 	SafeRelease(_texture);
->>>>>>> origin/Mochizuki-desk
 }
 
 //=============================================================================
@@ -102,11 +92,7 @@ void ScreenUnit::Draw()
 	// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_2D,GetID());
 	S_GetCommandBuffer()->PushShader(_shader, GetID());
-<<<<<<< HEAD
 	S_GetCommandBuffer()->PushMesh(_game_world->GetMeshResource()->Get(MESH_RESOURE_SPRITE), GetID());
-}
-=======
-	S_GetCommandBuffer()->PushMesh(_mesh, GetID());
 }
 
 //=============================================================================
@@ -122,4 +108,3 @@ void ScreenUnit::CreateTexture(LPCWSTR texture_filename)
 	//テクスチャ登録
 	_shader->SetAmbientTexture(_texture);
 }
->>>>>>> origin/Mochizuki-desk
