@@ -24,7 +24,8 @@
 #include "Shader/Component/diffuse_cube_texture.h"
 #include "Shader/Component/specular_cube_texture.h"
 #include "Shader/Component/albedo_texture.h"
-#include "Shader/Component/normal_texture.h"
+#include "Shader/Component/metalness_texture.h"
+#include "Shader/Component/dirty_texture.h"
 
 class ShaderPBLStatic : public ShaderBase,
 	public component::WorldViewProjection,
@@ -38,7 +39,8 @@ class ShaderPBLStatic : public ShaderBase,
 	public component::DiffuseCubeMap,
 	public component::SpecularCubeMap,
 	public component::AlbedoMap,
-	public component::NormalMap
+	public component::MetalnessMap,
+	public component::DirtyMap
 {
 public:
 	ShaderPBLStatic() : ShaderBase(s_effect_id) { Initialize(); }

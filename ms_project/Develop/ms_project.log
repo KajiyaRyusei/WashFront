@@ -1,10 +1,13 @@
-﻿2015/10/30 13:01:00 にビルドを開始しました。
+﻿2015/11/23 18:06:08 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /Zi /nologo /W4 /WX /MP /O2 /Oy- /D WIN32 /D _DEVELOP /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Develop\ms_project_develop.pch" /Fo"Develop\\" /Fd"Develop\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Scene\Scene\scene_game.cpp
-         scene_game.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /Zi /nologo /W4 /WX /MP /O2 /Oy- /D WIN32 /D _DEVELOP /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Develop\ms_project_develop.pch" /Fo"Develop\\" /Fd"Develop\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\DevelopTool\DevelopTool\debug_print.cpp source\main.cpp
+         debug_print.cpp
+         main.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_develop.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_develop.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_develop.lib" /MACHINE:X86 /SAFESEH Develop\often_use.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_develop.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_develop.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_develop.lib" /MACHINE:X86 /SAFESEH Develop\dirt_math.obj
+         Develop\often_use.obj
+         Develop\perlin_noise.obj
          Develop\animation_system.obj
          Develop\camera_2d.obj
          Develop\camera_game_main.obj
@@ -34,14 +37,22 @@
          Develop\input_event_buffer.obj
          Develop\input_manager.obj
          Develop\input_keyboard.obj
+         Develop\input_x.obj
          Develop\directx9.obj
+         Develop\animation_mesh_resource.obj
+         Develop\cube_texture_resource.obj
          Develop\index_buffer.obj
          Develop\mesh_factory_amo.obj
          Develop\mesh_factory_cube.obj
+         Develop\mesh_factory_mesh_field.obj
          Develop\mesh_factory_smo.obj
          Develop\mesh_factory_sprite.obj
+         Develop\mesh_factory_water_cylinder.obj
          Develop\mesh_buffer.obj
          Develop\vertex_buffer.obj
+         Develop\mesh_resource.obj
+         Develop\static_mesh_resource.obj
+         Develop\texture_resource.obj
          Develop\scene_game.obj
          Develop\scene_result.obj
          Develop\scene_title.obj
@@ -51,11 +62,13 @@
          Develop\fade_shader.obj
          Develop\aim_shader.obj
          Develop\back_ground_shader.obj
+         Develop\dirt_shader.obj
          Develop\lambert.obj
          Develop\animation_shader.obj
          Develop\PBL_animation_shader.obj
          Develop\PBL_static_shader.obj
          Develop\screen_shader.obj
+         Develop\water_shader.obj
          Develop\shader_base.obj
          Develop\speaker.obj
          Develop\speaker_3d.obj
@@ -73,6 +86,8 @@
          Develop\bullet.obj
          Develop\dirt.obj
          Develop\player.obj
+         Develop\water_bullet.obj
+         Develop\weapon.obj
          Develop\screen_unit.obj
          Develop\unit.obj
          Develop\window.obj
@@ -86,4 +101,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:01.79
+経過時間 00:00:00.84

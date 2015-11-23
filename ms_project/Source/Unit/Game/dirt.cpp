@@ -12,29 +12,24 @@
 #include "Camera/camera_manager.h"
 #include "Camera/Camera/camera_game_player.h"
 #include "Algorithm/often_use.h"
-#include "Renderer/directx9.h"
-#include "Shader/Shader/PBL_static_shader.h"
-#include "Resource/Mesh/Mesh/mesh_factory_cube.h"
+#include "Shader/Shader/dirt_shader.h"
 #include "World/collision_grid.h"
+
+//リソース
+#include "Resource/cube_texture_resource.h"
+#include "Resource/texture_resource.h"
+#include "Resource/mesh_resource.h"
 
 //=============================================================================
 // 初期化
 void DirtUnit::Initialize()
 {
 	// シェーダの作成
-	_shader = new ShaderPBLStatic();
-
-	// メッシュの作成
-	MeshFactoryCube mesh_factory;
-	_mesh = mesh_factory.Create(_application->GetRendererDevice());
+	_shader = new ShaderDirt();
 
 	// テクスチャ
-	LPDIRECT3DDEVICE9 device = _application->GetRendererDevice()->GetDevice();
-	D3DXCreateCubeTextureFromFileEx(device, L"Data/CubeTexture/rnl_cross.dds", 2, 1, 0, D3DFMT_A8B8G8R8, D3DPOOL_DEFAULT, D3DX_FILTER_LINEAR, D3DX_FILTER_LINEAR, 0xff, nullptr, nullptr, &_diffuse_cube_map);
-	D3DXCreateCubeTextureFromFileEx(device, L"Data/CubeTexture/rnl_cross.dds", 0, 0, 0, D3DFMT_A8B8G8R8, D3DPOOL_DEFAULT, D3DX_FILTER_LINEAR, D3DX_FILTER_LINEAR, 0xff, nullptr, nullptr, &_specular_cube_map);
-
-	ASSERT(S_OK == D3DXCreateTextureFromFileEx(device, L"Data/Texture/Orange_glazed_pxr128_bmp.jpg", 0, 0, 0, 0, D3DFMT_A8B8G8R8, D3DPOOL_DEFAULT, D3DX_FILTER_LINEAR, D3DX_FILTER_LINEAR, 0xff, nullptr, nullptr, &_albedo_map),"テクスチャ読み込み失敗");
-	ASSERT(S_OK == D3DXCreateTextureFromFileEx(device, L"Data/Texture/Orange_glazed_pxr128_normal.jpg", 0, 0, 0, 0, D3DFMT_A8B8G8R8, D3DPOOL_DEFAULT, D3DX_FILTER_LINEAR, D3DX_FILTER_LINEAR, 0xff, nullptr, nullptr, &_normal_map), "テクスチャ読み込み失敗");
+	LPDIRECT3DTEXTURE9 normal_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_DIRT_NORMAL_TEXTURE);
+	_shader->SetNormalTexture(normal_map);
 
 	// 座標の設定
 	_position.current = _game_world->GetCollisionGrid()->CellCenterPoint(2, 2) + D3DXVECTOR3(-7.f, 5.f, -7.f);
@@ -56,11 +51,6 @@ void DirtUnit::Initialize()
 // 終了
 void DirtUnit::Finalize()
 {
-	SafeRelease(_diffuse_cube_map);
-	SafeRelease(_specular_cube_map);
-	SafeRelease(_albedo_map);
-	SafeRelease(_normal_map);
-	SafeDelete(_mesh);
 	SafeDelete(_shader);
 }
 
@@ -69,6 +59,12 @@ void DirtUnit::Finalize()
 void DirtUnit::Update()
 {
 	SettingShaderParameter();
+
+	if( _is_invisible == true )
+	{
+		_position.current = D3DXVECTOR3(10000.f,1000.f,10000.f);
+		_shpere->position = _position.current;
+	}
 }
 //=============================================================================
 // 衝突判定用更新
@@ -98,7 +94,7 @@ void DirtUnit::Draw()
 		// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
 		S_GetCommandBuffer()->PushRenderState(RENDER_STATE_DEFAULT, GetID());
 		S_GetCommandBuffer()->PushShader(_shader, GetID());
-		S_GetCommandBuffer()->PushMesh(_mesh, GetID());
+		S_GetCommandBuffer()->PushMesh(_game_world->GetMeshResource()->Get(MESH_RESOURE_MESH_FIELD), GetID());
 	}
 
 	//_shpere->DebugDraw();
@@ -112,28 +108,43 @@ void DirtUnit::SettingShaderParameter()
 	CameraGamePlayer* camera = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER));
 	// 行列の作成
 	_world.position = _position.current;
-	_world.rotation.x += 0.1f;
-	_world.rotation.y += 0.1f;
-	_world.rotation.z += 0.1f;
+	_world.rotation.x = D3DX_PI*0.5f;
 	algo::CreateWorld(_world.matrix, _world.position, _world.rotation, _world.scale);
 	algo::CreateWVP(_matrix_world_view_projection, _world.matrix, camera);
 	// ライトの方向作成
 	D3DXVECTOR4 light_direction(0.2f, -0.8f, 0.5f, 0.f);
-	D3DXVECTOR4 ambient(0.3f, 0.1f, 0.8f, 1.f);
+	D3DXVECTOR4 ambient(0.25f, 0.15f, 0.15f, 1.f);
 	D3DXVECTOR4 eye(camera->GetVectorEye(), 0.f);
 	// シェーダの設定
 	_shader->SetWorldViewProjection(_matrix_world_view_projection);
+	
+	//D3DXMatrixIdentity(&_world.matrix);
+
+	//_world.matrix._41 = -2.f;
+	//_world.matrix._42 = 2.f;
+	//_world.matrix._43 = -2.f;
+	static D3DXVECTOR2 texcoord_move(0.f,0.f);
+	texcoord_move.y += 0.0001f;
+	//texcoord_move.x += 0.0001f;
+	D3DXMATRIX world_inverse_transpose;
+	D3DXMatrixInverse(&world_inverse_transpose, nullptr, &_world.matrix);
+	D3DXMatrixTranspose(&world_inverse_transpose, &world_inverse_transpose);
+	_shader->SetWorldInverseTranspose(world_inverse_transpose);
+	_shader->SetTexcoordMove(texcoord_move);
+
+	D3DXMATRIX dirt_move_matrix;
+	D3DXMatrixIdentity(&dirt_move_matrix);
+	//dirt_move_matrix._41 = -2.f;
+	//dirt_move_matrix._42 = -2.f;
+	//dirt_move_matrix._43 = -2.f;
+	_shader->SetDirtMoveMatrix(dirt_move_matrix);
 	_shader->SetWorld(_world.matrix);
 	_shader->SetLightDirection(light_direction);
-	_shader->SetAlbedoTexture(_albedo_map);
-	_shader->SetNormalTexture(_normal_map);
 	_shader->SetAmbientColor(ambient);
-	_shader->SetDiffuseCubeMap(_diffuse_cube_map);
-	_shader->SetSpecularCubeMap(_specular_cube_map);
 	_shader->SetEyePosition(eye);
-	_shader->SetFresnel(0.5f);
-	_shader->SetMetalness(0.1f);
-	_shader->SetRoughness(0.8f);
+	_shader->SetFresnel(0.4f);
+	_shader->SetMetalness(0.03f);
+	_shader->SetRoughness(0.7f);
 	_shader->SetWorld(_world.matrix);
 }
 

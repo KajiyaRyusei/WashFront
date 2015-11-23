@@ -130,7 +130,7 @@ s32 Grid2D::CellCalculation(fx32 position)
 	{
 		cell = 0;
 	}
-	if( cell >= kSizeCell *kMaxCell )
+	if( cell >= kMaxCell )
 	{
 		cell = kMaxCell - 1;
 	}

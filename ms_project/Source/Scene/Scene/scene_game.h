@@ -44,5 +44,9 @@ public:
 
 private:
 	World* _world;
+
+	void MapGeneration();
+	void ResourceGeneration();
+
 };
 

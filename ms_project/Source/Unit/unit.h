@@ -20,6 +20,7 @@
 #include "Data/data_box.h"
 #include "Data/data_shpere.h"
 #include "Data/data_line.h"
+#include "Data/data_mesh_point.h"
 
 //*****************************************************************************
 // クラス設計
@@ -37,7 +38,9 @@ public:
 	virtual void Finalize() = 0;
 	virtual void Update() = 0;
 	virtual void CollisionUpdate() = 0;
-	virtual void CollisionSphere(){};
+	virtual void CollisionSphere(){}
+	virtual void CollisionBox(){}
+	virtual void CollisionMeshPoint(u32 point_index){ UNREFERENCED_PARAMETER(point_index); }
 	virtual void CollisionLine(const D3DXVECTOR3& impact_point){ UNREFERENCED_PARAMETER(impact_point); }
 	virtual void Draw() = 0;
 
@@ -60,6 +63,8 @@ protected:
 	data::Box* _box;
 	// ラインのボリューム
 	data::Line* _line;
+	// メッシュのポイント
+	data::MeshPoint* _volume_mesh_point;
 
 	//------------------------------------
 	// 衝突判定用ボリュームの作成
@@ -90,6 +95,20 @@ protected:
 		_line->start_point = start;
 		_line->end_point = end;
 	}
+
+	void CreateVolumeMeshPoint(
+		const D3DXVECTOR3& position,
+		const D3DXVECTOR3& scale,
+		const D3DXVECTOR3& rotation,
+		const u32 vertex_size,
+		const D3DXVECTOR3* point_array,
+		const D3DXVECTOR3* normal_array)
+	{
+		_volume_mesh_point = new data::MeshPoint(
+			position, scale, rotation,
+			vertex_size, point_array, normal_array);
+	}
+
 
 private:
 

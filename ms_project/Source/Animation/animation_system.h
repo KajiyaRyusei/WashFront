@@ -38,19 +38,32 @@ public:
 		_frame += advance_time;
 	}
 
-	// 人型ボーンの姿勢計算
+	// 人型の姿勢計算
 	void ComputeHumanPose(
 		D3DXMATRIX* matrix_list,				// 計算結果を詰め込む行列
 		const u32 matrix_count,					// 行列の最大数
 		const data::ObjectAnimationFile& oaf,	// アニメーションファイル
-		const D3DXVECTOR3& upper_body_rotation,	// 上半身の向き
-		const D3DXVECTOR3& lower_body_rotation);// 下半身の向き
+		D3DXVECTOR3& upper_body_rotation,		// 上半身の向き
+		const D3DXVECTOR3& lower_body_rotation, // 下半身の向き
+		const u32 mesh_id);
+
+	// 武器のボーン選択
+	void SelectWeaponBone(
+		D3DXMATRIX* matrix_list,// 計算結果を詰め込む行列
+		const u32 matrix_id);	// 行列番号
 
 private:
+
+	void ComputeHumanPoseMeshOne(D3DXMATRIX* matrix_list, const data::ObjectAnimationFile& oaf);
+	void ComputeHumanPoseMeshTwo(D3DXMATRIX* matrix_list, const data::ObjectAnimationFile& oaf);
+	void ComputeHumanPoseMeshThree(D3DXMATRIX* matrix_list, const data::ObjectAnimationFile& oaf);
+	void ComputeHumanPoseMeshFour(D3DXMATRIX* matrix_list, const data::ObjectAnimationFile& oaf);
+	void ComputeHumanPoseMeshFive(D3DXMATRIX* matrix_list, const data::ObjectAnimationFile& oaf);
 
 	D3DXVECTOR3 _upper_rotation;
 	D3DXMATRIX _upper_rotation_matrix;
 	D3DXVECTOR3 _lower_rotation;
 	D3DXMATRIX _lower_rotation_matrix;
+	
 	u32 _frame;
 };

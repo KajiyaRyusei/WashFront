@@ -30,5 +30,4 @@ void CameraGameMain::CreateMatrix()
 {
 	D3DXMatrixPerspectiveFovLH(&_projection.matrix, _projection.fov, _projection.aspect, _projection.camera_near, _projection.camera_far);
 	D3DXMatrixLookAtLH(&_view.matrix, &_view.eye, &_view.look_at, &_view.up);
-
 }

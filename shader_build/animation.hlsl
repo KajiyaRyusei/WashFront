@@ -54,7 +54,7 @@ VertexShaderOutput VS(VertexShaderInput input)
 
 	// ç¿ïWïœä∑
 	float4x4 composition_matrix;
-	composition_matrix = uniform_animation_matrix_list[input.bone_index[0]] * input.weight.x;
+	composition_matrix =  uniform_animation_matrix_list[input.bone_index[0]] * input.weight.x;
 	composition_matrix += uniform_animation_matrix_list[input.bone_index[1]] * input.weight.y;
 	composition_matrix += uniform_animation_matrix_list[input.bone_index[2]] * input.weight.z;
 	composition_matrix += uniform_animation_matrix_list[input.bone_index[3]] * input.weight.w;

@@ -42,6 +42,8 @@
 #include <iostream>
 #include <memory>
 #include <cstdint>
+#include <typeinfo>
+#include <random>
 
 //*****************************************************************************
 // その他のライブラリのファイル

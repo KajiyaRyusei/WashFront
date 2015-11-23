@@ -10,18 +10,7 @@
 // include
 #include "mesh_factory_amo.h"
 
-//*****************************************************************************
-// 3D用頂点フォーマット
-struct VERTEX_AMO
-{
-	D3DXVECTOR3 position;		// 座標
-	D3DXVECTOR3 normal;			// 法線
-	D3DXVECTOR2 texcoord;		// テクスチャ座標
-	fx32 weight[4];			// 重み
-	u8 bone_index[4];// ボーンインデックス
 
-	VERTEX_AMO() : position(0.f, 0.f, 0.f), normal(0.f, 0.f, 0.f), texcoord(0.f, 0.f){ ZeroMemory(bone_index, sizeof(u8)* 4); ZeroMemory(weight, sizeof(fx32)* 4); }
-};
 
 //=============================================================================
 // 作成
@@ -60,18 +49,18 @@ void MeshFactoryAMO::Create(
 
 		for( u32 vertex_id = 0; vertex_id < mesh_vertex_count; ++vertex_id )
 		{// 頂点
-			u32 vertex_bone[4];
 			VERTEX_AMO vertex;
+			u32 temp_vertex_bone_index[4];
 			file >> vertex.position.x >> vertex.position.y >> vertex.position.z;
 			file >> vertex.normal.x >> vertex.normal.y >> vertex.normal.z;
 			file >> vertex.texcoord.x >> vertex.texcoord.y;
 			file >> vertex.weight[0] >> vertex.weight[1] >> vertex.weight[2] >> vertex.weight[3];
-			file >> vertex_bone[0] >> vertex_bone[1] >> vertex_bone[2] >> vertex_bone[3];
-			for( int i = 0; i < 4; ++i )
-			{
-				vertex.bone_index[i] = static_cast<u8>(vertex_bone[i]);
-			}
+			file >> temp_vertex_bone_index[0] >> temp_vertex_bone_index[1] >> temp_vertex_bone_index[2] >> temp_vertex_bone_index[3];
 
+			for( u32 i = 0; i < 4; ++i )
+			{
+				vertex.bone_index[i] = static_cast<u8>(temp_vertex_bone_index[i]);
+			}
 			vertices.push_back(vertex);
 		}
 

@@ -15,7 +15,7 @@
 class DebugPrint
 {
 public:
-#ifndef _RELEASE
+#ifdef _DEBUG
 	DebugPrint() : 
 		_d3dx_font(nullptr),
 		_current_string_index(0)
@@ -34,7 +34,7 @@ public:
 
 private:
 
-#ifndef _RELEASE
+#ifdef _DEBUG
 
 	static const u64 kStringMax= 1024;
 	LPD3DXFONT _d3dx_font;

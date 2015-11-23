@@ -2,7 +2,7 @@
 //
 // 描画用AIM
 // 
-// Created by Ryusei Kajiya on 20151029
+// Created by Ryusei Kajiya on 20151102
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -17,7 +17,6 @@
 
 //*****************************************************************************
 // 前方宣言
-class MeshBuffer;
 class ShaderAim;
 
 //*****************************************************************************
@@ -41,10 +40,8 @@ private:
 
 	// シェーダー
 	ShaderAim* _shader;
-	// メッシュ
-	MeshBuffer* _mesh;
-	// テクスチャ
-	LPDIRECT3DTEXTURE9 _albedo_map;
+
+	// ワールド
 	data::World _world;
 	D3DXMATRIX _matrix_world_view_projection;
 	// 自分の位置を算出

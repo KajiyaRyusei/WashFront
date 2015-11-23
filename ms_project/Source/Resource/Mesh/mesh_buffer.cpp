@@ -119,9 +119,17 @@ void MeshBuffer::BindVertexBuffer(void) const
 }
 LPDIRECT3DVERTEXBUFFER9 MeshBuffer::GetVertexBuffer(u16 vertex_buffer_index) const
 {
-	return _vertex_buffer->GetVertexBuffer(vertex_buffer_index);
+	return _vertex_buffer->_vertex_buffers[vertex_buffer_index];
 }
 u32 MeshBuffer::GetPrimitiveCount(u16 primitive_index)
 {
-	return _vertex_buffer->GetPrimitiveCount(primitive_index);
+	return _vertex_buffer->_primitive_count[primitive_index];
+}
+u32 MeshBuffer::GetVertexCount(u16 primitive_index)
+{
+	return _vertex_buffer->_vertex_count[primitive_index];
+}
+u16 MeshBuffer::GetVertexSize(u16 primitive_index)
+{
+	return _vertex_buffer->_vertex_size[primitive_index];
 }

@@ -189,9 +189,6 @@
     <ClCompile Include="Source\DevelopTool\DevelopTool\debug_box.cpp">
       <Filter>DevelopTool\DevelopTool</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DevelopTool\DevelopTool\debug_sphere.cpp">
-      <Filter>Resource\Mesh\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Unit\Game\building.cpp">
       <Filter>Unit\Game</Filter>
     </ClCompile>
@@ -227,6 +224,60 @@
     </ClCompile>
     <ClCompile Include="Source\Unit\Game\dirt.cpp">
       <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\texture_resource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\cube_texture_resource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\mesh_resource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\static_mesh_resource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\animation_mesh_resource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input\xinput\input_x.cpp">
+      <Filter>Input\xinput</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DevelopTool\DevelopTool\debug_sphere.cpp">
+      <Filter>DevelopTool\DevelopTool</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_mesh_field.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\dirt_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Algorithm\dirt_math.cpp">
+      <Filter>Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Algorithm\perlin_noise.cpp">
+      <Filter>Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\water_bullet.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_water_cylinder.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\water_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\weapon.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_water_cylinder_back.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\water_back.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\water_back_shader.cpp">
+      <Filter>Shader\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -514,9 +565,6 @@
     <ClInclude Include="Source\DevelopTool\DevelopTool\debug_box.h">
       <Filter>DevelopTool\DevelopTool</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DevelopTool\DevelopTool\debug_sphere.h">
-      <Filter>Resource\Mesh\Factory</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Unit\Game\building.h">
       <Filter>Unit\Game</Filter>
     </ClInclude>
@@ -558,6 +606,84 @@
     </ClInclude>
     <ClInclude Include="Source\Unit\Game\dirt.h">
       <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\texture_resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\cube_texture_resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\mesh_resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\static_mesh_resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\animation_mesh_resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\xinput\input_x.h">
+      <Filter>Input\xinput</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DevelopTool\DevelopTool\debug_sphere.h">
+      <Filter>DevelopTool\DevelopTool</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_mesh_field.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\dirt_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Algorithm\dirt_math.h">
+      <Filter>Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\dirt_move_matrix.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\texcoord_move.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\world_inverse_transpose.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Algorithm\perlin_noise.h">
+      <Filter>Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\water_bullet.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_water_cylinder.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\water_matrix.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\water_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\weapon.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\metalness_texture.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\dirty_texture.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_mesh_point.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_water_cylinder_back.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\water_back.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\water_back_shader.h">
+      <Filter>Shader\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,8 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
 // リソースボックス
-// 
-// Created by Ryusei Kajiya on 20151029
+//
+// Created by Ryusei Kajiya on 20151102
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -15,16 +15,27 @@
 template<class T>
 class ResourceBox
 {
+private:
+
+	using ResourceMap = std::map< s32, T>;
+	ResourceMap _map;
+
 public:
-	ResourceBox() : _current_id{ 0 }{}
-	virtual ~ResourceBox(){}
+	//ResourceBox():{}
+	//virtual ~ResourceBox(){}
 
 	// 追加
-	s32 Add(T resource)
+	// true : 追加成功
+	// false : 追加失敗
+	bool Add(T resource,s32 id)
 	{
-		// リソースの追加
-		_map.insert(ResourceMap::value_type(_current_id, resource)).first->second = resource;
-		return _current_id++;
+		if( _map.find(id) == _map.end())
+		{
+			// リソースの追加
+			_map.insert(ResourceMap::value_type(id, resource)).first->second = resource;
+			return true;
+		}
+		return false;
 	}
 
 	// 取得
@@ -32,7 +43,7 @@ public:
 	{
 		if( _map.find(id) == _map.end() )
 		{// 無い場合
-			return nullptr;
+			return T();
 		}
 
 		return _map[id];
@@ -57,16 +68,19 @@ public:
 	{
 		for( auto it = _map.begin(); it != _map.end(); ++it )
 		{
-			SafeDelete(it->second);
+			_map.erase(it);
 		}
 		_map.clear();
 
 		_current_id = 0;
 	}
 
-private:
+	// Begin
+	typename ResourceMap::iterator Begin(){ return _map.begin(); }
 
-	using ResourceMap = std::map<int, T>;
-	ResourceMap _map;
-	s32 _current_id;
+	// End
+	typename ResourceMap::iterator End(){ return _map.end(); }
+
+
+
 };

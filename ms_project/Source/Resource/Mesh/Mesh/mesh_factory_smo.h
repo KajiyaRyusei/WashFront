@@ -15,6 +15,16 @@
 #include "mesh_factory.h"
 
 //*****************************************************************************
+// 3D用頂点フォーマット
+struct VERTEX_SMO
+{
+	D3DXVECTOR3	position;	// 頂点
+	D3DXVECTOR3	normal;		// 法線ベクトル
+	D3DXVECTOR2	texcoord;	// テクスチャ座標
+	fx32 cleanliness;		// 汚れ具合
+};
+
+//*****************************************************************************
 // クラス設計
 class MeshFactorySMO : MeshFactory
 {

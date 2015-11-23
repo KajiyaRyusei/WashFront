@@ -28,7 +28,8 @@ void ShaderPBLStatic::Initialize()
 	InitializeDiffuseCubeMap(_effect_handle_holder->effect_handle());
 	InitializeSpecularCubeMap(_effect_handle_holder->effect_handle());
 	InitializeAlbedoTexture(_effect_handle_holder->effect_handle());
-	InitializeNormalTexture(_effect_handle_holder->effect_handle());
+	InitializeMetalnessMap(_effect_handle_holder->effect_handle());
+	InitializeDirtyTexture(_effect_handle_holder->effect_handle());
 }
 
 void ShaderPBLStatic::AssignExceptMaterial() const
@@ -44,5 +45,6 @@ void ShaderPBLStatic::AssignExceptMaterial() const
 	SendDiffuseCubeMap(_effect_handle_holder->effect_handle());
 	SendSpecularCubeMap(_effect_handle_holder->effect_handle());
 	SendAlbedoTexture(_effect_handle_holder->effect_handle());
-	SendNormalTexture(_effect_handle_holder->effect_handle());
+	SendMetalnessMap(_effect_handle_holder->effect_handle());
+	SendDirtyTexture(_effect_handle_holder->effect_handle());
 }

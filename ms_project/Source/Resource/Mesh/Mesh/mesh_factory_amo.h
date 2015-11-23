@@ -15,6 +15,17 @@
 #include "mesh_factory.h"
 
 //*****************************************************************************
+// 3D用頂点フォーマット
+struct VERTEX_AMO
+{
+	D3DXVECTOR3 position;		// 座標
+	D3DXVECTOR3 normal;			// 法線
+	D3DXVECTOR2 texcoord;		// テクスチャ座標
+	fx32 weight[4];			// 重み
+	u8 bone_index[4];// ボーンインデックス
+};
+
+//*****************************************************************************
 // クラス設計
 class MeshFactoryAMO : MeshFactory
 {

@@ -58,6 +58,12 @@ public:
 	// リピート
 	bool CheckRepeat(INPUT_EVENT);
 
+	// データ設定
+	void SetEventValue(INPUT_EVENT_VALUE, s32 Value );
+
+	// データ取得
+	s32 GetEventValue(INPUT_EVENT_VALUE);
+	
 private:
 
 	std::vector<Input*> _input_device_list;

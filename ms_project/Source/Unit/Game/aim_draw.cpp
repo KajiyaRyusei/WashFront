@@ -2,7 +2,7 @@
 //
 // 描画用AIM
 // 
-// Created by Ryusei Kajiya on 20151029
+// Created by Ryusei Kajiya on 20151102
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -10,10 +10,13 @@
 // include
 #include "aim_draw.h"
 #include "Shader/Shader/aim_shader.h"
-#include "Resource/Mesh/Mesh/mesh_factory_sprite.h"
 #include "Camera/camera_manager.h"
 #include "Camera/Camera/camera_game_player.h"
 #include "Renderer/directx9.h"
+
+//リソース
+#include "Resource/texture_resource.h"
+#include "Resource/mesh_resource.h"
 
 //=============================================================================
 // 初期化
@@ -21,23 +24,15 @@ void AimDrawUnit::Initialize()
 {
 	// シェーダの作成
 	_shader = new ShaderAim();
+	LPDIRECT3DTEXTURE9 albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_AIM_TEXTURE);
+	_shader->SetAlbedoTexture(albedo_map);
 
-	// メッシュの作成
-	MeshFactorySprite mesh_factory;
-	_mesh = mesh_factory.Create(_application->GetRendererDevice());
-
-	// テクスチャ
-	LPDIRECT3DDEVICE9 device = _application->GetRendererDevice()->GetDevice();
-	D3DXCreateTextureFromFileEx(device, L"Data/Texture/aim.png", 0, 0, 0, 0, D3DFMT_A8B8G8R8, D3DPOOL_DEFAULT, D3DX_FILTER_LINEAR, D3DX_FILTER_LINEAR, 0xff, nullptr, nullptr, &_albedo_map);
-	_shader->SetAlbedoTexture(_albedo_map);
 }
 
 //=============================================================================
 // 終了
 void AimDrawUnit::Finalize()
 {
-	SafeRelease(_albedo_map);
-	SafeDelete(_mesh);
 	SafeDelete(_shader);
 }
 
@@ -55,7 +50,7 @@ void AimDrawUnit::Draw()
 	// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_AIM, GetID());
 	S_GetCommandBuffer()->PushShader(_shader, GetID());
-	S_GetCommandBuffer()->PushMesh(_mesh, GetID());
+	S_GetCommandBuffer()->PushMesh(_game_world->GetMeshResource()->Get(MESH_RESOURE_SPRITE), GetID());
 }
 
 //=============================================================================

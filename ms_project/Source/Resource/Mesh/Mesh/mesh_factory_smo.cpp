@@ -10,15 +10,6 @@
 // include
 #include "mesh_factory_smo.h"
 
-//*****************************************************************************
-// 3D用頂点フォーマット
-struct VERTEX_SMO
-{
-	D3DXVECTOR3	position;	// 頂点
-	D3DXVECTOR3	normal;		// 法線ベクトル
-	D3DXVECTOR2	texcoord;	// テクスチャ座標
-};
-
 //=============================================================================
 // 作成
 void MeshFactorySMO::Create(
@@ -60,6 +51,7 @@ void MeshFactorySMO::Create(
 			file >> vertex.position.x >> vertex.position.y >> vertex.position.z;
 			file >> vertex.normal.x >> vertex.normal.y >> vertex.normal.z;
 			file >> vertex.texcoord.x >> vertex.texcoord.y;
+			vertex.cleanliness = 1.0f;
 
 			vertices.push_back(vertex);
 		}
@@ -70,6 +62,7 @@ void MeshFactorySMO::Create(
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0);
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0);
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0);
+		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT1, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1);
 		// 頂点バッファの作成
 		mesh->CreateVertexBuffer(D3DUSAGE_WRITEONLY, D3DPOOL_MANAGED);
 

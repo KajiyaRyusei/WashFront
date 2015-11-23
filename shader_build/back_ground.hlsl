@@ -73,6 +73,9 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	PixelShaderOutput output = (PixelShaderOutput)0;
 
 	output.render_target0 = texCUBE(uniform_albedo_cube_sampler, input.normal);
+	output.render_target0.r = 0.2f;
+	output.render_target0.g = 0.5f;
+	output.render_target0.b = 1.f;
 	//output.render_target0 = float4(input.normal, 1);
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);

@@ -44,6 +44,12 @@ void CommandProcessor::ProccessBackGround(void) const
 	Proccess(RENDER_STATE_BACKGROUND);
 }
 //=============================================================================
+// îºìßñæ
+void CommandProcessor::ProccessTranslucent(void) const
+{
+	Proccess(RENDER_STATE_TRANSLUCENT);
+}
+//=============================================================================
 // è∆èÄ
 void CommandProcessor::ProccessAIM(void) const
 {

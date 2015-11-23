@@ -2,19 +2,23 @@
 //
 // テストスクリーン用ユニット
 // 
-// Created by Ryusei Kajiya on 20151012
+// Created by Ryusei Kajiya on 20151102
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //*****************************************************************************
 // include
 #include "screen_unit.h"
-
 #include "Shader/Shader/screen_shader.h"
-
-#include "Resource/Mesh/Mesh/mesh_factory_sprite.h"
-
 #include "Windows/window.h"
+
+//リソース
+#include "Resource/texture_resource.h"
+#include "Resource/mesh_resource.h"
+
+#include "Resource/Mesh/vertex_buffer.h"
+#include "Resource/Mesh/mesh_buffer.h"
+
 
 //=============================================================================
 // 初期化
@@ -23,9 +27,8 @@ void ScreenUnit::Initialize()
 	// シェーダの作成
 	_shader = new ShaderScreen();
 
-	// 頂点バッファの作成
-	MeshFactorySprite sprite_factory;
-	_mesh = sprite_factory.Create(_application->GetRendererDevice());
+	// メッシュの作成
+	_game_world->GetMeshResource()->Create(MESH_RESOURE_SPRITE, _application->GetRendererDevice());
 }
 
 //=============================================================================
@@ -33,7 +36,6 @@ void ScreenUnit::Initialize()
 void ScreenUnit::Finalize()
 {
 	SafeDelete(_shader);
-	SafeDelete(_mesh);
 }
 
 //=============================================================================
@@ -69,5 +71,5 @@ void ScreenUnit::Draw()
 	// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_2D,GetID());
 	S_GetCommandBuffer()->PushShader(_shader, GetID());
-	S_GetCommandBuffer()->PushMesh(_mesh, GetID());
+	S_GetCommandBuffer()->PushMesh(_game_world->GetMeshResource()->Get(MESH_RESOURE_SPRITE), GetID());
 }

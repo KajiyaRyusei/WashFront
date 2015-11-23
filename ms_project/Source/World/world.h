@@ -2,7 +2,7 @@
 //
 // 世界
 // 
-// Created by Ryusei Kajiya on 20151029
+// Created by Ryusei Kajiya on 20151030
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -14,7 +14,14 @@
 // 前方宣言
 class Unit;
 class CollisionGrid;
-template<class T>class ResourceBox;
+class RendererDevice;
+
+class TextureResource;
+class CubeTextureResource;
+class MeshResource;
+class StaticMeshResource;
+class AnimationMeshResource;
+
 
 //*****************************************************************************
 // クラス設計
@@ -40,14 +47,21 @@ public:
 	}
 
 	CollisionGrid* GetCollisionGrid(){ return _collision_grid; }
-	ResourceBox<LPDIRECT3DTEXTURE9>* GetTextureResourceBox(){ return _texture_resource_box; }
-	ResourceBox<LPDIRECT3DCUBETEXTURE9>* GetCubeTextureResourceBox(){ return _texture_cube_resource_box; }
+	TextureResource* GetTextureResource(){ return _texture_resource; }
+	CubeTextureResource* GetCubeTextureResource(){ return _cube_texture_resource; }
+	MeshResource* GetMeshResource(){ return _mesh_resource; }
+	StaticMeshResource* GetStaticMeshResource(){ return _static_mesh_resource; }
+	AnimationMeshResource* GetAnimationMeshResource(){ return _animation_mesh_resource; }
 
 
 private:
 
 	std::list<Unit*> _unit_list;
 	CollisionGrid* _collision_grid;
-	ResourceBox<LPDIRECT3DTEXTURE9>* _texture_resource_box;
-	ResourceBox<LPDIRECT3DCUBETEXTURE9>* _texture_cube_resource_box;
+
+	TextureResource* _texture_resource;
+	CubeTextureResource* _cube_texture_resource;
+	MeshResource* _mesh_resource;
+	StaticMeshResource* _static_mesh_resource;
+	AnimationMeshResource* _animation_mesh_resource;
 };

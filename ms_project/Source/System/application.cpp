@@ -129,10 +129,11 @@ void Application::Draw()
 	// ƒRƒ}ƒ“ƒh‚É‚½‚Ü‚Á‚Ä‚¢‚é‚à‚Ì‚ð•`‰æ
 	_command_buffer->Sort();
 	_command_processor->ProccessLightDepth();
+	_command_processor->ProccessShadow();
 	_command_processor->ProccessDefault();
 	_command_processor->ProccessField();
-	_command_processor->ProccessShadow();
 	_command_processor->ProccessBackGround();
+	_command_processor->ProccessTranslucent();
 	_command_processor->ProccessAIM();
 	_command_processor->Proccess2D();
 	_command_buffer->Clear();

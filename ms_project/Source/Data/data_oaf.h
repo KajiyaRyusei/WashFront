@@ -2,7 +2,7 @@
 //
 // アニメーションデータ
 //
-// Created by Ryusei Kajiya on 20151009
+// Created by Ryusei Kajiya on 20151111
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -12,30 +12,41 @@
 
 namespace data
 {
-	//*****************************************************************************
-	// 構造体定義
-	struct KeyData
+	//************************************
+	// フレームデータ
+	struct FrameData
 	{
-	public:
-		KeyData() : matrix_animation(nullptr){}
-		// ボーンの数だけ
+		FrameData() : matrix_animation(nullptr){}
+		// クラスターの数だけ
 		D3DXMATRIX* matrix_animation;
 	};
+	//************************************
+	// アニメーションメッシュデータ
+	struct AnimationData
+	{
+		AnimationData() : frame(nullptr), number_cluster(0){}
+		// クラスター数
+		u32 number_cluster;
+		// フレーム情報
+		FrameData* frame;
+	};
+	//************************************
+	// アニメーションファイル
 	struct ObjectAnimationFile
 	{
 	public:
 		ObjectAnimationFile() :
 			end_frame(0),
-			max_bone(0),
-			key(nullptr){}
+			animation(nullptr){}
 
 		u32 end_frame;
-		u32 max_bone;
+		u32 mesh_size;
 		// フレームの数だけ
-		KeyData* key;
+		AnimationData* animation;
 
 		void LoadAnimationFile(const std::string file_name, const u32 mesh_list_size)
 		{
+			mesh_size = mesh_list_size;
 			std::ifstream file;
 			std::string line;
 			file.open(file_name, std::ios::out);
@@ -44,34 +55,32 @@ namespace data
 				OutputDebugStringA("ファイル入力にエラーが発生しました\n");
 			}
 
+
 			// 浮動小数点の精度
 			file.precision(5);
 
-
 			// フレームの最大数
 			file >> end_frame;
-			// ボーン数
-			file >> max_bone;
 
-			// フレームの最大数だけキーを確保
-			key = new KeyData[end_frame];
+			animation = new AnimationData[mesh_list_size];
 
-			// アニメーション行列の確保
-			for( unsigned int frame = 0; frame < end_frame; ++frame )
+			for( u32 mesh_id = 0; mesh_id < mesh_list_size; ++mesh_id )
 			{
-				key[frame].matrix_animation = new D3DXMATRIX[max_bone];
-			}
+				file >> animation[mesh_id].number_cluster;
 
-			for( u32 frame = 0; frame < end_frame; ++frame )
-			{
-				for( unsigned int mesh_id = 0; mesh_id < mesh_list_size; ++mesh_id )
+				animation[mesh_id].frame = new FrameData[end_frame];
+
+				
+				for( u32 frame = 0; frame < end_frame; ++frame )
 				{
-					for( unsigned int matrix_index = 0; matrix_index < max_bone; ++matrix_index )
+					animation[mesh_id].frame[frame].matrix_animation = new D3DXMATRIX[animation[mesh_id].number_cluster];
+
+					for( u32 matrix_index = 0; matrix_index < animation[mesh_id].number_cluster; ++matrix_index )
 					{
-						file >> key[frame].matrix_animation[matrix_index]._11 >> key[frame].matrix_animation[matrix_index]._12 >> key[frame].matrix_animation[matrix_index]._13 >> key[frame].matrix_animation[matrix_index]._14
-							>> key[frame].matrix_animation[matrix_index]._21 >> key[frame].matrix_animation[matrix_index]._22 >> key[frame].matrix_animation[matrix_index]._23 >> key[frame].matrix_animation[matrix_index]._24
-							>> key[frame].matrix_animation[matrix_index]._31 >> key[frame].matrix_animation[matrix_index]._32 >> key[frame].matrix_animation[matrix_index]._33 >> key[frame].matrix_animation[matrix_index]._34
-							>> key[frame].matrix_animation[matrix_index]._41 >> key[frame].matrix_animation[matrix_index]._42 >> key[frame].matrix_animation[matrix_index]._43 >> key[frame].matrix_animation[matrix_index]._44;
+						file >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._11 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._12 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._13 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._14
+							>> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._21 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._22 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._23 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._24
+							>> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._31 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._32 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._33 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._34
+							>> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._41 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._42 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._43 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._44;
 					}
 				}
 			}
@@ -80,11 +89,15 @@ namespace data
 		void UnLoadAnimationFile()
 		{
 			// アニメーションデータの削除
-			for( u32 frame = 0; frame < end_frame; ++frame )
+			for( u32 mesh_id = 0; mesh_id < mesh_size; ++mesh_id )
 			{
-				SafeDeleteArray(key[frame].matrix_animation);
+				for( u32 frame = 0; frame < end_frame; ++frame )
+				{
+					SafeDeleteArray(animation[mesh_id].frame[frame].matrix_animation);
+				}
+				SafeDeleteArray(animation[mesh_id].frame);
 			}
-			SafeDeleteArray(key);
+			SafeDeleteArray(animation);
 		}
 	};
 };

@@ -31,5 +31,14 @@
     <FxCompile Include="PBL_static.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
+    <FxCompile Include="dirt.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="water.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="water_back.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
