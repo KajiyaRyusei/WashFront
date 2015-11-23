@@ -39,7 +39,17 @@ public:
 
 	//テクスチャ作成
 	void CreateTexture( LPCWSTR texture_filename );
-	
+	// 座標セット
+	void SetPosition( D3DXVECTOR3 pos )
+	{
+		_position = pos;
+	}
+	// 大きさセット
+	void SetScaling( D3DXVECTOR3 scale )
+	{
+		_scaling = scale;
+	}
+
 protected:
 	//uv値
 	D3DXVECTOR2 _texture_uv;
