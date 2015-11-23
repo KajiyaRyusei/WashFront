@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 c:\users\龍成\documents\fourth\ms\washfront\ms_project\data\shader\lambert_lighting.cso
 c:\users\龍成\documents\fourth\ms\washfront\ms_project\data\shader\aim.cso
 c:\users\龍成\documents\fourth\ms\washfront\ms_project\data\shader\animation.cso
@@ -10,3 +11,18 @@ c:\users\龍成\documents\fourth\ms\washfront\shader_build\debug\shader_build.tl
 c:\users\龍成\documents\fourth\ms\washfront\shader_build\debug\shader_build.tlog\fxc.read.1.tlog
 c:\users\龍成\documents\fourth\ms\washfront\shader_build\debug\shader_build.tlog\fxc.write.1.tlog
 c:\users\龍成\documents\fourth\ms\washfront\shader_build\debug\shader_build.tlog\shader_build.write.1u.tlog
+=======
+d:\4年\未来創造展\ms_project\data\shader\aim.cso
+d:\4年\未来創造展\ms_project\data\shader\animation.cso
+d:\4年\未来創造展\ms_project\data\shader\back_ground.cso
+d:\4年\未来創造展\ms_project\data\shader\fade.cso
+d:\4年\未来創造展\ms_project\data\shader\lambert_lighting.cso
+d:\4年\未来創造展\ms_project\data\shader\pbl_animation.cso
+d:\4年\未来創造展\ms_project\data\shader\pbl_static.cso
+d:\4年\未来創造展\ms_project\data\shader\screen_shader.cso
+d:\4年\未来創造展\ms_project\data\shader\shader_2d.cso
+d:\4年\未来創造展\shader_build\debug\shader_build.tlog\fxc.command.1.tlog
+d:\4年\未来創造展\shader_build\debug\shader_build.tlog\fxc.read.1.tlog
+d:\4年\未来創造展\shader_build\debug\shader_build.tlog\fxc.write.1.tlog
+d:\4年\未来創造展\shader_build\debug\shader_build.tlog\shader_build.write.1u.tlog
+>>>>>>> origin/Mochizuki-desk

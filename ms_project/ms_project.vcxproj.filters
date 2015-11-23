@@ -225,6 +225,7 @@
     <ClCompile Include="Source\Unit\Game\dirt.cpp">
       <Filter>Unit\Game</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Source\Resource\texture_resource.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
@@ -279,6 +280,17 @@
     <ClCompile Include="Source\Shader\Shader\water_back_shader.cpp">
       <Filter>Shader\Shader</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="Source\Shader\Shader\screen_2d_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\map.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+>>>>>>> origin/Mochizuki-desk
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdafx.h" />
@@ -607,6 +619,7 @@
     <ClInclude Include="Source\Unit\Game\dirt.h">
       <Filter>Unit\Game</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Source\Resource\resource.h">
       <Filter>Resource</Filter>
     </ClInclude>
@@ -685,6 +698,29 @@
     <ClInclude Include="Source\Shader\Shader\water_back_shader.h">
       <Filter>Shader\Shader</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="Source\Shader\Component\ambient_texture.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\screen_2d_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\map.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\screen_texture_offset.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\screen_texture_uv.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\screen_texture_alpha.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+>>>>>>> origin/Mochizuki-desk
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

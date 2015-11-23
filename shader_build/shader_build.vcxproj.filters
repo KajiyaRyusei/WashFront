@@ -31,6 +31,7 @@
     <FxCompile Include="PBL_static.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
+<<<<<<< HEAD
     <FxCompile Include="dirt.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
@@ -38,6 +39,9 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="water_back.hlsl">
+=======
+    <FxCompile Include="shader_2d.hlsl">
+>>>>>>> origin/Mochizuki-desk
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>
