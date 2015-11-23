@@ -279,6 +279,42 @@
     <ClCompile Include="Source\Shader\Shader\water_back_shader.cpp">
       <Filter>Shader\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Unit\Title\text.cpp">
+      <Filter>Unit\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Title\logo.cpp">
+      <Filter>Unit\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Title\logo_bg.cpp">
+      <Filter>Unit\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Result\result_bg.cpp">
+      <Filter>Unit\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Result\score.cpp">
+      <Filter>Unit\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Result\score_board.cpp">
+      <Filter>Unit\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Result\bulletin_board.cpp">
+      <Filter>Unit\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Result\judge.cpp">
+      <Filter>Unit\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Result\message_box.cpp">
+      <Filter>Unit\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\number.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\screen_2d_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdafx.h" />
@@ -685,6 +721,51 @@
     <ClInclude Include="Source\Shader\Shader\water_back_shader.h">
       <Filter>Shader\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Unit\Title\text.h">
+      <Filter>Unit\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Title\logo.h">
+      <Filter>Unit\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Title\logo_bg.h">
+      <Filter>Unit\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Result\message_box.h">
+      <Filter>Unit\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Result\result_bg.h">
+      <Filter>Unit\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Result\score.h">
+      <Filter>Unit\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Result\score_board.h">
+      <Filter>Unit\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Result\bulletin_board.h">
+      <Filter>Unit\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Result\judge.h">
+      <Filter>Unit\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\number.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\screen_texture_offset.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\screen_texture_uv.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\screen_texture_alpha.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\screen_2d_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -794,6 +875,12 @@
     </Filter>
     <Filter Include="Command">
       <UniqueIdentifier>{d0671d7b-0485-498d-b719-908250635096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit\Result">
+      <UniqueIdentifier>{7f86546d-16a4-404b-b427-939df7f80a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit\Title">
+      <UniqueIdentifier>{89cafac7-d0a6-44f6-ba74-e806385f3424}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

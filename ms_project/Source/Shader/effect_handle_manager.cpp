@@ -26,6 +26,7 @@
 #include "Shader/Shader/dirt_shader.h"
 #include "Shader/Shader/water_shader.h"
 #include "Shader/Shader/water_back_shader.h"
+#include "Shader/Shader/screen_2d_shader.h"
 
 //==============================================================================
 // コンストラクタ
@@ -49,7 +50,7 @@ EffectHandleManager::EffectHandleManager(RendererDevice* renderer_device)
 	EntryList<ShaderDirt>("Data/Shader/dirt.cso", renderer_device);
 	EntryList<ShaderWater>("Data/Shader/water.cso", renderer_device);
 	EntryList<ShaderWaterBack>("Data/Shader/water_back.cso", renderer_device);
-
+	EntryList<Shader2D>("Data/Shader/shader_2d.cso", renderer_device);
 }
 
 //==============================================================================

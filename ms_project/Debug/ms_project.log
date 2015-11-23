@@ -1,10 +1,8 @@
-﻿2015/11/23 20:50:40 にビルドを開始しました。
+﻿2015/11/23 23:17:57 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Unit\Game\player.cpp Source\Unit\Game\water_back.cpp
-         player.cpp
-         water_back.cpp
-         コードを生成中...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Unit\Game\building.cpp
+         building.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\dirt_math.obj
          Debug\often_use.obj
@@ -43,6 +41,7 @@
          Debug\animation_mesh_resource.obj
          Debug\cube_texture_resource.obj
          Debug\index_buffer.obj
+         Debug\mesh_factory_2d_sprite.obj
          Debug\mesh_factory_amo.obj
          Debug\mesh_factory_cube.obj
          Debug\mesh_factory_mesh_field.obj
@@ -69,6 +68,7 @@
          Debug\animation_shader.obj
          Debug\PBL_animation_shader.obj
          Debug\PBL_static_shader.obj
+         Debug\screen_2d_shader.obj
          Debug\screen_shader.obj
          Debug\water_back_shader.obj
          Debug\water_shader.obj
@@ -92,7 +92,17 @@
          Debug\water_back.obj
          Debug\water_bullet.obj
          Debug\weapon.obj
+         Debug\number.obj
+         Debug\bulletin_board.obj
+         Debug\judge.obj
+         Debug\message_box.obj
+         Debug\result_bg.obj
+         Debug\score.obj
+         Debug\score_board.obj
          Debug\screen_unit.obj
+         Debug\logo.obj
+         Debug\logo_bg.obj
+         Debug\text.obj
          Debug\unit.obj
          Debug\window.obj
          Debug\window_operation_wrapper.obj

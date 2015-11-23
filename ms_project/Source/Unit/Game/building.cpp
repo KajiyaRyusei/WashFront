@@ -85,7 +85,7 @@ void BuildingUnit::Initialize(
 
 	// ƒ{ƒŠƒ…[ƒ€‚Ìì¬
 	CreateVolumeMeshPoint(_world.position, _world.scale, _world.rotation, vertex_count, mesh_point_array, mesh_normal_array);
-	D3DXVECTOR3 volume_box_size(_world.scale*150.f);
+	D3DXVECTOR3 volume_box_size(_world.scale*100.f);
 	volume_box_size.y *= 10.f;
 	CreateVolumeBox(_world.position, volume_box_size, _world.rotation);
 
@@ -134,7 +134,7 @@ void BuildingUnit::Draw()
 		S_GetCommandBuffer()->PushMesh((*it), GetID());
 	}
 
-	//_box->DebugDraw();
+	_box->DebugDraw();
 }
 
 //=============================================================================

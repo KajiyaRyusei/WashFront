@@ -2,7 +2,7 @@
 //
 // シーン：タイトル
 // 
-// Created by Ryusei Kajiya on 20151029
+// Created by Ryusei Kajiya on 20151123
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -45,5 +45,7 @@ public:
 private:
 	World* _world;
 	
+	void MapGeneration();
+	void ResourceGeneration();
 };
 

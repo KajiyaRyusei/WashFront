@@ -40,5 +40,8 @@
     <FxCompile Include="water_back.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
+    <FxCompile Include="shader_2d.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

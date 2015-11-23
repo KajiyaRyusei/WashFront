@@ -166,6 +166,7 @@
     <ClCompile Include="Source\Resource\animation_mesh_resource.cpp" />
     <ClCompile Include="Source\Resource\cube_texture_resource.cpp" />
     <ClCompile Include="Source\Resource\Mesh\index_buffer.cpp" />
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_amo.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_cube.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_mesh_field.cpp" />
@@ -192,6 +193,7 @@
     <ClCompile Include="Source\Shader\Shader\animation_shader.cpp" />
     <ClCompile Include="Source\Shader\Shader\PBL_animation_shader.cpp" />
     <ClCompile Include="Source\Shader\Shader\PBL_static_shader.cpp" />
+    <ClCompile Include="Source\Shader\Shader\screen_2d_shader.cpp" />
     <ClCompile Include="Source\Shader\Shader\screen_shader.cpp" />
     <ClCompile Include="Source\Shader\Shader\water_back_shader.cpp" />
     <ClCompile Include="Source\Shader\Shader\water_shader.cpp" />
@@ -219,7 +221,17 @@
     <ClCompile Include="Source\Unit\Game\water_back.cpp" />
     <ClCompile Include="Source\Unit\Game\water_bullet.cpp" />
     <ClCompile Include="Source\Unit\Game\weapon.cpp" />
+    <ClCompile Include="Source\Unit\number.cpp" />
+    <ClCompile Include="Source\Unit\Result\bulletin_board.cpp" />
+    <ClCompile Include="Source\Unit\Result\judge.cpp" />
+    <ClCompile Include="Source\Unit\Result\message_box.cpp" />
+    <ClCompile Include="Source\Unit\Result\result_bg.cpp" />
+    <ClCompile Include="Source\Unit\Result\score.cpp" />
+    <ClCompile Include="Source\Unit\Result\score_board.cpp" />
     <ClCompile Include="Source\Unit\screen_unit.cpp" />
+    <ClCompile Include="Source\Unit\Title\logo.cpp" />
+    <ClCompile Include="Source\Unit\Title\logo_bg.cpp" />
+    <ClCompile Include="Source\Unit\Title\text.cpp" />
     <ClCompile Include="Source\Unit\unit.cpp" />
     <ClCompile Include="Source\Windows\window.cpp" />
     <ClCompile Include="Source\Windows\window_operation_wrapper.cpp" />
@@ -282,6 +294,7 @@
     <ClInclude Include="Source\Resource\cube_texture_resource.h" />
     <ClInclude Include="Source\Resource\Mesh\index_buffer.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory.h" />
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_amo.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_cube.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_mesh_field.h" />
@@ -318,6 +331,9 @@
     <ClInclude Include="Source\Shader\Component\roughness.h" />
     <ClInclude Include="Source\Shader\Component\screen_matrix.h" />
     <ClInclude Include="Source\Shader\Component\screen_size.h" />
+    <ClInclude Include="Source\Shader\Component\screen_texture_alpha.h" />
+    <ClInclude Include="Source\Shader\Component\screen_texture_offset.h" />
+    <ClInclude Include="Source\Shader\Component\screen_texture_uv.h" />
     <ClInclude Include="Source\Shader\Component\specular_cube_texture.h" />
     <ClInclude Include="Source\Shader\Component\texcoord_move.h" />
     <ClInclude Include="Source\Shader\Component\water_matrix.h" />
@@ -334,6 +350,7 @@
     <ClInclude Include="Source\Shader\Shader\animation_shader.h" />
     <ClInclude Include="Source\Shader\Shader\PBL_animation_shader.h" />
     <ClInclude Include="Source\Shader\Shader\PBL_static_shader.h" />
+    <ClInclude Include="Source\Shader\Shader\screen_2d_shader.h" />
     <ClInclude Include="Source\Shader\Shader\screen_shader.h" />
     <ClInclude Include="Source\Shader\Shader\water_back_shader.h" />
     <ClInclude Include="Source\Shader\Shader\water_shader.h" />
@@ -357,7 +374,17 @@
     <ClInclude Include="Source\Unit\Game\water_back.h" />
     <ClInclude Include="Source\Unit\Game\water_bullet.h" />
     <ClInclude Include="Source\Unit\Game\weapon.h" />
+    <ClInclude Include="Source\Unit\number.h" />
+    <ClInclude Include="Source\Unit\Result\bulletin_board.h" />
+    <ClInclude Include="Source\Unit\Result\judge.h" />
+    <ClInclude Include="Source\Unit\Result\message_box.h" />
+    <ClInclude Include="Source\Unit\Result\result_bg.h" />
+    <ClInclude Include="Source\Unit\Result\score.h" />
+    <ClInclude Include="Source\Unit\Result\score_board.h" />
     <ClInclude Include="Source\Unit\screen_unit.h" />
+    <ClInclude Include="Source\Unit\Title\logo.h" />
+    <ClInclude Include="Source\Unit\Title\logo_bg.h" />
+    <ClInclude Include="Source\Unit\Title\text.h" />
     <ClInclude Include="Source\Unit\unit.h" />
     <ClInclude Include="Source\Windows\window.h" />
     <ClInclude Include="Source\Windows\window_operation_wrapper.h" />
