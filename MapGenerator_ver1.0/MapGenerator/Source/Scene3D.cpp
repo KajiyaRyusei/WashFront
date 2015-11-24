@@ -82,10 +82,10 @@ HRESULT Scene3D::Init(D3DXVECTOR3 pos)
 	pVtx[2].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	pVtx[3].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 
-	pVtx[0].diffuse = D3DXCOLOR(0.3f, 0.9f, 0.7f, 0.4f);
-	pVtx[1].diffuse = D3DXCOLOR(0.3f, 0.9f, 0.7f, 0.4f);
-	pVtx[2].diffuse = D3DXCOLOR(0.3f, 0.9f, 0.7f, 0.4f);
-	pVtx[3].diffuse = D3DXCOLOR(0.3f, 0.9f, 0.7f, 0.4f);
+	pVtx[0].diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	pVtx[1].diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	pVtx[2].diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	pVtx[3].diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
 
 	// テクスチャ情報の初期化
 	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);

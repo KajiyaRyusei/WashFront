@@ -11,6 +11,7 @@
 #include "ImportFileManager.h"
 #include "ObjectManager.h"
 #include "Building.h"
+#include "RouteManager.h"
 #include <commctrl.h>
 
 
@@ -30,10 +31,16 @@
 LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM w_param, LPARAM l_param);
 
 // ダイアログプロシージャ
-BOOL CALLBACK DlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam);
 
-// ファイルの読み込み
-void ImportFile(HWND windowHandle);
+// ダイアログプロシージャ
+BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam);
+
+// モデルファイルの読み込み
+void ImportModelFile(HWND windowHandle);
+
+// テクスチャファイルの読み込み
+void ImportTextureFile(HWND windowHandle);
 
 // モデルの生成
 void CreateModel(HWND hDlg);
@@ -47,13 +54,19 @@ void ReadMapFile(HWND hWnd);
 // 保存関数
 void SaveMapFile(HWND hWnd);
 
+// 読み込み関数
+void ReadRouteFile(HWND hWnd);
+
+// 保存関数
+void SaveRouteFile(HWND hWnd);
 
 
 //-----------------------------------------------------------------------------
 // グローバル変数
 //-----------------------------------------------------------------------------
 HWND g_windowHandle = nullptr;
-HWND g_dialogHandle = nullptr;
+HWND g_objectDialogHandle = nullptr;
+HWND g_routeDialogHandle = nullptr;
 
 TCHAR g_szFile[MAX_PATH] = {};
 
@@ -149,10 +162,17 @@ int APIENTRY WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmd_line
 
 
 	// ダイアログの作成
-	g_dialogHandle = CreateDialog(instance, MAKEINTRESOURCE(IDD_DIALOG1),
-		g_windowHandle, DlgProc);
-	ShowWindow(g_dialogHandle, cmd_show);
-	UpdateWindow(g_dialogHandle);
+	g_objectDialogHandle = CreateDialog(instance, MAKEINTRESOURCE(IDD_DIALOG1),
+		g_windowHandle, ObjectDlgProc);
+	ShowWindow(g_objectDialogHandle, cmd_show);
+	UpdateWindow(g_objectDialogHandle);
+
+
+	// ダイアログの作成
+	g_routeDialogHandle = CreateDialog(instance, MAKEINTRESOURCE(IDD_DIALOG2),
+		g_windowHandle, RouteDlgProc);
+	ShowWindow(g_routeDialogHandle, cmd_show);
+	UpdateWindow(g_routeDialogHandle);
 
 
 	// メッセージループ
@@ -245,14 +265,30 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM w_param, LPARAM l_param)
 		// モデルのインポート
 		case ID_40003:
 			// モデルファイル読み込み
-			ImportFile(wnd);
+			ImportModelFile(wnd);
 			break;
 
+			// テクスチャのインポート
+		case ID_40007:
+			// テクスチャファイル読み込み
+			ImportTextureFile(wnd);
+			break;
 
 		// 名前をつけて保存
 		case ID_40006:
 			// 保存
 			SaveMapFile(wnd);
+			break;
+
+		// ルートの保存
+		case ID_40008:
+			SaveRouteFile(wnd);
+			break;
+
+			// ルートの読み込み
+		case ID_40009:
+			if (IDYES == MessageBox(g_windowHandle, "現在の編集情報は破棄されますがよろしいですか", "警告", MB_YESNO))
+				ReadRouteFile(wnd);
 			break;
 
 		default:
@@ -278,7 +314,7 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM w_param, LPARAM l_param)
 //=============================================================================
 // ダイアログプロシージャ
 //=============================================================================
-BOOL CALLBACK DlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
+BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (Msg) {
 
@@ -331,7 +367,7 @@ BOOL CALLBACK DlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 				if (building) {
 					char str[4096] = {};
 					GetWindowText(
-						(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT2),		// スライダーのハンドル
+						(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT2),		// スライダーのハンドル
 						str, 4096);
 					double positionX = atof(str);
 					building->SetPositionX((float)positionX);
@@ -347,7 +383,7 @@ BOOL CALLBACK DlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 				if (building) {
 					char str[4096] = {};
 					GetWindowText(
-						(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT3),		// スライダーのハンドル
+						(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT3),		// スライダーのハンドル
 						str, 4096);
 					double positionY = atof(str);
 					building->SetPositionY((float)positionY);
@@ -363,7 +399,7 @@ BOOL CALLBACK DlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 				if (building) {
 					char str[4096] = {};
 					GetWindowText(
-						(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT4),		// スライダーのハンドル
+						(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT4),		// スライダーのハンドル
 						str, 4096);
 					double positionZ = atof(str);
 					building->SetPositionZ((float)positionZ);
@@ -380,7 +416,7 @@ BOOL CALLBACK DlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 				if (building) {
 					char str[4096] = {};
 					GetWindowText(
-						(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT5),		// スライダーのハンドル
+						(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT5),		// スライダーのハンドル
 						str, 4096);
 					double scaleX = atof(str);
 					building->SetScaleX((float)scaleX);
@@ -396,7 +432,7 @@ BOOL CALLBACK DlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 				if (building) {
 					char str[4096] = {};
 					GetWindowText(
-						(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT6),		// スライダーのハンドル
+						(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT6),		// スライダーのハンドル
 						str, 4096);
 					double scaleY = atof(str);
 					building->SetScaleY((float)scaleY);
@@ -412,7 +448,7 @@ BOOL CALLBACK DlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 				if (building) {
 					char str[4096] = {};
 					GetWindowText(
-						(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT7),		// スライダーのハンドル
+						(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT7),		// スライダーのハンドル
 						str, 4096);
 					double scaleZ = atof(str);
 					building->SetScaleZ((float)scaleZ);
@@ -461,16 +497,6 @@ BOOL CALLBACK DlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 	case WM_NULL:
 	{
 		
-		const char *fileName = Manager::GetInstance()->GetImportFileManager()->GetFileName(g_szFile);
-
-		HWND hCombo = GetDlgItem(hDlg, IDC_COMBO1);
-
-		SendMessage(
-			(HWND)hCombo,			// コンボボックスのハンドル
-			(UINT)CB_ADDSTRING,		// 項目の追加
-			0,						// ０固定
-			(LPARAM)fileName		// 追加する項目の文字列
-			);
 		break;
 	}
 
@@ -508,9 +534,9 @@ float GetFps()
 
 
 //=============================================================================
-// ファイルの読み込み
+// モデルファイルの読み込み
 //=============================================================================
-void ImportFile(HWND windowHandle)
+void ImportModelFile(HWND windowHandle)
 {
 	OPENFILENAME ofn = {};
 	TCHAR szPath[MAX_PATH] = { 0 };
@@ -540,36 +566,93 @@ void ImportFile(HWND windowHandle)
 		if (!Manager::GetInstance()->GetImportFileManager()->ImportFile(g_szFile))
 			MessageBox(g_windowHandle, "すでに読み込まれています", "警告", MB_OK);
 		else
-			SendMessage(g_dialogHandle, WM_NULL, 0, 0);
+			SendMessage(g_objectDialogHandle, WM_NULL, 0, 0);
 	}
 }
+
+//=============================================================================
+// テクスチャファイルの読み込み
+//=============================================================================
+void ImportTextureFile(HWND windowHandle)
+{
+	OPENFILENAME ofn = {};
+	TCHAR szPath[MAX_PATH] = { 0 };
+	TCHAR szFile[MAX_PATH] = {};
+	memset(g_szFile, 0, sizeof(TCHAR)* MAX_PATH);
+
+	if (szPath[0] == TEXT('\0')) {
+		GetCurrentDirectory(MAX_PATH, szPath);
+	}
+
+	// ダイアログの情報
+	if (ofn.lStructSize == 0) {
+		ofn.lStructSize = sizeof(OPENFILENAME);
+		ofn.hwndOwner = windowHandle;
+		ofn.lpstrInitialDir = szPath;	// 初期フォルダ位置
+		ofn.lpstrFile = g_szFile;		// 選択ファイル格納
+		ofn.nMaxFile = MAX_PATH;
+		ofn.lpstrFilter = "JPEG(*.jpg)\0*.jpg\0PNG(*.png)\0*.png";
+		ofn.lpstrTitle = "テクスチャのインポート";
+		ofn.Flags = OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+	}
+
+	// ダイアログ表示
+	if (GetOpenFileName(&ofn)) {
+
+		// モデルファイルの読み込み
+		if (!Manager::GetInstance()->GetImportFileManager()->ImportFile(g_szFile))
+			MessageBox(g_windowHandle, "すでに読み込まれています", "警告", MB_OK);
+		else
+			SendMessage(g_objectDialogHandle, WM_NULL, 0, 0);
+	}
+}
+
 
 // モデルの生成
 void CreateModel(HWND hDlg)
 {
 
 	// コンボボックスから生成するモデルのファイル名取得
-	HWND hCombo = GetDlgItem(hDlg, IDC_COMBO1);
-	int index = SendMessage(
-		(HWND)hCombo,			// コンボボックスのハンドル
+	HWND hCombo1 = GetDlgItem(hDlg, IDC_COMBO1);
+	int modelIndex = SendMessage(
+		(HWND)hCombo1,			// コンボボックスのハンドル
 		(UINT)CB_GETCURSEL,		// 選択中のインデックス取得
 		0,						// ０固定
 		0						// 追加する項目の文字列
 		);
 
+	// コンボボックスから生成するテクスチャのファイル名取得
+	HWND hCombo2 = GetDlgItem(hDlg, IDC_COMBO2);
+	int textureIndex = SendMessage(
+		(HWND)hCombo2,			// コンボボックスのハンドル
+		(UINT)CB_GETCURSEL,		// 選択中のインデックス取得
+		0,						// ０固定
+		0						// 追加する項目の文字列
+		);
 
 	// ファイル名の取得
-	int intTxtLen = SendMessage(hCombo, CB_GETLBTEXTLEN, index, 0);
+	int intTxtLen = SendMessage(hCombo1, CB_GETLBTEXTLEN, modelIndex, 0);
 	if (intTxtLen != CB_ERR)
 	{
-		char* pszBuf = new char[intTxtLen + 1];
-		if (SendMessage(hCombo, CB_GETLBTEXT, index, (LPARAM)pszBuf) != CB_ERR)
+		char* modelBuf = new char[intTxtLen + 1];
+		if (SendMessage(hCombo1, CB_GETLBTEXT, modelIndex, (LPARAM)modelBuf) != CB_ERR)
 		{
-			// モデルの生成
-			Manager::GetInstance()->GetObjectManager()->CreateBuilding(
-				Manager::GetInstance()->GetImportFileManager()->GetFilePath(pszBuf));
+			intTxtLen = SendMessage(hCombo2, CB_GETLBTEXTLEN, textureIndex, 0);
+			if (intTxtLen != CB_ERR)
+			{
+				char* textureBuf = new char[intTxtLen + 1];
+				if (SendMessage(hCombo2, CB_GETLBTEXT, textureIndex, (LPARAM)textureBuf) != CB_ERR)
+				{
+
+					// モデルの生成
+					Manager::GetInstance()->GetObjectManager()->CreateBuilding(
+						Manager::GetInstance()->GetImportFileManager()->GetModelFilePath(modelBuf),
+						Manager::GetInstance()->GetImportFileManager()->GetTextureFilePath(textureBuf));
+				}
+				delete[] textureBuf;
+			}
 		}
-		delete[] pszBuf;
+		delete[] modelBuf;
 	}
 
 }
@@ -592,19 +675,19 @@ void ClickLeftEvent()
 
 		// 向きスライダー
 		SendMessage(
-			(HWND)GetDlgItem(g_dialogHandle, IDC_SLIDER5),	// スライダーのハンドル
+			(HWND)GetDlgItem(g_objectDialogHandle, IDC_SLIDER5),	// スライダーのハンドル
 			(UINT)TBM_SETPOS,								// 座標の取得(0～100)
 			(WPARAM)TRUE,									// ０固定
 			(LPARAM)((rotation.x + D3DX_PI) / (D3DX_PI * 2) * 100)			// 追加する項目の文字列
 			);
 		SendMessage(
-			(HWND)GetDlgItem(g_dialogHandle, IDC_SLIDER6),	// スライダーのハンドル
+			(HWND)GetDlgItem(g_objectDialogHandle, IDC_SLIDER6),	// スライダーのハンドル
 			(UINT)TBM_SETPOS,								// 座標の取得(0～100)
 			(WPARAM)TRUE,									// ０固定
 			(LPARAM)((rotation.y + D3DX_PI) / (D3DX_PI * 2) * 100)			// 追加する項目の文字列
 			);
 		SendMessage(
-			(HWND)GetDlgItem(g_dialogHandle, IDC_SLIDER7),	// スライダーのハンドル
+			(HWND)GetDlgItem(g_objectDialogHandle, IDC_SLIDER7),	// スライダーのハンドル
 			(UINT)TBM_SETPOS,								// 座標の取得(0～100)
 			(WPARAM)TRUE,									// ０固定
 			(LPARAM)((rotation.z + D3DX_PI) / (D3DX_PI * 2) * 100)			// 追加する項目の文字列
@@ -616,19 +699,19 @@ void ClickLeftEvent()
 		char str[4096] = {};
 		sprintf(str, "%.1f", position.x);
 		SetWindowText(
-			(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT2),		// スライダーのハンドル
+			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT2),		// スライダーのハンドル
 			str		// 追加する項目の文字列
 			);
 
 		sprintf(str, "%.1f", position.y);
 		SetWindowText(
-			(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT3),		// スライダーのハンドル
+			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT3),		// スライダーのハンドル
 			str		// 追加する項目の文字列
 			);
 
 		sprintf(str, "%.1f", position.z);
 		SetWindowText(
-			(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT4),		// スライダーのハンドル
+			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT4),		// スライダーのハンドル
 			str		// 追加する項目の文字列
 			);
 
@@ -637,19 +720,19 @@ void ClickLeftEvent()
 		// スケールエディットボックス
 		sprintf(str, "%.1f", scale.x);
 		SetWindowText(
-			(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT5),		// スライダーのハンドル
+			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT5),		// スライダーのハンドル
 			str		// 追加する項目の文字列
 			);
 
 		sprintf(str, "%.1f", scale.y);
 		SetWindowText(
-			(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT6),		// スライダーのハンドル
+			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT6),		// スライダーのハンドル
 			str		// 追加する項目の文字列
 			);
 
 		sprintf(str, "%.1f", scale.z);
 		SetWindowText(
-			(HWND)GetDlgItem(g_dialogHandle, IDC_EDIT7),		// スライダーのハンドル
+			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT7),		// スライダーのハンドル
 			str		// 追加する項目の文字列
 			);
 
@@ -684,7 +767,7 @@ void ReadMapFile(HWND hWnd)
 		if (file) {
 
 			// 現在の状況破棄
-			HWND hCombo = GetDlgItem(g_dialogHandle, IDC_COMBO1);
+			HWND hCombo = GetDlgItem(g_objectDialogHandle, IDC_COMBO1);
 			SendMessage((HWND)hCombo, (UINT)CB_RESETCONTENT, 0, 0);
 			Manager::GetInstance()->GetObjectManager()->AllDeleteBuilding();
 			
@@ -736,9 +819,266 @@ void SaveMapFile(HWND hWnd)
 	}
 }
 
-HWND GetDialogHandle()
+
+
+// ダイアログプロシージャ
+BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
-	return g_dialogHandle;
+	switch (Msg) {
+
+		// ダイアログ初期化
+	case WM_INITDIALOG:
+	{
+
+		// スピンコントロールとエディットボックスの関連付け
+		SendMessage(
+			(HWND)GetDlgItem(hDlg, IDC_SPIN1),		// スピンコントロールのハンドル
+			(UINT)UDM_SETBUDDY,
+			(WPARAM)GetDlgItem(hDlg, IDC_EDIT2),	// 関連付けるコントロールのハンドル
+			0										// 0固定
+			);
+		SendMessage(
+			(HWND)GetDlgItem(hDlg, IDC_SPIN2),		// スピンコントロールのハンドル
+			(UINT)UDM_SETBUDDY,
+			(WPARAM)GetDlgItem(hDlg, IDC_EDIT3),	// 関連付けるコントロールのハンドル
+			0										// 0固定
+			);
+		SendMessage(
+			(HWND)GetDlgItem(hDlg, IDC_SPIN3),		// スピンコントロールのハンドル
+			(UINT)UDM_SETBUDDY,
+			(WPARAM)GetDlgItem(hDlg, IDC_EDIT4),	// 関連付けるコントロールのハンドル
+			0										// 0固定
+			);
+
+
+		// モードの設定
+		HWND radio = GetDlgItem(hDlg, IDC_RADIO6);
+		SendMessage(
+			(HWND)radio,		// ラジオボタンのハンドル
+			(UINT)BM_SETCHECK,
+			(WPARAM)BST_CHECKED,
+			0					// ０固定
+			);
+	}
+		return TRUE;
+
+		break;
+
+	case WM_COMMAND:
+		switch (LOWORD(wParam)) {
+		case IDOK:
+			return TRUE;
+
+		case IDCANCEL:
+			return TRUE;
+
+		// 点の選択
+		case IDC_COMBO1:
+			
+			// 選択したとき
+			if (HIWORD(wParam) == CBN_SELCHANGE) {
+				// コンボボックスから生成するモデルのファイル名取得
+				HWND hCombo1 = GetDlgItem(hDlg, IDC_COMBO1);
+				int index = SendMessage(
+					(HWND)hCombo1,			// コンボボックスのハンドル
+					(UINT)CB_GETCURSEL,		// 選択中のインデックス取得
+					0,						// ０固定
+					0						// 追加する項目の文字列
+					);
+
+				// 選択中の点変更
+				Manager::GetInstance()->GetRouteManager()->SetPointListCursor(index);
+
+
+				D3DXVECTOR3 position = Manager::GetInstance()->GetRouteManager()->GetPosition();
+				// 座標エディットボックス
+				char str[4096] = {};
+				sprintf(str, "%.1f", position.x);
+				SetWindowText(
+					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT2),		// スライダーのハンドル
+					str		// 追加する項目の文字列
+					);
+
+				sprintf(str, "%.1f", position.y);
+				SetWindowText(
+					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT3),		// スライダーのハンドル
+					str		// 追加する項目の文字列
+					);
+
+				sprintf(str, "%.1f", position.z);
+				SetWindowText(
+					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT4),		// スライダーのハンドル
+					str		// 追加する項目の文字列
+					);
+
+			}
+			break;
+
+
+			// 点の生成もしくは削除
+		case IDC_BUTTON1:
+		{
+			HWND radio1 = GetDlgItem(hDlg, IDC_RADIO6);
+			HWND radio2 = GetDlgItem(hDlg, IDC_RADIO7);
+			HWND radio3 = GetDlgItem(hDlg, IDC_RADIO8);
+
+			// 生成 : 追加
+			if (SendMessage(radio1, BM_GETCHECK, 0, 0) == 1) {
+				Manager::GetInstance()->GetRouteManager()->CreatePoint();
+			}
+			// 生成 : 挿入
+			if (SendMessage(radio2, BM_GETCHECK, 0, 0) == 1) {
+				Manager::GetInstance()->GetRouteManager()->InsertPoint();
+			}
+			// 削除
+			if (SendMessage(radio3, BM_GETCHECK, 0, 0) == 1) {
+				Manager::GetInstance()->GetRouteManager()->DeletePoint();
+			}
+		}
+			break;
+
+			// 座標 : X軸
+		case IDC_EDIT2:
+			if (HIWORD(wParam) == EN_UPDATE) {
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT2),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				Manager::GetInstance()->GetRouteManager()->SetPositionX((float)positionX);
+			}
+			break;
+
+			// 座標 : Y軸
+		case IDC_EDIT3:
+			if (HIWORD(wParam) == EN_UPDATE) {
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT3),		// スライダーのハンドル
+					str, 4096);
+				double positionY = atof(str);
+				Manager::GetInstance()->GetRouteManager()->SetPositionY((float)positionY);
+			}
+			break;
+
+			// 座標 : Z軸
+		case IDC_EDIT4:
+			if (HIWORD(wParam) == EN_UPDATE) {
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT4),		// スライダーのハンドル
+					str, 4096);
+				double positionZ = atof(str);
+				Manager::GetInstance()->GetRouteManager()->SetPositionZ((float)positionZ);
+			}
+			break;
+
+
+		default:
+			break;
+		}
+		break;
+
+	case WM_CLOSE:
+		EndDialog(hDlg, 0);
+		return TRUE;
+
+	default:
+		break;
+	}
+
+	return FALSE;
+}
+
+// 読み込み関数
+void ReadRouteFile(HWND hWnd)
+{
+	OPENFILENAME ofn = {};
+	TCHAR szPath[MAX_PATH] = { 0 };
+	TCHAR szFile[MAX_PATH] = {};
+
+	if (szPath[0] == TEXT('\0')) {
+		GetCurrentDirectory(MAX_PATH, szPath);
+	}
+	if (ofn.lStructSize == 0) {
+		ofn.lStructSize = sizeof(OPENFILENAME);
+		ofn.hwndOwner = hWnd;
+		ofn.lpstrInitialDir = szPath;	// 初期フォルダ位置
+		ofn.lpstrFile = szFile;			// 選択ファイル格納
+		ofn.nMaxFile = MAX_PATH;
+		ofn.lpstrDefExt = TEXT(".rt");
+		ofn.lpstrFilter = TEXT("ルートファイル(*.rt)\0*.rt\0");
+		ofn.lpstrTitle = TEXT("開く");
+		ofn.Flags = OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+	}
+
+	if (GetSaveFileName(&ofn)) {
+		FILE *file = nullptr;
+		file = fopen(szFile, "rt");
+		if (file) {
+
+			// 現在の状況破棄
+			HWND hCombo = GetDlgItem(g_routeDialogHandle, IDC_COMBO1);
+			SendMessage((HWND)hCombo, (UINT)CB_RESETCONTENT, 0, 0);
+			Manager::GetInstance()->GetRouteManager()->AllDeletePoint();
+
+			// 読み込み
+			Manager::GetInstance()->GetRouteManager()->InputData(file);
+
+			fclose(file);
+		}
+		else {
+			MessageBox(g_windowHandle, "読み込みに失敗しました", "警告", MB_OK);
+		}
+	}
+}
+
+// 保存関数
+void SaveRouteFile(HWND hWnd)
+{
+	OPENFILENAME ofn = {};
+	TCHAR szPath[MAX_PATH] = { 0 };
+	TCHAR szFile[MAX_PATH] = {};
+
+	if (szPath[0] == TEXT('\0')) {
+		GetCurrentDirectory(MAX_PATH, szPath);
+	}
+	if (ofn.lStructSize == 0) {
+		ofn.lStructSize = sizeof(OPENFILENAME);
+		ofn.hwndOwner = hWnd;
+		ofn.lpstrInitialDir = szPath;	// 初期フォルダ位置
+		ofn.lpstrFile = szFile;			// 選択ファイル格納
+		ofn.nMaxFile = MAX_PATH;
+		ofn.lpstrDefExt = TEXT(".rt");
+		ofn.lpstrFilter = TEXT("ルートファイル(*.rt)\0*.rt\0");
+		ofn.lpstrTitle = TEXT("名前を付けて保存");
+		ofn.Flags = OFN_FILEMUSTEXIST | OFN_OVERWRITEPROMPT | OFN_NOCHANGEDIR;
+	}
+
+	if (GetSaveFileName(&ofn)) {
+		FILE *file = nullptr;
+		file = fopen(szFile, "wt");
+
+		if (file) {
+			Manager::GetInstance()->GetRouteManager()->OutputData(file);
+			fclose(file);
+		}
+		else {
+			MessageBox(g_windowHandle, "保存に失敗しました", "警告", MB_OK);
+		}
+	}
+}
+
+
+
+HWND GetObjectDialogHandle()
+{
+	return g_objectDialogHandle;
+}
+
+HWND GetRouteDialogHandle()
+{
+	return g_routeDialogHandle;
 }
 
 

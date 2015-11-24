@@ -1,0 +1,16 @@
+#MODELNUM
+2
+#MODELFILE
+0 Model000.x C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\MapGenerator\Resource\Model\Game\Model000.x
+1 StencilShadow.x C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\MapGenerator\Resource\Model\Game\Shadow\StencilShadow.x
+#TEXTURENUM
+2
+#TEXTUREFILE
+0 Field.jpg C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\MapGenerator\Resource\Texture\Game\Field.jpg
+1 Weed002.png C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\MapGenerator\Resource\Texture\Game\Weed002.png
+#OBJNUM
+3
+#OBJ
+0 1 10.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 1.000000 1.000000
+1 1 0.000000 0.000000 10.000000 0.000000 0.000000 0.000000 1.000000 1.000000 1.000000
+1 0 0.000000 0.000000 0.000000 0.000000 0.000000 1.005310 1.000000 1.000000 1.000000

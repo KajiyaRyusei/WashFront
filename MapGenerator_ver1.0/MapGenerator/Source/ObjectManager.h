@@ -4,8 +4,8 @@
 // Author : KEITA OHUCHI
 //
 //=============================================================================
-#ifndef _ObjectManager_H_
-#define _ObjectManager_H_
+#ifndef _OBJECT_MANAGER_H_
+#define _OBJECT_MANAGER_H_
 
 #include "Main.h"
 
@@ -69,8 +69,8 @@ public:
 	//=========================================================================
 	// インスタンスの生成
 	//=========================================================================
-	Building *CreateBuilding(const char *fileName);
-	Building *CreateBuilding(const char *fileName, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale);
+	Building *CreateBuilding(const char *modelFileName, const char *textureFilePath);
+	Building *CreateBuilding(const char *fileName, const char *textureFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale);
 
 	//=========================================================================
 	// インスタンスの全削除

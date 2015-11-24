@@ -36,8 +36,8 @@ public:
 	// 初期化処理
 	//=========================================================================
 	HRESULT Init();
-	HRESULT Init(const char *modelFilePath);
-	HRESULT Init(const char *modelFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale);
+	HRESULT Init(const char *modelFilePath, const char *textureFilePath);
+	HRESULT Init(const char *modelFilePath, const char *textureFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale);
 	//=========================================================================
 	// 更新処理
 	//=========================================================================
@@ -63,8 +63,11 @@ public:
 	//=========================================================================
 	// ファイルパスの取得
 	//=========================================================================
-	char *GetFilePath() { return filePath_; }
-
+	char *GetModelFilePath() { return modelFilePath_; }
+	//=========================================================================
+	// ファイルパスの取得
+	//=========================================================================
+	char *GetTextureFilePath() { return textureFilePath_; }
 
 	//=========================================================================
 	// X座標の設定
@@ -127,7 +130,8 @@ protected:
 
 	int			id_;			// 一意のID
 
-	char		*filePath_;
+	char		*modelFilePath_;
+	char		*textureFilePath_;
 };
 
 

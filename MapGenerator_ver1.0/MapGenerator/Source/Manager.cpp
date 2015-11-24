@@ -21,6 +21,7 @@
 #include "CameraManager.h"
 #include "ObjectManager.h"
 #include "ImportFileManager.h"
+#include "RouteManager.h"
 
 
 //-----------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Manager::Manager()
 	cameraManager_ = nullptr;
 	objectManager_ = nullptr;
 	importFileManager_ = nullptr;
+	routeManager_ = nullptr;
 
 }
 
@@ -76,6 +78,9 @@ Manager::~Manager()
 
 	// オブジェクトマネージャの解放
 	SafeDelete(objectManager_);
+
+	// ルートマネージャの解放
+	SafeDelete(routeManager_);
 
 
 #ifdef _DEBUG
@@ -147,6 +152,10 @@ HRESULT Manager::Init(HINSTANCE instance, HWND wnd, BOOL window)
 	importFileManager_ = new ImportFileManager();
 	importFileManager_->Init();
 
+	// ルートマネージャの生成
+	routeManager_ = new RouteManager();
+	routeManager_->Init();
+
 
 #ifdef _DEBUG
 	debugProc_ = new DebugProc();
@@ -208,6 +217,8 @@ void Manager::Draw()
 		// シーンの描画
 		objectManager_->Draw();
 
+		// ルートの描画
+		routeManager_->Draw();
 
 #ifdef _DEBUG
 		// デバッグ表示

@@ -11,6 +11,7 @@
 #include "Building.h"
 #include "model.h"
 #include "ModelFactory.h"
+#include "TextureFactory.h"
 
 
 //=========================================================================
@@ -21,7 +22,8 @@ model_(nullptr),
 rotation_(D3DXVECTOR3(0, 0, 0)),
 scale_(D3DXVECTOR3(1, 1, 1)),
 id_(-1),
-filePath_(nullptr)
+modelFilePath_(nullptr),
+textureFilePath_(nullptr)
 {
 	D3DXMatrixIdentity(&worldMatrix_);
 }
@@ -39,18 +41,27 @@ HRESULT Building::Init()
 	return S_OK;
 }
 
-HRESULT Building::Init(const char *modelFilePath)
+HRESULT Building::Init(const char *modelFilePath, const char *textureFilePath)
 {
-	model_ = Manager::GetInstance()->GetModelFactory()->GetModel(modelFilePath);
-	filePath_ = (char *)modelFilePath;
+	if (modelFilePath)
+		model_ = Manager::GetInstance()->GetModelFactory()->GetModel(modelFilePath);
+	if (textureFilePath)
+		texture_ = Manager::GetInstance()->GetTextureFactory()->GetTexture(textureFilePath);
+	modelFilePath_ = (char *)modelFilePath;
+	textureFilePath_ = (char *)textureFilePath;
+
 
 	return S_OK;
 }
 
-HRESULT Building::Init(const char *modelFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale)
+HRESULT Building::Init(const char *modelFilePath, const char *textureFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale)
 {
-	model_ = Manager::GetInstance()->GetModelFactory()->GetModel(modelFilePath);
-	filePath_ = (char *)modelFilePath;
+	if (modelFilePath)
+		model_ = Manager::GetInstance()->GetModelFactory()->GetModel(modelFilePath);
+	if (textureFilePath)
+		texture_ = Manager::GetInstance()->GetTextureFactory()->GetTexture(textureFilePath);
+	modelFilePath_ = (char *)modelFilePath;
+	textureFilePath_ = (char *)textureFilePath;
 	position_ = position;
 	rotation_ = rotation;
 	scale_ = scale;
@@ -91,8 +102,9 @@ void Building::Draw()
 
 	device->SetTransform(D3DTS_WORLD, &worldMatrix_);  // s—ñ‚ÌÝ’è
 
+	device->SetTexture(0, texture_);
 	model_->Draw();
-
+	device->SetTexture(0, nullptr);
 }
 
 

@@ -100,7 +100,7 @@ HRESULT ObjectManager::Init()
 
 	// 水の生成
 	water_ = new Scene3D(PRIORITY_WATER);
-	water_->Init(D3DXVECTOR3(0.0f, -0.2f, 0.0f));
+	water_->Init(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	// スカイドームの生成
 	sky_ = MeshDome::Create(
@@ -156,19 +156,19 @@ void ObjectManager::Draw()
 //=========================================================================
 // ビルの生成
 //=========================================================================
-Building *ObjectManager::CreateBuilding(const char *fileName)
+Building *ObjectManager::CreateBuilding(const char *fileName, const char *textureFilePath)
 {
 	Building *building = new Building();
-	building->Init(fileName);
+	building->Init(fileName, textureFilePath);
 
 	buildingList_.push_back(building);
 
 	return building;
 }
-Building *ObjectManager::CreateBuilding(const char *fileName, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale)
+Building *ObjectManager::CreateBuilding(const char *fileName, const char *textureFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale)
 {
 	Building *building = new Building();
-	building->Init(fileName, position, rotation, scale);
+	building->Init(fileName, textureFilePath, position, rotation, scale);
 
 	buildingList_.push_back(building);
 
@@ -224,9 +224,9 @@ void ObjectManager::CheckCollisionMouseAndObject()
 	D3DXVECTOR3 farPosition;
 	D3DXVECTOR3 ray;
 	nearPosition = camera->CalcScreenToWorld(D3DXVECTOR3((float)screenPosition.x, (float)screenPosition.y, 0.0f),
-		D3DXVECTOR2(rect.right - rect.left, rect.bottom - rect.top));
+		D3DXVECTOR2((float)(rect.right - rect.left), (float)(rect.bottom - rect.top)));
 	farPosition = camera->CalcScreenToWorld(D3DXVECTOR3((float)screenPosition.x, (float)screenPosition.y, 1.0f),
-		D3DXVECTOR2(rect.right - rect.left, rect.bottom - rect.top));
+		D3DXVECTOR2((float)(rect.right - rect.left), (float)(rect.bottom - rect.top)));
 	ray = farPosition - nearPosition;
 	D3DXVec3Normalize(&ray, &ray);
 
@@ -278,10 +278,13 @@ void ObjectManager::SaveBuildingData(FILE *outputFile)
 		D3DXVECTOR3 position = (*itr)->GetPosition();
 		D3DXVECTOR3 rotation = (*itr)->GetRotation();
 		D3DXVECTOR3 scale = (*itr)->GetScale();
-		char *filePath = (*itr)->GetFilePath();
-		int fileID = ifm->GetFilePathID(filePath);
+		char *modelFilePath = (*itr)->GetModelFilePath();
+		char *textureFilePath = (*itr)->GetTextureFilePath();
+		int modelFileID = ifm->GetModelFilePathID(modelFilePath);
+		int textureFileID = ifm->GetTextureFilePathID(textureFilePath);
 
-		fprintf(outputFile, "%d ", fileID);
+		fprintf(outputFile, "%d ", modelFileID);
+		fprintf(outputFile, "%d ", textureFileID);
 		fprintf(outputFile, "%f %f %f ", position.x, position.y, position.z);
 		fprintf(outputFile, "%f %f %f ", rotation.x, rotation.y, rotation.z);
 		fprintf(outputFile, "%f %f %f", scale.x, scale.y, scale.z);
@@ -322,17 +325,21 @@ void ObjectManager::ReadBuildingData(FILE *inputFile)
 
 		if (!strcmp(str, "#OBJ")) {
 			for (int i = 0; i < num; i++) {
-				int id;
+				int modelID;
+				int textureID;
 				D3DXVECTOR3 position;
 				D3DXVECTOR3 rotation;
 				D3DXVECTOR3 scale;
-				fscanf(inputFile, "%d %f %f %f %f %f %f %f %f %f", &id,
+				fscanf(inputFile, "%d %d %f %f %f %f %f %f %f %f %f",
+					&modelID, &textureID,
 					&position.x, &position.y, &position.z,
 					&rotation.x, &rotation.y, &rotation.z,
 					&scale.x, &scale.y, &scale.z
 					);
 
-				CreateBuilding(Manager::GetInstance()->GetImportFileManager()->GetFilePath(id),
+				CreateBuilding(
+					Manager::GetInstance()->GetImportFileManager()->GetModelFilePath(modelID),
+					Manager::GetInstance()->GetImportFileManager()->GetTextureFilePath(textureID),
 					position, rotation, scale);
 			}
 		}

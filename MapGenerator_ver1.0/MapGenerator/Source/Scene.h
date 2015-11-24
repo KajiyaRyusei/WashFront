@@ -15,7 +15,8 @@
 // 列挙型定義
 //-----------------------------------------------------------------------------
 enum {  // プライオリティ
-	PRIORITY_SKY = (0),
+	PRIORITY_WATER = (0),
+	PRIORITY_SKY,
 	PRIORITY_MOUNTAIN,
 	PRIORITY_FIELD,
 	PRIORITY_STENCIL_SHADOW,
@@ -26,7 +27,6 @@ enum {  // プライオリティ
 	PRIORITY_ITEM,
 	PRIORITY_WEED,
 	PRIORITY_TREE,
-	PRIORITY_WATER,
 	PRIORITY_UI,
 	PRIORITY_FADE,
 	PRIORITY_MAX

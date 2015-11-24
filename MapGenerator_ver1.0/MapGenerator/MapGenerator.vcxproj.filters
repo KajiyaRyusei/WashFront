@@ -186,6 +186,9 @@
     <ClInclude Include="Source\Building.h">
       <Filter>Header\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Source\RouteManager.h">
+      <Filter>Header\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\BoxAndBox.cpp">
@@ -283,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="Source\Building.cpp">
       <Filter>Source\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RouteManager.cpp">
+      <Filter>Source\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

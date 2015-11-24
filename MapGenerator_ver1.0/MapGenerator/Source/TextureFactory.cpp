@@ -32,6 +32,24 @@ TextureFactory::~TextureFactory()
 
 }
 
+//=========================================================================
+// テクスチャのインポート
+//=========================================================================
+int TextureFactory::ImportTexture(std::string texturePath)
+{
+	// すでにあるかどうかチェック
+	if (textureMap_.find(texturePath) == textureMap_.end()) {
+		// テクスチャ生成
+		D3DXCreateTextureFromFile(
+			Manager::GetInstance()->GetRenderer()->GetDevice(),
+			texturePath.c_str(),
+			&textureMap_[texturePath]);
+		return 1;
+	} else {
+		return 0;
+	}
+
+}
 
 //=========================================================================
 // テクスチャの取得

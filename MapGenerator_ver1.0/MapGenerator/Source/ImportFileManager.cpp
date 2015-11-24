@@ -19,8 +19,10 @@
 ImportFileManager::ImportFileManager()
 {
 	// クリア
-	fileNameMap_.clear();
-	filePathMap_.clear();
+	modelFileNameMap_.clear();
+	modelFilePathMap_.clear();
+	textureFileNameMap_.clear();
+	textureFilePathMap_.clear();
 }
 
 //=========================================================================
@@ -53,9 +55,9 @@ int ImportFileManager::ImportFile(std::string filePath)
 	if (!strcmp(extension, "x")) {
 		ret = Manager::GetInstance()->GetModelFactory()->ImportModel(filePath);
 	}
-	if (!strcmp(extension, "jpg") ||
-		!strcmp(extension, "png")) {
-//		Manager::GetInstance()->GetModelFactory()->ImportTexture(filePath);
+	if (!(strcmp(extension, "jpg") &&
+		strcmp(extension, "png"))) {
+		ret = Manager::GetInstance()->GetTextureFactory()->ImportTexture(filePath);
 	}
 
 	// 読み込みの成功時のみファイル名保存
@@ -71,8 +73,32 @@ int ImportFileManager::ImportFile(std::string filePath)
 		}
 
 		// 保存
-		fileNameMap_[filePath] = fileName;
-		filePathMap_[fileName] = filePath;
+		if (!strcmp(extension, "x")) {
+			modelFileNameMap_[filePath] = fileName;
+			modelFilePathMap_[fileName] = filePath;
+
+			HWND hCombo = GetDlgItem(GetObjectDialogHandle(), IDC_COMBO1);
+
+			SendMessage(
+				(HWND)hCombo,				// コンボボックスのハンドル
+				(UINT)CB_ADDSTRING,			// 項目の追加
+				0,							// ０固定
+				(LPARAM)fileName.c_str()	// 追加する項目の文字列
+				);
+		}
+		if (!strcmp(extension, "jpg") ||
+			!strcmp(extension, "png")) {
+			textureFileNameMap_[filePath] = fileName;
+			textureFilePathMap_[fileName] = filePath;
+
+			HWND hCombo = GetDlgItem(GetObjectDialogHandle(), IDC_COMBO2);
+			SendMessage(
+				(HWND)hCombo,				// コンボボックスのハンドル
+				(UINT)CB_ADDSTRING,			// 項目の追加
+				0,							// ０固定
+				(LPARAM)fileName.c_str()	// 追加する項目の文字列
+				);
+		}
 	}
 
 	return ret;
@@ -83,12 +109,12 @@ int ImportFileManager::ImportFile(std::string filePath)
 //=========================================================================
 void ImportFileManager::AllImportFile()
 {
-	for (auto itr = fileNameMap_.begin(); itr != fileNameMap_.end(); itr++) {
+	for (auto itr = modelFileNameMap_.begin(); itr != modelFileNameMap_.end(); itr++) {
 		std::string filePath = (*itr).first;
 		std::string fileName = (*itr).second;
 		Manager::GetInstance()->GetModelFactory()->ImportModel(filePath);
 
-		HWND hCombo = GetDlgItem(GetDialogHandle(), IDC_COMBO1);
+		HWND hCombo = GetDlgItem(GetObjectDialogHandle(), IDC_COMBO1);
 
 		SendMessage(
 			(HWND)hCombo,				// コンボボックスのハンドル
@@ -96,24 +122,55 @@ void ImportFileManager::AllImportFile()
 			0,							// ０固定
 			(LPARAM)fileName.c_str()	// 追加する項目の文字列
 			);
-
 	}
+
+	for (auto itr = textureFileNameMap_.begin(); itr != textureFileNameMap_.end(); itr++) {
+		std::string filePath = (*itr).first;
+		std::string fileName = (*itr).second;
+		Manager::GetInstance()->GetTextureFactory()->ImportTexture(filePath);
+
+		HWND hCombo = GetDlgItem(GetObjectDialogHandle(), IDC_COMBO2);
+
+		SendMessage(
+			(HWND)hCombo,				// コンボボックスのハンドル
+			(UINT)CB_ADDSTRING,			// 項目の追加
+			0,							// ０固定
+			(LPARAM)fileName.c_str()	// 追加する項目の文字列
+			);
+	}
+
 }
 
 //=========================================================================
 // ファイルパスからファイル名のみ取得
 //=========================================================================
-const char *ImportFileManager::GetFileName(std::string filePath)
+const char *ImportFileManager::GetModelFileName(std::string filePath)
 {
-	return fileNameMap_[filePath].c_str();
+	return modelFileNameMap_[filePath].c_str();
 }
 
 //=========================================================================
 // ファイル名からファイルのフルパスを取得
 //=========================================================================
-const char *ImportFileManager::GetFilePath(std::string fileName)
+const char *ImportFileManager::GetModelFilePath(std::string fileName)
 {
-	return filePathMap_[fileName].c_str();
+	return modelFilePathMap_[fileName].c_str();
+}
+
+//=========================================================================
+// ファイルパスからファイル名のみ取得
+//=========================================================================
+const char *ImportFileManager::GetTextureFileName(std::string filePath)
+{
+	return textureFileNameMap_[filePath].c_str();
+}
+
+//=========================================================================
+// ファイル名からファイルのフルパスを取得
+//=========================================================================
+const char *ImportFileManager::GetTextureFilePath(std::string fileName)
+{
+	return textureFilePathMap_[fileName].c_str();
 }
 
 //=========================================================================
@@ -122,10 +179,13 @@ const char *ImportFileManager::GetFilePath(std::string fileName)
 void ImportFileManager::ReadImportData(FILE *inputFile)
 {
 	// クリア
-	fileNameMap_.clear();
-	filePathMap_.clear();
+	modelFileNameMap_.clear();
+	modelFilePathMap_.clear();
+	textureFileNameMap_.clear();
+	textureFilePathMap_.clear();
 
-	int num = 0;
+	int modelNum = 0;
+	int textureNum = 0;
 
 	fseek(inputFile, 0, SEEK_SET);
 
@@ -135,8 +195,11 @@ void ImportFileManager::ReadImportData(FILE *inputFile)
 		if (EOF == fscanf(inputFile, "%s", str))
 			break;
 
-		if (!strcmp(str, "#NUM")) {
-			fscanf(inputFile, "%d", &num);
+		if (!strcmp(str, "#MODELNUM")) {
+			fscanf(inputFile, "%d", &modelNum);
+		}
+		if (!strcmp(str, "#TEXTURENUM")) {
+			fscanf(inputFile, "%d", &textureNum);
 		}
 	}
 
@@ -148,16 +211,29 @@ void ImportFileManager::ReadImportData(FILE *inputFile)
 		if (EOF == fscanf(inputFile, "%s", str))
 			break;
 
-		if (!strcmp(str, "#FILE")) {
-			for (int i = 0; i < num; i++) {
+		if (!strcmp(str, "#MODELFILE")) {
+			for (int i = 0; i < modelNum; i++) {
 				char fileName[4096];
 				char filePath[4096];
 				int n;
 				fscanf(inputFile, "%d %s %s\n", &n, fileName, filePath);
 
 				// 保存
-				fileNameMap_[filePath] = fileName;
-				filePathMap_[fileName] = filePath;
+				modelFileNameMap_[filePath] = fileName;
+				modelFilePathMap_[fileName] = filePath;
+			}
+		}
+
+		if (!strcmp(str, "#TEXTUREFILE")) {
+			for (int i = 0; i < textureNum; i++) {
+				char fileName[4096];
+				char filePath[4096];
+				int n;
+				fscanf(inputFile, "%d %s %s\n", &n, fileName, filePath);
+
+				// 保存
+				textureFileNameMap_[filePath] = fileName;
+				textureFilePathMap_[fileName] = filePath;
 			}
 		}
 	}
@@ -168,18 +244,37 @@ void ImportFileManager::ReadImportData(FILE *inputFile)
 //=========================================================================
 void ImportFileManager::SaveImportData(FILE *outputFile)
 {
-	int importNum = fileNameMap_.size();
+	int importNum = modelFileNameMap_.size();
 
 
 	// インポートしたファイル数の出力
-	fprintf(outputFile, "#NUM\n");
+	fprintf(outputFile, "#MODELNUM\n");
 	fprintf(outputFile, "%d\n", importNum);
 
 
 	// インポートしたファイル名の出力
-	fprintf(outputFile, "#FILE\n");
+	fprintf(outputFile, "#MODELFILE\n");
 	int i = 0;
-	for (auto itr = fileNameMap_.begin(); itr != fileNameMap_.end(); itr++) {
+	for (auto itr = modelFileNameMap_.begin(); itr != modelFileNameMap_.end(); itr++) {
+		std::string fileName = (*itr).second;
+		std::string filePath = (*itr).first;
+		fprintf(outputFile, "%d %s %s\n", i, fileName.c_str(), filePath.c_str());
+		i++;
+	}
+
+
+
+	importNum = textureFileNameMap_.size();
+
+	// インポートしたファイル数の出力
+	fprintf(outputFile, "#TEXTURENUM\n");
+	fprintf(outputFile, "%d\n", importNum);
+
+
+	// インポートしたファイル名の出力
+	fprintf(outputFile, "#TEXTUREFILE\n");
+	i = 0;
+	for (auto itr = textureFileNameMap_.begin(); itr != textureFileNameMap_.end(); itr++) {
 		std::string fileName = (*itr).second;
 		std::string filePath = (*itr).first;
 		fprintf(outputFile, "%d %s %s\n", i, fileName.c_str(), filePath.c_str());
@@ -190,13 +285,31 @@ void ImportFileManager::SaveImportData(FILE *outputFile)
 //=========================================================================
 // ファイルパスのID取得
 //=========================================================================
-int ImportFileManager::GetFilePathID(char *filePath)
+int ImportFileManager::GetModelFilePathID(char *filePath)
 {
 	std::string path0;
 	path0.assign(filePath);
 
 	int i = 0;
-	for (auto itr = fileNameMap_.begin(); itr != fileNameMap_.end(); itr++) {
+	for (auto itr = modelFileNameMap_.begin(); itr != modelFileNameMap_.end(); itr++) {
+		std::string path1 = (*itr).first;
+		if (!path0.compare(path1))
+			return i;
+		i++;
+	}
+
+	return -1;
+}
+//=========================================================================
+// ファイルパスのID取得
+//=========================================================================
+int ImportFileManager::GetTextureFilePathID(char *filePath)
+{
+	std::string path0;
+	path0.assign(filePath);
+
+	int i = 0;
+	for (auto itr = textureFileNameMap_.begin(); itr != textureFileNameMap_.end(); itr++) {
 		std::string path1 = (*itr).first;
 		if (!path0.compare(path1))
 			return i;
@@ -209,9 +322,9 @@ int ImportFileManager::GetFilePathID(char *filePath)
 //=========================================================================
 // IDからファイルパス取得
 //=========================================================================
-const char *ImportFileManager::GetFilePath(int ID)
+const char *ImportFileManager::GetModelFilePath(int ID)
 {
-	auto itr = fileNameMap_.begin();
+	auto itr = modelFileNameMap_.begin();
 
 	for (int i = 0; i < ID; i++)
 		itr++;
@@ -219,5 +332,17 @@ const char *ImportFileManager::GetFilePath(int ID)
 	return (*itr).first.c_str();
 }
 
+//=========================================================================
+// IDからファイルパス取得
+//=========================================================================
+const char *ImportFileManager::GetTextureFilePath(int ID)
+{
+	auto itr = textureFileNameMap_.begin();
+
+	for (int i = 0; i < ID; i++)
+		itr++;
+
+	return (*itr).first.c_str();
+}
 
 // End of file

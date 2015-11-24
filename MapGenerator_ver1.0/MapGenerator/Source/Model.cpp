@@ -103,7 +103,7 @@ void Model::Draw()
 		// マテリアルの設定
 		device->SetMaterial(&material[count].MatD3D);
 		// テクスチャの設定
-		device->SetTexture(0, texture_[count]);
+		//device->SetTexture(0, texture_[count]);
 		// 描画
 		mesh_->DrawSubset(count);
 	}

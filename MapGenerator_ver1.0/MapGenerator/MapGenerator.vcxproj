@@ -38,6 +38,7 @@
     <ClInclude Include="Source\ObjectManager.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Renderer.h" />
+    <ClInclude Include="Source\RouteManager.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Scene2D.h" />
     <ClInclude Include="Source\Scene3D.h" />
@@ -73,6 +74,7 @@
     <ClCompile Include="Source\ObjectManager.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Renderer.cpp" />
+    <ClCompile Include="Source\RouteManager.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Scene2D.cpp" />
     <ClCompile Include="Source\Scene3D.cpp" />

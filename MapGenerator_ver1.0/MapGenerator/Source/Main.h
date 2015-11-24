@@ -90,7 +90,8 @@ static inline void SafeRelease(T*& p) {
 //=============================================================================
 float GetFps();
 
-HWND GetDialogHandle();
+HWND GetObjectDialogHandle();
+HWND GetRouteDialogHandle();
 
 
 #endif
