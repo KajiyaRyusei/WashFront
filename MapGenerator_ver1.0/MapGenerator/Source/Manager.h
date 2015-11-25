@@ -24,6 +24,7 @@ class CameraManager;
 class ObjectManager;
 class ImportFileManager;
 class RouteManager;
+class DirtManager;
 
 
 //-----------------------------------------------------------------------------
@@ -78,6 +79,7 @@ public:
 	ImportFileManager *GetImportFileManager() { return importFileManager_; }
 	ObjectManager *GetObjectManager() { return objectManager_; }
 	RouteManager *GetRouteManager() { return routeManager_; }
+	DirtManager *GetDirtManager() { return dirtManager_; }
 
 
 private:
@@ -95,6 +97,7 @@ private:
 	ObjectManager		*objectManager_;		// オブジェクトマネージャ
 	ImportFileManager	*importFileManager_;	// ファイルの読み込みマネージャ
 	RouteManager		*routeManager_;			// ルート管理マネージャ
+	DirtManager			*dirtManager_;			// 汚れ管理マネージャ
 	// ファクトリ
 	TextureFactory		*textureFactory_;		// テクスチャファクトリ
 	ModelFactory		*modelFactory_;			// モデルファクトリ

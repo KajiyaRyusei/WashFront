@@ -78,7 +78,7 @@ static inline void SafeRelease(T*& p) {
 
 // ƒƒ‚ƒŠƒŠ[ƒNŒŸo
 #ifdef _DEBUG
-#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
+//#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #endif
 
 
@@ -92,6 +92,7 @@ float GetFps();
 
 HWND GetObjectDialogHandle();
 HWND GetRouteDialogHandle();
+HWND GetDirtDialogHandle();
 
 
 #endif

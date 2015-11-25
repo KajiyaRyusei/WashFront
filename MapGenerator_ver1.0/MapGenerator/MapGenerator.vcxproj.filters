@@ -189,6 +189,15 @@
     <ClInclude Include="Source\RouteManager.h">
       <Filter>Header\System</Filter>
     </ClInclude>
+    <ClInclude Include="Source\fbx.h">
+      <Filter>Header\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirtManager.h">
+      <Filter>Header\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Dirt.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\BoxAndBox.cpp">
@@ -289,6 +298,15 @@
     </ClCompile>
     <ClCompile Include="Source\RouteManager.cpp">
       <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fbx.cpp">
+      <Filter>Source\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirtManager.cpp">
+      <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Dirt.cpp">
+      <Filter>Source\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

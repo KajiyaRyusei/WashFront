@@ -1,0 +1,14 @@
+#MODELNUM
+1
+#MODELFILE
+0 biru_1.fbx C:\Users\Keita\Desktop\MSResource\fbxdata\biru_1.fbx
+#TEXTURENUM
+2
+#TEXTUREFILE
+0 water.jpg C:\Users\Keita\Desktop\MSResource\textures\water.jpg
+1 window.png C:\Users\Keita\Desktop\MSResource\textures\window.png
+#OBJNUM
+2
+#OBJ
+0 1 30.000000 0.000000 30.000000 0.000000 -0.125664 0.000000 0.100000 0.100000 0.100000
+0 1 0.000000 0.000000 20.000000 0.000000 0.000000 0.000000 0.100000 0.100000 0.100000

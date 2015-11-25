@@ -22,7 +22,10 @@
     <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\CollisionManager.h" />
     <ClInclude Include="Source\Debug.h" />
+    <ClInclude Include="Source\Dirt.h" />
+    <ClInclude Include="Source\DirtManager.h" />
     <ClInclude Include="Source\EditorCamera.h" />
+    <ClInclude Include="Source\fbx.h" />
     <ClInclude Include="Source\ImportFileManager.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\Keyboard.h" />
@@ -58,7 +61,10 @@
     <ClCompile Include="Source\CameraManager.cpp" />
     <ClCompile Include="Source\CollisionManager.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
+    <ClCompile Include="Source\Dirt.cpp" />
+    <ClCompile Include="Source\DirtManager.cpp" />
     <ClCompile Include="Source\EditorCamera.cpp" />
+    <ClCompile Include="Source\fbx.cpp" />
     <ClCompile Include="Source\ImportFileManager.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Keyboard.cpp" />
@@ -119,8 +125,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Users\Keita\Documents\TH44\MS展\プログラム\MapGenerator\MapGenerator\Source;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Users\Keita\Documents\TH44\MS展\プログラム\MapGenerator\MapGenerator\Source;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
     <ReferencePath>C:\Users\Keita\Documents\TH44\MS展\プログラム\MapGenerator_ver0.1\MapGenerator\Resource;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,6 +145,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libfbxsdk-mt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

@@ -93,7 +93,7 @@ void SceneX::Draw()
 
 
 	// 描画
-	model_->Draw();
+	//model_->Draw();
 
 
 	// ワールドマトリックスの設定

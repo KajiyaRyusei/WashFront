@@ -52,7 +52,7 @@ int ImportFileManager::ImportFile(std::string filePath)
 
 	int ret = 0;
 	// “Ç‚Ýž‚Ý
-	if (!strcmp(extension, "x")) {
+	if (!strcmp(extension, "fbx")) {
 		ret = Manager::GetInstance()->GetModelFactory()->ImportModel(filePath);
 	}
 	if (!(strcmp(extension, "jpg") &&
@@ -73,7 +73,7 @@ int ImportFileManager::ImportFile(std::string filePath)
 		}
 
 		// •Û‘¶
-		if (!strcmp(extension, "x")) {
+		if (!strcmp(extension, "fbx")) {
 			modelFileNameMap_[filePath] = fileName;
 			modelFilePathMap_[fileName] = filePath;
 

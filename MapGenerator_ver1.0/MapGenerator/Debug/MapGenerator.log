@@ -1,21 +1,17 @@
-﻿2015/11/25 2:14:26 にビルドを開始しました。
+﻿2015/11/25 12:43:27 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\MapGenerator\MapGenerator.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\ImportFileManager.cpp Source\Main.cpp Source\Manager.cpp Source\RouteManager.cpp
-         RouteManager.cpp
-     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\routemanager.cpp(269): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
-     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\routemanager.cpp(302): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
-     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\routemanager.cpp(314): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
-     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\routemanager.cpp(326): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
-     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\routemanager.cpp(342): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
-         Manager.cpp
-         Main.cpp
-         ImportFileManager.cpp
-         コードを生成中...
-       ResourceCompile:
-         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /l"0x0409" /nologo /fo"Debug\MapGenerator.res" MapGenerator.rc 
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\DirtManager.cpp
+         DirtManager.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\dirtmanager.cpp(208): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\dirtmanager.cpp(241): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\dirtmanager.cpp(253): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\dirtmanager.cpp(265): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\dirtmanager.cpp(276): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\dirtmanager.cpp(292): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\dirtmanager.cpp(307): warning C4101: 'oor' : ローカル変数は 1 度も使われていません。
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\Debug\MapGenerator.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\Debug\MapGenerator.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\Debug\MapGenerator.lib" /MACHINE:X86 Debug\MapGenerator.res
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\Debug\MapGenerator.exe" /INCREMENTAL /NOLOGO "libfbxsdk-mt.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\Debug\MapGenerator.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\Debug\MapGenerator.lib" /MACHINE:X86 Debug\MapGenerator.res
          Debug\BoxAndBox.obj
          Debug\BoxAndSphere.obj
          Debug\Building.obj
@@ -23,7 +19,10 @@
          Debug\CameraManager.obj
          Debug\CollisionManager.obj
          Debug\Debug.obj
+         Debug\Dirt.obj
+         Debug\DirtManager.obj
          Debug\EditorCamera.obj
+         Debug\fbx.obj
          Debug\ImportFileManager.obj
          Debug\Input.obj
          Debug\Keyboard.obj
@@ -54,4 +53,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:19.85
+経過時間 00:00:04.91

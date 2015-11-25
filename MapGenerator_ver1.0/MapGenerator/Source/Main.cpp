@@ -12,6 +12,7 @@
 #include "ObjectManager.h"
 #include "Building.h"
 #include "RouteManager.h"
+#include "DirtManager.h"
 #include <commctrl.h>
 
 
@@ -35,6 +36,9 @@ BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam);
 
 // ダイアログプロシージャ
 BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam);
+
+// ダイアログプロシージャ
+BOOL CALLBACK DirtDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam);
 
 // モデルファイルの読み込み
 void ImportModelFile(HWND windowHandle);
@@ -60,6 +64,12 @@ void ReadRouteFile(HWND hWnd);
 // 保存関数
 void SaveRouteFile(HWND hWnd);
 
+// 読み込み関数
+void ReadDirtFile(HWND hWnd);
+
+// 保存関数
+void SaveDirtFile(HWND hWnd);
+
 
 //-----------------------------------------------------------------------------
 // グローバル変数
@@ -67,6 +77,7 @@ void SaveRouteFile(HWND hWnd);
 HWND g_windowHandle = nullptr;
 HWND g_objectDialogHandle = nullptr;
 HWND g_routeDialogHandle = nullptr;
+HWND g_dirtDialogHandle = nullptr;
 
 TCHAR g_szFile[MAX_PATH] = {};
 
@@ -173,6 +184,14 @@ int APIENTRY WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmd_line
 		g_windowHandle, RouteDlgProc);
 	ShowWindow(g_routeDialogHandle, cmd_show);
 	UpdateWindow(g_routeDialogHandle);
+
+
+	// ダイアログの作成
+	g_dirtDialogHandle = CreateDialog(instance, MAKEINTRESOURCE(IDD_DIALOG3),
+		g_windowHandle, DirtDlgProc);
+	ShowWindow(g_dirtDialogHandle, cmd_show);
+	UpdateWindow(g_dirtDialogHandle);
+
 
 
 	// メッセージループ
@@ -289,6 +308,17 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM w_param, LPARAM l_param)
 		case ID_40009:
 			if (IDYES == MessageBox(g_windowHandle, "現在の編集情報は破棄されますがよろしいですか", "警告", MB_YESNO))
 				ReadRouteFile(wnd);
+			break;
+
+			// 汚れの保存
+		case ID_40010:
+			SaveDirtFile(wnd);
+			break;
+
+			// 汚れの読み込み
+		case ID_40011:
+			if (IDYES == MessageBox(g_windowHandle, "現在の編集情報は破棄されますがよろしいですか", "警告", MB_YESNO))
+				ReadDirtFile(wnd);
 			break;
 
 		default:
@@ -554,7 +584,7 @@ void ImportModelFile(HWND windowHandle)
 		ofn.lpstrInitialDir = szPath;	// 初期フォルダ位置
 		ofn.lpstrFile = g_szFile;		// 選択ファイル格納
 		ofn.nMaxFile = MAX_PATH;
-		ofn.lpstrFilter = "モデルデータ(*.x)\0*.x";
+		ofn.lpstrFilter = "モデルデータ(*.fbx)\0*.fbx";
 		ofn.lpstrTitle = "モデルのインポート";
 		ofn.Flags = OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
 	}
@@ -697,19 +727,19 @@ void ClickLeftEvent()
 
 		// 座標エディットボックス
 		char str[4096] = {};
-		sprintf(str, "%.1f", position.x);
+		sprintf(str, "%.3f", position.x);
 		SetWindowText(
 			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT2),		// スライダーのハンドル
 			str		// 追加する項目の文字列
 			);
 
-		sprintf(str, "%.1f", position.y);
+		sprintf(str, "%.3f", position.y);
 		SetWindowText(
 			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT3),		// スライダーのハンドル
 			str		// 追加する項目の文字列
 			);
 
-		sprintf(str, "%.1f", position.z);
+		sprintf(str, "%.3f", position.z);
 		SetWindowText(
 			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT4),		// スライダーのハンドル
 			str		// 追加する項目の文字列
@@ -718,19 +748,19 @@ void ClickLeftEvent()
 
 
 		// スケールエディットボックス
-		sprintf(str, "%.1f", scale.x);
+		sprintf(str, "%.3f", scale.x);
 		SetWindowText(
 			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT5),		// スライダーのハンドル
 			str		// 追加する項目の文字列
 			);
 
-		sprintf(str, "%.1f", scale.y);
+		sprintf(str, "%.3f", scale.y);
 		SetWindowText(
 			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT6),		// スライダーのハンドル
 			str		// 追加する項目の文字列
 			);
 
-		sprintf(str, "%.1f", scale.z);
+		sprintf(str, "%.3f", scale.z);
 		SetWindowText(
 			(HWND)GetDlgItem(g_objectDialogHandle, IDC_EDIT7),		// スライダーのハンドル
 			str		// 追加する項目の文字列
@@ -821,6 +851,9 @@ void SaveMapFile(HWND hWnd)
 
 
 
+
+
+
 // ダイアログプロシージャ
 BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
@@ -893,19 +926,19 @@ BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 				D3DXVECTOR3 position = Manager::GetInstance()->GetRouteManager()->GetPosition();
 				// 座標エディットボックス
 				char str[4096] = {};
-				sprintf(str, "%.1f", position.x);
+				sprintf(str, "%.3f", position.x);
 				SetWindowText(
 					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT2),		// スライダーのハンドル
 					str		// 追加する項目の文字列
 					);
 
-				sprintf(str, "%.1f", position.y);
+				sprintf(str, "%.3f", position.y);
 				SetWindowText(
 					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT3),		// スライダーのハンドル
 					str		// 追加する項目の文字列
 					);
 
-				sprintf(str, "%.1f", position.z);
+				sprintf(str, "%.3f", position.z);
 				SetWindowText(
 					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT4),		// スライダーのハンドル
 					str		// 追加する項目の文字列
@@ -1071,6 +1104,279 @@ void SaveRouteFile(HWND hWnd)
 
 
 
+
+
+
+// ダイアログプロシージャ
+BOOL CALLBACK DirtDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (Msg) {
+
+		// ダイアログ初期化
+	case WM_INITDIALOG:
+	{
+
+		// スピンコントロールとエディットボックスの関連付け
+		SendMessage(
+			(HWND)GetDlgItem(hDlg, IDC_SPIN1),		// スピンコントロールのハンドル
+			(UINT)UDM_SETBUDDY,
+			(WPARAM)GetDlgItem(hDlg, IDC_EDIT2),	// 関連付けるコントロールのハンドル
+			0										// 0固定
+			);
+		SendMessage(
+			(HWND)GetDlgItem(hDlg, IDC_SPIN2),		// スピンコントロールのハンドル
+			(UINT)UDM_SETBUDDY,
+			(WPARAM)GetDlgItem(hDlg, IDC_EDIT3),	// 関連付けるコントロールのハンドル
+			0										// 0固定
+			);
+		SendMessage(
+			(HWND)GetDlgItem(hDlg, IDC_SPIN3),		// スピンコントロールのハンドル
+			(UINT)UDM_SETBUDDY,
+			(WPARAM)GetDlgItem(hDlg, IDC_EDIT4),	// 関連付けるコントロールのハンドル
+			0										// 0固定
+			);
+
+		SendMessage(
+			(HWND)GetDlgItem(hDlg, IDC_SPIN7),		// スピンコントロールのハンドル
+			(UINT)UDM_SETBUDDY,
+			(WPARAM)GetDlgItem(hDlg, IDC_EDIT5),	// 関連付けるコントロールのハンドル
+			0										// 0固定
+			);
+
+		// モードの設定
+		HWND radio = GetDlgItem(hDlg, IDC_RADIO6);
+		SendMessage(
+			(HWND)radio,		// ラジオボタンのハンドル
+			(UINT)BM_SETCHECK,
+			(WPARAM)BST_CHECKED,
+			0					// ０固定
+			);
+	}
+		return TRUE;
+
+		break;
+
+	case WM_COMMAND:
+		switch (LOWORD(wParam)) {
+		case IDOK:
+			return TRUE;
+
+		case IDCANCEL:
+			return TRUE;
+
+		// 汚れの選択
+		case IDC_COMBO1:
+
+			// 選択したとき
+			if (HIWORD(wParam) == CBN_SELCHANGE) {
+				// コンボボックスから生成するモデルのファイル名取得
+				HWND hCombo1 = GetDlgItem(hDlg, IDC_COMBO1);
+				int index = SendMessage(
+					(HWND)hCombo1,			// コンボボックスのハンドル
+					(UINT)CB_GETCURSEL,		// 選択中のインデックス取得
+					0,						// ０固定
+					0						// 追加する項目の文字列
+					);
+
+				// 選択中の点変更
+				Manager::GetInstance()->GetDirtManager()->SetDirtListCursor(index);
+
+
+				D3DXVECTOR3 position = Manager::GetInstance()->GetDirtManager()->GetPosition();
+				float radius = Manager::GetInstance()->GetDirtManager()->GetRadius();
+				// 座標エディットボックス
+				char str[4096] = {};
+				sprintf(str, "%.3f", position.x);
+				SetWindowText(
+					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT2),		// スライダーのハンドル
+					str		// 追加する項目の文字列
+					);
+
+				sprintf(str, "%.3f", position.y);
+				SetWindowText(
+					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT3),		// スライダーのハンドル
+					str		// 追加する項目の文字列
+					);
+
+				sprintf(str, "%.3f", position.z);
+				SetWindowText(
+					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT4),		// スライダーのハンドル
+					str		// 追加する項目の文字列
+					);
+
+				sprintf(str, "%.3f", radius);
+				SetWindowText(
+					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT5),		// スライダーのハンドル
+					str		// 追加する項目の文字列
+					);
+			}
+			break;
+
+
+		// 点の生成もしくは削除
+		case IDC_BUTTON1:
+		{
+			HWND radio1 = GetDlgItem(hDlg, IDC_RADIO6);
+			HWND radio3 = GetDlgItem(hDlg, IDC_RADIO8);
+
+			// 生成 : 追加
+			if (SendMessage(radio1, BM_GETCHECK, 0, 0) == 1) {
+				Manager::GetInstance()->GetDirtManager()->CreateDirt();
+			}
+			// 削除
+			if (SendMessage(radio3, BM_GETCHECK, 0, 0) == 1) {
+				Manager::GetInstance()->GetDirtManager()->DeleteDirt();
+			}
+		}
+			break;
+
+
+		// 座標 : X軸
+		case IDC_EDIT2:
+			if (HIWORD(wParam) == EN_UPDATE) {
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT2),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				Manager::GetInstance()->GetDirtManager()->SetPositionX((float)positionX);
+			}
+			break;
+
+			// 座標 : Y軸
+		case IDC_EDIT3:
+			if (HIWORD(wParam) == EN_UPDATE) {
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT3),		// スライダーのハンドル
+					str, 4096);
+				double positionY = atof(str);
+				Manager::GetInstance()->GetDirtManager()->SetPositionY((float)positionY);
+			}
+			break;
+
+			// 座標 : Z軸
+		case IDC_EDIT4:
+			if (HIWORD(wParam) == EN_UPDATE) {
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT4),		// スライダーのハンドル
+					str, 4096);
+				double positionZ = atof(str);
+				Manager::GetInstance()->GetDirtManager()->SetPositionZ((float)positionZ);
+			}
+			break;
+
+
+			// 半径
+		case IDC_EDIT5:
+			if (HIWORD(wParam) == EN_UPDATE) {
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT5),		// スライダーのハンドル
+					str, 4096);
+				double radius = atof(str);
+				Manager::GetInstance()->GetDirtManager()->SetRadius((float)radius);
+			}
+			break;
+
+
+		default:
+			break;
+		}
+		break;
+
+	case WM_CLOSE:
+		EndDialog(hDlg, 0);
+		return TRUE;
+
+	default:
+		break;
+	}
+
+	return FALSE;
+}
+
+// 読み込み関数
+void ReadDirtFile(HWND hWnd)
+{
+	OPENFILENAME ofn = {};
+	TCHAR szPath[MAX_PATH] = { 0 };
+	TCHAR szFile[MAX_PATH] = {};
+
+	if (szPath[0] == TEXT('\0')) {
+		GetCurrentDirectory(MAX_PATH, szPath);
+	}
+	if (ofn.lStructSize == 0) {
+		ofn.lStructSize = sizeof(OPENFILENAME);
+		ofn.hwndOwner = hWnd;
+		ofn.lpstrInitialDir = szPath;	// 初期フォルダ位置
+		ofn.lpstrFile = szFile;			// 選択ファイル格納
+		ofn.nMaxFile = MAX_PATH;
+		ofn.lpstrDefExt = TEXT(".drt");
+		ofn.lpstrFilter = TEXT("汚れファイル(*.drt)\0*.drt\0");
+		ofn.lpstrTitle = TEXT("開く");
+		ofn.Flags = OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+	}
+
+	if (GetSaveFileName(&ofn)) {
+		FILE *file = nullptr;
+		file = fopen(szFile, "rt");
+		if (file) {
+
+			// 現在の状況破棄
+			HWND hCombo = GetDlgItem(g_dirtDialogHandle, IDC_COMBO1);
+			SendMessage((HWND)hCombo, (UINT)CB_RESETCONTENT, 0, 0);
+			Manager::GetInstance()->GetDirtManager()->AllDeleteDirt();
+
+			// 読み込み
+			Manager::GetInstance()->GetDirtManager()->InputData(file);
+
+			fclose(file);
+		}
+		else {
+			MessageBox(g_windowHandle, "読み込みに失敗しました", "警告", MB_OK);
+		}
+	}
+}
+
+// 保存関数
+void SaveDirtFile(HWND hWnd)
+{
+	OPENFILENAME ofn = {};
+	TCHAR szPath[MAX_PATH] = { 0 };
+	TCHAR szFile[MAX_PATH] = {};
+
+	if (szPath[0] == TEXT('\0')) {
+		GetCurrentDirectory(MAX_PATH, szPath);
+	}
+	if (ofn.lStructSize == 0) {
+		ofn.lStructSize = sizeof(OPENFILENAME);
+		ofn.hwndOwner = hWnd;
+		ofn.lpstrInitialDir = szPath;	// 初期フォルダ位置
+		ofn.lpstrFile = szFile;			// 選択ファイル格納
+		ofn.nMaxFile = MAX_PATH;
+		ofn.lpstrDefExt = TEXT(".drt");
+		ofn.lpstrFilter = TEXT("汚れファイル(*.drt)\0*.drt\0");
+		ofn.lpstrTitle = TEXT("名前を付けて保存");
+		ofn.Flags = OFN_FILEMUSTEXIST | OFN_OVERWRITEPROMPT | OFN_NOCHANGEDIR;
+	}
+
+	if (GetSaveFileName(&ofn)) {
+		FILE *file = nullptr;
+		file = fopen(szFile, "wt");
+		if (file) {
+			Manager::GetInstance()->GetDirtManager()->OutputData(file);
+			fclose(file);
+		}
+		else {
+			MessageBox(g_windowHandle, "保存に失敗しました", "警告", MB_OK);
+		}
+	}
+}
+
+
+
 HWND GetObjectDialogHandle()
 {
 	return g_objectDialogHandle;
@@ -1079,6 +1385,11 @@ HWND GetObjectDialogHandle()
 HWND GetRouteDialogHandle()
 {
 	return g_routeDialogHandle;
+}
+
+HWND GetDirtDialogHandle()
+{
+	return g_dirtDialogHandle;
 }
 
 

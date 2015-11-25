@@ -54,32 +54,35 @@ void RouteManager::Draw()
 {
 	int size = pointList_.size();
 
-	
-	VERTEX_3D *vertex = new VERTEX_3D[size];
+	if (size) {
+		VERTEX_3D *vertex = new VERTEX_3D[size + 1];
 
-	for (int i = 0; i < size; i++) {
-		vertex[i].diffuse = D3DXCOLOR(0, 1, 0, 1);
-		vertex[i].vtx = pointList_.at(i)->position;
+		for (int i = 0; i < size; i++) {
+			vertex[i].diffuse = D3DXCOLOR(0, 1, 0, 1);
+			vertex[i].vtx = pointList_.at(i)->position;
+		}
+		vertex[size].vtx = pointList_.at(0)->position;
+
+
+		LPDIRECT3DDEVICE9 device = Manager::GetInstance()->GetRenderer()->GetDevice();
+		device->SetRenderState(D3DRS_LIGHTING, false);
+
+
+		device->SetFVF(FVF_VERTEX_3D);		// 頂点フォーマットの設定
+
+		// ワールドマトリックスの設定
+		D3DXMATRIX worldMatrix;
+		D3DXMatrixIdentity(&worldMatrix);
+		device->SetTransform(D3DTS_WORLD, &worldMatrix);
+		device->SetTexture(0, nullptr);
+		device->DrawPrimitiveUP(D3DPT_LINESTRIP, size, vertex, sizeof(VERTEX_3D));
+
+
+		device->SetRenderState(D3DRS_LIGHTING, true);
+
+
+		delete[] vertex;
 	}
-
-	LPDIRECT3DDEVICE9 device = Manager::GetInstance()->GetRenderer()->GetDevice();
-	device->SetRenderState(D3DRS_LIGHTING, false);
-
-
-	device->SetFVF(FVF_VERTEX_3D);		// 頂点フォーマットの設定
-
-	// ワールドマトリックスの設定
-	D3DXMATRIX worldMatrix;
-	D3DXMatrixIdentity(&worldMatrix);
-	device->SetTransform(D3DTS_WORLD, &worldMatrix);
-	device->SetTexture(0, nullptr);
-	device->DrawPrimitiveUP(D3DPT_LINESTRIP, size - 1, vertex, sizeof(VERTEX_3D));
-
-
-	device->SetRenderState(D3DRS_LIGHTING, true);
-
-
-	delete[] vertex;
 }
 
 

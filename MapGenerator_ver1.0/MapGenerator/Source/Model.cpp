@@ -9,6 +9,7 @@
 #include "Manager.h"
 #include "Renderer.h"
 #include "TextureFactory.h"
+#include "fbx.h"
 
 
 //=========================================================================
@@ -22,6 +23,7 @@ Model::Model()
 	materialNum_ = 0;
 	mesh_ = nullptr;
 	filePath_ = nullptr;
+	fbx_ = nullptr;
 
 }
 
@@ -37,7 +39,10 @@ Model::~Model()
 	SafeRelease(mesh_);
 	// テクスチャの開放処理
 	SafeDelete(texture_);
-
+	
+	if (fbx_)
+		fbx_->Uninit();
+	SafeDelete(fbx_);
 }
 
 
@@ -49,7 +54,11 @@ bool Model::Init(LPCSTR xFileName)
 
 	filePath_ = xFileName;
 
+	fbx_ = new KFbxObject();
+	fbx_->Initialze(xFileName);
 
+
+	/*
 	// Xファイルの読み込み
 	if (FAILED(D3DXLoadMeshFromX(
 			xFileName,
@@ -62,7 +71,7 @@ bool Model::Init(LPCSTR xFileName)
 			&mesh_))) {
 		return false;
 	}
-
+	
 
 	// テクスチャ関連
 	texture_ = new LPDIRECT3DTEXTURE9[materialNum_];
@@ -79,7 +88,7 @@ bool Model::Init(LPCSTR xFileName)
 		}
 	}
 
-
+	*/
 	return true;
 
 }
@@ -87,9 +96,11 @@ bool Model::Init(LPCSTR xFileName)
 //=========================================================================
 // 描画処理
 //=========================================================================
-void Model::Draw()
+void Model::Draw(D3DXMATRIX world)
 {
+	fbx_->Draw(world);
 
+	/*
 	LPDIRECT3DDEVICE9 device = Manager::GetInstance()->GetRenderer()->GetDevice();
 	D3DXMATERIAL *material;
 	D3DMATERIAL9 materialDefault;
@@ -110,7 +121,7 @@ void Model::Draw()
 
 	device->SetTexture(0, nullptr);
 	device->SetMaterial(&materialDefault);
-
+	*/
 }
 
 //=========================================================================
@@ -118,14 +129,14 @@ void Model::Draw()
 //=========================================================================
 Model* Model::Create(LPCSTR xFileName)
 {
-
+	
 	Model *model = nullptr;
 	model = new Model();
 	model->Init(xFileName);
 
 
 	return model;
-
+	
 }
 
 

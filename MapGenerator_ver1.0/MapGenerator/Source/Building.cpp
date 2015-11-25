@@ -103,7 +103,7 @@ void Building::Draw()
 	device->SetTransform(D3DTS_WORLD, &worldMatrix_);  // s—ñ‚ÌÝ’è
 
 	device->SetTexture(0, texture_);
-	model_->Draw();
+	model_->Draw(worldMatrix_);
 	device->SetTexture(0, nullptr);
 }
 

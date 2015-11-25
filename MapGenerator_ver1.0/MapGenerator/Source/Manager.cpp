@@ -22,6 +22,7 @@
 #include "ObjectManager.h"
 #include "ImportFileManager.h"
 #include "RouteManager.h"
+#include "DirtManager.h"
 
 
 //-----------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Manager::Manager()
 	objectManager_ = nullptr;
 	importFileManager_ = nullptr;
 	routeManager_ = nullptr;
+	dirtManager_ = nullptr;
 
 }
 
@@ -81,6 +83,9 @@ Manager::~Manager()
 
 	// ルートマネージャの解放
 	SafeDelete(routeManager_);
+
+	// 汚れマネージャの解放
+	SafeDelete(dirtManager_);
 
 
 #ifdef _DEBUG
@@ -156,6 +161,10 @@ HRESULT Manager::Init(HINSTANCE instance, HWND wnd, BOOL window)
 	routeManager_ = new RouteManager();
 	routeManager_->Init();
 
+	// 汚れマネージャの生成
+	dirtManager_ = new DirtManager();
+	dirtManager_->Init();
+
 
 #ifdef _DEBUG
 	debugProc_ = new DebugProc();
@@ -219,6 +228,9 @@ void Manager::Draw()
 
 		// ルートの描画
 		routeManager_->Draw();
+
+		// 汚れの描画
+		dirtManager_->Draw();
 
 #ifdef _DEBUG
 		// デバッグ表示
