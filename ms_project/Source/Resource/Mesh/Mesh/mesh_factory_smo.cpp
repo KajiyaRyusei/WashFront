@@ -19,7 +19,7 @@ void MeshFactorySMO::Create(
 {
 	std::ifstream file;
 	std::string line;
-	file.open(file_name, std::ios::out);
+	file.open(file_name, std::ios_base::binary);
 	if( file.fail() == true )
 	{
 		OutputDebugStringA("ファイル入力にエラーが発生しました\n");
@@ -30,7 +30,7 @@ void MeshFactorySMO::Create(
 
 	// メッシュ数
 	unsigned int number_mesh(0);
-	file >> number_mesh;
+	file.read((char*)&number_mesh, sizeof(u32));
 
 	// 確保
 	mesh_list.reserve(number_mesh);
@@ -41,16 +41,16 @@ void MeshFactorySMO::Create(
 
 		//// 頂点数
 		unsigned int mesh_vertex_count(0);
-		file >> mesh_vertex_count;
+		file.read((char*)&mesh_vertex_count, sizeof(u32));
 		std::vector<VERTEX_SMO> vertices;
 		vertices.reserve(mesh_vertex_count);
 
 		for( unsigned int vertex_id = 0; vertex_id < mesh_vertex_count; ++vertex_id )
 		{// 頂点
 			VERTEX_SMO vertex;
-			file >> vertex.position.x >> vertex.position.y >> vertex.position.z;
-			file >> vertex.normal.x >> vertex.normal.y >> vertex.normal.z;
-			file >> vertex.texcoord.x >> vertex.texcoord.y;
+			file.read((char*)&vertex.position, sizeof(D3DXVECTOR3));
+			file.read((char*)&vertex.normal, sizeof(D3DXVECTOR3));
+			file.read((char*)&vertex.texcoord, sizeof(D3DXVECTOR2));
 			vertex.cleanliness = 1.0f;
 
 			vertices.push_back(vertex);
@@ -68,13 +68,13 @@ void MeshFactorySMO::Create(
 
 		// インデックス数
 		u32 index_buffer_count = 0;
-		file >> index_buffer_count;
+		file.read((char*)&index_buffer_count, sizeof(u32));
 		std::vector<u32> indices;
 		indices.reserve(index_buffer_count);
 		for( u32 index_id = 0; index_id < index_buffer_count; ++index_id )
 		{// インデックス
-			DWORD index;
-			file >> index;
+			u32 index;
+			file.read((char*)&index, sizeof(u32));
 			indices.push_back(index);
 		}
 

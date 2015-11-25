@@ -315,6 +315,12 @@
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.cpp">
       <Filter>Resource\Mesh\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Unit\Game\water_spray_pool.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\water_spray.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdafx.h" />
@@ -765,6 +771,12 @@
     </ClInclude>
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.h">
       <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\water_spray_pool.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\water_spray.h">
+      <Filter>Unit\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

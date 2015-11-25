@@ -220,6 +220,8 @@
     <ClCompile Include="Source\Unit\Game\player.cpp" />
     <ClCompile Include="Source\Unit\Game\water_back.cpp" />
     <ClCompile Include="Source\Unit\Game\water_bullet.cpp" />
+    <ClCompile Include="Source\Unit\Game\water_spray.cpp" />
+    <ClCompile Include="Source\Unit\Game\water_spray_pool.cpp" />
     <ClCompile Include="Source\Unit\Game\weapon.cpp" />
     <ClCompile Include="Source\Unit\number.cpp" />
     <ClCompile Include="Source\Unit\Result\bulletin_board.cpp" />
@@ -373,6 +375,8 @@
     <ClInclude Include="Source\Unit\Game\player.h" />
     <ClInclude Include="Source\Unit\Game\water_back.h" />
     <ClInclude Include="Source\Unit\Game\water_bullet.h" />
+    <ClInclude Include="Source\Unit\Game\water_spray.h" />
+    <ClInclude Include="Source\Unit\Game\water_spray_pool.h" />
     <ClInclude Include="Source\Unit\Game\weapon.h" />
     <ClInclude Include="Source\Unit\number.h" />
     <ClInclude Include="Source\Unit\Result\bulletin_board.h" />

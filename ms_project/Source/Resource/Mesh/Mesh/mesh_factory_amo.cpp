@@ -21,7 +21,7 @@ void MeshFactoryAMO::Create(
 {
 	std::ifstream file;
 	std::string line;
-	file.open(file_name, std::ios::out);
+	file.open(file_name, std::ios_base::binary);
 	if( file.fail() == true )
 	{
 		OutputDebugStringA("ファイル入力にエラーが発生しました\n");
@@ -32,7 +32,7 @@ void MeshFactoryAMO::Create(
 
 	// メッシュ数
 	u32 number_mesh(0);
-	file >> number_mesh;
+	file.read((char*)&number_mesh, sizeof(u32));
 
 	// 確保
 	mesh_list.reserve(number_mesh);
@@ -43,7 +43,7 @@ void MeshFactoryAMO::Create(
 
 		//// 頂点数
 		unsigned int mesh_vertex_count(0);
-		file >> mesh_vertex_count;
+		file.read((char*)&mesh_vertex_count, sizeof(u32));
 		std::vector<VERTEX_AMO> vertices;
 		vertices.reserve(mesh_vertex_count);
 
@@ -51,11 +51,12 @@ void MeshFactoryAMO::Create(
 		{// 頂点
 			VERTEX_AMO vertex;
 			u32 temp_vertex_bone_index[4];
-			file >> vertex.position.x >> vertex.position.y >> vertex.position.z;
-			file >> vertex.normal.x >> vertex.normal.y >> vertex.normal.z;
-			file >> vertex.texcoord.x >> vertex.texcoord.y;
-			file >> vertex.weight[0] >> vertex.weight[1] >> vertex.weight[2] >> vertex.weight[3];
-			file >> temp_vertex_bone_index[0] >> temp_vertex_bone_index[1] >> temp_vertex_bone_index[2] >> temp_vertex_bone_index[3];
+
+			file.read((char*)&vertex.position, sizeof(D3DXVECTOR3));
+			file.read((char*)&vertex.normal, sizeof(D3DXVECTOR3));
+			file.read((char*)&vertex.texcoord, sizeof(D3DXVECTOR2));
+			file.read((char*)vertex.weight, sizeof(fx32)* 4);
+			file.read((char*)temp_vertex_bone_index, sizeof(u32)* 4);
 
 			for( u32 i = 0; i < 4; ++i )
 			{
@@ -78,13 +79,13 @@ void MeshFactoryAMO::Create(
 
 		// インデックス数
 		u32 index_buffer_count = 0;
-		file >> index_buffer_count;
+		file.read((char*)&index_buffer_count, sizeof(u32));
 		std::vector<u32> indices;
 		indices.reserve(index_buffer_count);
 		for( u32 index_id = 0; index_id < index_buffer_count; ++index_id )
 		{// インデックス
 			u32 index;
-			file >> index;
+			file.read((char*)&index, sizeof(u32));
 			indices.push_back(index);
 		}
 

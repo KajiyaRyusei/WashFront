@@ -25,7 +25,6 @@
 void World::Initialize()
 {
 	_collision_grid = new CollisionGrid();
-
 	_texture_resource = new TextureResource;
 	_cube_texture_resource = new CubeTextureResource;
 	_mesh_resource = new MeshResource;

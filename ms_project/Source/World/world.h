@@ -58,7 +58,6 @@ private:
 
 	std::list<Unit*> _unit_list;
 	CollisionGrid* _collision_grid;
-
 	TextureResource* _texture_resource;
 	CubeTextureResource* _cube_texture_resource;
 	MeshResource* _mesh_resource;

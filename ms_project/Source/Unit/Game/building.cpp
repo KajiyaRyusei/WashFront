@@ -39,7 +39,7 @@ void BuildingUnit::Initialize(
 {
 	// シェーダの作成
 	MeshFactorySMO mesh_factory;
-	mesh_factory.Create(_application->GetRendererDevice(), "Data/StaticModel/biru_2.smo", _mesh_list);
+	mesh_factory.Create(_application->GetRendererDevice(), "Data/StaticModel/biru_1.smo", _mesh_list);
 	_shader_size = _mesh_list.size();
 	_shader = new ShaderPBLStatic[_mesh_list.size()];
 
