@@ -16,10 +16,6 @@
 // エラー消し
 #define _CRT_SECURE_NO_WARNINGS
 
-// ワーニング抑制
-#pragma warning( disable :4201 )
-#pragma warning( disable :4127 )
-
 #include <stdio.h>
 #include <wchar.h>
 #include <stdarg.h>

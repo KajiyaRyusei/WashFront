@@ -1,28 +1,61 @@
-﻿2015/11/27 18:20:41 にビルドを開始しました。
+﻿2015/10/30 15:44:49 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /Zi /nologo /W4 /WX /sdl /O2 /Oi /Oy- /GL /D _RELEASE /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\ms_project.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Command\command_fire.cpp Source\Command\command_move_back.cpp Source\Command\command_move_down.cpp Source\Command\command_move_front.cpp Source\Command\command_move_left.cpp Source\Command\command_move_right.cpp Source\Command\command_move_up.cpp Source\DevelopTool\DevelopTool\debug_line.cpp Source\DevelopTool\develop_tool_manager.cpp Source\DrawCommand\command_processor.cpp Source\Renderer\directx9.cpp Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Scene\scene_manager.cpp Source\Shader\Shader\water_back_shader.cpp Source\Shader\Shader\water_spray_shader.cpp Source\Shader\effect_handle_manager.cpp Source\System\application.cpp Source\Unit\Game\aim.cpp Source\Unit\Game\aim_draw.cpp Source\Unit\Game\aim_line.cpp Source\Unit\Game\back_ground.cpp Source\Unit\Game\building.cpp Source\Unit\Game\bullet.cpp Source\Unit\Game\dirt.cpp Source\Unit\Game\player.cpp Source\Unit\Game\water_back.cpp Source\Unit\Game\water_bullet.cpp Source\Unit\Game\water_spray.cpp Source\Unit\Game\water_spray_pool.cpp Source\Unit\Game\weapon.cpp Source\Unit\Result\bulletin_board.cpp Source\Unit\Result\judge.cpp Source\Unit\Result\message_box.cpp Source\Unit\Result\result_bg.cpp Source\Unit\Result\score.cpp Source\Unit\Result\score_board.cpp Source\Unit\Title\logo.cpp Source\Unit\Title\logo_bg.cpp Source\Unit\Title\text.cpp Source\Unit\number.cpp Source\Unit\screen_unit.cpp Source\Unit\unit.cpp Source\World\collision_grid.cpp Source\World\grid_2D.cpp Source\World\world.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /Zi /nologo /W4 /WX /sdl /O2 /Oi /Oy- /GL /D _RELEASE /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\ms_project.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Algorithm\often_use.cpp Source\Animation\animation_system.cpp Source\Camera\Camera\camera_2d.cpp Source\Camera\Camera\camera_game_main.cpp Source\Camera\Camera\camera_game_player.cpp Source\Camera\camera_manager.cpp Source\Collision\collision_system.cpp Source\Command\command_fire.cpp Source\Command\command_handler.cpp Source\Command\command_move_back.cpp Source\Command\command_move_down.cpp Source\Command\command_move_front.cpp Source\Command\command_move_left.cpp Source\Command\command_move_right.cpp Source\Command\command_move_up.cpp Source\DevelopTool\DevelopTool\debug_box.cpp Source\DevelopTool\DevelopTool\debug_line.cpp Source\DevelopTool\DevelopTool\debug_line_box.cpp Source\DevelopTool\DevelopTool\debug_print.cpp Source\DevelopTool\DevelopTool\debug_sphere.cpp Source\DevelopTool\develop_tool_manager.cpp Source\DrawCommand\command_buffer.cpp Source\DrawCommand\command_buffer_holder.cpp Source\DrawCommand\command_processor.cpp Source\Error\assert.cpp Source\Fade\fade.cpp Source\Input\input.cpp Source\Input\input_event_buffer.cpp Source\Input\input_manager.cpp Source\Input\keyboard\input_keyboard.cpp Source\Renderer\directx9.cpp Source\Resource\Mesh\Mesh\mesh_factory_amo.cpp Source\Resource\Mesh\Mesh\mesh_factory_cube.cpp Source\Resource\Mesh\Mesh\mesh_factory_smo.cpp Source\Resource\Mesh\Mesh\mesh_factory_sprite.cpp Source\Resource\Mesh\index_buffer.cpp Source\Resource\Mesh\mesh_buffer.cpp Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Scene\scene_manager.cpp Source\Shader\PostEffect\fade_shader.cpp Source\Shader\Shader\PBL_animation_shader.cpp Source\Shader\Shader\PBL_static_shader.cpp Source\Shader\Shader\aim_shader.cpp Source\Shader\Shader\animation_shader.cpp Source\Shader\Shader\back_ground_shader.cpp Source\Shader\Shader\lambert.cpp Source\Shader\effect_handle_holder.cpp Source\Shader\effect_handle_manager.cpp Source\System\application.cpp Source\Unit\Game\aim.cpp Source\Unit\Game\aim_draw.cpp Source\Unit\Game\aim_line.cpp Source\Unit\Game\back_ground.cpp Source\Unit\Game\building.cpp Source\Unit\Game\bullet.cpp Source\Unit\Game\dirt.cpp Source\Unit\Game\player.cpp Source\Unit\screen_unit.cpp Source\Unit\unit.cpp Source\World\collision_grid.cpp Source\World\grid_2D.cpp Source\World\world.cpp source\main.cpp
+         often_use.cpp
+         animation_system.cpp
+         camera_2d.cpp
+         camera_game_main.cpp
+         camera_game_player.cpp
+         camera_manager.cpp
+         collision_system.cpp
          command_fire.cpp
+         command_handler.cpp
          command_move_back.cpp
          command_move_down.cpp
          command_move_front.cpp
          command_move_left.cpp
          command_move_right.cpp
          command_move_up.cpp
+         debug_box.cpp
          debug_line.cpp
+         debug_line_box.cpp
+         debug_print.cpp
+         debug_sphere.cpp
+         コンパイル中...
          develop_tool_manager.cpp
+         command_buffer.cpp
+         command_buffer_holder.cpp
          command_processor.cpp
+         assert.cpp
+         fade.cpp
+         input.cpp
+         input_event_buffer.cpp
+         input_manager.cpp
+         input_keyboard.cpp
          directx9.cpp
+         mesh_factory_amo.cpp
+         mesh_factory_cube.cpp
+         mesh_factory_smo.cpp
+         mesh_factory_sprite.cpp
+         index_buffer.cpp
+         mesh_buffer.cpp
          scene_game.cpp
          scene_result.cpp
          scene_title.cpp
+         コンパイル中...
          scene_manager.cpp
-         water_back_shader.cpp
-         water_spray_shader.cpp
+         fade_shader.cpp
+         PBL_animation_shader.cpp
+         PBL_static_shader.cpp
+         aim_shader.cpp
+         animation_shader.cpp
+         back_ground_shader.cpp
+         lambert.cpp
+         effect_handle_holder.cpp
          effect_handle_manager.cpp
          application.cpp
          aim.cpp
-         コンパイル中...
          aim_draw.cpp
          aim_line.cpp
          back_ground.cpp
@@ -30,31 +63,15 @@
          bullet.cpp
          dirt.cpp
          player.cpp
-         water_back.cpp
-         water_bullet.cpp
-         water_spray.cpp
-         water_spray_pool.cpp
-         weapon.cpp
-         bulletin_board.cpp
-         judge.cpp
-         message_box.cpp
-         result_bg.cpp
-         score.cpp
-         score_board.cpp
-         logo.cpp
-         logo_bg.cpp
-         コンパイル中...
-         text.cpp
-         number.cpp
          screen_unit.cpp
+         コンパイル中...
          unit.cpp
          collision_grid.cpp
          grid_2D.cpp
          world.cpp
+         main.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.lib" /MACHINE:X86 /SAFESEH Release\dirt_math.obj
-         Release\often_use.obj
-         Release\perlin_noise.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.lib" /MACHINE:X86 /SAFESEH Release\often_use.obj
          Release\animation_system.obj
          Release\camera_2d.obj
          Release\camera_game_main.obj
@@ -84,25 +101,14 @@
          Release\input_event_buffer.obj
          Release\input_manager.obj
          Release\input_keyboard.obj
-         Release\input_x.obj
          Release\directx9.obj
-         Release\animation_mesh_resource.obj
-         Release\cube_texture_resource.obj
          Release\index_buffer.obj
-         Release\mesh_factory_2d_sprite.obj
          Release\mesh_factory_amo.obj
          Release\mesh_factory_cube.obj
-         Release\mesh_factory_instance_sprite.obj
-         Release\mesh_factory_mesh_field.obj
          Release\mesh_factory_smo.obj
          Release\mesh_factory_sprite.obj
-         Release\mesh_factory_water_cylinder.obj
-         Release\mesh_factory_water_cylinder_back.obj
          Release\mesh_buffer.obj
          Release\vertex_buffer.obj
-         Release\mesh_resource.obj
-         Release\static_mesh_resource.obj
-         Release\texture_resource.obj
          Release\scene_game.obj
          Release\scene_result.obj
          Release\scene_title.obj
@@ -112,16 +118,11 @@
          Release\fade_shader.obj
          Release\aim_shader.obj
          Release\back_ground_shader.obj
-         Release\dirt_shader.obj
          Release\lambert.obj
          Release\animation_shader.obj
          Release\PBL_animation_shader.obj
          Release\PBL_static_shader.obj
-         Release\screen_2d_shader.obj
          Release\screen_shader.obj
-         Release\water_back_shader.obj
-         Release\water_shader.obj
-         Release\water_spray_shader.obj
          Release\shader_base.obj
          Release\speaker.obj
          Release\speaker_3d.obj
@@ -139,22 +140,7 @@
          Release\bullet.obj
          Release\dirt.obj
          Release\player.obj
-         Release\water_back.obj
-         Release\water_bullet.obj
-         Release\water_spray.obj
-         Release\water_spray_pool.obj
-         Release\weapon.obj
-         Release\number.obj
-         Release\bulletin_board.obj
-         Release\judge.obj
-         Release\message_box.obj
-         Release\result_bg.obj
-         Release\score.obj
-         Release\score_board.obj
          Release\screen_unit.obj
-         Release\logo.obj
-         Release\logo_bg.obj
-         Release\text.obj
          Release\unit.obj
          Release\window.obj
          Release\window_operation_wrapper.obj
@@ -169,4 +155,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:10.80
+経過時間 00:00:12.64

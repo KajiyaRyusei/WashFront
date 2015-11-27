@@ -16,7 +16,7 @@
 // 初期化
 void DebugSphere::Initialize()
 {
-#ifndef _RELEASE
+#ifdef _DEBUG
 	for( u32 i = 0; i < kMaxShpere; ++i )
 	{
 		_sphere[i].position = D3DXVECTOR3(0.f, 0.f, 0.f);
@@ -35,7 +35,7 @@ void DebugSphere::Initialize()
 // 終了
 void DebugSphere::Finalize()
 {
-#ifndef _RELEASE
+#ifdef _DEBUG
 	SafeRelease(_mesh);
 #endif
 }
@@ -44,7 +44,7 @@ void DebugSphere::Finalize()
 // 描画
 void DebugSphere::Draw()
 {
-#ifndef _RELEASE
+#ifdef _DEBUG
 
 	D3DXMATRIX world, rotation_matrix, transform_matrix;
 	D3DXMatrixIdentity(&world);
@@ -70,7 +70,7 @@ void DebugSphere::RegisteSphere(
 	const float scale,
 	const D3DXVECTOR3& position)
 {
-#ifndef _RELEASE
+#ifdef _DEBUG
 	if( _current_sphere_index >= kMaxShpere )
 	{
 		OutputDebugStringA("デバックボックスの登録数を超えてます");

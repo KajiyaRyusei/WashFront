@@ -62,7 +62,6 @@
     <FxCompile Include="shader_2d.hlsl" />
     <FxCompile Include="water.hlsl" />
     <FxCompile Include="water_back.hlsl" />
-    <FxCompile Include="water_spray.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

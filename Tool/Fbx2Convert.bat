@@ -1,1 +1,1 @@
-Fbx2Convert.exe standby.fbx
+Fbx2Convert.exe oba_walk.fbx

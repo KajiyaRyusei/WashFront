@@ -53,8 +53,6 @@ public:
 	StaticMeshResource* GetStaticMeshResource(){ return _static_mesh_resource; }
 	AnimationMeshResource* GetAnimationMeshResource(){ return _animation_mesh_resource; }
 
-	// パスファイルの読み込み
-	void ReadRootFile(std::string file_path);
 
 private:
 

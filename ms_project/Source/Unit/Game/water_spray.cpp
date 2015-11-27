@@ -12,14 +12,12 @@
 //
 ////=============================================================================
 //// 初期化
-//void WaterSpray::Initialize(
+//void Initialize(
 //	const D3DXVECTOR3& position,
 //	const D3DXQUATERNION& quaternion)
 //{
-//	UNREFERENCED_PARAMETER(position);
-//	UNREFERENCED_PARAMETER(quaternion);
-//}
 //
+//}
 ////=============================================================================
 //// アニメーション
 //bool WaterSpray::Animate()

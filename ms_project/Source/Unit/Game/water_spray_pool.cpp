@@ -9,12 +9,10 @@
 ////*****************************************************************************
 //// include
 //#include "Unit/Game/water_spray_pool.h"
-//#include "Resource/Mesh/Mesh/mesh_factory_instance_sprite.h"
-//#include "Shader/Shader/water_spray_shader.h"
 //
 ////=============================================================================
 //// コンストラクタ
-//WaterSprayPool::WaterSprayPool(Application* application, World* world) : Unit(application, world)
+//WaterSprayPool::WaterSprayPool()
 //{
 //	_first_available = &_particles[0];
 //
@@ -24,17 +22,6 @@
 //	}
 //
 //	_particles[kPoolSize - 1].SetNext(nullptr);
-//
-//	MeshFactoryInstanceSprite factory;
-//	_mesh = factory.Create(application->GetRendererDevice(), kPoolSize);
-//	_shader = new ShaderWaterSpray();
-//}
-////=============================================================================
-//// デストラクタ
-//WaterSprayPool::~WaterSprayPool()
-//{
-//	SafeDelete(_mesh);
-//	SafeDelete(_shader);
 //}
 //
 ////=============================================================================
@@ -65,12 +52,4 @@
 //			_first_available = &_particles[i];
 //		}
 //	}
-//
-//	MeshFactoryInstanceSprite factory;
-//	factory.RegisterMatrix(_spray_matrices, _mesh);
-//
-//	// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
-//	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_TRANSLUCENT, GetID());
-//	S_GetCommandBuffer()->PushShader(_shader, GetID());
-//	S_GetCommandBuffer()->PushMesh(_mesh, GetID());
 //}

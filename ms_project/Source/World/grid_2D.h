@@ -69,7 +69,7 @@ public:
 	{
 		D3DXVECTOR3 work;
 		work.x = static_cast<fx32>(kSizeCell)* x + (kSizeCell / 2);
-		//work.y = 0.f;
+		work.y = 0.f;
 		work.z = static_cast<fx32>(kSizeCell)* z + (kSizeCell / 2);
 		return work;
 	}

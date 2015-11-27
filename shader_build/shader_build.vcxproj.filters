@@ -43,8 +43,5 @@
     <FxCompile Include="shader_2d.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
-    <FxCompile Include="water_spray.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
   </ItemGroup>
 </Project>

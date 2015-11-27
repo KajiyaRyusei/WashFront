@@ -24,7 +24,7 @@
 // ‰Šú‰»
 void World::Initialize()
 {
-	_collision_grid = new CollisionGrid;
+	_collision_grid = new CollisionGrid();
 	_texture_resource = new TextureResource;
 	_cube_texture_resource = new CubeTextureResource;
 	_mesh_resource = new MeshResource;
@@ -73,11 +73,4 @@ void World::Draw()
 		it->Draw();
 	}
 	_collision_grid->DebugDraw();
-}
-
-//=============================================================================
-// •`‰æ
-void World::ReadRootFile(std::string file_path)
-{
-
 }
