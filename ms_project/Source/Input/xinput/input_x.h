@@ -37,5 +37,4 @@ private:
 	static const u8 kOptionNum		= 8;
 	DWORD			_device_num;
 	XINPUT_STATE*	_preview_state;
-
 };

@@ -30,7 +30,7 @@ public:
 
 private:
 
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 
 	struct LINE

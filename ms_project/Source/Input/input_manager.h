@@ -59,9 +59,12 @@ public:
 	bool CheckRepeat(INPUT_EVENT);
 
 	// データ設定
+	// 振動の設定
+	// 0は止まる
 	void SetEventValue(INPUT_EVENT_VALUE, s32 Value );
 
 	// データ取得
+	// パッドの値が返ってくる
 	s32 GetEventValue(INPUT_EVENT_VALUE);
 	
 private:

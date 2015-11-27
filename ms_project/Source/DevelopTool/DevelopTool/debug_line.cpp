@@ -23,7 +23,7 @@ struct VERTEX_LINE
 // 初期化
 void DebugLine::Initialize()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 	for( u32 i = 0; i < kMaxLine; ++i )
 	{
 		_lines[i].vertices[0] = D3DXVECTOR3(0.f, 0.f, 0.f);
@@ -37,7 +37,7 @@ void DebugLine::Initialize()
 // 終了
 void DebugLine::Finalize()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 #endif
 	
@@ -47,7 +47,7 @@ void DebugLine::Finalize()
 // 描画
 void DebugLine::Draw()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 	D3DXMATRIX projection,view,world,rotation_matrix,transform_matrix;
 	D3DXMatrixIdentity(&world);
@@ -80,7 +80,7 @@ void DebugLine::Draw()
 // ラインの登録
 void DebugLine::RegisteLine(const D3DXVECTOR3& start_point, const D3DXVECTOR3& end_point)
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 	if( _current_line_index  >= kMaxLine )
 	{
 		OutputDebugStringA("デバックラインの登録数を超えてます");

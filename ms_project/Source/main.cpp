@@ -24,7 +24,7 @@ s32 APIENTRY WinMain(
 	UNREFERENCED_PARAMETER(command_line);
 	UNREFERENCED_PARAMETER(command_show);
 
-#ifdef _DEBUG
+#ifndef _RELEASE
 	OutputDebugString(L"デバッグモード\n");
 #endif
 #ifdef _DEVELOP

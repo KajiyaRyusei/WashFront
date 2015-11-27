@@ -16,7 +16,7 @@
 // 初期化
 void DebugPrint::Initialize()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 	LPDIRECT3DDEVICE9 device = Reference::GetInstance().GetRenderer()->GetDevice();
 
 	D3DXCreateFont(
@@ -40,7 +40,7 @@ void DebugPrint::Initialize()
 // 終了
 void DebugPrint::Finalize()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 	SafeRelease(_d3dx_font);
 #endif
 }
@@ -49,7 +49,7 @@ void DebugPrint::Finalize()
 // 描画
 void DebugPrint::Draw()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 	u32 width = Reference::GetInstance().GetSizeScreenWidth();
 	u32 height = Reference::GetInstance().GetSizeScreenHeight();
 
@@ -68,7 +68,7 @@ void DebugPrint::Draw()
 // デバッグ情報登録
 void DebugPrint::Print(const char* string, ...)
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 	if( _current_string_index  > kStringMax )
 	{

@@ -16,7 +16,7 @@
 // 初期化
 void DebugBox::Initialize()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 	for( u32 i = 0; i < kMaxBox; ++i )
 	{
 		_boxs[i].position = D3DXVECTOR3(0.f, 0.f, 0.f);
@@ -78,7 +78,7 @@ void DebugBox::Initialize()
 // 終了
 void DebugBox::Finalize()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 #endif
 }
@@ -87,7 +87,7 @@ void DebugBox::Finalize()
 // 描画
 void DebugBox::Draw()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 	D3DXMATRIX world, rotation_matrix, transform_matrix;
 	D3DXMatrixIdentity(&world);
@@ -115,7 +115,7 @@ void DebugBox::RegisteBox(
 	const D3DXVECTOR3& position,
 	const D3DXVECTOR3& rotation)
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 	if( _current_box_index >= kMaxBox )
 	{

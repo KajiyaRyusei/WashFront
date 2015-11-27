@@ -18,7 +18,7 @@
 // 初期化
 void DebugLineBox::Initialize()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 	for( u32 i = 0; i < kMaxBox; ++i )
 	{
 		_boxs[i].position = D3DXVECTOR3(0.f, 0.f, 0.f);
@@ -72,7 +72,7 @@ void DebugLineBox::Initialize()
 // 終了
 void DebugLineBox::Finalize()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 #endif
 }
@@ -81,7 +81,7 @@ void DebugLineBox::Finalize()
 // 描画
 void DebugLineBox::Draw()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 
 	D3DXMATRIX world, rotation_matrix, transform_matrix;
@@ -113,7 +113,7 @@ void DebugLineBox::RegisteBox(
 	const D3DXVECTOR3& position,
 	const D3DXVECTOR3& rotation)
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 	if( _current_line_box_index >= kMaxBox )
 	{
 		OutputDebugStringA("デバックボックスの登録数を超えてます");

@@ -30,7 +30,7 @@ public:
 
 private:
 
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 	static const u32 kVertexMax = 30;
 

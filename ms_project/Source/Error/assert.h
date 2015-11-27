@@ -23,7 +23,7 @@
 #define OUTPUT_ASSERT_BOX
 
 // コメントアウトでアサ―との切り替え
-#ifdef _DEBUG
+#ifndef _RELEASE
 #define DO_ASSERT
 #endif
 
@@ -52,7 +52,7 @@ else{\
 #else STRONG_ASSERT(exp,format,...)
 #endif
 
-#ifdef _DEBUG
+#ifndef _RELEASE
 #define BREAK_IF( exp ) { if( ( exp ) ) { __debugbreak(); } }
 #else
 #define BREAK_IF __noop

@@ -88,61 +88,59 @@ void SceneGame::MapGeneration()
 	unit_list.push_back(new PlayerUnit(_application, _world));
 	unit_list.push_back(new BackGroundUnit(_application, _world));
 
-	// ビル
-	D3DXVECTOR3 bill_position = _world->GetCollisionGrid()->CellCenterPoint(0, 0);
-	D3DXVECTOR3 bill_rotation(0.f, 0.f, 0.f);
-	D3DXVECTOR3 bill_scaling(0.1f, 0.1f, 0.1f);
-	BuildingUnit* bill_0 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(1, 0);
-	BuildingUnit* bill_1 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(2, 0);
-	BuildingUnit* bill_2 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(3, 0);
-	BuildingUnit* bill_3 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(4, 0);
-	BuildingUnit* bill_4 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(0, 1);
-	BuildingUnit* bill_5 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(0, 2);
-	BuildingUnit* bill_6 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(0, 3);
-	BuildingUnit* bill_7 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(0, 4);
-	BuildingUnit* bill_8 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(2, 2);
-	BuildingUnit* bill_9 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(1, 4);
-	BuildingUnit* bill_10 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(2, 4);
-	BuildingUnit* bill_11 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(3, 4);
-	BuildingUnit* bill_12 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(4, 4);
-	BuildingUnit* bill_13 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(4, 1);
-	BuildingUnit* bill_14 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(4, 2);
-	BuildingUnit* bill_15 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
-	bill_position = _world->GetCollisionGrid()->CellCenterPoint(4, 3);
-	BuildingUnit* bill_16 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	FILE *input_file = nullptr;
+	input_file = fopen("Data/Map/beta.map", "rt");
+	ASSERT(input_file != nullptr,"マップファイルの読み込みに失敗");
 
-	unit_list.push_back(bill_0);
-	unit_list.push_back(bill_1);
-	unit_list.push_back(bill_2);
-	unit_list.push_back(bill_3);
-	unit_list.push_back(bill_4);
-	unit_list.push_back(bill_5);
-	unit_list.push_back(bill_6);
-	unit_list.push_back(bill_7);
-	unit_list.push_back(bill_8);
-	unit_list.push_back(bill_9);
-	unit_list.push_back(bill_10);
-	unit_list.push_back(bill_11);
-	unit_list.push_back(bill_12);
-	unit_list.push_back(bill_13);
-	unit_list.push_back(bill_14);
-	unit_list.push_back(bill_15);
-	unit_list.push_back(bill_16);;
+	u32 number = 0;
+	fseek(input_file,0,SEEK_SET);
+
+	while(true)
+	{// 生成したオブジェクト数取得
+		char string[4096] = {};
+		if( EOF == fscanf(input_file, "%s",string) )
+		{
+			break;
+		}
+
+		if( !strcmp(string, "#OBJNUM"))
+		{
+			fscanf(input_file,"%d",&number);
+		}
+	}
+
+	fseek(input_file, 0, SEEK_SET);
+
+	while( true )
+	{// インポートファイルパス読み込み
+		char str[4096] = {};
+		if( EOF == fscanf(input_file, "%s", str) )
+			break;
+
+		if( !strcmp(str, "#OBJ") )
+		{
+			for( u32 i = 0; i < number; i++ )
+			{
+				u32 id;
+				D3DXVECTOR3 position;
+				D3DXVECTOR3 rotation;
+				D3DXVECTOR3 scale;
+
+				fscanf(
+					input_file,
+					"%d %f %f %f %f %f %f %f %f %f",
+					&id,
+					&position.x, &position.y, &position.z,
+					&rotation.x, &rotation.y, &rotation.z,
+					&scale.x, &scale.y, &scale.z);
+
+				//BuildingUnit* bill = new BuildingUnit(_application, _world, position, rotation, scale);
+				//unit_list.push_back(bill);
+			}
+		}
+	}
+
+	fclose(input_file);
 
 	_world->PushUnit(std::move(unit_list));
 }
