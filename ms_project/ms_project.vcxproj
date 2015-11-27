@@ -196,6 +196,7 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="Source\System\application.cpp" />
     <ClCompile Include="Source\System\system_flow.cpp" />
+    <ClCompile Include="Source\Unit\dummy_ui.cpp" />
     <ClCompile Include="Source\Unit\Game\aim.cpp" />
     <ClCompile Include="Source\Unit\Game\aim_draw.cpp" />
     <ClCompile Include="Source\Unit\Game\aim_line.cpp" />
@@ -204,8 +205,11 @@
     <ClCompile Include="Source\Unit\Game\bullet.cpp" />
     <ClCompile Include="Source\Unit\Game\dirt.cpp" />
     <ClCompile Include="Source\Unit\Game\map.cpp" />
+    <ClCompile Include="Source\Unit\Game\map_back.cpp" />
+    <ClCompile Include="Source\Unit\Game\map_character.cpp" />
     <ClCompile Include="Source\Unit\Game\player.cpp" />
     <ClCompile Include="Source\Unit\screen_unit.cpp" />
+    <ClCompile Include="Source\Unit\ui.cpp" />
     <ClCompile Include="Source\Unit\unit.cpp" />
     <ClCompile Include="Source\Windows\window.cpp" />
     <ClCompile Include="Source\Windows\window_operation_wrapper.cpp" />
@@ -316,6 +320,7 @@
     <ClInclude Include="Source\System\application.h" />
     <ClInclude Include="Source\System\system_flow.h" />
     <ClInclude Include="Source\type_alias.h" />
+    <ClInclude Include="Source\Unit\dummy_ui.h" />
     <ClInclude Include="Source\Unit\Game\aim.h" />
     <ClInclude Include="Source\Unit\Game\aim_draw.h" />
     <ClInclude Include="Source\Unit\Game\aim_line.h" />
@@ -324,8 +329,11 @@
     <ClInclude Include="Source\Unit\Game\bullet.h" />
     <ClInclude Include="Source\Unit\Game\dirt.h" />
     <ClInclude Include="Source\Unit\Game\map.h" />
+    <ClInclude Include="Source\Unit\Game\map_back.h" />
+    <ClInclude Include="Source\Unit\Game\map_character.h" />
     <ClInclude Include="Source\Unit\Game\player.h" />
     <ClInclude Include="Source\Unit\screen_unit.h" />
+    <ClInclude Include="Source\Unit\ui.h" />
     <ClInclude Include="Source\Unit\unit.h" />
     <ClInclude Include="Source\Windows\window.h" />
     <ClInclude Include="Source\Windows\window_operation_wrapper.h" />

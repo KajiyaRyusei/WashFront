@@ -22,6 +22,7 @@
 
 // unit
 #include "Unit/screen_unit.h"
+#include "Unit/dummy_ui.h"
 
 //=============================================================================
 // コンストラクタ
@@ -36,6 +37,12 @@ void SceneResult::Initialize()
 {
 	_world = new World();
 	std::list<Unit*> unit_list;
+
+	//UI
+	DummyUi *dummy_ui;
+	dummy_ui = new DummyUi(_application, _world);
+	_world->SetUi(dummy_ui);
+
 	unit_list.push_back(new ScreenUnit(_application, _world));
 	_world->PushUnit(std::move(unit_list));
 

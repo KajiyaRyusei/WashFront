@@ -237,6 +237,18 @@
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.cpp">
       <Filter>Resource\Mesh\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Unit\Game\map_character.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\map_back.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\ui.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\dummy_ui.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdafx.h" />
@@ -588,6 +600,18 @@
     </ClInclude>
     <ClInclude Include="Source\Shader\Component\screen_texture_alpha.h">
       <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\map_character.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\map_back.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\ui.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\dummy_ui.h">
+      <Filter>Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

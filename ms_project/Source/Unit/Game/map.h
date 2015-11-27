@@ -1,8 +1,8 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
-// マップ
+// AIM
 // 
-// Created by Chiharu Kamiyama on 20151111
+// Created by Ryusei Kajiya on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -12,19 +12,22 @@
 
 //*****************************************************************************
 // include
-#include "Unit/screen_unit.h"
-
+#include "Unit/unit.h"
 
 //*****************************************************************************
 // 前方宣言
+class MapBack;
+class MapCharacter;
+
+static const int kPlayerNum = 2;
 
 //*****************************************************************************
 // クラス設計
-class Map : public ScreenUnit
+class Map : public Unit
 {
 public:
 
-	Map(Application* application, World* world) : ScreenUnit(application, world)
+	Map(Application* application, World* world) : Unit(application, world)
 	{
 		Initialize();
 	}
@@ -34,8 +37,12 @@ public:
 	virtual void Finalize() override;
 	virtual void Update() override;
 	virtual void Draw() override;
-	virtual void CollisionUpdate() override{}
+	virtual void CollisionUpdate() override;
 
+	//マップキャラクター位置設定
+	void SetMapCharacterPosition(D3DXVECTOR3 position);
+	
 private:
-
+	MapBack *_map_back;
+	MapCharacter *_map_character[2];
 };

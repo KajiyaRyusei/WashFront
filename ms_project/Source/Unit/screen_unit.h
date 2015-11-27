@@ -40,6 +40,42 @@ public:
 	//テクスチャ作成
 	void CreateTexture( LPCWSTR texture_filename );
 	
+	//場所セット
+	void SetPosition(D3DXVECTOR3 position)
+	{
+		_position = position;
+	}
+
+	//場所取得
+	D3DXVECTOR3 GetPosition(void)
+	{
+		return _position;
+	}
+
+	//大きさセット
+	void SetScale(D3DXVECTOR3 scaling)
+	{
+		_scaling = scaling;
+	}
+
+	//大きさ取得
+	D3DXVECTOR3 GetScaling(void)
+	{
+		return _scaling;
+	}
+
+	//角度セット
+	void SetRotation(float rotation)
+	{
+		_rotation = rotation;
+	}
+
+	//角度取得
+	float GetRotation(void)
+	{
+		return _rotation;
+	}
+
 protected:
 	//uv値
 	D3DXVECTOR2 _texture_uv;

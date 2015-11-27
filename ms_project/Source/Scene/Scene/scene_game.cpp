@@ -25,7 +25,8 @@
 #include "Unit/Game/back_ground.h"
 #include "Unit/Game/building.h"
 #include "Unit/Game/dirt.h"
-#include "Unit/Game/map.h"
+
+#include "Unit/ui.h"
 
 #include "World/collision_grid.h"
 
@@ -42,11 +43,20 @@ void SceneGame::Initialize()
 {
 	_world = new World();
 	std::list<Unit*> unit_list;
+	
+	//UI作成
+	Ui* ui = new Ui(_application, _world);
+	_world->SetUi(ui);
+
+	//UI関連ユニットをリストに登録
+	ui->SetList(&unit_list);
+
 	unit_list.push_back(new PlayerUnit(_application, _world));
 	unit_list.push_back(new BackGroundUnit(_application, _world));
 
+
 	// ビル
-	BuildingUnit* bill_0 = new BuildingUnit(_application, _world);
+/*	BuildingUnit* bill_0 = new BuildingUnit(_application, _world);
 	BuildingUnit* bill_1 = new BuildingUnit(_application, _world);
 	BuildingUnit* bill_2 = new BuildingUnit(_application, _world);
 	BuildingUnit* bill_3 = new BuildingUnit(_application, _world);
@@ -116,7 +126,7 @@ void SceneGame::Initialize()
 	unit_list.push_back(bill_14);
 	unit_list.push_back(bill_15);
 	unit_list.push_back(bill_16);
-
+	*/
 
 	// ごみ
 	/*DirtUnit* dirt_0 = new DirtUnit(_application, _world);
@@ -172,8 +182,6 @@ void SceneGame::Initialize()
 	unit_list.push_back(dirt_8);
 	unit_list.push_back(dirt_9);
 */
-	//マップ
-	unit_list.push_back(new Map(_application, _world));
 
 
 	_world->PushUnit(std::move(unit_list));

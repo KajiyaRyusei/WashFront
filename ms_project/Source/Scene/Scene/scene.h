@@ -15,6 +15,11 @@
 #include "System/application.h"
 
 //*****************************************************************************
+// 前方宣言
+//後で消してください
+class Ui;
+
+//*****************************************************************************
 // クラス設計
 class Scene
 {
@@ -37,9 +42,17 @@ public:
 	// 描画
 	virtual void Draw() = 0;
 
+	//UI取得
+	//後で消してください
+	Ui *GetSceneUi(void)
+	{ return _ui; }
+
 protected:
 
 	// データ
 	Application *_application;
+
+	//UI
+	Ui *_ui;
 
 };

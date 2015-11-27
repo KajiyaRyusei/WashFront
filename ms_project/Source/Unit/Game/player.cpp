@@ -23,6 +23,11 @@
 #include "Unit/Game/bullet.h"
 #include "World/collision_grid.h"
 
+#include "Scene/Scene/scene_game.h"
+#include "Scene/scene_manager.h"
+
+#include "Unit/ui.h"
+
 //*****************************************************************************
 // 定数
 namespace
@@ -42,7 +47,7 @@ void PlayerUnit::Initialize()
 	mesh_factory.Create(_application->GetRendererDevice(), "Data/AnimationModel/oba_walk.amo", _mesh_list);
 
 	// アニメーションの読み込み
-	_animation.LoadAnimationFile("Data/Animation/oba_walk.oaf",_mesh_list.size());
+	_animation.LoadAnimationFile("Data/Animation/oba_walk.oaf", _mesh_list.size());
 
 	// アニメーションシステムの作成
 	_animation_system = new AnimationSystem();
@@ -54,7 +59,7 @@ void PlayerUnit::Initialize()
 	D3DXCreateTextureFromFileEx(device, L"Data/Texture/oba.jpg", 0, 0, 0, 0, D3DFMT_A8B8G8R8, D3DPOOL_DEFAULT, D3DX_FILTER_LINEAR, D3DX_FILTER_LINEAR, 0xff, nullptr, nullptr, &_albedo_map);
 
 	// 座標
-	_position.current = D3DXVECTOR3(0.f,0.f,0.f);
+	_position.current = D3DXVECTOR3(0.f, 0.f, 0.f);
 	_position.previous = _position.current;
 	_world.position = _position.current;
 	_world.rotation = D3DXVECTOR3(0.f, 0.f, 0.f);
@@ -67,7 +72,7 @@ void PlayerUnit::Initialize()
 	_command_handler = new CommandHandler();
 
 	// 弾
-	_bullet = new BulletUnit(_application,_game_world);
+	_bullet = new BulletUnit(_application, _game_world);
 
 	// パス
 	_pass_point_list[0] = _game_world->GetCollisionGrid()->CellCenterPoint(1, 1);
@@ -78,7 +83,7 @@ void PlayerUnit::Initialize()
 
 	// 最初の向いているベクトル
 	_front_vector = _pass_point_list[1] - _pass_point_list[0];
-	_lower_body_rotation = D3DX_PI/2;
+	_lower_body_rotation = D3DX_PI / 2;
 }
 
 //=============================================================================
@@ -113,6 +118,10 @@ void PlayerUnit::Update()
 	PassRootDecision();
 	// プレイヤーのポジションを教える
 	camera->SetPlayerPosition(_position.current);
+
+	//マップに反映
+	_game_world->GetUi()->UpdateMap(_position.current);
+
 	_animation_system->AdvanceFrame(1);
 	SettingShaderParameter();
 	AimUpdate();

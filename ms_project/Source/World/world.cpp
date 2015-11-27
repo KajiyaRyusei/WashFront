@@ -11,6 +11,7 @@
 #include "World/world.h"
 #include "World/collision_grid.h"
 #include "Unit/unit.h"
+#include "Unit/ui.h"
 
 #include "DevelopTool/develop_tool_manager.h"
 
@@ -29,6 +30,8 @@ void World::Finalize()
 	{
 		SafeDelete(it);
 	}
+
+	SafeDelete(_ui);
 	SafeDelete(_collision_grid);
 }
 
@@ -45,6 +48,11 @@ void World::Update()
 	{
 		it->CollisionUpdate();
 	}
+
+	if (_ui != NULL)
+	{
+		_ui->Update();
+	}
 }
 
 //=============================================================================
@@ -56,4 +64,6 @@ void World::Draw()
 		it->Draw();
 	}
 	_collision_grid->DebugDraw();
+
+	_ui->Draw();
 }

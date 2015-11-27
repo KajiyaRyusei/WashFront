@@ -37,9 +37,11 @@ void ScreenUnit::Initialize()
 // èI
 void ScreenUnit::Finalize()
 {
+	SafeRelease(_texture);
 	SafeDelete(_shader);
 	SafeDelete(_mesh);
-	SafeDelete(_texture);
+
+
 }
 
 //=============================================================================

@@ -13,6 +13,7 @@
 //*****************************************************************************
 // 前方宣言
 class Unit;
+class Ui;
 class CollisionGrid;
 template<class T>class ResourceBox;
 
@@ -43,6 +44,13 @@ public:
 	ResourceBox<LPDIRECT3DTEXTURE9>* GetTextureResourceBox(){ return _texture_resource_box; }
 	ResourceBox<LPDIRECT3DCUBETEXTURE9>* GetCubeTextureResourceBox(){ return _texture_cube_resource_box; }
 
+	Ui* GetUi(void){ return _ui; }
+
+	//Uiセッター
+	void SetUi(Ui *ui)
+	{
+		_ui = ui;
+	}
 
 private:
 
@@ -50,4 +58,5 @@ private:
 	CollisionGrid* _collision_grid;
 	ResourceBox<LPDIRECT3DTEXTURE9>* _texture_resource_box;
 	ResourceBox<LPDIRECT3DCUBETEXTURE9>* _texture_cube_resource_box;
+	Ui *_ui;
 };
