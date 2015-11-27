@@ -40,6 +40,24 @@ public:
 	//テクスチャ作成
 	void CreateTexture( LPCWSTR texture_filename );
 	
+	// 座標セット
+	virtual void SetPosition(D3DXVECTOR3 pos)
+	{
+		_position = pos;
+	}
+
+	D3DXVECTOR3 GetPosition( void )
+	{
+		return _position;
+	}
+
+	// 大きさセット
+	void SetScaling(D3DXVECTOR3 scale)
+	{
+		_scaling = scale;
+	}
+
+
 protected:
 	//uv値
 	D3DXVECTOR2 _texture_uv;
@@ -59,6 +77,9 @@ protected:
 	//スケール
 	D3DXVECTOR3 _scaling;
 
+	//
+	bool _visible;
+
 private:
 
 	// シェーダー
@@ -70,5 +91,5 @@ private:
 	//テクスチャ
 	LPDIRECT3DTEXTURE9 _texture;
 
-
+	
 };

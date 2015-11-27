@@ -31,6 +31,8 @@ void ScreenUnit::Initialize()
 	// ’¸“_ƒoƒbƒtƒ@‚Ìì¬
 	MeshFactory2DSprite sprite_factory;
 	_mesh = sprite_factory.Create(_application->GetRendererDevice());
+
+	_visible = true;
 }
 
 //=============================================================================
@@ -39,7 +41,7 @@ void ScreenUnit::Finalize()
 {
 	SafeDelete(_shader);
 	SafeDelete(_mesh);
-	SafeDelete(_texture);
+	SafeRelease(_texture);
 }
 
 //=============================================================================
@@ -80,10 +82,13 @@ void ScreenUnit::Update()
 // •`‰æ
 void ScreenUnit::Draw()
 {
-	// •`‰æ‚·‚éî•ñ‚ð‰Ÿ‚µž‚ÞF‚P“x‚Ì•`‰æ‚É‚P“x‚µ‚©ŒÄ‚Î‚È‚¢‚±‚Æ
-	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_2D,GetID());
-	S_GetCommandBuffer()->PushShader(_shader, GetID());
-	S_GetCommandBuffer()->PushMesh(_mesh, GetID());
+	if( _visible == true )
+	{
+		// •`‰æ‚·‚éî•ñ‚ð‰Ÿ‚µž‚ÞF‚P“x‚Ì•`‰æ‚É‚P“x‚µ‚©ŒÄ‚Î‚È‚¢‚±‚Æ
+		S_GetCommandBuffer()->PushRenderState(RENDER_STATE_2D, GetID());
+		S_GetCommandBuffer()->PushShader(_shader, GetID());
+		S_GetCommandBuffer()->PushMesh(_mesh, GetID());
+	}
 }
 
 //=============================================================================
@@ -97,5 +102,6 @@ void ScreenUnit::CreateTexture(LPCWSTR texture_filename)
 	D3DXCreateTextureFromFile(device, texture_filename, &_texture);
 
 	//ƒeƒNƒXƒ`ƒƒ“o˜^
-	_shader->SetAmbientTexture(_texture);
+	_shader->SetAlbedoTexture(_texture);
+
 }
