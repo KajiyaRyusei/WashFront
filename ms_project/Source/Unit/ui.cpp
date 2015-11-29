@@ -12,6 +12,8 @@
 
 //GameUnit
 #include "Unit/Game/map.h"
+#include "Unit/Game/score.h"
+#include "Unit/Game/meter.h"
 
 //=============================================================================
 // 初期化
@@ -45,6 +47,17 @@ void Ui::SetList(std::list<Unit*> *list)
 	//マップ登録
 	_map = new Map(_application, _game_world);
 	list->push_back(_map);
+	_map->SetMapCharacterList(list);
+
+	//スコア登録
+	_score = new Score(_application, _game_world);
+	list->push_back(_score);
+	_score->SetListScoreCharacter(list);
+
+	//メーター登録	
+	_meter = new Meter(_application, _game_world);
+	list->push_back(_meter);
+	_meter->SetMeterCharacterList(list);
 }
 
 //=============================================================================
@@ -52,4 +65,11 @@ void Ui::SetList(std::list<Unit*> *list)
 void Ui::UpdateMap(D3DXVECTOR3 player_position)
 {
 	_map->SetMapCharacterPosition(player_position);
+}
+
+//=============================================================================
+//スコア更新
+void Ui::UpdateScore(int score)
+{
+	score = score;
 }

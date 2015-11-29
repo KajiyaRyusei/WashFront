@@ -1,8 +1,8 @@
-﻿2015/11/27 15:52:53 にビルドを開始しました。
+﻿2015/11/29 10:00:32 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "D:\4年\未来創造展\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\4年\未来創造展\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Unit\dummy_ui.cpp
-         dummy_ui.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\4年\未来創造展\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Unit\Game\meter_water.cpp
+         meter_water.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\4年\未来創造展\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\4年\未来創造展\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\4年\未来創造展\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\often_use.obj
          Debug\animation_system.obj
@@ -78,7 +78,12 @@
          Debug\map.obj
          Debug\map_back.obj
          Debug\map_character.obj
+         Debug\meter.obj
+         Debug\meter_frame.obj
+         Debug\meter_water.obj
          Debug\player.obj
+         Debug\score.obj
+         Debug\score_back.obj
          Debug\screen_unit.obj
          Debug\ui.obj
          Debug\unit.obj
@@ -93,4 +98,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:02.21
+経過時間 00:00:10.56

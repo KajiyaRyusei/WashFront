@@ -41,6 +41,8 @@ public:
 
 	//マップキャラクター位置設定
 	void SetMapCharacterPosition(D3DXVECTOR3 position);
+
+	void SetMapCharacterList(std::list<Unit*> *list);
 	
 private:
 	MapBack *_map_back;

@@ -16,8 +16,6 @@
 
 
 //定数
-static const D3DXVECTOR3 position = D3DXVECTOR3(960 / 2, 540, 0.0f);
-static const D3DXVECTOR3 scaling = D3DXVECTOR3(50.0f, 50.0f, 1.0f);
 static const int kMaxPass = 4;
 
 //=============================================================================
@@ -30,9 +28,11 @@ void MapCharacter::Initialize()
 	_texture_offset = D3DXVECTOR2(0.0f, 0.0f);
 	_texture_alpha = 1.0f;
 
-	_position = position;
+	_position = D3DXVECTOR3((float)_application->GetWindow()->GetSizeWindowWidth() / 2,
+							(float)_application->GetWindow()->GetSizeWindowHeight(),
+							0.0f);
 	_rotation = 0.0f;
-	_scaling = scaling;
+	_scaling = D3DXVECTOR3( 50.0f, 50.0f, 1.0f );
 
 	//総移動距離算出
 	D3DXVECTOR3 pass[kMaxPass];
@@ -108,27 +108,27 @@ void MapCharacter::Update()
 
 
 	//全部隠れたら下リピートのやつと一緒に。
-	if ((pos_y + scaling.y / 2) <= 0.0f)
+	if ((pos_y + _scaling.y / 2) <= 0.0f)
 	{
 		if (_id == 0)
 		{
 			_character_distance -= _map_distance;
-			pos_y = window_height - scaling.y / 2;
+			pos_y = window_height - _scaling.y / 2;
 		}
 	}
 
 
 	//上端まで行ったらリピート表示
-	if ((pos_y - scaling.y / 2) <= 0.0f)
+	if ((pos_y - _scaling.y / 2) <= 0.0f)
 	{
 		if (_id == 1)
 		{
 			//はみ出した差分を計算
 			float difference = 0.0f;
-			difference = pos_y - scaling.y / 2;
+			difference = pos_y - _scaling.y / 2;
 
 			//はみ出した分下から出す。
-			pos_y = difference + window_height + scaling.y / 2;
+			pos_y = difference + window_height + _scaling.y / 2;
 
 			if (pos_y <= window_height)
 			{

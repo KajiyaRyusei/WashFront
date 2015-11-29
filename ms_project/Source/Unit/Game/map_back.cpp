@@ -9,10 +9,10 @@
 //*****************************************************************************
 // include
 #include "map_back.h"
+#include "Windows/window.h"
+
 
 //’è”
-static const D3DXVECTOR3 position = D3DXVECTOR3(960 / 2, 540 / 2, 0.0f);
-static const D3DXVECTOR3 scaling = D3DXVECTOR3(50.0f, 720.0f, 1.0f);
 
 //=============================================================================
 // ‰Šú‰»
@@ -24,9 +24,10 @@ void MapBack::Initialize()
 	_texture_offset = D3DXVECTOR2(0.0f, 1.0f);
 	_texture_alpha = 1.0f;
 
-	_position = position;
+	_position = D3DXVECTOR3((float)_application->GetWindow()->GetSizeWindowWidth() / 2, 
+							(float)_application->GetWindow()->GetSizeWindowHeight() / 2, 0.0f);
 	_rotation = 0.0f;
-	_scaling = scaling;
+	_scaling = D3DXVECTOR3( 50.0f, 720.0f, 1.0f );
 }
 
 //=============================================================================

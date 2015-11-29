@@ -17,7 +17,8 @@
 //*****************************************************************************
 // 前方宣言
 class Map;
-
+class Score;
+class Meter;
 
 //*****************************************************************************
 // クラス設計
@@ -43,6 +44,11 @@ public:
 	//マップ更新
 	virtual void UpdateMap(D3DXVECTOR3 player_position);
 
+	//スコア更新
+	virtual void UpdateScore(int score);
+
 private:
 	Map* _map;
+	Score* _score;
+	Meter* _meter;
 };

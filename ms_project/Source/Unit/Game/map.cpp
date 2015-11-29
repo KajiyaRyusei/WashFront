@@ -17,15 +17,6 @@
 // 初期化
 void Map::Initialize()
 {
-	//マップ背景の作成
-	_map_back = new MapBack(_application, _game_world);
-
-	//マップキャラクターの作成
-	for (int i = 0; i < 2; i++)
-	{
-		_map_character[i] = new MapCharacter(_application, _game_world);
-		_map_character[i]->SetId(i);
-	}
 }
 
 
@@ -34,12 +25,6 @@ void Map::Initialize()
 void Map::Finalize()
 {
 
-	SafeDelete(_map_back);
-	for (int i = 0; i < 2; i++)
-	{
-		SafeDelete(_map_character[i]);
-
-	}
 }
 
 //=============================================================================
@@ -47,25 +32,12 @@ void Map::Finalize()
 void Map::Update()
 {	
 
-	_map_back->Update();
-	
-	for (int i = 0; i < 2; i++)
-	{
-		_map_character[i]->Update();
-	}
-
 }
 
 //=============================================================================
 // 描画
 void Map::Draw()
 {
-
-	_map_back->Draw();
-	for (int i = 0; i < 2; i++)
-	{
-		_map_character[i]->Draw();
-	}
 }
 
 //=============================================================================
@@ -81,5 +53,22 @@ void Map::SetMapCharacterPosition(D3DXVECTOR3 position)
 	for (int i = 0; i < 2; i++)
 	{
 		_map_character[i]->SetMapCharacterPosition(position);
+	}
+}
+
+//=============================================================================
+//リストセット
+void Map::SetMapCharacterList(std::list<Unit*> *list)
+{
+	//マップ登録
+	_map_back = new MapBack(_application, _game_world);
+	list->push_back(_map_back);
+
+	//マップキャラクターの作成
+	for (int i = 0; i < 2; i++)
+	{
+		_map_character[i] = new MapCharacter(_application, _game_world);
+		_map_character[i]->SetId(i);
+		list->push_back(_map_character[i]);
 	}
 }

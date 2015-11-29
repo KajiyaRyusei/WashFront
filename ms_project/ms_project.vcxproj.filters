@@ -249,6 +249,21 @@
     <ClCompile Include="Source\Unit\dummy_ui.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Unit\Game\score_back.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\score.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\meter_frame.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\meter.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\meter_water.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdafx.h" />
@@ -612,6 +627,21 @@
     </ClInclude>
     <ClInclude Include="Source\Unit\dummy_ui.h">
       <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\score_back.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\score.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\meter_frame.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\meter.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\meter_water.h">
+      <Filter>Unit\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
