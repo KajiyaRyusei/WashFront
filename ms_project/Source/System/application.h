@@ -24,6 +24,8 @@ class CommandProcessor;
 class Fade;
 class XactManager;
 
+class Ui;
+
 //*****************************************************************************
 // ÉNÉâÉXê›åv
 class Application

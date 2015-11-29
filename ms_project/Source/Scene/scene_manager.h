@@ -43,6 +43,7 @@ public:
 	void SetNextScene(
 		SpawnerScene *next_scene);
 
+
 private:
 
 	// Œ»İ‚ÌƒV[ƒ“

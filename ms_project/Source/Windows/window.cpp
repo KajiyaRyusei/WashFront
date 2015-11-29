@@ -19,7 +19,7 @@ namespace
 	static const LPCWSTR kWindowName = TEXT("ms_project");
 	//static const u32 kSizeWindowWidth = 1280;
 	//static const u32 kSizeWindowHeight = 720;
-	static const u32 kSizeWindowWidth = 960;
+	static const u32 kSizeWindowWidth = 1280;
 	static const u32 kSizeWindowHeight = 540;
 };
 

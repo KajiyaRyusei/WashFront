@@ -25,6 +25,8 @@ class AimUnit;
 class CommandHandler;
 class BulletUnit;
 
+
+
 //*****************************************************************************
 // クラス設計
 class PlayerUnit : public Unit
@@ -54,6 +56,8 @@ public:
 	// デバッグ用移動
 	void DebugMove(const float velocity);
 
+
+
 private:
 
 	// シェーダー
@@ -75,6 +79,7 @@ private:
 	// aim
 	AimUnit* _aim;
 	void AimUpdate();
+
 
 	// コマンド
 	CommandHandler* _command_handler;
