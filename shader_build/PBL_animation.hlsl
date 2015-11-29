@@ -202,13 +202,12 @@ VertexShaderOutput VS(VertexShaderInput input)
 	VertexShaderOutput output = (VertexShaderOutput)0;
 
 	// 座標変換
-	float4 position = float4(input.position.x, input.position.y, input.position.z, 1.0f);
 	float4x4 composition_matrix;
 	composition_matrix = uniform_animation_matrix_list[input.bone_index[0]] * input.weight.x;
 	composition_matrix += uniform_animation_matrix_list[input.bone_index[1]] * input.weight.y;
 	composition_matrix += uniform_animation_matrix_list[input.bone_index[2]] * input.weight.z;
 	composition_matrix += uniform_animation_matrix_list[input.bone_index[3]] * input.weight.w;
-	position = mul(position, composition_matrix);
+	float4 position = mul(float4(input.position, 1.0f), composition_matrix);
 	output.position = mul(position, uniform_world_view_projection);
 
 	// ワールド変換頂点を送る
@@ -220,7 +219,6 @@ VertexShaderOutput VS(VertexShaderInput input)
 	normal = mul(normal, composition_matrix);
 	normal = mul(normal, uniform_world);
 	output.normal = normalize(normal).xyz;
-
 
 	// テクセル座標
 	output.texcoord = input.texcoord;
@@ -235,18 +233,19 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	PixelShaderOutput output = (PixelShaderOutput)0;
 
 	// ライトベクトル
-	float3 light_direction = uniform_light_direction.xyz;
+	float3 light_direction = -uniform_light_direction.xyz;
 	// 視線ベクトル
 	float3 eye = normalize(uniform_eye_position - input.world_position);
 	// アルベド色
 	float3 albedo = tex2D(uniform_albedo_sampler, input.texcoord).xyz;
 	// 拡散反射色
-	float3 diffuse = OrenNayar(light_direction, eye, input.normal, uniform_ambient_color.xyz);
+	//float3 diffuse = OrenNayar(light_direction, eye, input.normal, uniform_ambient_color.xyz);
+	float3 diffuse = Burley(light_direction, eye, input.normal, uniform_ambient_color.xyz);
 	// 鏡面反射色
 	float3 specular = CookTorrance(light_direction, eye, input.normal);
 	// 環境光色
 	float3 R = reflect(eye, input.normal);
-	float4 specular_cube_ambient = texCUBE(uniform_specular_cube_sampler, -R);
+	float4 specular_cube_ambient = texCUBE(uniform_specular_cube_sampler, R);
 	float4 diffuse_cube_ambient = texCUBE(uniform_diffuse_cube_sampler, input.normal);
 
 	output.render_target0.xyz = (diffuse + specular) * albedo;
@@ -254,8 +253,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	output.render_target0.a = uniform_ambient_color.w;
 
 	// ガンマ補正
-	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 2.2f);
-	output.render_target0.xyz *= 2.f;
+	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 1.5f);
 
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);

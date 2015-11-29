@@ -23,12 +23,11 @@
 namespace
 {
 	static const fx32 kCenterPointHeight = 5.f;
-	static const fx32 kVelocityCoefficient = 0.8f;
+	static const fx32 kVelocityCoefficient = 0.90f;
 	static const fx32 kLengthCenterAndLookAt = 30.f;
 	static const fx32 kLengthCenterAndEye = -15.f;
-	//static const fx32 kLengthCenterAndEye = -550.f;
 	static const fx32 kCameraRotationVelocityX = 0.01f;
-	static const fx32 kCameraRotationVelocityY = 0.03f;
+	static const fx32 kCameraRotationVelocityY = 0.05f;
 	static const fx32 kCameraRotationLimitX = 1.15f;// 3.14のパーセンテージ
 	static const fx32 kCameraRotationLimitY = 1.5f;	// 3.14のパーセンテージ
 }

@@ -12,9 +12,15 @@
 
 //*****************************************************************************
 // const
-const D3DXVECTOR3	position	= D3DXVECTOR3( 480.0f , 240.0f , 0.0 );
+const D3DXVECTOR3	position	= D3DXVECTOR3( 480.0f , 790.0f , 0.0 );
 const D3DXVECTOR3	scaling		= D3DXVECTOR3( 800.0f , 430.0f , 0.0f );
+const float			dest_pos_Y	= 240.0f;
+const int			startTime	= 60;
 
+//*****************************************************************************
+// static
+bool BulletinUnit::_disp_flg	= false;
+bool BulletinUnit::_update_flg	= false;
 //=============================================================================
 // ‰Šú‰»
 void BulletinUnit::Initialize()
@@ -33,6 +39,11 @@ void BulletinUnit::Initialize()
 	_scaling	= scaling;
 	// À•W
 	_position	= position;
+	//
+	_timeCnt	= 0;
+	//
+	_disp_flg	= false;
+	_update_flg = false;
 }
 
 //=============================================================================
@@ -46,6 +57,21 @@ void BulletinUnit::Finalize()
 // XV
 void BulletinUnit::Update()
 {
+	_timeCnt++;
+
+	if( _timeCnt > startTime )
+	{
+		_update_flg = true;
+		if( _position.y > dest_pos_Y )
+		{
+			_position.y -= 10;
+		}
+		else
+		{
+			_disp_flg = true;
+		}
+	}
+
 	ScreenUnit::Update();
 }
 

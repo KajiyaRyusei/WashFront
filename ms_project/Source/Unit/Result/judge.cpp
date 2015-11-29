@@ -9,12 +9,13 @@
 //*****************************************************************************
 // include
 #include "Unit\Result/Judge.h"
+#include "Unit\Result\score.h"
 
 //*****************************************************************************
 // const
 const D3DXVECTOR3	position	= D3DXVECTOR3( 0.0f , 0.0f , 0.0f );
 const D3DXVECTOR3	scaling		= D3DXVECTOR3( 300.0f , 80.0f , 0.0f );
-
+const int			disp_time	= 60;
 //=============================================================================
 // èâä˙âª
 void JudgeUnit::Initialize()
@@ -33,6 +34,10 @@ void JudgeUnit::Initialize()
 	_scaling	= scaling;
 	// ç¿ïW
 	_position	= position;
+
+	_visible	= false;
+
+	_timeCnt	= 0;
 }
 
 //=============================================================================
@@ -46,6 +51,15 @@ void JudgeUnit::Finalize()
 // çXêV
 void JudgeUnit::Update()
 {
+	if( ScoreUnit::GetFlg() )
+	{
+		_timeCnt++;
+		if( _timeCnt == disp_time )
+		{
+
+			_visible = true;
+		}
+	}
 	ScreenUnit::Update();
 }
 

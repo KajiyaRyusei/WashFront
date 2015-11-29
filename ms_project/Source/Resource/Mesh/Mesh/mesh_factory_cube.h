@@ -2,7 +2,9 @@
 //
 // キューブメッシュ作成
 // 
-// Created by Ryusei Kajiya on 20151103
+// 8頂点しかないので法線とUVがあってないと思う
+// 
+// Created by Ryusei Kajiya on 20151022
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -14,16 +16,6 @@
 // include
 #include "mesh_factory.h"
 
-//*****************************************************************************
-// 3D用頂点フォーマット
-struct VERTEX_CUBE
-{
-	D3DXVECTOR3	position;	// 頂点
-	D3DXVECTOR3	normal;		// 法線ベクトル
-	D3DXVECTOR2	texcoord;	// テクスチャ座標
-	D3DXVECTOR3	tangent;	// 接ベクトル
-	D3DXVECTOR3	binormal;	// 従法線
-};
 //*****************************************************************************
 // クラス設計
 class MeshFactoryCube : MeshFactory
@@ -37,6 +29,4 @@ private:
 	void NormalComputeSlanting(MeshBuffer* mesh);
 	// 法線を面からまっすぐにつける
 	void NormalComputeStraight(MeshBuffer* mesh);
-	// 従法線と接ベクトルを求める
-	void TangentCompute(MeshBuffer* mesh);
 };

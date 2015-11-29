@@ -35,17 +35,4 @@ public:
 	void DebugDraw();
 
 private:
-
-	// 球と球
-	void Sphrere2Sphere(Unit* unit, Unit* other_unit);
-
-	// 球とボックス
-	// 正確にはXZの円と円
-	void Sphrere2Box(Unit* unit, Unit* other_unit);
-
-	// 線とbox
-	void Line2Box(Unit* unit, Unit* other_unit);
-
-	// メッシュポイントと球
-	void MeshPoint2Sphrere(Unit* unit, Unit* other_unit);
 };

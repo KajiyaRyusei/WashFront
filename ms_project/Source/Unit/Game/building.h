@@ -2,7 +2,7 @@
 //
 // ビル
 // 
-// Created by Ryusei Kajiya on 20151102
+// Created by Ryusei Kajiya on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -26,40 +26,33 @@ class BuildingUnit : public Unit
 {
 public:
 
-	BuildingUnit(
-		Application* application,
-		World* world,
-		const D3DXVECTOR3& position,
-		const D3DXVECTOR3& rotaiton,
-		const D3DXVECTOR3& scale) : Unit(application, world)
+	BuildingUnit(Application* application, World* world) : Unit(application, world)
 	{
-		Initialize(position,rotaiton,scale);
+		Initialize();
 	}
 	virtual ~BuildingUnit(){ Finalize(); }
 
-	virtual void Initialize() override{};
-	void Initialize(
-		const D3DXVECTOR3& position,
-		const D3DXVECTOR3& rotaiton,
-		const D3DXVECTOR3& scale);
+	virtual void Initialize() override;
 	virtual void Finalize() override;
 	virtual void Update() override;
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
-	virtual void CollisionMeshPoint(u32 point_index)override;
+
+	// 座標設定
+	void SetPosition(const D3DXVECTOR3& position);
 
 private:
 
 	// シェーダー
 	ShaderPBLStatic* _shader;
-	u32 _shader_size;
+	// メッシュ
+	MeshBuffer* _mesh;
 	// シェーダパラメーターの設定
 	void SettingShaderParameter();
 	data::World _world;
 	D3DXMATRIX _matrix_world_view_projection;
-	// メッシュ
-	std::vector<MeshBuffer*> _mesh_list;
-	// 衝突してる点かどうか
-	std::list<u32> _clean_index_list;
-	void CleanUp();
+	LPDIRECT3DCUBETEXTURE9 _diffuse_cube_map;
+	LPDIRECT3DCUBETEXTURE9 _specular_cube_map;
+	LPDIRECT3DTEXTURE9 _albedo_map;
+	LPDIRECT3DTEXTURE9 _normal_map;
 };

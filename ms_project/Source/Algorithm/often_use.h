@@ -49,17 +49,6 @@ namespace algo
 		const D3DXVECTOR3& control_point,
 		const fx32 frame);
 
-	//====================================
-	// 頂点座標とUVから接ベクトルと従法線を求める
-	// *縮退ポリゴンはなにもせずに返す
-	void ComputeTangentAndBinormal(
-		const D3DXVECTOR3 &position_one,
-		const D3DXVECTOR3 &position_two,
-		const D3DXVECTOR3 &position_three,
-		const D3DXVECTOR2 &texcoord_one,
-		const D3DXVECTOR2 &texcoord_two,
-		const D3DXVECTOR2 &texcoord_three,
-		D3DXVECTOR3* tangent,
-		D3DXVECTOR3* binormal);
+
 }
 

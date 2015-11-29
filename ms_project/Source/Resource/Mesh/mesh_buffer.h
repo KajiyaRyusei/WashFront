@@ -52,8 +52,7 @@ public:
 	void BindVertexBuffer(void) const;
 	virtual  LPDIRECT3DVERTEXBUFFER9 GetVertexBuffer(u16 vertex_buffer_index) const;
 	u32 GetPrimitiveCount(u16 primitive_index);
-	u32 GetVertexCount(u16 primitive_index);
-	u16 GetVertexSize(u16 primitive_index);
+
 
 private:
 

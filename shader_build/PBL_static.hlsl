@@ -2,7 +2,7 @@
 //
 // 物理ベースレンダリング静的モデル
 // 
-// Created by Ryusei Kajiya on 20151103
+// Created by Ryusei Kajiya on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -11,10 +11,9 @@
 //-------------------------------------
 struct VertexShaderInput
 {
-	float3 position	 : POSITION0;
-	float3 normal	 : NORMAL0;
-	float2 texcoord	 : TEXCOORD0;
-	float cleanliness: TEXCOORD1;
+	float3 position	: POSITION0;
+	float3 normal	: NORMAL0;
+	float2 texcoord	: TEXCOORD0;
 };
 //-------------------------------------
 // 頂点シェーダ出力
@@ -25,7 +24,6 @@ struct VertexShaderOutput
 	float3 normal		 : TEXCOORD0;
 	float2 texcoord		 : TEXCOORD1;
 	float3 world_position: TEXCOORD2;
-	float cleanliness	 : TEXCOORD3;
 };
 
 //-------------------------------------
@@ -84,20 +82,9 @@ uniform sampler uniform_albedo_sampler = sampler_state {
 	AddressV = WRAP;
 };
 
-uniform texture uniform_metalness_texture;
-uniform sampler uniform_metalness_sampler = sampler_state {
-	Texture = <uniform_metalness_texture>;
-	MinFilter = ANISOTROPIC;
-	MagFilter = LINEAR;
-	MipFilter = LINEAR;
-	MaxAnisotropy = 16;
-	AddressU = WRAP;
-	AddressV = WRAP;
-};
-
-uniform texture uniform_dirty_texture;
-uniform sampler uniform_dirty_sampler = sampler_state {
-	Texture = <uniform_dirty_texture>;
+uniform texture uniform_normal_texture;
+uniform sampler uniform_normal_sampler = sampler_state {
+	Texture = <uniform_normal_texture>;
 	MinFilter = ANISOTROPIC;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
@@ -228,7 +215,7 @@ VertexShaderOutput VS(VertexShaderInput input)
 	// ワールド変換頂点を送る
 	output.world_position = mul(float4(input.position, 1.f), uniform_world).xyz;
 
-	// ワールド法線
+	// 法線もアニメーションに合わせてあとにワールド変換
 	float4 normal = float4(input.normal.x, input.normal.y, input.normal.z, 0.f);
 	normal = normalize(normal);
 	normal = mul(normal, uniform_world);
@@ -236,9 +223,6 @@ VertexShaderOutput VS(VertexShaderInput input)
 
 	// テクセル座標
 	output.texcoord = input.texcoord;
-
-	// 汚れ具合
-	output.cleanliness = input.cleanliness;
 
 	return output;
 }
@@ -248,36 +232,29 @@ VertexShaderOutput VS(VertexShaderInput input)
 PixelShaderOutput PS(VertexShaderOutput input)
 {
 	PixelShaderOutput output = (PixelShaderOutput)0;
-	// 法線マップから法線作成
-	float3 normal = input.normal;
+
 	// ライトベクトル
-	float3 light_direction = uniform_light_direction.xyz;
+	float3 light_direction = -uniform_light_direction.xyz;
 	// 視線ベクトル
 	float3 eye = normalize(uniform_eye_position - input.world_position);
-	// 汚れ色
-	float3 dirty = tex2D(uniform_dirty_sampler, input.texcoord).xyz;
 	// アルベド色
 	float3 albedo = tex2D(uniform_albedo_sampler, input.texcoord).xyz;
-	albedo = lerp(albedo, dirty, input.cleanliness);
-	// メタルネス
-	float3 metalness = tex2D(uniform_metalness_sampler, input.texcoord).xyz;
 	// 拡散反射色
-	float3 diffuse = OrenNayar(light_direction, eye, normal, uniform_ambient_color.xyz);
+	//float3 diffuse = OrenNayar(light_direction, eye, input.normal, uniform_ambient_color.xyz);
+	float3 diffuse = Burley(light_direction, eye, input.normal, uniform_ambient_color.xyz);
 	// 鏡面反射色
-	float3 specular = CookTorrance(light_direction, eye, normal);
+	float3 specular = CookTorrance(light_direction, eye, input.normal);
 	// 環境光色
-	float3 R = reflect(eye, normal);
-	float4 specular_cube_ambient = texCUBE(uniform_specular_cube_sampler, -R);
-	float4 diffuse_cube_ambient = texCUBE(uniform_diffuse_cube_sampler, normal);
+	float3 R = reflect(eye, input.normal);
+	float4 specular_cube_ambient = texCUBE(uniform_specular_cube_sampler, R);
+	float4 diffuse_cube_ambient = texCUBE(uniform_diffuse_cube_sampler, input.normal);
 
 	output.render_target0.xyz = (diffuse + specular) * albedo;
-	output.render_target0.xyz = lerp(diffuse_cube_ambient.xyz, specular_cube_ambient.xyz, metalness.x) * output.render_target0.xyz;
+	output.render_target0.xyz = lerp(diffuse_cube_ambient.xyz, specular_cube_ambient.xyz, uniform_metalness) * output.render_target0.xyz;
 	output.render_target0.a = uniform_ambient_color.w;
 
 	// ガンマ補正
-	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 2.2f);
-	output.render_target0.xyz *= 2.f;
-	
+	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 1.5f);
 
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);

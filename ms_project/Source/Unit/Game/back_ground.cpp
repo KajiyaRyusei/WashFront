@@ -2,7 +2,7 @@
 //
 // 背景用天球
 // 
-// Created by Ryusei Kajiya on 20151102
+// Created by Ryusei Kajiya on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -10,23 +10,27 @@
 // include
 #include "back_ground.h"
 #include "Shader/Shader/back_ground_shader.h"
+#include "Shader/Shader/lambert.h"
+#include "Resource/Mesh/Mesh/mesh_factory_cube.h"
 #include "Camera/camera_manager.h"
 #include "Camera/Camera/camera_game_player.h"
-
-//リソース
-#include "Resource/cube_texture_resource.h"
-#include "Resource/mesh_resource.h"
+#include "Resource/resource_box.h"
+#include "Renderer/directx9.h"
 
 //=============================================================================
 // 初期化
 void BackGroundUnit::Initialize()
 {
 	// シェーダの作成
+	//_shader = new ShaderLambert();
 	_shader = new ShaderBackGround();
 
-	// キューブマップセット
-	LPDIRECT3DCUBETEXTURE9 texture = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_SPECULAR);
-	_shader->SetAlbedoCubeTexture(texture);
+	// メッシュの作成
+	MeshFactoryCube cube_factory;
+	_mesh = cube_factory.Create(_application->GetRendererDevice());
+
+	// テクスチャの作成
+	D3DXCreateCubeTextureFromFile(_application->GetRendererDevice()->GetDevice(), L"Data/CubeTexture/rnl_cross.dds", &_texture);
 }
 
 //=============================================================================
@@ -34,6 +38,8 @@ void BackGroundUnit::Initialize()
 void BackGroundUnit::Finalize()
 {
 	SafeDelete(_shader);
+	SafeDelete(_mesh);
+	SafeRelease(_texture);
 }
 
 //=============================================================================
@@ -46,6 +52,9 @@ void BackGroundUnit::Update()
 	D3DXMatrixScaling(&matrix_scaling, kScaling, kScaling, kScaling);
 	D3DXMATRIX matrix_world_view_projection = matrix_scaling * camera->GetMatrixView() * camera->GetMatrixProjection();
 	_shader->SetWorldViewProjection(matrix_world_view_projection);
+
+	// cube_textureセット
+	_shader->SetAlbedoCubeTexture(_texture);
 }
 
 //=============================================================================
@@ -55,5 +64,5 @@ void BackGroundUnit::Draw()
 	// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_BACKGROUND,GetID());
 	S_GetCommandBuffer()->PushShader(_shader, GetID());
-	S_GetCommandBuffer()->PushMesh(_game_world->GetMeshResource()->Get(MESH_RESOURE_BOX), GetID());
+	S_GetCommandBuffer()->PushMesh(_mesh, GetID());
 }

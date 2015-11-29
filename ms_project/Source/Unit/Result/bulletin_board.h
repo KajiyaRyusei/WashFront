@@ -36,8 +36,21 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
 
+	static bool GetDispFlg( void )
+	{
+		return _disp_flg;
+	}
 
+	static bool GetUpdateFlg( void )
+	{
+		return _update_flg;
+	}
 
 private:
+
+	int _timeCnt;
+
+	static bool _disp_flg;
+	static bool _update_flg;
 
 };

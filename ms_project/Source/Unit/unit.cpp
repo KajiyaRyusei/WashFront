@@ -22,8 +22,7 @@ Unit::Unit(Application* application, World* world) :
 	_id(++s_unit_id),
 	_shpere(nullptr),
 	_box(nullptr),
-	_line(nullptr),
-	_volume_mesh_point(nullptr)
+	_line(nullptr)
 {
 
 }
@@ -35,5 +34,4 @@ Unit::~Unit()
 	SafeDelete(_shpere);
 	SafeDelete(_box);
 	SafeDelete(_line);
-	SafeDelete(_volume_mesh_point);
 }

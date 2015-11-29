@@ -12,7 +12,6 @@
 #include "scene_spawner.h"
 #include "Scene/scene.h"
 #include "Scene/scene_game.h"
-#include "Scene/scene_title.h"
 
 #include "Fade/fade.h"
 
@@ -31,7 +30,7 @@ SceneManager::SceneManager(Application *application, Fade* fade) :
 // ‰Šú‰»
 void SceneManager::Initialize(Application *application)
 {
-	SpawnerScene* spawner = new SpawnerForScene<SceneTitle>();
+	SpawnerScene* spawner = new SpawnerForScene<SceneGame>();
 	_scene_current = spawner->Spawner(_application);
 	ASSERT(_scene_current != nullptr,"ƒV[ƒ“‚ª¶¬‚³‚ê‚Ä‚Ü‚¹‚ñ");
 	SafeDelete(spawner);

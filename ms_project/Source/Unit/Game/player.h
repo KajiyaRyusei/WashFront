@@ -19,11 +19,11 @@
 //*****************************************************************************
 // 前方宣言
 class ShaderPBLAnimation;
+class MeshBuffer;
 class AnimationSystem;
 class AimUnit;
 class CommandHandler;
-class WeaponUnit;
-class WaterBackUnit;
+class BulletUnit;
 
 //*****************************************************************************
 // クラス設計
@@ -58,8 +58,8 @@ private:
 
 	// シェーダー
 	ShaderPBLAnimation* _shader;
-	// シェーダ数:メッシュ数に合わせる
-	u32 _shader_size;
+	// メッシュ
+	std::vector<MeshBuffer*> _mesh_list;
 	// アニメーション
 	data::ObjectAnimationFile _animation;
 	// アニメーションシステム
@@ -68,6 +68,9 @@ private:
 	void SettingShaderParameter();
 	data::World _world;
 	D3DXMATRIX _matrix_world_view_projection;
+	LPDIRECT3DCUBETEXTURE9 _diffuse_cube_map;
+	LPDIRECT3DCUBETEXTURE9 _specular_cube_map;
+	LPDIRECT3DTEXTURE9 _albedo_map;
 
 	// aim
 	AimUnit* _aim;
@@ -76,11 +79,8 @@ private:
 	// コマンド
 	CommandHandler* _command_handler;
 
-	// 武器
-	WeaponUnit* _weapon;
-
-	// 後ろ水
-	WaterBackUnit* _back_water;
+	// 弾
+	BulletUnit* _bullet;
 
 	// 移動パス
 	static const s32 kMaxPass = 4;

@@ -9,11 +9,13 @@
 //*****************************************************************************
 // include
 #include "Unit\Result/score_board.h"
+#include "Unit\Result\bulletin_board.h"
 
 //*****************************************************************************
 // const
 const D3DXVECTOR3	position	= D3DXVECTOR3( 0.0f , 0.0f , 0.0 );
 const D3DXVECTOR3	scaling		= D3DXVECTOR3( 350.0f , 400.0f , 0.0f );
+const float			dest_pos_Y	= 240.0f;
 
 //=============================================================================
 // ‰Šú‰»
@@ -46,6 +48,13 @@ void Score_BoardUnit::Finalize()
 // XV
 void Score_BoardUnit::Update()
 {
+	if( BulletinUnit::GetUpdateFlg() )
+	{
+		if( _position.y > dest_pos_Y )
+		{
+			_position.y -= 10;
+		}
+	}
 	ScreenUnit::Update();
 }
 

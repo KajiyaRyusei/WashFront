@@ -43,7 +43,10 @@ private:
 
 	// ”’l”½‰f
 	void Reflection( void );
+
 	// ”š
-	int _value;
+	int		_value;
+	// 
+	float	_grade;
 
 };

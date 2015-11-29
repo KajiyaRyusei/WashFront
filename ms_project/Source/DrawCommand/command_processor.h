@@ -31,7 +31,6 @@ public:
 	void ProccessShadow(void) const;
 	void ProccessField(void) const;
 	void ProccessBackGround(void) const;
-	void ProccessTranslucent(void) const;
 	void ProccessAIM(void) const;
 	void Proccess2D(void) const;
 

@@ -35,19 +35,15 @@ HRESULT RendererDevice::Initialize(
 	}
 
 	// デバイスのプレゼンテーションパラメータの設定
-	ZeroMemory(&_present_parameters, sizeof(_present_parameters));	// ワークをゼロクリア
+	ZeroMemory(&_present_parameters, sizeof(_present_parameters));// ワークをゼロクリア
 	_present_parameters.BackBufferCount = 1;						// バックバッファの数
 	_present_parameters.BackBufferWidth = size_window_width;		// ゲーム画面サイズ(幅)
-	_present_parameters.BackBufferHeight = size_window_height;		// ゲーム画面サイズ(高さ)
-	_present_parameters.BackBufferFormat = display_mode.Format;		// バックバッファフォーマットはディスプレイモードに合わせて使う
-	_present_parameters.SwapEffect = D3DSWAPEFFECT_DISCARD;			// 映像信号に同期してフリップする
+	_present_parameters.BackBufferHeight = size_window_height;	// ゲーム画面サイズ(高さ)
+	_present_parameters.BackBufferFormat = display_mode.Format;	// バックバッファフォーマットはディスプレイモードに合わせて使う
+	_present_parameters.SwapEffect = D3DSWAPEFFECT_DISCARD;		// 映像信号に同期してフリップする
 	_present_parameters.Windowed = true;							// ウィンドウモード
-	_present_parameters.EnableAutoDepthStencil = TRUE;				// デプスバッファ（Ｚバッファ）とステンシルバッファを作成
-	_present_parameters.AutoDepthStencilFormat = D3DFMT_D24S8;		// デプスバッファとして24bit・ステンシルに8bit使用
-	_present_parameters.MultiSampleType = D3DMULTISAMPLE_4_SAMPLES;	// マルチサンプリング
-	DWORD multi_sample_quality = 0;
-	_direct3d->CheckDeviceMultiSampleType(D3DADAPTER_DEFAULT,D3DDEVTYPE_HAL,D3DFMT_X8R8G8B8,true,D3DMULTISAMPLE_4_SAMPLES,&multi_sample_quality);
-	_present_parameters.MultiSampleQuality = multi_sample_quality-1;
+	_present_parameters.EnableAutoDepthStencil = TRUE;			// デプスバッファ（Ｚバッファ）とステンシルバッファを作成
+	_present_parameters.AutoDepthStencilFormat = D3DFMT_D24S8;	// デプスバッファとして24bit・ステンシルに8bit使用
 
 	if( is_full_screen == false)
 	{// ウィンドウモード
@@ -106,7 +102,6 @@ HRESULT RendererDevice::Initialize(
 	InitializeTextureStageState();
 	// デバイス能力の調査
 	ExamineDeviceCapacity();
-
 
 	// バックバッファと初期デプスステンシルを取得
 	_direct_device->GetRenderTarget(0, &_back_buffer);
@@ -169,7 +164,6 @@ void RendererDevice::Set()
 void RendererDevice::InitializeRenderState()
 {
 	_direct_device->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);			// ポリゴン面を表示
-	//_direct_device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);		// ワイヤーフレームを表示
 	_direct_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);				// 裏面をカリング
 	_direct_device->SetRenderState(D3DRS_COLORWRITEENABLE, 0xffff);			// 全てのカラー書き込みを行う
 	_direct_device->SetRenderState(D3DRS_FOGENABLE, FALSE);					// フォグ不使用
@@ -221,7 +215,6 @@ void RendererDevice::ExamineDeviceCapacity()
 	}
 	MyOutputDebugString(L"頂点定数レジスタの最大数：%d\n", capacity.MaxVertexShaderConst);
 	MyOutputDebugString(L"ピクセルシェーダ浮動小数点レジスタは：%d\n", 224);
-	//MyOutputDebugString(L"マルチサンプリングのクオリティは：%d\n", capacity.);
 }
 
 //=============================================================================

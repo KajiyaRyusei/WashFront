@@ -16,7 +16,7 @@
 // 初期化
 void DebugBox::Initialize()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 	for( u32 i = 0; i < kMaxBox; ++i )
 	{
 		_boxs[i].position = D3DXVECTOR3(0.f, 0.f, 0.f);
@@ -36,39 +36,41 @@ void DebugBox::Initialize()
 	D3DXVECTOR3 lbb(1.f, -1.f, -1.f);
 
 	vertices[0].position = ltf;
-	vertices[1].position = rtf;
-	vertices[2].position = lbf;
-	vertices[3].position = rbf;
-	vertices[4].position = rbf;
-	vertices[5].position = rtf;
-	vertices[6].position = rbb;
-	vertices[7].position = rtb;
-	vertices[8].position = rtb;
-	vertices[9].position = lbf;
-	vertices[10].position = lbf;
-	vertices[11].position = rbf;
-	vertices[12].position = lbb;
-	vertices[13].position = rbb;
-	vertices[14].position = rbb;
 	vertices[15].position = ltf;
 	vertices[16].position = ltf;
-	vertices[17].position = lbf;
-	vertices[18].position = ltb;
-	vertices[19].position = lbb;
-	vertices[20].position = lbb;
+	vertices[23].position = ltf;
+
+	vertices[1].position = rtf;
+	vertices[5].position = rtf;
 	vertices[21].position = rtf;
 	vertices[22].position = rtf;
-	vertices[23].position = ltf;
+
+	vertices[2].position = lbf;
+	vertices[9].position = lbf;
+	vertices[10].position = lbf;
+	vertices[17].position = lbf;
+
+	vertices[3].position = rbf;
+	vertices[4].position = rbf;
+	vertices[11].position = rbf;
+
+	vertices[7].position = rtb;
+	vertices[8].position = rtb;
 	vertices[24].position = rtb;
+	vertices[28].position = rtb;
+
+	vertices[18].position = ltb;
 	vertices[25].position = ltb;
 	vertices[26].position = ltb;
+
+	vertices[12].position = lbb;
+	vertices[19].position = lbb;
+	vertices[20].position = lbb;
 	vertices[27].position = lbb;
-	vertices[28].position = rtb;
-	vertices[29].position = rbb;
 
 	for( u32 i = 0; i < kVertexMax; ++i )
 	{
-		vertices[i].color = D3DCOLOR_ARGB(255, 255, 255, 0);
+		vertices[i].color = D3DCOLOR_ARGB(255, 0, 255, 0);
 	}
 
 #endif
@@ -78,7 +80,7 @@ void DebugBox::Initialize()
 // 終了
 void DebugBox::Finalize()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 #endif
 }
@@ -87,7 +89,7 @@ void DebugBox::Finalize()
 // 描画
 void DebugBox::Draw()
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 	D3DXMATRIX world, rotation_matrix, transform_matrix;
 	D3DXMatrixIdentity(&world);
@@ -99,7 +101,7 @@ void DebugBox::Draw()
 		algo::CreateWorld(world, _boxs[i].position, _boxs[i].rotation, _boxs[i].scaling);
 		device->SetTransform(D3DTS_WORLD, &world);
 		device->SetFVF(D3DFVF_XYZ | D3DFVF_DIFFUSE);
-		device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, kVertexMax-2, vertices, sizeof(VERTEX_BOX));
+		device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, kVertexMax - 1, vertices, sizeof(VERTEX_BOX));
 	}
 
 	device->SetRenderState(D3DRS_LIGHTING, TRUE);
@@ -115,7 +117,7 @@ void DebugBox::RegisteBox(
 	const D3DXVECTOR3& position,
 	const D3DXVECTOR3& rotation)
 {
-#ifdef _DEBUG
+#ifndef _RELEASE
 
 	if( _current_box_index >= kMaxBox )
 	{

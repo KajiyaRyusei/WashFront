@@ -17,7 +17,8 @@
 
 //*****************************************************************************
 // 前方宣言
-class ShaderDirt;
+class ShaderPBLStatic;
+class MeshBuffer;
 
 //*****************************************************************************
 // クラス設計
@@ -45,12 +46,18 @@ public:
 private:
 
 	// シェーダー
-	ShaderDirt* _shader;
+	ShaderPBLStatic* _shader;
+	// メッシュ
+	MeshBuffer* _mesh;
 	// シェーダパラメーターの設定
 	void SettingShaderParameter();
 	data::World _world;
 
 	D3DXMATRIX _matrix_world_view_projection;
+	LPDIRECT3DCUBETEXTURE9 _diffuse_cube_map;
+	LPDIRECT3DCUBETEXTURE9 _specular_cube_map;
+	LPDIRECT3DTEXTURE9 _albedo_map;
+	LPDIRECT3DTEXTURE9 _normal_map;
 	bool _is_invisible;
 
 };

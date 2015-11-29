@@ -81,6 +81,10 @@ void Application::Initalize(Window *window, RendererDevice *renderer_device)
 
 	// Xactマネージャーの作成
 	_xact_manager = new XactManager(this);
+	_xact_manager->GetBGMSound()->Play();
+	_xact_manager->Get3DSound()->Play();
+	
+
 }
 //=============================================================================
 // 終了
@@ -125,11 +129,10 @@ void Application::Draw()
 	// コマンドにたまっているものを描画
 	_command_buffer->Sort();
 	_command_processor->ProccessLightDepth();
-	_command_processor->ProccessShadow();
 	_command_processor->ProccessDefault();
 	_command_processor->ProccessField();
+	_command_processor->ProccessShadow();
 	_command_processor->ProccessBackGround();
-	_command_processor->ProccessTranslucent();
 	_command_processor->ProccessAIM();
 	_command_processor->Proccess2D();
 	_command_buffer->Clear();

@@ -2,7 +2,7 @@
 // 
 // Õ“Ë”»’èŠÖ”ŒQ
 // 
-// Created by Ryusei Kajiya on 20151102
+// Created by Ryusei Kajiya on 20151028
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -128,8 +128,6 @@ namespace collision
 			if( impact_point != nullptr )
 			{
 				*impact_point = cross_point;
-
-				// Õ“Ë‚µ‚Ä‚¢‚é–Ê‚Ì–@üZo
 			}
 			return true;
 		}
@@ -246,36 +244,5 @@ namespace collision
 		return powf(point_two.x - point_one.x, 2) + powf(point_two.y - point_one.y, 2) + powf(point_two.z - point_one.z, 2) <= powf(radius_one + radius_two, 2);
 	}
 
-	//=============================================================================
-	// —§•û‘Ì‚Æ—§•û‘Ì‚ÌÕ“Ë”»’è
-	bool Box2Box(
-		const D3DXVECTOR3& p1,	// —§•û‘Ì‡@‚Ì’†S
-		const D3DXVECTOR3& s1,	// —§•û‘Ì‡@‚Ì‚P•Ó‚Ì”¼•ª‚Ì‘å‚«‚³
-		const D3DXVECTOR3& p2,	// —§•û‘Ì‡A‚Ì’†S
-		const D3DXVECTOR3& s2)	// —§•û‘Ì‡A‚Ì‚P•Ó‚Ì”¼•ª‚Ì‘å‚«‚³
-	{
-		D3DXVECTOR3 temp_p1 = p1 + s1;
-		D3DXVECTOR3 temp_s1 = s1 * 2.0f;
-		D3DXVECTOR3 temp_p2 = p2 + s2;
-		D3DXVECTOR3 temp_s2 = s2 * 2.0f;
-
-		return temp_p1.x <= temp_p2.x + temp_s2.x && temp_p2.x <= temp_p1.x + temp_s1.x && temp_p1.y <= temp_p2.y + temp_s2.y && temp_p2.y <= temp_p1.y + temp_s1.y && temp_p1.z <= temp_p2.z + temp_s2.z && temp_p2.z <= temp_p1.z + temp_s1.z;
-	}
-
-	//=============================================================================
-	// ‹…‚Æ“_
-	bool Sphrere2Point(
-		const D3DXVECTOR3& sphrere_center,	// ‹…‚Ì’†S
-		const D3DXVECTOR3& point,			// “_
-		const fx32 radius)					// ‹…‚Ì”¼Œa
-	{
-		D3DXVECTOR3 temp = sphrere_center - point;
-		fx32 sphrere_point_length = D3DXVec3Length(&temp);
-		if( sphrere_point_length  < radius )
-		{
-			return true;
-		}
-		return false;
-	}
 	
 };

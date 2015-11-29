@@ -9,10 +9,12 @@
 //*****************************************************************************
 // include
 #include "Unit\Result/message_box.h"
+#include "Unit\Result\bulletin_board.h"
 
 //*****************************************************************************
 // const
 const D3DXVECTOR3	scaling		= D3DXVECTOR3( 150.0f , 40.0f , 0.0f );
+const float			dest_pos_Y	= 550;
 
 //=============================================================================
 // èâä˙âª
@@ -45,6 +47,13 @@ void Message_BoxUnit::Finalize()
 // çXêV
 void Message_BoxUnit::Update()
 {
+	if( BulletinUnit::GetUpdateFlg() )
+	{
+		if( _pos.y - dest_pos_Y < _position.y )
+		{
+			_position.y -= 10;
+		}
+	}
 	ScreenUnit::Update();
 }
 

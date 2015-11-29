@@ -2,7 +2,7 @@
 // 
 // Õ“Ë”»’èŠÖ”ŒQ
 // 
-// Created by Ryusei Kajiya on 20151123
+// Created by Ryusei Kajiya on 20151028
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -20,7 +20,6 @@ namespace collision
 		const D3DXVECTOR2 &s1,	// ‹éŒ`‡@‘å‚«‚³
 		const D3DXVECTOR2 &p2,	// ‹éŒ`‡A¶ã‚ÌÀ•W
 		const D3DXVECTOR2 &s2);	// ‹éŒ`‡A‘å‚«‚³
-
 
 	// “_‚ÆOŠpŒ`‚ÌÕ“Ë”»’è
 	bool Point2Trigangle(
@@ -68,18 +67,4 @@ namespace collision
 		const D3DXVECTOR3& point_two,	// ‹…‚Ì’†S‡A
 		const fx32 radius_one,			// ‹…‚Ì”¼Œa‡@
 		const fx32 radius_two);			// ‹…‚Ì”¼Œa‡A
-
-	// —§•û‘Ì‚Æ—§•û‘Ì‚ÌÕ“Ë”»’è
-	bool Box2Box(
-		const D3DXVECTOR3& p1,	// —§•û‘Ì‡@‚Ì’†S
-		const D3DXVECTOR3& s1,	// —§•û‘Ì‡@‚Ì‚P•Ó‚Ì”¼•ª‚Ì‘å‚«‚³
-		const D3DXVECTOR3& p2,	// —§•û‘Ì‡A‚Ì’†S
-		const D3DXVECTOR3& s2);	// —§•û‘Ì‡A‚Ì‚P•Ó‚Ì”¼•ª‚Ì‘å‚«‚³
-
-	// ‹…‚Æ“_
-	bool Sphrere2Point(
-		const D3DXVECTOR3& sphrere_center,	// ‹…‚Ì’†S
-		const D3DXVECTOR3& point,			// “_
-		const fx32 radius);					// ‹…‚Ì”¼Œa
-
 };

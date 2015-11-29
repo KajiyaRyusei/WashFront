@@ -10,7 +10,18 @@
 // include
 #include "mesh_factory_amo.h"
 
+//*****************************************************************************
+// 3D用頂点フォーマット
+struct VERTEX_AMO
+{
+	D3DXVECTOR3 position;		// 座標
+	D3DXVECTOR3 normal;			// 法線
+	D3DXVECTOR2 texcoord;		// テクスチャ座標
+	fx32 weight[4];			// 重み
+	u8 bone_index[4];// ボーンインデックス
 
+	VERTEX_AMO() : position(0.f, 0.f, 0.f), normal(0.f, 0.f, 0.f), texcoord(0.f, 0.f){ ZeroMemory(bone_index, sizeof(u8)* 4); ZeroMemory(weight, sizeof(fx32)* 4); }
+};
 
 //=============================================================================
 // 作成
@@ -21,7 +32,7 @@ void MeshFactoryAMO::Create(
 {
 	std::ifstream file;
 	std::string line;
-	file.open(file_name, std::ios_base::binary);
+	file.open(file_name, std::ios::out);
 	if( file.fail() == true )
 	{
 		OutputDebugStringA("ファイル入力にエラーが発生しました\n");
@@ -32,7 +43,7 @@ void MeshFactoryAMO::Create(
 
 	// メッシュ数
 	u32 number_mesh(0);
-	file.read((char*)&number_mesh, sizeof(u32));
+	file >> number_mesh;
 
 	// 確保
 	mesh_list.reserve(number_mesh);
@@ -43,25 +54,24 @@ void MeshFactoryAMO::Create(
 
 		//// 頂点数
 		unsigned int mesh_vertex_count(0);
-		file.read((char*)&mesh_vertex_count, sizeof(u32));
+		file >> mesh_vertex_count;
 		std::vector<VERTEX_AMO> vertices;
 		vertices.reserve(mesh_vertex_count);
 
 		for( u32 vertex_id = 0; vertex_id < mesh_vertex_count; ++vertex_id )
 		{// 頂点
+			u32 vertex_bone[4];
 			VERTEX_AMO vertex;
-			u32 temp_vertex_bone_index[4];
-
-			file.read((char*)&vertex.position, sizeof(D3DXVECTOR3));
-			file.read((char*)&vertex.normal, sizeof(D3DXVECTOR3));
-			file.read((char*)&vertex.texcoord, sizeof(D3DXVECTOR2));
-			file.read((char*)vertex.weight, sizeof(fx32)* 4);
-			file.read((char*)temp_vertex_bone_index, sizeof(u32)* 4);
-
-			for( u32 i = 0; i < 4; ++i )
+			file >> vertex.position.x >> vertex.position.y >> vertex.position.z;
+			file >> vertex.normal.x >> vertex.normal.y >> vertex.normal.z;
+			file >> vertex.texcoord.x >> vertex.texcoord.y;
+			file >> vertex.weight[0] >> vertex.weight[1] >> vertex.weight[2] >> vertex.weight[3];
+			file >> vertex_bone[0] >> vertex_bone[1] >> vertex_bone[2] >> vertex_bone[3];
+			for( int i = 0; i < 4; ++i )
 			{
-				vertex.bone_index[i] = static_cast<u8>(temp_vertex_bone_index[i]);
+				vertex.bone_index[i] = static_cast<u8>(vertex_bone[i]);
 			}
+
 			vertices.push_back(vertex);
 		}
 
@@ -79,13 +89,13 @@ void MeshFactoryAMO::Create(
 
 		// インデックス数
 		u32 index_buffer_count = 0;
-		file.read((char*)&index_buffer_count, sizeof(u32));
+		file >> index_buffer_count;
 		std::vector<u32> indices;
 		indices.reserve(index_buffer_count);
 		for( u32 index_id = 0; index_id < index_buffer_count; ++index_id )
 		{// インデックス
 			u32 index;
-			file.read((char*)&index, sizeof(u32));
+			file >> index;
 			indices.push_back(index);
 		}
 

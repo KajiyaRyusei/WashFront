@@ -10,6 +10,15 @@
 // include
 #include "mesh_factory_smo.h"
 
+//*****************************************************************************
+// 3D用頂点フォーマット
+struct VERTEX_SMO
+{
+	D3DXVECTOR3	position;	// 頂点
+	D3DXVECTOR3	normal;		// 法線ベクトル
+	D3DXVECTOR2	texcoord;	// テクスチャ座標
+};
+
 //=============================================================================
 // 作成
 void MeshFactorySMO::Create(
@@ -19,7 +28,7 @@ void MeshFactorySMO::Create(
 {
 	std::ifstream file;
 	std::string line;
-	file.open(file_name, std::ios_base::binary);
+	file.open(file_name, std::ios::out);
 	if( file.fail() == true )
 	{
 		OutputDebugStringA("ファイル入力にエラーが発生しました\n");
@@ -30,7 +39,7 @@ void MeshFactorySMO::Create(
 
 	// メッシュ数
 	unsigned int number_mesh(0);
-	file.read((char*)&number_mesh, sizeof(u32));
+	file >> number_mesh;
 
 	// 確保
 	mesh_list.reserve(number_mesh);
@@ -41,17 +50,16 @@ void MeshFactorySMO::Create(
 
 		//// 頂点数
 		unsigned int mesh_vertex_count(0);
-		file.read((char*)&mesh_vertex_count, sizeof(u32));
+		file >> mesh_vertex_count;
 		std::vector<VERTEX_SMO> vertices;
 		vertices.reserve(mesh_vertex_count);
 
 		for( unsigned int vertex_id = 0; vertex_id < mesh_vertex_count; ++vertex_id )
 		{// 頂点
 			VERTEX_SMO vertex;
-			file.read((char*)&vertex.position, sizeof(D3DXVECTOR3));
-			file.read((char*)&vertex.normal, sizeof(D3DXVECTOR3));
-			file.read((char*)&vertex.texcoord, sizeof(D3DXVECTOR2));
-			vertex.cleanliness = 1.0f;
+			file >> vertex.position.x >> vertex.position.y >> vertex.position.z;
+			file >> vertex.normal.x >> vertex.normal.y >> vertex.normal.z;
+			file >> vertex.texcoord.x >> vertex.texcoord.y;
 
 			vertices.push_back(vertex);
 		}
@@ -62,19 +70,18 @@ void MeshFactorySMO::Create(
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0);
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0);
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0);
-		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT1, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1);
 		// 頂点バッファの作成
 		mesh->CreateVertexBuffer(D3DUSAGE_WRITEONLY, D3DPOOL_MANAGED);
 
 		// インデックス数
 		u32 index_buffer_count = 0;
-		file.read((char*)&index_buffer_count, sizeof(u32));
+		file >> index_buffer_count;
 		std::vector<u32> indices;
 		indices.reserve(index_buffer_count);
 		for( u32 index_id = 0; index_id < index_buffer_count; ++index_id )
 		{// インデックス
-			u32 index;
-			file.read((char*)&index, sizeof(u32));
+			DWORD index;
+			file >> index;
 			indices.push_back(index);
 		}
 

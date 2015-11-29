@@ -2,7 +2,7 @@
 //
 // アニメーションデータ
 //
-// Created by Ryusei Kajiya on 20151111
+// Created by Ryusei Kajiya on 20151009
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -12,72 +12,66 @@
 
 namespace data
 {
-	//************************************
-	// フレームデータ
-	struct FrameData
+	//*****************************************************************************
+	// 構造体定義
+	struct KeyData
 	{
-		FrameData() : matrix_animation(nullptr){}
-		// クラスターの数だけ
+	public:
+		KeyData() : matrix_animation(nullptr){}
+		// ボーンの数だけ
 		D3DXMATRIX* matrix_animation;
 	};
-	//************************************
-	// アニメーションメッシュデータ
-	struct AnimationData
-	{
-		AnimationData() : frame(nullptr), number_cluster(0){}
-		// クラスター数
-		u32 number_cluster;
-		// フレーム情報
-		FrameData* frame;
-	};
-	//************************************
-	// アニメーションファイル
 	struct ObjectAnimationFile
 	{
 	public:
 		ObjectAnimationFile() :
 			end_frame(0),
-			animation(nullptr){}
+			max_bone(0),
+			key(nullptr){}
 
 		u32 end_frame;
-		u32 mesh_size;
+		u32 max_bone;
 		// フレームの数だけ
-		AnimationData* animation;
+		KeyData* key;
 
 		void LoadAnimationFile(const std::string file_name, const u32 mesh_list_size)
 		{
-			mesh_size = mesh_list_size;
 			std::ifstream file;
 			std::string line;
-			file.open(file_name, std::ios_base::binary);
+			file.open(file_name, std::ios::out);
 			if( file.fail() == true )
 			{
 				OutputDebugStringA("ファイル入力にエラーが発生しました\n");
 			}
 
-
 			// 浮動小数点の精度
 			file.precision(5);
 
+
 			// フレームの最大数
-			file.read((char*)&end_frame, sizeof(u32));
+			file >> end_frame;
+			// ボーン数
+			file >> max_bone;
 
-			animation = new AnimationData[mesh_list_size];
+			// フレームの最大数だけキーを確保
+			key = new KeyData[end_frame];
 
-			for( u32 mesh_id = 0; mesh_id < mesh_list_size; ++mesh_id )
+			// アニメーション行列の確保
+			for( unsigned int frame = 0; frame < end_frame; ++frame )
 			{
-				file.read((char*)&animation[mesh_id].number_cluster, sizeof(u32));
+				key[frame].matrix_animation = new D3DXMATRIX[max_bone];
+			}
 
-				animation[mesh_id].frame = new FrameData[end_frame];
-
-				
-				for( u32 frame = 0; frame < end_frame; ++frame )
+			for( u32 frame = 0; frame < end_frame; ++frame )
+			{
+				for( unsigned int mesh_id = 0; mesh_id < mesh_list_size; ++mesh_id )
 				{
-					animation[mesh_id].frame[frame].matrix_animation = new D3DXMATRIX[animation[mesh_id].number_cluster];
-
-					for( u32 matrix_index = 0; matrix_index < animation[mesh_id].number_cluster; ++matrix_index )
+					for( unsigned int matrix_index = 0; matrix_index < max_bone; ++matrix_index )
 					{
-						file.read((char*)&animation[mesh_id].frame[frame].matrix_animation[matrix_index], sizeof(D3DXMATRIX));
+						file >> key[frame].matrix_animation[matrix_index]._11 >> key[frame].matrix_animation[matrix_index]._12 >> key[frame].matrix_animation[matrix_index]._13 >> key[frame].matrix_animation[matrix_index]._14
+							>> key[frame].matrix_animation[matrix_index]._21 >> key[frame].matrix_animation[matrix_index]._22 >> key[frame].matrix_animation[matrix_index]._23 >> key[frame].matrix_animation[matrix_index]._24
+							>> key[frame].matrix_animation[matrix_index]._31 >> key[frame].matrix_animation[matrix_index]._32 >> key[frame].matrix_animation[matrix_index]._33 >> key[frame].matrix_animation[matrix_index]._34
+							>> key[frame].matrix_animation[matrix_index]._41 >> key[frame].matrix_animation[matrix_index]._42 >> key[frame].matrix_animation[matrix_index]._43 >> key[frame].matrix_animation[matrix_index]._44;
 					}
 				}
 			}
@@ -86,15 +80,11 @@ namespace data
 		void UnLoadAnimationFile()
 		{
 			// アニメーションデータの削除
-			for( u32 mesh_id = 0; mesh_id < mesh_size; ++mesh_id )
+			for( u32 frame = 0; frame < end_frame; ++frame )
 			{
-				for( u32 frame = 0; frame < end_frame; ++frame )
-				{
-					SafeDeleteArray(animation[mesh_id].frame[frame].matrix_animation);
-				}
-				SafeDeleteArray(animation[mesh_id].frame);
+				SafeDeleteArray(key[frame].matrix_animation);
 			}
-			SafeDeleteArray(animation);
+			SafeDeleteArray(key);
 		}
 	};
 };

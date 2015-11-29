@@ -43,9 +43,9 @@ float2 uniform_texture_uv;
 float2 uniform_texture_offset;
 float uniform_texture_alpha;
 
-uniform texture uniform_albedo_texture;
-uniform sampler uniform_albedo_sampler = sampler_state{
-	Texture = <uniform_albedo_texture>;
+uniform texture uniform_screen_texture;
+uniform sampler uniform_screen_sampler = sampler_state{
+	Texture = <uniform_screen_texture>;
 	MinFilter = ANISOTROPIC;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
@@ -92,7 +92,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 {
 	PixelShaderOutput output = (PixelShaderOutput)0;
 
-	float4 albedo = tex2D(uniform_albedo_sampler, input.texcoord);
+	float4 albedo = tex2D(uniform_screen_sampler, input.texcoord);
 
 
 	output.render_target0 = albedo * uniform_texture_alpha;
