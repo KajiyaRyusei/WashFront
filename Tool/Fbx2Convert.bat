@@ -1,1 +1,0 @@
-Fbx2Convert.exe oba_walk.fbx

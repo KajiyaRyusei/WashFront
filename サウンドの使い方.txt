@@ -1,5 +1,0 @@
-<サウンドの使い方>
-今回はXactという機能を使用しているので、通常のサウンド再生と勝手が異なります。
-詳しくは
-http://kocoon-memo.hateblo.jp/archive/category/XACT
-をチェックしてください。
