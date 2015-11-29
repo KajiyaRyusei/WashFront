@@ -22,6 +22,7 @@
 // mesh
 #include "Resource/Mesh/mesh_buffer.h"
 #include "Resource/Mesh/Mesh/mesh_factory_smo.h"
+#include "Unit/Game/water_spray_pool.h"
 
 //*****************************************************************************
 // ’è”
@@ -171,6 +172,7 @@ void BuildingUnit::SettingShaderParameter()
 void BuildingUnit::CollisionMeshPoint(u32 point_index)
 {
 	_clean_index_list.push_back(point_index);
+	_game_world->GetWaterSprayPool()->Create(_volume_mesh_point->points[point_index], _volume_mesh_point->attitudes[point_index]);
 }
 
 //=============================================================================

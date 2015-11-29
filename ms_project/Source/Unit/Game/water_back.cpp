@@ -110,7 +110,7 @@ void WaterBackUnit::SettingShaderParameter()
 	_shader->SetWorld(_world.matrix);
 	static D3DXVECTOR2 texcoord_move(0.f,0.f);
 	//texcoord_move.x += 0.01f;
-	texcoord_move.y -= 0.01f;
+	texcoord_move.y -= 0.05f;
 	_shader->SetTexcoordMove(texcoord_move);
 }
 

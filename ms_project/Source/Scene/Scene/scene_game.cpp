@@ -1,3 +1,4 @@
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
 // シーン：ゲーム
@@ -25,7 +26,7 @@
 #include "Unit/Game/back_ground.h"
 #include "Unit/Game/building.h"
 #include "Unit/Game/dirt.h"
-
+#include "Unit/Game/water_spray_pool.h"
 
 // 空間
 #include "World/collision_grid.h"
@@ -49,6 +50,9 @@ SceneGame::SceneGame(Application *application) :
 void SceneGame::Initialize()
 {
 	_world = new World();
+	WaterSprayPool* water_spray_pool = new WaterSprayPool(_application,_world);
+	_world->SetWaterSprayPool(water_spray_pool);
+
 	ResourceGeneration();
 	MapGeneration();
 }

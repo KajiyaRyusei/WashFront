@@ -16,6 +16,8 @@
 // ÉGÉâÅ[è¡Çµ
 #define _CRT_SECURE_NO_WARNINGS
 
+#pragma warning( disable: 4201 )
+
 #include <stdio.h>
 #include <wchar.h>
 #include <stdarg.h>

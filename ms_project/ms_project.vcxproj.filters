@@ -321,6 +321,12 @@
     <ClCompile Include="Source\Unit\Game\water_spray.cpp">
       <Filter>Unit\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\water_spray_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_sprite_instance.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdafx.h" />
@@ -776,6 +782,18 @@
       <Filter>Unit\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Unit\Game\water_spray.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\view_projection.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\water_spray_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_sprite_instance.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\water_spray_pool_dummy.h">
       <Filter>Unit\Game</Filter>
     </ClInclude>
   </ItemGroup>

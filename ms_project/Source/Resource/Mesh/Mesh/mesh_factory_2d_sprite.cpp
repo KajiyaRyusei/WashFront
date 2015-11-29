@@ -51,7 +51,7 @@ MeshBuffer* MeshFactory2DSprite::Create(RendererDevice* renderer_device)
 
 	for( u32 i = 0; i < 4; ++i )
 	{
-		vertex[i].normal = D3DXVECTOR3(0.f, 0.f, -1.f);
+		vertex[i].normal = D3DXVECTOR3(0.f, 0.f, 1.f);
 	}
 
 	vertex[0].texcoord = D3DXVECTOR2(0.f, 0.f);
@@ -61,10 +61,10 @@ MeshBuffer* MeshFactory2DSprite::Create(RendererDevice* renderer_device)
 
 	static const fx32 size = 1.f;
 
-	vertex[0].position = D3DXVECTOR3(-size, -size, 0.f);
-	vertex[1].position = D3DXVECTOR3(size, -size, 0.f);
-	vertex[2].position = D3DXVECTOR3(-size, size, 0.f);
-	vertex[3].position = D3DXVECTOR3(size, size, 0.f);
+	vertex[0].position = D3DXVECTOR3(-size, -size ,0.f );
+	vertex[1].position = D3DXVECTOR3(size, -size,0.f );
+	vertex[2].position = D3DXVECTOR3(-size, size,0.f );
+	vertex[3].position = D3DXVECTOR3(size, size,0.f);
 
 	mesh->GetVertexBuffer(0)->Unlock();
 

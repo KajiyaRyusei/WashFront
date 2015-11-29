@@ -28,7 +28,7 @@
 #include "Unit/Game/player.h"
 #include "Unit/Game/back_ground.h"
 #include "Unit/Game/building.h"
-
+#include "Unit/Game/water_spray_pool_dummy.h"
 #include "World/collision_grid.h"
 
 // resource
@@ -50,7 +50,8 @@ Scene{ application }
 void SceneTitle::Initialize()
 {
 	_world = new World();
-
+	WaterSprayPool* water_spray_pool = new WaterSprayPool(_application, _world);
+	_world->SetWaterSprayPool(water_spray_pool);
 	ResourceGeneration();
 	MapGeneration();
 

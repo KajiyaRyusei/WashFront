@@ -172,6 +172,7 @@
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_mesh_field.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_smo.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_sprite.cpp" />
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_sprite_instance.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_water_cylinder.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_water_cylinder_back.cpp" />
     <ClCompile Include="Source\Resource\Mesh\mesh_buffer.cpp" />
@@ -197,6 +198,7 @@
     <ClCompile Include="Source\Shader\Shader\screen_shader.cpp" />
     <ClCompile Include="Source\Shader\Shader\water_back_shader.cpp" />
     <ClCompile Include="Source\Shader\Shader\water_shader.cpp" />
+    <ClCompile Include="Source\Shader\Shader\water_spray_shader.cpp" />
     <ClCompile Include="Source\Shader\shader_base.cpp" />
     <ClCompile Include="Source\Sound\speaker\speaker.cpp" />
     <ClCompile Include="Source\Sound\speaker\speaker_3d.cpp" />
@@ -302,6 +304,7 @@
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_mesh_field.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_smo.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_sprite.h" />
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_sprite_instance.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_water_cylinder.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_water_cylinder_back.h" />
     <ClInclude Include="Source\Resource\Mesh\mesh_buffer.h" />
@@ -338,6 +341,7 @@
     <ClInclude Include="Source\Shader\Component\screen_texture_uv.h" />
     <ClInclude Include="Source\Shader\Component\specular_cube_texture.h" />
     <ClInclude Include="Source\Shader\Component\texcoord_move.h" />
+    <ClInclude Include="Source\Shader\Component\view_projection.h" />
     <ClInclude Include="Source\Shader\Component\water_matrix.h" />
     <ClInclude Include="Source\Shader\Component\world.h" />
     <ClInclude Include="Source\Shader\Component\world_inverse_transpose.h" />
@@ -356,6 +360,7 @@
     <ClInclude Include="Source\Shader\Shader\screen_shader.h" />
     <ClInclude Include="Source\Shader\Shader\water_back_shader.h" />
     <ClInclude Include="Source\Shader\Shader\water_shader.h" />
+    <ClInclude Include="Source\Shader\Shader\water_spray_shader.h" />
     <ClInclude Include="Source\Shader\shader_base.h" />
     <ClInclude Include="Source\Sound\speaker\speaker.h" />
     <ClInclude Include="Source\Sound\speaker\speaker_3d.h" />
@@ -377,6 +382,7 @@
     <ClInclude Include="Source\Unit\Game\water_bullet.h" />
     <ClInclude Include="Source\Unit\Game\water_spray.h" />
     <ClInclude Include="Source\Unit\Game\water_spray_pool.h" />
+    <ClInclude Include="Source\Unit\Game\water_spray_pool_dummy.h" />
     <ClInclude Include="Source\Unit\Game\weapon.h" />
     <ClInclude Include="Source\Unit\number.h" />
     <ClInclude Include="Source\Unit\Result\bulletin_board.h" />

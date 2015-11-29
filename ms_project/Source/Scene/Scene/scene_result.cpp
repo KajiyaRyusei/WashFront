@@ -28,6 +28,7 @@
 #include "Unit\Result\message_box.h"
 #include "Unit\Result\judge.h"
 #include "Unit/Result/score.h"
+#include "Unit/Game/water_spray_pool_dummy.h"
 
 //=============================================================================
 // コンストラクタ
@@ -42,6 +43,10 @@ Scene{ application }
 void SceneResult::Initialize()
 {
 	_world = new World();
+
+	WaterSprayPoolDummy* water_spray_pool = new WaterSprayPoolDummy(_application, _world);
+	_world->SetWaterSprayPool(water_spray_pool);
+
 	std::list<Unit*> unit_list;
 
 	// 背景

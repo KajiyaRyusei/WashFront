@@ -21,7 +21,6 @@
 #include "World/collision_grid.h"
 #include "Unit/Game/weapon.h"
 #include "Unit/Game/water_back.h"
-
 //ÉäÉ\Å[ÉX
 #include "Resource/cube_texture_resource.h"
 #include "Resource/texture_resource.h"
