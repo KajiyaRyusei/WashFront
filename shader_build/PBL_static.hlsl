@@ -276,6 +276,8 @@ PixelShaderOutput PS(VertexShaderOutput input)
 
 	// ƒKƒ“ƒ}•â³
 	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 2.2f);
+	output.render_target0.xyz *= 2.f;
+	
 
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);

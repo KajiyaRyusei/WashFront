@@ -81,10 +81,6 @@ void Application::Initalize(Window *window, RendererDevice *renderer_device)
 
 	// Xactマネージャーの作成
 	_xact_manager = new XactManager(this);
-	_xact_manager->GetBGMSound()->Play();
-	_xact_manager->Get3DSound()->Play();
-	
-
 }
 //=============================================================================
 // 終了

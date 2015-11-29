@@ -23,13 +23,11 @@
 #include "Shader/Shader/PBL_animation_shader.h"
 #include "Shader/Shader/PBL_static_shader.h"
 #include "Shader/Shader/aim_shader.h"
-<<<<<<< HEAD
 #include "Shader/Shader/dirt_shader.h"
 #include "Shader/Shader/water_shader.h"
 #include "Shader/Shader/water_back_shader.h"
-=======
 #include "Shader/Shader/screen_2d_shader.h"
->>>>>>> origin/Mochizuki-desk
+#include "Shader/Shader/water_spray_shader.h"
 
 //==============================================================================
 // コンストラクタ
@@ -50,15 +48,11 @@ EffectHandleManager::EffectHandleManager(RendererDevice* renderer_device)
 	EntryList<ShaderPBLAnimation>("Data/Shader/PBL_animation.cso", renderer_device);
 	EntryList<ShaderPBLStatic>("Data/Shader/PBL_static.cso", renderer_device);
 	EntryList<ShaderAim>("Data/Shader/aim.cso", renderer_device);
-<<<<<<< HEAD
 	EntryList<ShaderDirt>("Data/Shader/dirt.cso", renderer_device);
 	EntryList<ShaderWater>("Data/Shader/water.cso", renderer_device);
 	EntryList<ShaderWaterBack>("Data/Shader/water_back.cso", renderer_device);
-=======
 	EntryList<Shader2D>("Data/Shader/shader_2d.cso", renderer_device);
-
->>>>>>> origin/Mochizuki-desk
-
+	EntryList<ShaderWaterSpray>("Data/Shader/water_spray.cso", renderer_device);
 }
 
 //==============================================================================

@@ -22,6 +22,7 @@ class MeshResource;
 class StaticMeshResource;
 class AnimationMeshResource;
 
+class WaterSprayPool;
 
 //*****************************************************************************
 // ÉNÉâÉXê›åv
@@ -53,15 +54,17 @@ public:
 	StaticMeshResource* GetStaticMeshResource(){ return _static_mesh_resource; }
 	AnimationMeshResource* GetAnimationMeshResource(){ return _animation_mesh_resource; }
 
+	void SetWaterSprayPool(WaterSprayPool* water_spray_pool){ _water_spray_pool = water_spray_pool; }
+	WaterSprayPool* GetWaterSprayPool(){ return _water_spray_pool; }
 
 private:
 
 	std::list<Unit*> _unit_list;
 	CollisionGrid* _collision_grid;
-
 	TextureResource* _texture_resource;
 	CubeTextureResource* _cube_texture_resource;
 	MeshResource* _mesh_resource;
 	StaticMeshResource* _static_mesh_resource;
 	AnimationMeshResource* _animation_mesh_resource;
+	WaterSprayPool* _water_spray_pool;
 };

@@ -22,6 +22,7 @@
 // mesh
 #include "Resource/Mesh/mesh_buffer.h"
 #include "Resource/Mesh/Mesh/mesh_factory_smo.h"
+#include "Unit/Game/water_spray_pool.h"
 
 //*****************************************************************************
 // 定数
@@ -39,7 +40,7 @@ void BuildingUnit::Initialize(
 {
 	// シェーダの作成
 	MeshFactorySMO mesh_factory;
-	mesh_factory.Create(_application->GetRendererDevice(), "Data/StaticModel/biru_2.smo", _mesh_list);
+	mesh_factory.Create(_application->GetRendererDevice(), "Data/StaticModel/biru_1.smo", _mesh_list);
 	_shader_size = _mesh_list.size();
 	_shader = new ShaderPBLStatic[_mesh_list.size()];
 
@@ -85,7 +86,7 @@ void BuildingUnit::Initialize(
 
 	// ボリュームの作成
 	CreateVolumeMeshPoint(_world.position, _world.scale, _world.rotation, vertex_count, mesh_point_array, mesh_normal_array);
-	D3DXVECTOR3 volume_box_size(_world.scale*150.f);
+	D3DXVECTOR3 volume_box_size(_world.scale*100.f);
 	volume_box_size.y *= 10.f;
 	CreateVolumeBox(_world.position, volume_box_size, _world.rotation);
 
@@ -134,7 +135,7 @@ void BuildingUnit::Draw()
 		S_GetCommandBuffer()->PushMesh((*it), GetID());
 	}
 
-	//_box->DebugDraw();
+	_box->DebugDraw();
 }
 
 //=============================================================================
@@ -171,6 +172,7 @@ void BuildingUnit::SettingShaderParameter()
 void BuildingUnit::CollisionMeshPoint(u32 point_index)
 {
 	_clean_index_list.push_back(point_index);
+	_game_world->GetWaterSprayPool()->Create(_volume_mesh_point->points[point_index], _volume_mesh_point->attitudes[point_index]);
 }
 
 //=============================================================================

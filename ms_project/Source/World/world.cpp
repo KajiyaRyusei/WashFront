@@ -13,6 +13,8 @@
 #include "Unit/unit.h"
 #include "Renderer/directx9.h"
 
+#include "Unit/Game/water_spray_pool.h"
+
 // ƒŠƒ\[ƒX
 #include "Resource/texture_resource.h"
 #include "Resource/cube_texture_resource.h"
@@ -25,7 +27,6 @@
 void World::Initialize()
 {
 	_collision_grid = new CollisionGrid();
-
 	_texture_resource = new TextureResource;
 	_cube_texture_resource = new CubeTextureResource;
 	_mesh_resource = new MeshResource;
@@ -48,6 +49,7 @@ void World::Finalize()
 		SafeDelete(it);
 	}
 	SafeDelete(_collision_grid);
+	SafeDelete(_water_spray_pool);
 }
 
 //=============================================================================
@@ -73,5 +75,6 @@ void World::Draw()
 	{
 		it->Draw();
 	}
+	_water_spray_pool->Animate();
 	_collision_grid->DebugDraw();
 }

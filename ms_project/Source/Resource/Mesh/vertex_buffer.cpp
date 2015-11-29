@@ -218,7 +218,7 @@ void VertexBuffer::BindVertexBuffer(void) const
 		_device->SetStreamSourceFreq(0,D3DSTREAMSOURCE_INDEXEDDATA | _vertex_count[1]);
 		_device->SetStreamSourceFreq(1, static_cast<UINT>(D3DSTREAMSOURCE_INSTANCEDATA | 1));
 		_device->SetStreamSource(0, _vertex_buffers[0], 0, _vertex_size[0]);
-		_device->SetStreamSource(0, _vertex_buffers[1], 0, _vertex_size[1]);
+		_device->SetStreamSource(1, _vertex_buffers[1], 0, _vertex_size[1]);
 	}
 	else
 	{

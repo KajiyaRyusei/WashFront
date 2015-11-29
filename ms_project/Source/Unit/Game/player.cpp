@@ -21,7 +21,6 @@
 #include "World/collision_grid.h"
 #include "Unit/Game/weapon.h"
 #include "Unit/Game/water_back.h"
-
 //リソース
 #include "Resource/cube_texture_resource.h"
 #include "Resource/texture_resource.h"
@@ -41,7 +40,7 @@ void PlayerUnit::Initialize()
 
 	// アニメーションモデルの読み込み
 	auto mesh_list = _game_world->GetAnimationMeshResource()->Get(ANIMATION_MESH_RESOURE_GRANDPA);
-	_animation.LoadAnimationFile("Data/Animation/ojianime_move.oaf", mesh_list.size());
+	_animation.LoadAnimationFile("Data/Animation/ojianime_2.oaf", mesh_list.size());
 
 	// アニメーションシステムの作成
 	_animation_system = new AnimationSystem();

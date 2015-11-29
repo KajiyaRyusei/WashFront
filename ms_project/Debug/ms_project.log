@@ -1,63 +1,124 @@
-﻿2015/11/23 21:17:03 にビルドを開始しました。
+﻿2015/11/29 16:25:25 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_title.cpp
-         scene_game.cpp
-         scene_title.cpp
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(56): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(57): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(58): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(59): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(60): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(61): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(62): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(63): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(64): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(65): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(66): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(67): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(68): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(69): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(70): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(71): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(72): error C2661: 'BuildingUnit::BuildingUnit' : 2 個の引数を伴うオーバーロードされた関数はありません。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(75): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(77): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(79): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(81): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(83): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(85): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(87): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(89): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(91): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(93): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(95): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(97): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(99): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(101): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(103): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(105): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
-     1>c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\scene\scene\scene_title.cpp(107): error C2039: 'SetPosition' : 'BuildingUnit' のメンバーではありません。
-                 c:\users\龍成\documents\fourth\ms\washfront\ms_project\source\unit\game\building.h(25) : 'BuildingUnit' の宣言を確認してください。
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Renderer\directx9.cpp Source\Unit\Game\building.cpp
+         directx9.cpp
+         building.cpp
          コードを生成中...
-     1>プロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが終了しました -- 失敗。
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\dirt_math.obj
+         Debug\often_use.obj
+         Debug\perlin_noise.obj
+         Debug\animation_system.obj
+         Debug\camera_2d.obj
+         Debug\camera_game_main.obj
+         Debug\camera_game_player.obj
+         Debug\camera_manager.obj
+         Debug\collision_system.obj
+         Debug\command_fire.obj
+         Debug\command_handler.obj
+         Debug\command_move_back.obj
+         Debug\command_move_down.obj
+         Debug\command_move_front.obj
+         Debug\command_move_left.obj
+         Debug\command_move_right.obj
+         Debug\command_move_up.obj
+         Debug\debug_box.obj
+         Debug\debug_line.obj
+         Debug\debug_line_box.obj
+         Debug\debug_sphere.obj
+         Debug\develop_tool_manager.obj
+         Debug\debug_print.obj
+         Debug\command_buffer.obj
+         Debug\command_buffer_holder.obj
+         Debug\command_processor.obj
+         Debug\assert.obj
+         Debug\fade.obj
+         Debug\input.obj
+         Debug\input_event_buffer.obj
+         Debug\input_manager.obj
+         Debug\input_keyboard.obj
+         Debug\input_x.obj
+         Debug\directx9.obj
+         Debug\animation_mesh_resource.obj
+         Debug\cube_texture_resource.obj
+         Debug\index_buffer.obj
+         Debug\mesh_factory_2d_sprite.obj
+         Debug\mesh_factory_amo.obj
+         Debug\mesh_factory_cube.obj
+         Debug\mesh_factory_mesh_field.obj
+         Debug\mesh_factory_smo.obj
+         Debug\mesh_factory_sprite.obj
+         Debug\mesh_factory_sprite_instance.obj
+         Debug\mesh_factory_water_cylinder.obj
+         Debug\mesh_factory_water_cylinder_back.obj
+         Debug\mesh_buffer.obj
+         Debug\vertex_buffer.obj
+         Debug\mesh_resource.obj
+         Debug\static_mesh_resource.obj
+         Debug\texture_resource.obj
+         Debug\scene_game.obj
+         Debug\scene_result.obj
+         Debug\scene_title.obj
+         Debug\scene_manager.obj
+         Debug\effect_handle_holder.obj
+         Debug\effect_handle_manager.obj
+         Debug\fade_shader.obj
+         Debug\aim_shader.obj
+         Debug\back_ground_shader.obj
+         Debug\dirt_shader.obj
+         Debug\lambert.obj
+         Debug\animation_shader.obj
+         Debug\PBL_animation_shader.obj
+         Debug\PBL_static_shader.obj
+         Debug\screen_2d_shader.obj
+         Debug\screen_shader.obj
+         Debug\water_back_shader.obj
+         Debug\water_shader.obj
+         Debug\water_spray_shader.obj
+         Debug\shader_base.obj
+         Debug\speaker.obj
+         Debug\speaker_3d.obj
+         Debug\speaker_bgm.obj
+         Debug\xact_manager.obj
+         Debug\stdafx.obj
+         Debug\main.obj
+         Debug\application.obj
+         Debug\system_flow.obj
+         Debug\aim.obj
+         Debug\aim_draw.obj
+         Debug\aim_line.obj
+         Debug\back_ground.obj
+         Debug\building.obj
+         Debug\bullet.obj
+         Debug\dirt.obj
+         Debug\player.obj
+         Debug\water_back.obj
+         Debug\water_bullet.obj
+         Debug\water_spray.obj
+         Debug\water_spray_pool.obj
+         Debug\weapon.obj
+         Debug\number.obj
+         Debug\bulletin_board.obj
+         Debug\judge.obj
+         Debug\message_box.obj
+         Debug\result_bg.obj
+         Debug\score.obj
+         Debug\score_board.obj
+         Debug\screen_unit.obj
+         Debug\logo.obj
+         Debug\logo_bg.obj
+         Debug\text.obj
+         Debug\unit.obj
+         Debug\window.obj
+         Debug\window_operation_wrapper.obj
+         Debug\window_procedure.obj
+         Debug\collision_grid.obj
+         Debug\grid_2D.obj
+         Debug\world.obj
+         ms_project.vcxproj -> C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe
+     1>プロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが完了しました。
 
-ビルドに失敗しました。
+ビルドに成功しました。
 
-経過時間 00:00:00.84
+経過時間 00:00:01.07

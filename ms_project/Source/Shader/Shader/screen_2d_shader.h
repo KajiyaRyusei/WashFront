@@ -18,10 +18,10 @@
 #include "Shader/Component/screen_texture_uv.h"
 #include "Shader/Component/screen_texture_offset.h"
 #include "Shader/Component/screen_texture_alpha.h"
-#include "Shader/Component/ambient_texture.h"
+#include "Shader/Component/albedo_texture.h"
 
 class Shader2D : public ShaderBase, public component::ScreenMatrix, public component::ScreenSize, public component::ScreenTextureUv, 
-					public component::ScreenTextureOffset, public component::ScreenTextureAlpha, public component::AmbientTexture
+					public component::ScreenTextureOffset, public component::ScreenTextureAlpha, public component::AlbedoMap
 {
 public:
 	Shader2D() : ShaderBase(s_effect_id) { Initialize(); }

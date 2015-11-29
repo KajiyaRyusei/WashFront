@@ -49,7 +49,7 @@ namespace data
 			mesh_size = mesh_list_size;
 			std::ifstream file;
 			std::string line;
-			file.open(file_name, std::ios::out);
+			file.open(file_name, std::ios_base::binary);
 			if( file.fail() == true )
 			{
 				OutputDebugStringA("ファイル入力にエラーが発生しました\n");
@@ -60,13 +60,13 @@ namespace data
 			file.precision(5);
 
 			// フレームの最大数
-			file >> end_frame;
+			file.read((char*)&end_frame, sizeof(u32));
 
 			animation = new AnimationData[mesh_list_size];
 
 			for( u32 mesh_id = 0; mesh_id < mesh_list_size; ++mesh_id )
 			{
-				file >> animation[mesh_id].number_cluster;
+				file.read((char*)&animation[mesh_id].number_cluster, sizeof(u32));
 
 				animation[mesh_id].frame = new FrameData[end_frame];
 
@@ -77,10 +77,7 @@ namespace data
 
 					for( u32 matrix_index = 0; matrix_index < animation[mesh_id].number_cluster; ++matrix_index )
 					{
-						file >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._11 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._12 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._13 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._14
-							>> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._21 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._22 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._23 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._24
-							>> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._31 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._32 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._33 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._34
-							>> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._41 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._42 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._43 >> animation[mesh_id].frame[frame].matrix_animation[matrix_index]._44;
+						file.read((char*)&animation[mesh_id].frame[frame].matrix_animation[matrix_index], sizeof(D3DXMATRIX));
 					}
 				}
 			}

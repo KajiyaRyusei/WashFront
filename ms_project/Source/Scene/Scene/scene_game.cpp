@@ -1,8 +1,9 @@
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
 // シーン：ゲーム
 //
-// Created by Ryusei Kajiya on 20151029
+// Created by Ryusei Kajiya on 20151123
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -25,8 +26,7 @@
 #include "Unit/Game/back_ground.h"
 #include "Unit/Game/building.h"
 #include "Unit/Game/dirt.h"
-#include "Unit/Game/map.h"
-
+#include "Unit/Game/water_spray_pool.h"
 
 // 空間
 #include "World/collision_grid.h"
@@ -50,6 +50,9 @@ SceneGame::SceneGame(Application *application) :
 void SceneGame::Initialize()
 {
 	_world = new World();
+	WaterSprayPool* water_spray_pool = new WaterSprayPool(_application,_world);
+	_world->SetWaterSprayPool(water_spray_pool);
+
 	ResourceGeneration();
 	MapGeneration();
 }
@@ -90,79 +93,60 @@ void SceneGame::MapGeneration()
 	unit_list.push_back(new BackGroundUnit(_application, _world));
 
 	// ビル
-	// BuildingUnit* bill_0 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_1 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_2 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_3 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_4 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_5 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_6 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_7 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_8 = new BuildingUnit(_application, _world);
-	D3DXVECTOR3 bull_position = _world->GetCollisionGrid()->CellCenterPoint(2, 2);
-	bull_position.y -= 10.f;
-	D3DXVECTOR3 bull_rotation(0.f,0.f,0.f);
-	D3DXVECTOR3 bull_scaling(0.1f, 0.1f, 0.1f);
-	BuildingUnit* bill_9 = new BuildingUnit(_application, _world, bull_position, bull_rotation, bull_scaling);
-	// BuildingUnit* bill_10 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_11 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_12 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_13 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_14 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_15 = new BuildingUnit(_application, _world);
-	// BuildingUnit* bill_16 = new BuildingUnit(_application, _world);
+	D3DXVECTOR3 bill_position = _world->GetCollisionGrid()->CellCenterPoint(0, 0);
+	D3DXVECTOR3 bill_rotation(0.f, 0.f, 0.f);
+	D3DXVECTOR3 bill_scaling(0.1f, 0.1f, 0.1f);
+	BuildingUnit* bill_0 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(1, 0);
+	BuildingUnit* bill_1 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(2, 0);
+	BuildingUnit* bill_2 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(3, 0);
+	BuildingUnit* bill_3 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(4, 0);
+	BuildingUnit* bill_4 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(0, 1);
+	BuildingUnit* bill_5 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(0, 2);
+	BuildingUnit* bill_6 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(0, 3);
+	BuildingUnit* bill_7 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(0, 4);
+	BuildingUnit* bill_8 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(2, 2);
+	BuildingUnit* bill_9 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(1, 4);
+	BuildingUnit* bill_10 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(2, 4);
+	BuildingUnit* bill_11 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(3, 4);
+	BuildingUnit* bill_12 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(4, 4);
+	BuildingUnit* bill_13 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(4, 1);
+	BuildingUnit* bill_14 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(4, 2);
+	BuildingUnit* bill_15 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
+	bill_position = _world->GetCollisionGrid()->CellCenterPoint(4, 3);
+	BuildingUnit* bill_16 = new BuildingUnit(_application, _world, bill_position, bill_rotation, bill_scaling);
 
-	//bill_0->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(1, 0);
-	//bill_1->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(2, 0);
-	//bill_2->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(3, 0);
-	//bill_3->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(4, 0);
-	//bill_4->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(0, 1);
-	//bill_5->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(0, 2);
-	//bill_6->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(0, 3);
-	//bill_7->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(0, 4);
-	//bill_8->SetPosition(bull_position);
-	
-	//bull_position = D3DXVECTOR3(0.f,0.f,0.f);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(1, 4);
-	//bill_10->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(2, 4);
-	//bill_11->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(3, 4);
-	//bill_12->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(4, 4);
-	//bill_13->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(4, 1);
-	//bill_14->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(4, 2);
-	//bill_15->SetPosition(bull_position);
-	//bull_position = _world->GetCollisionGrid()->CellCenterPoint(4, 3);
-	//bill_16->SetPosition(bull_position);
-
-	//unit_list.push_back(bill_0);
-	//unit_list.push_back(bill_1);
-	//unit_list.push_back(bill_2);
-	//unit_list.push_back(bill_3);
-	//unit_list.push_back(bill_4);
-	//unit_list.push_back(bill_5);
-	//unit_list.push_back(bill_6);
-	//unit_list.push_back(bill_7);
-	//unit_list.push_back(bill_8);
+	unit_list.push_back(bill_0);
+	unit_list.push_back(bill_1);
+	unit_list.push_back(bill_2);
+	unit_list.push_back(bill_3);
+	unit_list.push_back(bill_4);
+	unit_list.push_back(bill_5);
+	unit_list.push_back(bill_6);
+	unit_list.push_back(bill_7);
+	unit_list.push_back(bill_8);
 	unit_list.push_back(bill_9);
-	//unit_list.push_back(bill_10);
-	//unit_list.push_back(bill_11);
-	//unit_list.push_back(bill_12);
-	//unit_list.push_back(bill_13);
-	//unit_list.push_back(bill_14);
-	//unit_list.push_back(bill_15);
-	//unit_list.push_back(bill_16);
+	unit_list.push_back(bill_10);
+	unit_list.push_back(bill_11);
+	unit_list.push_back(bill_12);
+	unit_list.push_back(bill_13);
+	unit_list.push_back(bill_14);
+	unit_list.push_back(bill_15);
+	unit_list.push_back(bill_16);;
 
 	_world->PushUnit(std::move(unit_list));
 }

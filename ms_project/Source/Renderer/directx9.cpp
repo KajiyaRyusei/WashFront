@@ -180,6 +180,8 @@ void RendererDevice::InitializeRenderState()
 	_direct_device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);			// αブレンドの種類
 	_direct_device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);		// αソースカラーの指定
 	_direct_device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);	// αデスティネーションカラーの指定
+	_direct_device->SetRenderState(D3DRS_ALPHAREF, (DWORD)0x00000050);		// αテストの値
+	_direct_device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATEREQUAL);	// αテストの種類
 }
 
 //=============================================================================

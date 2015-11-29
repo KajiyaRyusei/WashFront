@@ -2,7 +2,7 @@
 //
 // スクリーン用ユニット : 2Dオブジェクト
 // 
-// Created by Ryusei Kajiya on 20151102
+// Created by Ryusei Kajiya on 20151012
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -16,7 +16,6 @@
 
 //*****************************************************************************
 // 前方宣言
-class ShaderScreen;
 class Shader2D;
 class MeshBuffer;
 
@@ -39,14 +38,14 @@ public:
 	virtual void CollisionUpdate() override{}
 
 	//テクスチャ作成
-	void CreateTexture( LPCWSTR texture_filename );
+	void CreateTexture(LPCWSTR texture_filename);
 	// 座標セット
-	void SetPosition( D3DXVECTOR3 pos )
+	void SetPosition(D3DXVECTOR3 pos)
 	{
 		_position = pos;
 	}
 	// 大きさセット
-	void SetScaling( D3DXVECTOR3 scale )
+	void SetScaling(D3DXVECTOR3 scale)
 	{
 		_scaling = scale;
 	}
@@ -80,5 +79,6 @@ private:
 
 	//テクスチャ
 	LPDIRECT3DTEXTURE9 _texture;
+
 
 };
