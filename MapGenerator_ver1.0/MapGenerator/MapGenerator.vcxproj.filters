@@ -198,6 +198,9 @@
     <ClInclude Include="Source\Dirt.h">
       <Filter>Header\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Cursor.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\BoxAndBox.cpp">
@@ -306,6 +309,9 @@
       <Filter>Source\System</Filter>
     </ClCompile>
     <ClCompile Include="Source\Dirt.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cursor.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
   </ItemGroup>

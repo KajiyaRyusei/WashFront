@@ -34,6 +34,8 @@ class Building;
 // 衝突判定
 class CollisionManager;
 
+class Cursor;
+
 
 
 //-----------------------------------------------------------------------------
@@ -64,6 +66,7 @@ public:
 	// マウスとオブジェクトの衝突判定
 	//=========================================================================
 	void CheckCollisionMouseAndObject();
+	void CollisionMouseAndObject();
 
 
 	//=========================================================================
@@ -71,6 +74,7 @@ public:
 	//=========================================================================
 	Building *CreateBuilding(const char *modelFileName, const char *textureFilePath);
 	Building *CreateBuilding(const char *fileName, const char *textureFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale);
+	Building *CopyBuilding();
 
 	//=========================================================================
 	// インスタンスの全削除
@@ -84,6 +88,7 @@ public:
 	Player *GetPlayer() { return player_;  };
 	CollisionManager *GetCollisionManager() { return collisionManager_; };
 	Building *GetSelectBuilding();
+	Cursor *GetCursor() { return cursor_; }
 
 
 	//=========================================================================
@@ -123,6 +128,8 @@ private:
 
 	// 衝突判定
 	CollisionManager	*collisionManager_;			// 衝突判定の管理
+
+	Cursor				*cursor_;
 
 
 #ifdef _DEBUG

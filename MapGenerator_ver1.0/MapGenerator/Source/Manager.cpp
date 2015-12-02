@@ -78,15 +78,14 @@ Manager::~Manager()
 	// ファイル読み込みマネージャの解放
 	SafeDelete(importFileManager_);
 
-	// オブジェクトマネージャの解放
-	SafeDelete(objectManager_);
-
 	// ルートマネージャの解放
 	SafeDelete(routeManager_);
 
 	// 汚れマネージャの解放
 	SafeDelete(dirtManager_);
 
+	// オブジェクトマネージャの解放
+	SafeDelete(objectManager_);
 
 #ifdef _DEBUG
 	// デバッグプロシージャの解放
@@ -149,10 +148,6 @@ HRESULT Manager::Init(HINSTANCE instance, HWND wnd, BOOL window)
 	cameraManager_->Init();
 	cameraManager_->CreateEditorCamera();
 
-	// オブジェクトマネージャの生成
-	objectManager_ = new ObjectManager();
-	objectManager_->Init();
-
 	// ファイル読み込みマネージャの生成
 	importFileManager_ = new ImportFileManager();
 	importFileManager_->Init();
@@ -164,6 +159,10 @@ HRESULT Manager::Init(HINSTANCE instance, HWND wnd, BOOL window)
 	// 汚れマネージャの生成
 	dirtManager_ = new DirtManager();
 	dirtManager_->Init();
+
+	// オブジェクトマネージャの生成
+	objectManager_ = new ObjectManager();
+	objectManager_->Init();
 
 
 #ifdef _DEBUG
@@ -204,6 +203,8 @@ void Manager::Update()
 
 		// シーンの更新
 		objectManager_->Update();
+
+		routeManager_->Update();
 	}
 
 }

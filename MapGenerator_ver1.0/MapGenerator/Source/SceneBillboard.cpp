@@ -43,6 +43,56 @@ SceneBillboard::~SceneBillboard()
 
 }
 
+
+HRESULT SceneBillboard::Init(D3DXVECTOR2 size, D3DXCOLOR color)
+{
+	// 頂点座標の設定
+	Renderer *renderer = Manager::GetInstance()->GetRenderer();
+	LPDIRECT3DDEVICE9 device = renderer->GetDevice();
+
+	// 頂点バッファの生成（メモリの確保）
+	if (FAILED(device->CreateVertexBuffer(
+		sizeof(VERTEX_3D)* 4,  // 確保するメモリのサイズ
+		D3DUSAGE_WRITEONLY,
+		FVF_VERTEX_3D,  // 使用する頂点フォーマット
+		D3DPOOL_MANAGED,
+		&vertexBuffer_,  // 頂点バッファの先頭アドレスの入ったポインタ変数のアドレス
+		nullptr))) {
+		return E_FAIL;
+	}
+
+	float fAngle = atan2f(size.x / 2, size.y / 2);  // 対角線のなす角初期化
+	float fLength = sqrtf((size.x / 2) * (size.x / 2)
+		+ (size.y / 2) * (size.y / 2));  // 対角線の長さ初期化
+
+	// 頂点座標の設定
+	VERTEX_3D *pVtx;
+	vertexBuffer_->Lock(0, 0, (void**)&pVtx, 0);  // 頂点情報をロック
+
+	pVtx[0].vtx = D3DXVECTOR3(-sinf(fAngle) * fLength, cosf(fAngle) * fLength, 0.0f);
+	pVtx[1].vtx = D3DXVECTOR3(sinf(fAngle) * fLength, cosf(fAngle) * fLength, 0.0f);
+	pVtx[2].vtx = D3DXVECTOR3(-sinf(fAngle) * fLength, -cosf(fAngle) * fLength, 0.0f);
+	pVtx[3].vtx = D3DXVECTOR3(sinf(fAngle) * fLength, -cosf(fAngle) * fLength, 0.0f);
+
+	pVtx[0].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+	pVtx[1].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+	pVtx[2].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+	pVtx[3].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+
+	pVtx[0].diffuse = pVtx[1].diffuse = pVtx[2].diffuse = pVtx[3].diffuse = color;
+
+	// テクスチャ情報の初期化
+	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
+	pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
+	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
+	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
+
+	vertexBuffer_->Unlock();  // 頂点情報をアンロック
+
+
+	return S_OK;
+}
+
 //=============================================================================
 // 初期化処理
 //=============================================================================
@@ -103,19 +153,6 @@ HRESULT SceneBillboard::Init()
 //=============================================================================
 void SceneBillboard::Update()
 {
-	Mouse *mouse = Manager::GetInstance()->GetMouse();
-	DIMOUSESTATE mouse_state = mouse->GetPressMouse();
-
-	if (mouse_state.rgbButtons[BUTTON_LEFT] & BUTTON_MASK) {
-		position_.x -= 0.1f;
-	}
-	if (mouse_state.rgbButtons[BUTTON_RIGHT] & BUTTON_MASK) {
-		position_.x += 0.1f;
-	}
-
-#ifdef _DEBUG
-	DebugProc::Printf("BillBoardPos[%f, %f, %f]", position_.x, position_.y, position_.z);
-#endif
 }
 
 //=============================================================================
@@ -133,6 +170,7 @@ void SceneBillboard::Draw()
 	
 	// ライトの描画を無効に
 	device->SetRenderState(D3DRS_LIGHTING, FALSE);
+	device->SetRenderState(D3DRS_ZENABLE, false);
 	// アルファテスト有効
 	device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	device->SetRenderState(D3DRS_ALPHAREF, 0);
@@ -172,6 +210,7 @@ void SceneBillboard::Draw()
 	device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 	// ライトの描画を有効に
 	device->SetRenderState(D3DRS_LIGHTING, TRUE);
+	device->SetRenderState(D3DRS_ZENABLE, true);
 }
 
 //=============================================================================

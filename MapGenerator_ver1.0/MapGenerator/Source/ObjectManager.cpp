@@ -20,6 +20,7 @@
 #include "Building.h"
 #include "CameraManager.h"
 #include "ImportFileManager.h"
+#include "Cursor.h"
 
 
 //=========================================================================
@@ -36,6 +37,7 @@ ObjectManager::ObjectManager() : buildingListCursor_(0)
 	sky_ = nullptr;
 	collisionManager_ = nullptr;
 	buildingList_.clear();
+	cursor_ = nullptr;
 
 
 #ifdef _DEBUG
@@ -79,6 +81,8 @@ ObjectManager::~ObjectManager()
 	buildingList_.clear();
 
 
+	SafeDelete(cursor_);
+
 	// 全オブジェクトの解放
 	Scene::ReleaseAll();
 
@@ -99,12 +103,20 @@ HRESULT ObjectManager::Init()
 
 
 	// 水の生成
-	water_ = new Scene3D(PRIORITY_WATER);
-	water_->Init(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+//	water_ = new Scene3D(PRIORITY_WATER);
+//	water_->Init(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	// スカイドームの生成
-	sky_ = MeshDome::Create(
-		D3DXVECTOR3(0.0f, 0.0f, 0.0f), 50, 50, 100.0f);
+	//sky_ = MeshDome::Create(
+	//	D3DXVECTOR3(0.0f, 0.0f, 0.0f), 50, 50, 100.0f);
+
+	field_ = MeshField::Create(
+		10, 10, 100.f, 100.f,
+		D3DXVECTOR3(500.f, 0.f, 500.f), D3DXVECTOR3(0.f, 0.f, 0.f));
+	field_->SetTexture("./Resource/Texture/Game/Grid.png");
+
+	cursor_ = new Cursor();
+	cursor_->Init();
 
 
 	return S_OK;
@@ -136,6 +148,10 @@ void ObjectManager::Update()
 		{	// シーンインスタンスの更新処理
 			Scene::UpdateAll();
 		}
+		
+		
+		CollisionMouseAndObject();
+
 
 		// 衝突判定の更新
 		collisionManager_->Update();
@@ -176,6 +192,27 @@ Building *ObjectManager::CreateBuilding(const char *fileName, const char *textur
 }
 
 
+Building *ObjectManager::CopyBuilding()
+{
+	Building *b = nullptr;
+	try {
+		b = buildingList_.at(buildingListCursor_);
+	}
+	catch (const out_of_range& oor) {
+		return nullptr;
+	}
+
+	const char *modelPath = b->GetModelFilePath();
+	const char *texturePath = b->GetTextureFilePath();
+	D3DXVECTOR3 position = b->GetPosition();
+	D3DXVECTOR3 rotation = b->GetRotation();
+	D3DXVECTOR3 scale = b->GetScale();
+
+
+	return CreateBuilding(modelPath, texturePath, position, rotation, scale);
+}
+
+
 Building *ObjectManager::GetSelectBuilding()
 {
 	Building *building = nullptr;
@@ -209,14 +246,14 @@ void ObjectManager::CheckCollisionMouseAndObject()
 
 	// ウィンドウ情報取得
 	HWND hWnd = GetWindowHandle();
-	RECT rect;
-	GetWindowRect(hWnd, &rect);
+	RECT rectWindow, rectClient;
+	GetWindowRect(hWnd, &rectWindow);
+	GetClientRect(hWnd, &rectClient);
 
 	// マウスのスクリーン座標
 	POINT screenPosition;
 	GetCursorPos(&screenPosition);
-	screenPosition.x -= rect.left;
-	screenPosition.y -= rect.top;
+	ScreenToClient(hWnd, &screenPosition);
 
 
 	// マウスのレイ
@@ -224,9 +261,9 @@ void ObjectManager::CheckCollisionMouseAndObject()
 	D3DXVECTOR3 farPosition;
 	D3DXVECTOR3 ray;
 	nearPosition = camera->CalcScreenToWorld(D3DXVECTOR3((float)screenPosition.x, (float)screenPosition.y, 0.0f),
-		D3DXVECTOR2((float)(rect.right - rect.left), (float)(rect.bottom - rect.top)));
+		D3DXVECTOR2((float)rectClient.right, (float)rectClient.bottom));
 	farPosition = camera->CalcScreenToWorld(D3DXVECTOR3((float)screenPosition.x, (float)screenPosition.y, 1.0f),
-		D3DXVECTOR2((float)(rect.right - rect.left), (float)(rect.bottom - rect.top)));
+		D3DXVECTOR2((float)rectClient.right, (float)rectClient.bottom));
 	ray = farPosition - nearPosition;
 	D3DXVec3Normalize(&ray, &ray);
 
@@ -247,9 +284,70 @@ void ObjectManager::CheckCollisionMouseAndObject()
 		if (length < BUILDING_RADIUS) {
 			float distance = D3DXVec3Dot(&vec, &ray);
 			if (distance < minDistance) {
+				//buildingList_.at(buildingListCursor_)->SetState(SELECT_NONE);
 				buildingListCursor_ = i;
+				//buildingList_.at(buildingListCursor_)->SetState(SELECT_SELECT);
 				minDistance = distance;
 			}
+		} else {
+			//buildingList_.at(buildingListCursor_)->SetState(SELECT_NONE);
+		}
+
+		i++;
+	}
+
+}
+void ObjectManager::CollisionMouseAndObject()
+{
+	Camera *camera = Manager::GetInstance()->GetCameraManager()->GetCamera();
+
+	// ウィンドウ情報取得
+	HWND hWnd = GetWindowHandle();
+	RECT rectWindow, rectClient;
+	GetWindowRect(hWnd, &rectWindow);
+	GetClientRect(hWnd, &rectClient);
+
+	// マウスのスクリーン座標
+	POINT screenPosition;
+	GetCursorPos(&screenPosition);
+	ScreenToClient(hWnd, &screenPosition);
+
+
+	// マウスのレイ
+	D3DXVECTOR3 nearPosition;
+	D3DXVECTOR3 farPosition;
+	D3DXVECTOR3 ray;
+	nearPosition = camera->CalcScreenToWorld(D3DXVECTOR3((float)screenPosition.x, (float)screenPosition.y, 0.0f),
+		D3DXVECTOR2((float)rectClient.right, (float)rectClient.bottom));
+	farPosition = camera->CalcScreenToWorld(D3DXVECTOR3((float)screenPosition.x, (float)screenPosition.y, 1.0f),
+		D3DXVECTOR2((float)rectClient.right, (float)rectClient.bottom));
+	ray = farPosition - nearPosition;
+	D3DXVec3Normalize(&ray, &ray);
+
+	int i = 0;
+	float minDistance = 10000;
+
+	// 全オブジェクト探査
+	for (auto itr = buildingList_.begin(); itr != buildingList_.end(); itr++) {
+		D3DXVECTOR3 objectPosition = (*itr)->GetPosition();
+		D3DXVECTOR3 vec = objectPosition - nearPosition;
+		D3DXVECTOR3 cross;
+
+		// レイと球の距離
+		D3DXVec3Cross(&cross, &vec, &ray);
+		float length = D3DXVec3Length(&cross);
+
+		// 球との衝突判定
+		if (length < BUILDING_RADIUS) {
+			float distance = D3DXVec3Dot(&vec, &ray);
+			if (distance < minDistance) {
+				if (buildingList_.at(i)->GetState() != SELECT_SELECT)
+					buildingList_.at(i)->SetState(SELECT_HIT);
+				minDistance = distance;
+			}
+		} else {
+			if (buildingList_.at(i)->GetState() != SELECT_SELECT)
+				buildingList_.at(i)->SetState(SELECT_NONE);
 		}
 
 		i++;

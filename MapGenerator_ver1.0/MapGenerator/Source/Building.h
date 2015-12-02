@@ -15,6 +15,14 @@
 #define BUILDING_RADIUS (2.0f)
 
 
+enum SELECT_STATE {
+	SELECT_NONE = (0),
+	SELECT_HIT,
+	SELECT_SELECT,
+	SELECT_MAX
+};
+
+
 //-----------------------------------------------------------------------------
 // 前方宣言
 //-----------------------------------------------------------------------------
@@ -118,7 +126,8 @@ public:
 	//=========================================================================
 	void SetId(int id) { id_ = id; };
 
-
+	void SetState(int state) { state_ = state; }
+	int GetState() { return state_; }
 
 
 protected:
@@ -128,7 +137,10 @@ protected:
 
 	Model		*model_;		// モデルのポインタ
 
-	int			id_;			// 一意のID
+	int					id_;			// 一意のID
+	int					state_;
+	LPDIRECT3DTEXTURE9	hitTexture_;
+	LPDIRECT3DTEXTURE9	selectTexture_;
 
 	char		*modelFilePath_;
 	char		*textureFilePath_;

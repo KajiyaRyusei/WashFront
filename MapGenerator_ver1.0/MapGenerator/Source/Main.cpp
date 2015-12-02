@@ -13,6 +13,7 @@
 #include "Building.h"
 #include "RouteManager.h"
 #include "DirtManager.h"
+#include "Cursor.h"
 #include <commctrl.h>
 
 
@@ -50,7 +51,9 @@ void ImportTextureFile(HWND windowHandle);
 void CreateModel(HWND hDlg);
 
 // 左クリック時のイベント
-void ClickLeftEvent();
+void ClickLeftEventObjectMode();
+void ClickLeftEventRouteMode();
+void ClickLeftEventDirtMode();
 
 // 読み込み関数
 void ReadMapFile(HWND hWnd);
@@ -78,6 +81,8 @@ HWND g_windowHandle = nullptr;
 HWND g_objectDialogHandle = nullptr;
 HWND g_routeDialogHandle = nullptr;
 HWND g_dirtDialogHandle = nullptr;
+
+MODE g_mode = MODE_OBJECT;
 
 TCHAR g_szFile[MAX_PATH] = {};
 
@@ -182,14 +187,14 @@ int APIENTRY WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmd_line
 	// ダイアログの作成
 	g_routeDialogHandle = CreateDialog(instance, MAKEINTRESOURCE(IDD_DIALOG2),
 		g_windowHandle, RouteDlgProc);
-	ShowWindow(g_routeDialogHandle, cmd_show);
+	//ShowWindow(g_routeDialogHandle, cmd_show);
 	UpdateWindow(g_routeDialogHandle);
 
 
 	// ダイアログの作成
 	g_dirtDialogHandle = CreateDialog(instance, MAKEINTRESOURCE(IDD_DIALOG3),
 		g_windowHandle, DirtDlgProc);
-	ShowWindow(g_dirtDialogHandle, cmd_show);
+	//ShowWindow(g_dirtDialogHandle, cmd_show);
 	UpdateWindow(g_dirtDialogHandle);
 
 
@@ -264,6 +269,7 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM w_param, LPARAM l_param)
 		}
 	break;
 
+
 	case WM_COMMAND:
 		switch (LOWORD(w_param)) {
 
@@ -321,17 +327,72 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM w_param, LPARAM l_param)
 				ReadDirtFile(wnd);
 			break;
 
+
+			// オブジェクト
+		case ID_40013:
+		{
+				HMENU menu = GetMenu(wnd);
+				CheckMenuItem(menu, ID_40013, MF_BYCOMMAND | MFS_CHECKED);
+				CheckMenuItem(menu, ID_40014, MF_BYCOMMAND | MFS_UNCHECKED);
+				CheckMenuItem(menu, ID_40015, MF_BYCOMMAND | MFS_UNCHECKED);
+				ShowWindow(g_objectDialogHandle, SW_SHOW);
+				ShowWindow(g_routeDialogHandle, SW_HIDE);
+				ShowWindow(g_dirtDialogHandle, SW_HIDE);
+				g_mode = MODE_OBJECT;
+				 break;
+		}
+			// ルート
+		case ID_40014:
+		{
+			HMENU menu = GetMenu(wnd);
+			CheckMenuItem(menu, ID_40013, MF_BYCOMMAND | MFS_UNCHECKED);
+			CheckMenuItem(menu, ID_40014, MF_BYCOMMAND | MFS_CHECKED);
+			CheckMenuItem(menu, ID_40015, MF_BYCOMMAND | MFS_UNCHECKED);
+			ShowWindow(g_objectDialogHandle, SW_HIDE);
+			ShowWindow(g_routeDialogHandle, SW_SHOW);
+			ShowWindow(g_dirtDialogHandle, SW_HIDE);
+			g_mode = MODE_ROUTE;
+			break;
+		}
+			// 汚れ
+		case ID_40015:
+		{
+			HMENU menu = GetMenu(wnd);
+			CheckMenuItem(menu, ID_40013, MF_BYCOMMAND | MFS_UNCHECKED);
+			CheckMenuItem(menu, ID_40014, MF_BYCOMMAND | MFS_UNCHECKED);
+			CheckMenuItem(menu, ID_40015, MF_BYCOMMAND | MFS_CHECKED);
+			ShowWindow(g_objectDialogHandle, SW_HIDE);
+			ShowWindow(g_routeDialogHandle, SW_HIDE);
+			ShowWindow(g_dirtDialogHandle, SW_SHOW);
+			g_mode = MODE_DIRT;
+			break;
+		}
+
+		default:
+			break;
+		}
+		break;
+
+
+		// マウス左クリック時
+	case WM_LBUTTONDOWN:
+	{
+		switch (g_mode) {
+		case MODE_OBJECT:
+			ClickLeftEventObjectMode();
+			break;
+		case MODE_ROUTE:
+			ClickLeftEventRouteMode();
+			break;
+		case MODE_DIRT:
+			ClickLeftEventDirtMode();
+			break;
 		default:
 			break;
 		}
 
-
-	// マウス左クリック時
-	case WM_LBUTTONDOWN:
-	{
-		ClickLeftEvent();
-		break;
 	}
+	break;
 
 	default:
 		break;
@@ -387,6 +448,11 @@ BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 		// モデルの生成
 		case IDC_BUTTON1:
 			CreateModel(hDlg);
+			break;
+
+		// コピー
+		case IDC_BUTTON2:
+			Manager::GetInstance()->GetObjectManager()->CopyBuilding();
 			break;
 
 		// 座標 : X軸
@@ -523,12 +589,6 @@ BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 
-	// コンボボックスにファイル名追加
-	case WM_NULL:
-	{
-		
-		break;
-	}
 
 	case WM_CLOSE:
 		EndDialog(hDlg, 0);
@@ -689,7 +749,7 @@ void CreateModel(HWND hDlg)
 
 
 // 左クリック時のイベント
-void ClickLeftEvent()
+void ClickLeftEventObjectMode()
 {
 	// マウスとオブジェクトの衝突判定
 	Manager::GetInstance()->GetObjectManager()->CheckCollisionMouseAndObject();
@@ -768,6 +828,21 @@ void ClickLeftEvent()
 
 	}
 }
+
+// 左クリック時のイベント
+void ClickLeftEventRouteMode()
+{
+	D3DXVECTOR3 position = Manager::GetInstance()->GetObjectManager()->GetCursor()->GetPosition();
+	Manager::GetInstance()->GetRouteManager()->CreatePoint(position);
+}
+
+// 左クリック時のイベント
+void ClickLeftEventDirtMode()
+{
+}
+
+
+
 
 // 読み込み関数
 void ReadMapFile(HWND hWnd)
@@ -892,6 +967,14 @@ BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 			(WPARAM)BST_CHECKED,
 			0					// ０固定
 			);
+
+
+		HWND combo = GetDlgItem(hDlg, IDC_COMBO5);
+		SendMessage((HWND)combo, (UINT)CB_ADDSTRING, 0, (LPARAM)"1P");
+		SendMessage((HWND)combo, (UINT)CB_ADDSTRING, 0, (LPARAM)"2P");
+		SendMessage((HWND)combo, (UINT)CB_ADDSTRING, 0, (LPARAM)"1Pカメラ");
+		SendMessage((HWND)combo, (UINT)CB_ADDSTRING, 0, (LPARAM)"2Pカメラ");
+
 	}
 		return TRUE;
 
@@ -905,45 +988,50 @@ BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 		case IDCANCEL:
 			return TRUE;
 
-		// 点の選択
-		case IDC_COMBO1:
-			
+
+			// ルートの選択
+		case IDC_COMBO5:
+
 			// 選択したとき
 			if (HIWORD(wParam) == CBN_SELCHANGE) {
 				// コンボボックスから生成するモデルのファイル名取得
-				HWND hCombo1 = GetDlgItem(hDlg, IDC_COMBO1);
+				HWND hCombo = GetDlgItem(hDlg, IDC_COMBO5);
 				int index = SendMessage(
-					(HWND)hCombo1,			// コンボボックスのハンドル
+					(HWND)hCombo,			// コンボボックスのハンドル
 					(UINT)CB_GETCURSEL,		// 選択中のインデックス取得
 					0,						// ０固定
 					0						// 追加する項目の文字列
 					);
 
-				// 選択中の点変更
-				Manager::GetInstance()->GetRouteManager()->SetPointListCursor(index);
+				// 選択中のルートを変更
+				Manager::GetInstance()->GetRouteManager()->SetRouteMode(index);
+			}
+			break;
 
 
-				D3DXVECTOR3 position = Manager::GetInstance()->GetRouteManager()->GetPosition();
-				// 座標エディットボックス
-				char str[4096] = {};
-				sprintf(str, "%.3f", position.x);
-				SetWindowText(
-					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT2),		// スライダーのハンドル
-					str		// 追加する項目の文字列
-					);
-
-				sprintf(str, "%.3f", position.y);
-				SetWindowText(
-					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT3),		// スライダーのハンドル
-					str		// 追加する項目の文字列
-					);
-
-				sprintf(str, "%.3f", position.z);
-				SetWindowText(
-					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT4),		// スライダーのハンドル
-					str		// 追加する項目の文字列
-					);
-
+		// 点の選択
+		case IDC_COMBO1:
+			if (HIWORD(wParam) == CBN_SELCHANGE
+				&& Manager::GetInstance()->GetRouteManager()->GetRouteMode() == ROUTE_MODE_1P) {
+				Manager::GetInstance()->GetRouteManager()->SelectPoint(IDC_COMBO1);
+			}
+			break;
+		case IDC_COMBO3:
+			if (HIWORD(wParam) == CBN_SELCHANGE
+				&& Manager::GetInstance()->GetRouteManager()->GetRouteMode() == ROUTE_MODE_2P) {
+				Manager::GetInstance()->GetRouteManager()->SelectPoint(IDC_COMBO3);
+			}
+			break;
+		case IDC_COMBO4:
+			if (HIWORD(wParam) == CBN_SELCHANGE
+				&& Manager::GetInstance()->GetRouteManager()->GetRouteMode() == ROUTE_MODE_1P_CAMERA) {
+				Manager::GetInstance()->GetRouteManager()->SelectPoint(IDC_COMBO4);
+			}
+			break;
+		case IDC_COMBO2:
+			if (HIWORD(wParam) == CBN_SELCHANGE
+				&& Manager::GetInstance()->GetRouteManager()->GetRouteMode() == ROUTE_MODE_2P_CAMERA) {
+				Manager::GetInstance()->GetRouteManager()->SelectPoint(IDC_COMBO2);
 			}
 			break;
 
@@ -1390,6 +1478,11 @@ HWND GetRouteDialogHandle()
 HWND GetDirtDialogHandle()
 {
 	return g_dirtDialogHandle;
+}
+
+MODE GetMode()
+{
+	return g_mode;
 }
 
 

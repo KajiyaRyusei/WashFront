@@ -26,6 +26,18 @@ struct RoutePoint{
 };
 
 
+// どのルートを変更中か
+enum ROUTE_MODE {
+	ROUTE_MODE_1P = (0),
+	ROUTE_MODE_2P,
+	ROUTE_MODE_1P_CAMERA,
+	ROUTE_MODE_2P_CAMERA,
+	ROUTE_MODE_MAX
+};
+
+class SceneBillboard;
+
+
 //-----------------------------------------------------------------------------
 // クラス定義
 //-----------------------------------------------------------------------------
@@ -68,6 +80,7 @@ public:
 	// 点の生成
 	//=========================================================================
 	void CreatePoint();
+	void CreatePoint(D3DXVECTOR3 position);
 	//=========================================================================
 	// 点の挿入
 	//=========================================================================
@@ -76,6 +89,10 @@ public:
 	// 点の削除
 	//=========================================================================
 	void DeletePoint();
+	//=========================================================================
+	// 点の選択
+	//=========================================================================
+	void SelectPoint(int combo);
 
 
 	//=========================================================================
@@ -88,8 +105,10 @@ public:
 	//=========================================================================
 	// 選択中の点を設定
 	//=========================================================================
-	void SetPointListCursor(int cursor) { pointListCursor_ = cursor; }
+	void SetPointListCursor(int cursor) { pointListCursor_[routeMode_] = cursor; }
 
+	void SetRouteMode(int mode) { routeMode_ = mode; }
+	int GetRouteMode() { return routeMode_; }
 
 	//=========================================================================
 	// 座標の取得
@@ -98,8 +117,10 @@ public:
 
 private:
 
-	std::vector <RoutePoint*>	pointList_;			// ポイントのリスト
-	int							pointListCursor_;	// カーソル
+	std::vector <RoutePoint*>	pointList_[4];			// ポイントのリスト
+	int							pointListCursor_[4];	// カーソル
+	SceneBillboard				*point_;
+	int							routeMode_;
 };
 
 

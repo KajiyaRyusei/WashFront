@@ -23,7 +23,10 @@ rotation_(D3DXVECTOR3(0, 0, 0)),
 scale_(D3DXVECTOR3(1, 1, 1)),
 id_(-1),
 modelFilePath_(nullptr),
-textureFilePath_(nullptr)
+textureFilePath_(nullptr),
+selectTexture_(nullptr),
+hitTexture_(nullptr),
+state_(0)
 {
 	D3DXMatrixIdentity(&worldMatrix_);
 }
@@ -47,6 +50,10 @@ HRESULT Building::Init(const char *modelFilePath, const char *textureFilePath)
 		model_ = Manager::GetInstance()->GetModelFactory()->GetModel(modelFilePath);
 	if (textureFilePath)
 		texture_ = Manager::GetInstance()->GetTextureFactory()->GetTexture(textureFilePath);
+	selectTexture_ = Manager::GetInstance()->GetTextureFactory()->GetTexture(
+		"./Resource/Texture/Game/Select.png");
+	hitTexture_ = Manager::GetInstance()->GetTextureFactory()->GetTexture(
+		"./Resource/Texture/Game/Hit.png");
 	modelFilePath_ = (char *)modelFilePath;
 	textureFilePath_ = (char *)textureFilePath;
 
@@ -60,6 +67,10 @@ HRESULT Building::Init(const char *modelFilePath, const char *textureFilePath, D
 		model_ = Manager::GetInstance()->GetModelFactory()->GetModel(modelFilePath);
 	if (textureFilePath)
 		texture_ = Manager::GetInstance()->GetTextureFactory()->GetTexture(textureFilePath);
+	selectTexture_ = Manager::GetInstance()->GetTextureFactory()->GetTexture(
+		"./Resource/Texture/Game/Select.png");
+	hitTexture_ = Manager::GetInstance()->GetTextureFactory()->GetTexture(
+		"./Resource/Texture/Game/Hit.png");
 	modelFilePath_ = (char *)modelFilePath;
 	textureFilePath_ = (char *)textureFilePath;
 	position_ = position;
@@ -102,7 +113,19 @@ void Building::Draw()
 
 	device->SetTransform(D3DTS_WORLD, &worldMatrix_);  // s—ñ‚ÌÝ’è
 
-	device->SetTexture(0, texture_);
+	switch (state_) {
+	case SELECT_NONE:
+		device->SetTexture(0, texture_);
+		break;
+	case SELECT_HIT:
+		device->SetTexture(0, hitTexture_);
+		break;
+	case SELECT_SELECT:
+		device->SetTexture(0, selectTexture_);
+		break;
+	default:
+		break;
+	}
 	model_->Draw(worldMatrix_);
 	device->SetTexture(0, nullptr);
 }

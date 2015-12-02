@@ -21,6 +21,7 @@
     <ClInclude Include="Source\CameraManager.h" />
     <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\CollisionManager.h" />
+    <ClInclude Include="Source\Cursor.h" />
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\Dirt.h" />
     <ClInclude Include="Source\DirtManager.h" />
@@ -60,6 +61,7 @@
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\CameraManager.cpp" />
     <ClCompile Include="Source\CollisionManager.cpp" />
+    <ClCompile Include="Source\Cursor.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\Dirt.cpp" />
     <ClCompile Include="Source\DirtManager.cpp" />

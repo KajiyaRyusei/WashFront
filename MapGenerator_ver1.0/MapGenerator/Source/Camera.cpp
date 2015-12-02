@@ -53,7 +53,7 @@ void Camera::Set()
 		D3DX_PI / 4.0f,  // 視野角(π/4)
 		(float)SCREEN_WIDTH / (float)SCREEN_HEIGHT,  // アスペクト比(幅 / 高さ)
 		0.1f,  // near値
-		200.0f);  // far値
+		1000.0f);  // far値
 	device->SetTransform(D3DTS_PROJECTION, &projectionMatrix_);
 }
 
