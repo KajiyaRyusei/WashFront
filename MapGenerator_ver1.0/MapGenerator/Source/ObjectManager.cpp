@@ -181,10 +181,11 @@ Building *ObjectManager::CreateBuilding(const char *fileName, const char *textur
 
 	return building;
 }
-Building *ObjectManager::CreateBuilding(const char *fileName, const char *textureFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale)
+Building *ObjectManager::CreateBuilding(const char *fileName, const char *textureFilePath,
+	D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale, bool collision)
 {
 	Building *building = new Building();
-	building->Init(fileName, textureFilePath, position, rotation, scale);
+	building->Init(fileName, textureFilePath, position, rotation, scale, collision);
 
 	buildingList_.push_back(building);
 
@@ -207,9 +208,10 @@ Building *ObjectManager::CopyBuilding()
 	D3DXVECTOR3 position = b->GetPosition();
 	D3DXVECTOR3 rotation = b->GetRotation();
 	D3DXVECTOR3 scale = b->GetScale();
+	bool collision = b->GetCollision();
 
 
-	return CreateBuilding(modelPath, texturePath, position, rotation, scale);
+	return CreateBuilding(modelPath, texturePath, position, rotation, scale, collision);
 }
 
 
@@ -380,12 +382,14 @@ void ObjectManager::SaveBuildingData(FILE *outputFile)
 		char *textureFilePath = (*itr)->GetTextureFilePath();
 		int modelFileID = ifm->GetModelFilePathID(modelFilePath);
 		int textureFileID = ifm->GetTextureFilePathID(textureFilePath);
+		bool collision = (*itr)->GetCollision();
 
 		fprintf(outputFile, "%d ", modelFileID);
 		fprintf(outputFile, "%d ", textureFileID);
 		fprintf(outputFile, "%f %f %f ", position.x, position.y, position.z);
 		fprintf(outputFile, "%f %f %f ", rotation.x, rotation.y, rotation.z);
-		fprintf(outputFile, "%f %f %f", scale.x, scale.y, scale.z);
+		fprintf(outputFile, "%f %f %f ", scale.x, scale.y, scale.z);
+		fprintf(outputFile, "%d", collision);
 		fprintf(outputFile, "\n");
 
 		i++;
@@ -428,17 +432,19 @@ void ObjectManager::ReadBuildingData(FILE *inputFile)
 				D3DXVECTOR3 position;
 				D3DXVECTOR3 rotation;
 				D3DXVECTOR3 scale;
-				fscanf(inputFile, "%d %d %f %f %f %f %f %f %f %f %f",
+				int collision;
+				fscanf(inputFile, "%d %d %f %f %f %f %f %f %f %f %f %d",
 					&modelID, &textureID,
 					&position.x, &position.y, &position.z,
 					&rotation.x, &rotation.y, &rotation.z,
-					&scale.x, &scale.y, &scale.z
+					&scale.x, &scale.y, &scale.z,
+					&collision
 					);
 
 				CreateBuilding(
 					Manager::GetInstance()->GetImportFileManager()->GetModelFilePath(modelID),
 					Manager::GetInstance()->GetImportFileManager()->GetTextureFilePath(textureID),
-					position, rotation, scale);
+					position, rotation, scale, (bool)collision);
 			}
 		}
 	}

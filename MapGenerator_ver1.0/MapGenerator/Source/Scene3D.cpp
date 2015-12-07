@@ -41,7 +41,7 @@ Scene3D::~Scene3D()
 //=============================================================================
 // 初期化処理
 //=============================================================================
-HRESULT Scene3D::Init(D3DXVECTOR3 pos)
+HRESULT Scene3D::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size, char *texturePath)
 {
 	position_ = pos;
 
@@ -63,9 +63,9 @@ HRESULT Scene3D::Init(D3DXVECTOR3 pos)
 		return E_FAIL;
 	}
 
-	float fAngle = atan2f(POLYGON_WIDTH / 2, POLYGON_DEPTH / 2);  // 対角線のなす角初期化
-	float fLength = sqrtf((POLYGON_WIDTH / 2) * (POLYGON_WIDTH / 2) 
-							+(POLYGON_DEPTH / 2) * (POLYGON_DEPTH / 2));  // 対角線の長さ初期化
+	float fAngle = atan2f(size.x / 2, size.y / 2);  // 対角線のなす角初期化
+	float fLength = sqrtf((size.x / 2) * (size.x / 2) 
+							+(size.y / 2) * (size.y / 2));  // 対角線の長さ初期化
 
 
 	// 頂点座標の設定
@@ -82,10 +82,10 @@ HRESULT Scene3D::Init(D3DXVECTOR3 pos)
 	pVtx[2].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	pVtx[3].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 
-	pVtx[0].diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
-	pVtx[1].diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
-	pVtx[2].diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
-	pVtx[3].diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	pVtx[0].diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	pVtx[1].diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	pVtx[2].diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	pVtx[3].diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 
 	// テクスチャ情報の初期化
 	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
@@ -94,6 +94,9 @@ HRESULT Scene3D::Init(D3DXVECTOR3 pos)
 	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
 
 	vertexBuffer_->Unlock();  // 頂点情報をアンロック
+
+
+	SetTexture(texturePath);
 
 
 	return S_OK;
@@ -137,20 +140,6 @@ void Scene3D::Draw()
 	device->SetFVF(FVF_VERTEX_3D);  // 頂点フォーマットの設定
 	device->SetTexture(0, texture_);  // テクスチャの設定
 	device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);  // ポリゴンの描画
-}
-
-//=============================================================================
-// 生成処理
-//=============================================================================
-Scene3D *Scene3D::Create(D3DXVECTOR3 pos)
-{
-	// 生成
-	Scene3D *scene3D = new Scene3D;
-	// 初期化
-	scene3D->Init(pos);
-
-
-	return scene3D;
 }
 
 

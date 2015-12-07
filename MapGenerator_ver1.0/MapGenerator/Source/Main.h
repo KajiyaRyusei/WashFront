@@ -54,7 +54,7 @@ HWND GetWindowHandle();
 // インライン関数定義
 //-----------------------------------------------------------------------------
 // 角度の正規化
-static inline void NormalizeRotation(float r) {
+static inline void NormalizeRotation(float &r) {
 	if (r < -D3DX_PI) {
 		r += D3DX_PI * 2;
 	} else if (D3DX_PI < r) {

@@ -14,6 +14,7 @@
 #include "RouteManager.h"
 #include "DirtManager.h"
 #include "Cursor.h"
+#include "CameraManager.h"
 #include <commctrl.h>
 
 
@@ -409,9 +410,9 @@ BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (Msg) {
 
-	// ダイアログ初期化
+		// ダイアログ初期化
 	case WM_INITDIALOG:
-
+	{
 		// スピンコントロールとエディットボックスの関連付け
 
 		SendMessage(
@@ -432,6 +433,7 @@ BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 			(WPARAM)GetDlgItem(hDlg, IDC_EDIT4),	// 関連付けるコントロールのハンドル
 			0										// 0固定
 			);
+	}
 		return TRUE;
 
 		break;
@@ -552,6 +554,18 @@ BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
+		case IDC_CHECK1:
+		{
+			bool check;
+			Building *building = Manager::GetInstance()->GetObjectManager()->GetSelectBuilding();
+			if (building) {
+				check = SendMessage((HWND)GetDlgItem(hDlg, IDC_CHECK1), (UINT)BM_GETCHECK, 0, 0);
+				building->SetCollision(check);
+			}
+		}
+			break;
+
+
 		default:
 			return FALSE;
 		}
@@ -589,6 +603,144 @@ BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 
+
+	case WM_NOTIFY:
+		if (wParam == (WPARAM)IDC_SPIN1)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT2),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 1.f;
+				} else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 1.f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT2, (LPCTSTR)str);
+			}
+		}
+		if (wParam == (WPARAM)IDC_SPIN2)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT3),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 1.f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 1.f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT3, (LPCTSTR)str);
+			}
+		}
+		if (wParam == (WPARAM)IDC_SPIN3)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT4),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 1.f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 1.f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT4, (LPCTSTR)str);
+			}
+		}
+
+
+		if (wParam == (WPARAM)IDC_SPIN4)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT5),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 0.1f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 0.1f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT5, (LPCTSTR)str);
+			}
+		}
+		if (wParam == (WPARAM)IDC_SPIN5)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT6),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 0.1f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 0.1f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT6, (LPCTSTR)str);
+			}
+		}
+		if (wParam == (WPARAM)IDC_SPIN6)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT7),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 0.1f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 0.1f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT7, (LPCTSTR)str);
+			}
+		}
+		break;
+
+		return TRUE;
 
 	case WM_CLOSE:
 		EndDialog(hDlg, 0);
@@ -761,6 +913,7 @@ void ClickLeftEventObjectMode()
 		D3DXVECTOR3 position = building->GetPosition();
 		D3DXVECTOR3 rotation = building->GetRotation();
 		D3DXVECTOR3 scale = building->GetScale();
+		bool collision = building->GetCollision();
 
 
 		// 向きスライダー
@@ -826,6 +979,14 @@ void ClickLeftEventObjectMode()
 			str		// 追加する項目の文字列
 			);
 
+
+		if (collision)
+			SendMessage((HWND)GetDlgItem(g_objectDialogHandle, IDC_CHECK1),
+				(UINT)BM_SETCHECK, (WPARAM)BST_CHECKED, 0);
+		else
+			SendMessage((HWND)GetDlgItem(g_objectDialogHandle, IDC_CHECK1),
+			(UINT)BM_SETCHECK, (WPARAM)BST_UNCHECKED, 0);
+
 	}
 }
 
@@ -833,7 +994,18 @@ void ClickLeftEventObjectMode()
 void ClickLeftEventRouteMode()
 {
 	D3DXVECTOR3 position = Manager::GetInstance()->GetObjectManager()->GetCursor()->GetPosition();
-	Manager::GetInstance()->GetRouteManager()->CreatePoint(position);
+
+	HWND radio1 = GetDlgItem(g_routeDialogHandle, IDC_RADIO6);
+	HWND radio2 = GetDlgItem(g_routeDialogHandle, IDC_RADIO7);
+	
+	// 生成 : 追加
+	if (SendMessage(radio1, BM_GETCHECK, 0, 0) == 1) {
+		Manager::GetInstance()->GetRouteManager()->CreatePoint(position);
+	}
+	// 生成 : 挿入
+	if (SendMessage(radio2, BM_GETCHECK, 0, 0) == 1) {
+		Manager::GetInstance()->GetRouteManager()->InsertPoint(position);
+	}
 }
 
 // 左クリック時のイベント
@@ -957,6 +1129,12 @@ BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 			(WPARAM)GetDlgItem(hDlg, IDC_EDIT4),	// 関連付けるコントロールのハンドル
 			0										// 0固定
 			);
+		SendMessage(
+			(HWND)GetDlgItem(hDlg, IDC_SPIN11),		// スピンコントロールのハンドル
+			(UINT)UDM_SETBUDDY,
+			(WPARAM)GetDlgItem(hDlg, IDC_EDIT11),	// 関連付けるコントロールのハンドル
+			0										// 0固定
+			);
 
 
 		// モードの設定
@@ -970,10 +1148,12 @@ BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 
 		HWND combo = GetDlgItem(hDlg, IDC_COMBO5);
-		SendMessage((HWND)combo, (UINT)CB_ADDSTRING, 0, (LPARAM)"1P");
-		SendMessage((HWND)combo, (UINT)CB_ADDSTRING, 0, (LPARAM)"2P");
 		SendMessage((HWND)combo, (UINT)CB_ADDSTRING, 0, (LPARAM)"1Pカメラ");
 		SendMessage((HWND)combo, (UINT)CB_ADDSTRING, 0, (LPARAM)"2Pカメラ");
+
+		combo = GetDlgItem(hDlg, IDC_COMBO1);
+		SendMessage((HWND)combo, (UINT)CB_ADDSTRING, 0, (LPARAM)"通常");
+		SendMessage((HWND)combo, (UINT)CB_ADDSTRING, 0, (LPARAM)"イベント");
 
 	}
 		return TRUE;
@@ -988,6 +1168,15 @@ BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 		case IDCANCEL:
 			return TRUE;
 
+		// プレビュー再生
+		case IDC_BUTTON2:
+			Manager::GetInstance()->GetCameraManager()->ChangePreviewCamera();
+			break;
+
+		// プレビュー停止
+		case IDC_BUTTON3:
+			Manager::GetInstance()->GetCameraManager()->ChangeEditorCamera();
+			break;
 
 			// ルートの選択
 		case IDC_COMBO5:
@@ -1010,18 +1199,6 @@ BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 
 		// 点の選択
-		case IDC_COMBO1:
-			if (HIWORD(wParam) == CBN_SELCHANGE
-				&& Manager::GetInstance()->GetRouteManager()->GetRouteMode() == ROUTE_MODE_1P) {
-				Manager::GetInstance()->GetRouteManager()->SelectPoint(IDC_COMBO1);
-			}
-			break;
-		case IDC_COMBO3:
-			if (HIWORD(wParam) == CBN_SELCHANGE
-				&& Manager::GetInstance()->GetRouteManager()->GetRouteMode() == ROUTE_MODE_2P) {
-				Manager::GetInstance()->GetRouteManager()->SelectPoint(IDC_COMBO3);
-			}
-			break;
 		case IDC_COMBO4:
 			if (HIWORD(wParam) == CBN_SELCHANGE
 				&& Manager::GetInstance()->GetRouteManager()->GetRouteMode() == ROUTE_MODE_1P_CAMERA) {
@@ -1094,9 +1271,173 @@ BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
+			// Speed
+		case IDC_EDIT11:
+			if (HIWORD(wParam) == EN_UPDATE) {
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(g_routeDialogHandle, IDC_EDIT11),		// スライダーのハンドル
+					str, 4096);
+				double speed = atof(str);
+				Manager::GetInstance()->GetRouteManager()->SetSpeed((float)speed);
+			}
+			break;
+
+
+			// state
+		case IDC_COMBO1:
+		{
+			HWND hCombo = GetDlgItem(hDlg, IDC_COMBO1);
+			int index = SendMessage(
+				(HWND)hCombo,			// コンボボックスのハンドル
+				(UINT)CB_GETCURSEL,		// 選択中のインデックス取得
+				0,						// ０固定
+				0						// 追加する項目の文字列
+				);
+
+			Manager::GetInstance()->GetRouteManager()->SetState(index);
+		}
+			break;
 
 		default:
 			break;
+		}
+		break;
+
+		// 水平スライダーの値を取得
+	case WM_HSCROLL:
+	{
+
+		float position = (float)SendMessage(
+			(HWND)lParam,			// スライダーのハンドル
+			(UINT)TBM_GETPOS,		// 座標の取得(0～100)
+			0,						// ０固定
+			0						// 追加する項目の文字列
+			);
+
+		// 向き : X軸スライダー
+		if ((HWND)lParam == GetDlgItem(hDlg, IDC_SLIDER1)) {
+			Manager::GetInstance()->GetRouteManager()->SetRotationX(
+				(position / 100 - 0.5f) * D3DX_PI * 2);
+		}
+		// 向き : Y軸スライダー
+		if ((HWND)lParam == GetDlgItem(hDlg, IDC_SLIDER2)) {
+			Manager::GetInstance()->GetRouteManager()->SetRotationY(
+				(position / 100 - 0.5f) * D3DX_PI * 2);
+		}
+		// 向き : Z軸スライダー
+		if ((HWND)lParam == GetDlgItem(hDlg, IDC_SLIDER3)) {
+			Manager::GetInstance()->GetRouteManager()->SetRotationZ(
+				(position / 100 - 0.5f) * D3DX_PI * 2);
+		}
+
+		// PlayerDirection : X
+		if ((HWND)lParam == GetDlgItem(hDlg, IDC_SLIDER4)) {
+			Manager::GetInstance()->GetRouteManager()->SetPlayerDirectionX(
+				(position / 100 - 0.5f) * D3DX_PI * 2);
+		}
+		// PlayerDirection : Y
+		if ((HWND)lParam == GetDlgItem(hDlg, IDC_SLIDER8)) {
+			Manager::GetInstance()->GetRouteManager()->SetPlayerDirectionY(
+				(position / 100 - 0.5f) * D3DX_PI * 2);
+		}
+		// PlayerDirection : Z
+		if ((HWND)lParam == GetDlgItem(hDlg, IDC_SLIDER9)) {
+			Manager::GetInstance()->GetRouteManager()->SetPlayerDirectionZ(
+				(position / 100 - 0.5f) * D3DX_PI * 2);
+		}
+	}
+		break;
+
+	case WM_NOTIFY:
+		if (wParam == (WPARAM)IDC_SPIN1)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT2),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 1.f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 1.f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT2, (LPCTSTR)str);
+			}
+		}
+		if (wParam == (WPARAM)IDC_SPIN2)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT3),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 1.f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 1.f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT3, (LPCTSTR)str);
+			}
+		}
+		if (wParam == (WPARAM)IDC_SPIN3)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT4),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 1.f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 1.f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT4, (LPCTSTR)str);
+			}
+		}
+
+		if (wParam == (WPARAM)IDC_SPIN11)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT11),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 0.01f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 0.01f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT11, (LPCTSTR)str);
+			}
 		}
 		break;
 
@@ -1139,7 +1480,9 @@ void ReadRouteFile(HWND hWnd)
 		if (file) {
 
 			// 現在の状況破棄
-			HWND hCombo = GetDlgItem(g_routeDialogHandle, IDC_COMBO1);
+			HWND hCombo = GetDlgItem(g_routeDialogHandle, IDC_COMBO4);
+			SendMessage((HWND)hCombo, (UINT)CB_RESETCONTENT, 0, 0);
+			hCombo = GetDlgItem(g_routeDialogHandle, IDC_COMBO2);
 			SendMessage((HWND)hCombo, (UINT)CB_RESETCONTENT, 0, 0);
 			Manager::GetInstance()->GetRouteManager()->AllDeletePoint();
 
@@ -1371,6 +1714,99 @@ BOOL CALLBACK DirtDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 		default:
 			break;
+		}
+		break;
+
+
+	case WM_NOTIFY:
+		if (wParam == (WPARAM)IDC_SPIN1)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT2),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 1.f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 1.f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT2, (LPCTSTR)str);
+			}
+		}
+		if (wParam == (WPARAM)IDC_SPIN2)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT3),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 1.f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 1.f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT3, (LPCTSTR)str);
+			}
+		}
+		if (wParam == (WPARAM)IDC_SPIN3)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT4),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 1.f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 1.f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT4, (LPCTSTR)str);
+			}
+		}
+
+		if (wParam == (WPARAM)IDC_SPIN7)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT5),		// スライダーのハンドル
+					str, 4096);
+				double positionX = atof(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					positionX += 1.f;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					positionX -= 1.f;
+				}
+				sprintf(str, "%.3f", positionX);
+				SetDlgItemText(hDlg, IDC_EDIT5, (LPCTSTR)str);
+			}
 		}
 		break;
 

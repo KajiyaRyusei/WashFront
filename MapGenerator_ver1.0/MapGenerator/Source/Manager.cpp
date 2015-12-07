@@ -146,7 +146,7 @@ HRESULT Manager::Init(HINSTANCE instance, HWND wnd, BOOL window)
 	// カメラマネージャの生成
 	cameraManager_ = new CameraManager();
 	cameraManager_->Init();
-	cameraManager_->CreateEditorCamera();
+	cameraManager_->ChangeEditorCamera();
 
 	// ファイル読み込みマネージャの生成
 	importFileManager_ = new ImportFileManager();

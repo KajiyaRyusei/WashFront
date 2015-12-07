@@ -128,6 +128,7 @@ HRESULT Renderer::Init(HINSTANCE instance, HWND wnd, BOOL window)
 
 
     // ƒtƒHƒO
+	/*
     device_->SetRenderState(D3DRS_FOGENABLE, TRUE);
     device_->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.1f));
 	device_->SetRenderState(D3DRS_FOGTABLEMODE, D3DFOG_LINEAR);
@@ -135,7 +136,7 @@ HRESULT Renderer::Init(HINSTANCE instance, HWND wnd, BOOL window)
     float end = 200;
     device_->SetRenderState(D3DRS_FOGSTART, *(DWORD *)(&start));
     device_->SetRenderState(D3DRS_FOGEND, *(DWORD *)(&end));
-
+	*/
 
 	return S_OK;
 }

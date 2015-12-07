@@ -26,7 +26,8 @@ modelFilePath_(nullptr),
 textureFilePath_(nullptr),
 selectTexture_(nullptr),
 hitTexture_(nullptr),
-state_(0)
+state_(0),
+collision_(false)
 {
 	D3DXMatrixIdentity(&worldMatrix_);
 }
@@ -61,7 +62,8 @@ HRESULT Building::Init(const char *modelFilePath, const char *textureFilePath)
 	return S_OK;
 }
 
-HRESULT Building::Init(const char *modelFilePath, const char *textureFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale)
+HRESULT Building::Init(const char *modelFilePath, const char *textureFilePath,
+	D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale, bool collision)
 {
 	if (modelFilePath)
 		model_ = Manager::GetInstance()->GetModelFactory()->GetModel(modelFilePath);
@@ -76,6 +78,8 @@ HRESULT Building::Init(const char *modelFilePath, const char *textureFilePath, D
 	position_ = position;
 	rotation_ = rotation;
 	scale_ = scale;
+	collision_ = collision;
+
 
 	return S_OK;
 }

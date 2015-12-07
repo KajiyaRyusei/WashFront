@@ -45,7 +45,8 @@ public:
 	//=========================================================================
 	HRESULT Init();
 	HRESULT Init(const char *modelFilePath, const char *textureFilePath);
-	HRESULT Init(const char *modelFilePath, const char *textureFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale);
+	HRESULT Init(const char *modelFilePath, const char *textureFilePath,
+		D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale, bool collision);
 	//=========================================================================
 	// 更新処理
 	//=========================================================================
@@ -67,6 +68,8 @@ public:
 	// IDの取得
 	//=========================================================================
 	int GetId() { return id_; };
+
+	bool GetCollision() { return collision_; }
 
 	//=========================================================================
 	// ファイルパスの取得
@@ -116,6 +119,7 @@ public:
 	//=========================================================================
 	void SetScaleZ(float z) { scale_.z = z; };
 
+	void SetCollision(bool collision) { collision_ = collision; }
 
 	//=========================================================================
 	// 回転角の設定
@@ -144,6 +148,8 @@ protected:
 
 	char		*modelFilePath_;
 	char		*textureFilePath_;
+
+	bool		collision_;
 };
 
 

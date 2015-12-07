@@ -11,6 +11,7 @@
 #include "Main.h"
 #include "Camera.h"
 #include "EditorCamera.h"
+#include "PreviewCamera.h"
 
 
 //-----------------------------------------------------------------------------
@@ -49,27 +50,22 @@ public:
 	Camera *GetCamera() { return camera_; };
 
 	//=========================================================================
-	// カメラの解放
-	//=========================================================================
-	void ReleaseCamera() {
-		if (camera_) {
-			delete camera_;
-			camera_ = nullptr;
-		}
-	};
-	//=========================================================================
 	// ゲームカメラの生成
 	//=========================================================================
-	void CreateEditorCamera() {
-		if (!camera_) {
-			camera_ = new EditorCamera();
-			camera_->Init();
-		}
+	void ChangeEditorCamera() {
+		camera_ = edit_;
+		//camera_->Init();
+	};
+	void ChangePreviewCamera() {
+		camera_ = preview_;
+		camera_->Init();
 	};
 
 
 private:
-	Camera *camera_;	// カメラ
+	Camera *camera_;
+	Camera *edit_;
+	Camera *preview_;
 };
 
 

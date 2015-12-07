@@ -24,10 +24,8 @@ camera_(nullptr)
 CameraManager::~CameraManager()
 {
 	// ƒJƒƒ‰‚Ì‰ð•ú
-	if (camera_) {
-		delete camera_;
-		camera_ = nullptr;
-	}
+	SafeDelete(edit_);
+	SafeDelete(preview_);
 }
 
 //=========================================================================
@@ -38,6 +36,12 @@ HRESULT CameraManager::Init()
 	// ƒJƒƒ‰‚ÌÝ’è
 	//camera_ = new Camera();
 	//camera_->Init();
+
+	edit_ = new EditorCamera();
+	edit_->Init();
+
+	preview_ = new PreviewCamera();
+
 
 	return S_OK;
 }

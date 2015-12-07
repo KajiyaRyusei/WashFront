@@ -22,20 +22,23 @@ using namespace std;
 // 構造体宣言
 //-----------------------------------------------------------------------------
 struct RoutePoint{
-	D3DXVECTOR3 position;
+	D3DXVECTOR3	position;
+	D3DXVECTOR3	rotation;
+	D3DXVECTOR3	playerDirection;
+	float		speed;
+	int			state;
 };
 
 
 // どのルートを変更中か
 enum ROUTE_MODE {
-	ROUTE_MODE_1P = (0),
-	ROUTE_MODE_2P,
-	ROUTE_MODE_1P_CAMERA,
+	ROUTE_MODE_1P_CAMERA = (0),
 	ROUTE_MODE_2P_CAMERA,
 	ROUTE_MODE_MAX
 };
 
 class SceneBillboard;
+class Scene3D;
 
 
 //-----------------------------------------------------------------------------
@@ -85,6 +88,7 @@ public:
 	// 点の挿入
 	//=========================================================================
 	void InsertPoint();
+	void InsertPoint(D3DXVECTOR3 position);
 	//=========================================================================
 	// 点の削除
 	//=========================================================================
@@ -101,6 +105,14 @@ public:
 	void SetPositionX(float positionX);
 	void SetPositionY(float positionY);
 	void SetPositionZ(float positionZ);
+	void SetRotationX(float rotationX);
+	void SetRotationY(float rotationY);
+	void SetRotationZ(float rotationZ);
+	void SetPlayerDirectionX(float playerDirectionX);
+	void SetPlayerDirectionY(float playerDirectionY);
+	void SetPlayerDirectionZ(float playerDirectionZ);
+	void SetSpeed(float speed);
+	void SetState(int state);
 
 	//=========================================================================
 	// 選択中の点を設定
@@ -114,12 +126,20 @@ public:
 	// 座標の取得
 	//=========================================================================
 	D3DXVECTOR3 GetPosition();
+	D3DXVECTOR3 GetRotation();
+	D3DXVECTOR3 GetPlayerDirection();
+	float GetSpeed();
+	int GetState();
+
+	RoutePoint GetRoutePoint(int cursor);
 
 private:
 
-	std::vector <RoutePoint*>	pointList_[4];			// ポイントのリスト
-	int							pointListCursor_[4];	// カーソル
+	std::vector <RoutePoint*>	pointList_[2];			// ポイントのリスト
+	int							pointListCursor_[2];	// カーソル
 	SceneBillboard				*point_;
+	Scene3D						*cameraAllow_;
+	Scene3D						*playerAllow_;
 	int							routeMode_;
 };
 

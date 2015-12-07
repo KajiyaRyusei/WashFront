@@ -26,7 +26,7 @@ public:
 	// 初期化処理
 	//=========================================================================
 	virtual HRESULT Init() { return S_OK; };
-	HRESULT Init(D3DXVECTOR3 pos);
+	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR2 size, char *texturePath);
 	//=========================================================================
 	// 更新処理
 	//=========================================================================
@@ -35,10 +35,10 @@ public:
 	// 描画処理
 	//=========================================================================
 	virtual void Draw();
-	//=========================================================================
-	// 生成処理
-	//=========================================================================
-	static Scene3D *Create(D3DXVECTOR3 pos);
+
+
+	void SetRotation(D3DXVECTOR3 rotation) { rotation_ = rotation; }
+
 
 protected:
 	LPDIRECT3DVERTEXBUFFER9	vertexBuffer_;  // 頂点情報格納ワーク

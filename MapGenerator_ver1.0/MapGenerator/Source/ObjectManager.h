@@ -73,7 +73,8 @@ public:
 	// インスタンスの生成
 	//=========================================================================
 	Building *CreateBuilding(const char *modelFileName, const char *textureFilePath);
-	Building *CreateBuilding(const char *fileName, const char *textureFilePath, D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale);
+	Building *CreateBuilding(const char *fileName, const char *textureFilePath,
+		D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale, bool collision);
 	Building *CopyBuilding();
 
 	//=========================================================================
