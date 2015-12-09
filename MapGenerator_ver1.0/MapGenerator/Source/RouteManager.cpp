@@ -203,19 +203,24 @@ void RouteManager::OutputData(FILE *outputFile)
 			D3DXVECTOR3 playerDirection = (*itr)->playerDirection;
 			float speed = (*itr)->speed;
 			int state = (*itr)->state;
-			D3DXQUATERNION q;
-			D3DXMATRIX m;
-			D3DXMatrixIdentity(&m);
-			D3DXMatrixRotationYawPitchRoll(&m, rotation.y, rotation.x, rotation.z);
-			D3DXQuaternionRotationMatrix(&q, &m);
+			D3DXQUATERNION rotationQuaternion, directionQuaternion;
+			D3DXMATRIX rotationMatrix, directionMatrix;
+			D3DXMatrixIdentity(&rotationMatrix);
+			D3DXMatrixRotationYawPitchRoll(&rotationMatrix, rotation.y, rotation.x, rotation.z);
+			D3DXQuaternionRotationMatrix(&rotationQuaternion, &rotationMatrix);
+			D3DXMatrixIdentity(&directionMatrix);
+			D3DXMatrixRotationYawPitchRoll(&directionMatrix, rotation.y, rotation.x, rotation.z);
+			D3DXQuaternionRotationMatrix(&directionQuaternion, &directionMatrix);
 
 
 			fprintf(outputFile, "%d ", n);
-			fprintf(outputFile, "%f %f %f %f %f %f %f %f %f %f %f %f %f %f %d",
+			fprintf(outputFile, "%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %d",
 				position.x, position.y, position.z,
 				rotation.x, rotation.y, rotation.z,
-				q.x, q.y, q.z, q.w,
-				playerDirection.x, playerDirection.y, playerDirection.z, speed, state);
+				rotationQuaternion.x, rotationQuaternion.y, rotationQuaternion.z, rotationQuaternion.w,
+				playerDirection.x, playerDirection.y, playerDirection.z,
+				directionQuaternion.x, directionQuaternion.y, directionQuaternion.z, directionQuaternion.w,
+				speed, state);
 			fprintf(outputFile, "\n");
 
 			n++;
@@ -262,16 +267,17 @@ void RouteManager::InputData(FILE *inputFile)
 					D3DXVECTOR3 playerDirection;
 					float speed;
 					int state;
-					D3DXQUATERNION q;
+					D3DXQUATERNION q1, q2;
 					D3DXVECTOR3 rotation;
 
 
-					fscanf(inputFile, "%d %f %f %f %f %f %f %f %f %f %f %f %f %f %f %d",
+					fscanf(inputFile, "%d %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %d",
 						&ID,
 						&position.x, &position.y, &position.z,
 						&rotation.x, &rotation.y, &rotation.z,
-						&q.x, &q.y, &q.z, &q.w,
+						&q1.x, &q1.y, &q1.z, &q1.w,
 						&playerDirection.x, &playerDirection.y, &playerDirection.z,
+						&q2.x, &q2.y, &q2.z, &q2.w,
 						&speed, &state);
 
 
@@ -777,12 +783,16 @@ int RouteManager::GetState()
 
 
 
-RoutePoint RouteManager::GetRoutePoint(int cursor)
+RoutePoint *RouteManager::GetRoutePoint(int index, int cursor)
 {
-	int size = pointList_[0].size();
-	RoutePoint *p = pointList_[0].at(cursor % size);
+	RoutePoint *p = nullptr;
 
-	return *p;
+	if (0 <= index && index <= 1) {
+		int size = pointList_[index].size();
+		p = pointList_[index].at(cursor % size);
+	}
+
+	return p;
 }
 
 

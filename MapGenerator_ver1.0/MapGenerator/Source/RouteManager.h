@@ -131,7 +131,7 @@ public:
 	float GetSpeed();
 	int GetState();
 
-	RoutePoint GetRoutePoint(int cursor);
+	RoutePoint *GetRoutePoint(int index, int cursor);
 
 private:
 

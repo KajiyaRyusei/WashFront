@@ -13,6 +13,8 @@
 #include "RouteManager.h"
 
 
+class SceneBillboard;
+
 //-----------------------------------------------------------------------------
 // ÉNÉâÉXíËã`
 //-----------------------------------------------------------------------------
@@ -28,6 +30,7 @@ public:
 	// èâä˙âªèàóù
 	//=========================================================================
 	HRESULT Init();
+	HRESULT Init(int index);
 	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 focus_pos) { return S_OK; };
 
 	//=========================================================================
@@ -39,8 +42,10 @@ public:
 private:
 	float		length_;
 	float		time_;
-	RoutePoint	currentPoint_;
-	RoutePoint	nextPoint_;
+	RoutePoint	*currentPoint_;
+	RoutePoint	*nextPoint_;
+	int			index_;
+	SceneBillboard *player_;
 };
 
 

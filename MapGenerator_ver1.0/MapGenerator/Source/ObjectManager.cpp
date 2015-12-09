@@ -111,8 +111,8 @@ HRESULT ObjectManager::Init()
 	//	D3DXVECTOR3(0.0f, 0.0f, 0.0f), 50, 50, 100.0f);
 
 	field_ = MeshField::Create(
-		10, 10, 100.f, 100.f,
-		D3DXVECTOR3(500.f, 0.f, 500.f), D3DXVECTOR3(0.f, 0.f, 0.f));
+		1, 1, 500.f, 500.f,
+		D3DXVECTOR3(250.f, 0.f, 250.f), D3DXVECTOR3(0.f, 0.f, 0.f));
 	field_->SetTexture("./Resource/Texture/Game/Grid.png");
 
 	cursor_ = new Cursor();

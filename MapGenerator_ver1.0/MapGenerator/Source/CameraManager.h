@@ -56,9 +56,9 @@ public:
 		camera_ = edit_;
 		//camera_->Init();
 	};
-	void ChangePreviewCamera() {
+	void ChangePreviewCamera(int index) {
 		camera_ = preview_;
-		camera_->Init();
+		static_cast<PreviewCamera*>(camera_)->Init(index);
 	};
 
 

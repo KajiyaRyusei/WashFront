@@ -559,7 +559,7 @@ BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 			bool check;
 			Building *building = Manager::GetInstance()->GetObjectManager()->GetSelectBuilding();
 			if (building) {
-				check = SendMessage((HWND)GetDlgItem(hDlg, IDC_CHECK1), (UINT)BM_GETCHECK, 0, 0);
+				check = (bool)SendMessage((HWND)GetDlgItem(hDlg, IDC_CHECK1), (UINT)BM_GETCHECK, 0, 0);
 				building->SetCollision(check);
 			}
 		}
@@ -1170,7 +1170,11 @@ BOOL CALLBACK RouteDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 		// プレビュー再生
 		case IDC_BUTTON2:
-			Manager::GetInstance()->GetCameraManager()->ChangePreviewCamera();
+		{
+			HWND combo = GetDlgItem(hDlg, IDC_COMBO5);
+			int index = SendMessage((HWND)combo, (UINT)CB_GETCURSEL, 0, (LPARAM)0);
+			Manager::GetInstance()->GetCameraManager()->ChangePreviewCamera(index);
+		}
 			break;
 
 		// プレビュー停止

@@ -40,7 +40,7 @@ EditorCamera::EditorCamera()
 	upperVector_ = D3DXVECTOR3(0.0f, 1.0f, 0.0f);  // 上方向ベクトル
 	rotation_ = D3DXVECTOR3(0.0f, 0.0f, 0.0f);  // 向き
 	D3DXMatrixIdentity(&viewMatrix_);  // ビューマトリクス
-	D3DXMatrixIdentity(&projectionMatrix_);;  // プロジェクションマトリクス
+	D3DXMatrixIdentity(&projectionMatrix_);  // プロジェクションマトリクス
 	destRotation_ = rotation_;
 }
 
@@ -103,9 +103,9 @@ void EditorCamera::Update()
 	// マウスホイールクリックで平行移動
 	if (state.rgbButtons[BUTTON_SCROLL] & BUTTON_MASK) {
 		// カメラの視点の更新
-		position_.x += sinf(rotation_.y - D3DX_PI / 2) * state.lX * CAMERA_SPEED;
-		position_.y += sinf(rotation_.x + D3DX_PI / 2) * state.lY * CAMERA_SPEED;
-		position_.z += cosf(rotation_.y - D3DX_PI / 2) * state.lX * CAMERA_SPEED;
+		position_.x += sinf(rotation_.y - D3DX_PI / 2) * state.lX * CAMERA_SPEED * (length_ * 0.1f);
+		position_.y += sinf(rotation_.x + D3DX_PI / 2) * state.lY * CAMERA_SPEED * (length_ * 0.1f);
+		position_.z += cosf(rotation_.y - D3DX_PI / 2) * state.lX * CAMERA_SPEED * (length_ * 0.1f);
 
 		// カメラの注視点の更新
 		lookPosition_.x = position_.x + sinf(rotation_.y) * cosf(rotation_.x) * length_;
@@ -114,7 +114,7 @@ void EditorCamera::Update()
 	} else {
 		// マウスホイールでズーム
 		length_ -= 0.03f * state.lZ;
-		if (length_ < 0.01f) {
+		if (length_ < 0.2f) {
 			length_ = 0.2f;
 		}
 
