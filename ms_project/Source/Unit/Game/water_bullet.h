@@ -18,6 +18,7 @@
 //*****************************************************************************
 // 前方宣言
 class ShaderWater;
+class PlayerUnit;
 
 //*****************************************************************************
 // クラス設計
@@ -39,9 +40,10 @@ public:
 
 
 	// 発射
-	void Fire(
-		const D3DXVECTOR3& start,
-		const D3DXVECTOR3& end);
+	void Fire(const D3DXVECTOR3& end);
+
+	// セットプレイヤー
+	void SetPlayer(PlayerUnit* player){ _player = player; }
 
 private:
 
@@ -60,4 +62,7 @@ private:
 	fx32 _rotation_y;
 	fx32 _destination_release_of;
 	fx32 _release_of;
+
+	// プレイヤー
+	PlayerUnit* _player;
 };

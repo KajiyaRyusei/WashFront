@@ -38,10 +38,7 @@ public:
 	virtual void CollisionUpdate() override;
 
 	// ç¿ïWÇÃê›íË
-	void SetPosition(
-		const D3DXVECTOR3& position,
-		const D3DXVECTOR3& rotation,
-		const D3DXMATRIX& animation_matrix);
+	void SetPosition(const D3DXVECTOR3& position);
 
 private:
 

@@ -20,6 +20,8 @@
 #include "Resource/texture_resource.h"
 #include "Resource/mesh_resource.h"
 
+#include "Unit/Game/player.h"
+
 //*****************************************************************************
 // 定数
 namespace
@@ -69,8 +71,6 @@ void WaterBulletUnit::Update()
 		_destination_release_of = 0.f;
 	}
 
-	// シェーダパラメーターの更新
-	SettingShaderParameter();
 }
 //=============================================================================
 // 衝突判定用更新
@@ -83,6 +83,14 @@ void WaterBulletUnit::CollisionUpdate()
 // 描画
 void WaterBulletUnit::Draw()
 {
+	_start_point = _player->GetPosition();
+	_rotation_y = atan2f(_end_point.x - _start_point.x, _end_point.z - _start_point.z);
+	_control_point = (_start_point + _end_point) / 2;
+	_control_point.y += 5.f;
+
+	// シェーダパラメーターの更新
+	SettingShaderParameter();
+
 	// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
 	auto mesh = _game_world->GetMeshResource()->Get(MESH_RESOURE_WATER_CYLINDER);
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_DEFAULT, GetID());
@@ -95,7 +103,7 @@ void WaterBulletUnit::Draw()
 void WaterBulletUnit::SettingShaderParameter()
 {
 	// カメラ取得
-	CameraGamePlayer* camera = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER));
+	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
 	// 行列の作成
 	_world.position = _position.current;
 	algo::CreateWorld(_world.matrix, _world.position, _world.rotation, _world.scale);
@@ -149,14 +157,11 @@ void WaterBulletUnit::SettingShaderParameter()
 
 //=============================================================================
 // 発射
-void WaterBulletUnit::Fire(
-	const D3DXVECTOR3& start,
-	const D3DXVECTOR3& end)
+void WaterBulletUnit::Fire(const D3DXVECTOR3& end)
 {
-	_start_point = start;
+	_start_point = _player->GetPosition();
 	_end_point = end;
-	_control_point = (start + end) / 2;
+	_control_point = (_start_point + end) / 2;
 	_control_point.y += 5.f;
 	_destination_release_of = 1.f;
-	_rotation_y = atan2f(end.x - start.x, end.z - start.z);
 }

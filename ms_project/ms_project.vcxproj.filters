@@ -327,6 +327,48 @@
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_sprite_instance.cpp">
       <Filter>Resource\Mesh\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Unit\dummy_ui.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\ui.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\meter_water.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\map.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\map_back.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\map_character.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\meter.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\meter_frame.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\score_back.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Command\command_move.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera\Camera\camera_title.cpp">
+      <Filter>Camera\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\toon_building_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\toon_player_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\toon_weapon_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdafx.h" />
@@ -796,6 +838,72 @@
     <ClInclude Include="Source\Unit\Game\water_spray_pool_dummy.h">
       <Filter>Unit\Game</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Unit\dummy_ui.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\ui.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\meter_frame.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\meter_water.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\map.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\map_back.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\map_character.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\meter.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\score_back.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command_move.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_velocity.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera\Camera\camera_title.h">
+      <Filter>Camera\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Algorithm\frustum_culling.h">
+      <Filter>Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_dirt.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\toon_texture.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\toon_building_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\toon_player_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mission\mission.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mission\mission_list.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mission\mission_event.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data\data_route.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\toon_weapon_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -897,9 +1005,6 @@
     <Filter Include="Unit\Game">
       <UniqueIdentifier>{13990803-9f83-4f8c-bf84-55bcb7b1d695}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Algorithm">
-      <UniqueIdentifier>{0657806c-a5b5-4dbc-bc4d-30120e539dc2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Collision">
       <UniqueIdentifier>{a854b6ef-010b-498c-82d2-147607bf3d21}</UniqueIdentifier>
     </Filter>
@@ -911,6 +1016,12 @@
     </Filter>
     <Filter Include="Unit\Title">
       <UniqueIdentifier>{89cafac7-d0a6-44f6-ba74-e806385f3424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithm">
+      <UniqueIdentifier>{0657806c-a5b5-4dbc-bc4d-30120e539dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mission">
+      <UniqueIdentifier>{4acd9332-8972-4816-b50d-a23429d194c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

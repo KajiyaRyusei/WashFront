@@ -12,8 +12,8 @@
 
 //GameUnit
 #include "Unit/Game/map.h"
-#include "Unit/Game/score.h"
 #include "Unit/Game/meter.h"
+
 
 //=============================================================================
 // ‰Šú‰»
@@ -48,11 +48,6 @@ void Ui::SetList(std::list<Unit*> *list)
 	_map = new Map(_application, _game_world);
 	list->push_back(_map);
 	_map->SetMapCharacterList(list);
-
-	//ƒXƒRƒA“o˜^
-	_score = new Score(_application, _game_world);
-	list->push_back(_score);
-	_score->SetListScoreCharacter(list);
 
 	//ƒ[ƒ^[“o˜^	
 	_meter = new Meter(_application, _game_world);

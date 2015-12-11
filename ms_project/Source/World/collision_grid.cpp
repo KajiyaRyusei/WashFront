@@ -185,7 +185,6 @@ void CollisionGrid::Line2Box(Unit* unit, Unit* other_unit)
 // メッシュポイントと球
 void CollisionGrid::MeshPoint2Sphrere(Unit* unit, Unit* other_unit)
 {
-	// bool is_hit = false;
 
 	if( other_unit->_shpere != nullptr &&
 		unit->_volume_mesh_point!= nullptr )

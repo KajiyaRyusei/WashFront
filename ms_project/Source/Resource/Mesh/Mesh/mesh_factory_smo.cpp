@@ -9,6 +9,7 @@
 //*****************************************************************************
 // include
 #include "mesh_factory_smo.h"
+#include "Algorithm/often_use.h"
 
 //=============================================================================
 // 作成
@@ -62,7 +63,8 @@ void MeshFactorySMO::Create(
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0);
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0);
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0);
-		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT1, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1);
+		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1);
+		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT1, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2);
 		// 頂点バッファの作成
 		mesh->CreateVertexBuffer(D3DUSAGE_WRITEONLY, D3DPOOL_MANAGED);
 
@@ -99,6 +101,9 @@ void MeshFactorySMO::Create(
 
 		mesh->GetVertexBuffer(0)->Unlock();
 
+		// 接ベクトルの作成
+		TangentCompute(mesh);
+
 		// index情報の作成
 		u32* index;
 		mesh->GetIndexBuffer(0)->Lock(0, 0, (void**)&index, 0);
@@ -112,4 +117,44 @@ void MeshFactorySMO::Create(
 
 		mesh_list.push_back(mesh);
 	}
+}
+
+//=============================================================================
+// 従法線と接ベクトルを求める
+void MeshFactorySMO::TangentCompute(MeshBuffer* mesh)
+{
+	VERTEX_SMO* vertex = nullptr;
+	mesh->GetVertexBuffer(0)->Lock(0, 0, (void**)&vertex, 0);
+
+	s32 vertex_index = 0;
+	s32 index_one = 0;
+	s32 index_two = 0;
+	s32 index_three = 0;
+
+	for( u32 vertex_id = 0; vertex_id < mesh->GetVertexCount(0); ++vertex_id )
+	{
+		if( vertex_id == mesh->GetVertexCount(0) -1)
+		{
+
+		}
+		else if( vertex_id == mesh->GetVertexCount(0) - 2 )
+		{
+			index_one = vertex_id;
+			index_two = vertex_id + 1;
+			index_three = vertex_id + 2;
+		}
+		else
+		{
+			index_one = vertex_id;
+			index_two = vertex_id + 1;
+			index_three = vertex_id + 2;
+		}
+
+		algo::ComputeTangentAndBinormal(
+			vertex[index_one].position, vertex[index_two].position, vertex[index_three].position,
+			vertex[index_one].texcoord, vertex[index_two].texcoord, vertex[index_three].texcoord,
+			&vertex[vertex_index].tangent, nullptr);
+	}
+
+	mesh->GetVertexBuffer(0)->Unlock();
 }

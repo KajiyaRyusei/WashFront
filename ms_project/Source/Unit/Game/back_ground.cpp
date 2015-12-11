@@ -25,7 +25,7 @@ void BackGroundUnit::Initialize()
 	_shader = new ShaderBackGround();
 
 	// キューブマップセット
-	LPDIRECT3DCUBETEXTURE9 texture = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_SPECULAR);
+	LPDIRECT3DCUBETEXTURE9 texture = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ONE_SPECULAR);
 	_shader->SetAlbedoCubeTexture(texture);
 }
 
@@ -40,18 +40,21 @@ void BackGroundUnit::Finalize()
 // 更新
 void BackGroundUnit::Update()
 {
-	CameraGamePlayer* camera = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER));
-	D3DXMATRIX matrix_scaling;
-	static const float kScaling = 500.f;
-	D3DXMatrixScaling(&matrix_scaling, kScaling, kScaling, kScaling);
-	D3DXMATRIX matrix_world_view_projection = matrix_scaling * camera->GetMatrixView() * camera->GetMatrixProjection();
-	_shader->SetWorldViewProjection(matrix_world_view_projection);
+	
 }
 
 //=============================================================================
 // 描画
 void BackGroundUnit::Draw()
 {
+	// カメラ取得
+	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
+	D3DXMATRIX matrix_scaling;
+	static const float kScaling = 500.f;
+	D3DXMatrixScaling(&matrix_scaling, kScaling, kScaling, kScaling);
+	D3DXMATRIX matrix_world_view_projection = matrix_scaling * camera->GetMatrixView() * camera->GetMatrixProjection();
+	_shader->SetWorldViewProjection(matrix_world_view_projection);
+
 	// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_BACKGROUND,GetID());
 	S_GetCommandBuffer()->PushShader(_shader, GetID());

@@ -2,7 +2,7 @@
 //
 // アプリケーション
 // 
-// Created by Ryusei Kajiya on 20151006
+// Created by Ryusei Kajiya on 20151130
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -67,13 +67,14 @@ void Application::Initalize(Window *window, RendererDevice *renderer_device)
 	// フェードの作成
 	_fade = new Fade(this);
 
-	// シーンマネージャーの作成
-	_scene_manager = new SceneManager(this,_fade);
-	Reference::GetInstance().SetSceneManager(_scene_manager);
-	
 	// カメラマネージャーの作成
 	_camera_manager = new CameraManager(this);
 	Reference::GetInstance().SetCameraManager(_camera_manager);
+
+	// シーンマネージャーの作成
+	_scene_manager = new SceneManager(this,_fade);
+	Reference::GetInstance().SetSceneManager(_scene_manager);
+
 
 	// デベロップツールマネージャーの作成
 	_develop_manager = new DevelopToolManager();
@@ -104,8 +105,8 @@ void Application::Update(u64 fps)
 {
 	_develop_manager->GetDebugPrint().Print("FPS : %d\n", fps);
 	_input_manager->Update();
-	_camera_manager->Update();
 	_scene_manager->Update();
+	_camera_manager->Update();
 	_develop_manager->Update();
 	_xact_manager->Update();
 }
@@ -122,23 +123,11 @@ void Application::Draw()
 	// 各シーン描画
 	_scene_manager->Draw();
 
-	// コマンドにたまっているものを描画
-	_command_buffer->Sort();
-	_command_processor->ProccessLightDepth();
-	_command_processor->ProccessShadow();
-	_command_processor->ProccessDefault();
-	_command_processor->ProccessField();
-	_command_processor->ProccessBackGround();
-	_command_processor->ProccessTranslucent();
-	_command_processor->ProccessAIM();
-	_command_processor->Proccess2D();
-	_command_buffer->Clear();
-
 	// fadeの描画
 	_fade->Draw();
 
 	// デバッグ情報の描画
-	_develop_manager->Draw();
+	//_develop_manager->Draw();
 
 	// 描画の終了
 	_renderer_device->End();

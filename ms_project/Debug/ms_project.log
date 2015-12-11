@@ -1,21 +1,8 @@
-﻿2015/11/30 15:52:22 にビルドを開始しました。
+﻿2015/12/11 15:45:10 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Unit\Result\bulletin_board.cpp Source\Unit\Result\judge.cpp Source\Unit\Result\message_box.cpp Source\Unit\Result\result_bg.cpp Source\Unit\Result\score.cpp Source\Unit\Result\score_board.cpp Source\Unit\Title\logo.cpp Source\Unit\Title\logo_bg.cpp Source\Unit\Title\text.cpp Source\Unit\number.cpp Source\Unit\screen_unit.cpp
-         scene_result.cpp
-         scene_title.cpp
-         bulletin_board.cpp
-         judge.cpp
-         message_box.cpp
-         result_bg.cpp
-         score.cpp
-         score_board.cpp
-         logo.cpp
-         logo_bg.cpp
-         text.cpp
-         number.cpp
-         screen_unit.cpp
-         コードを生成中...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\DevelopTool\DevelopTool\debug_box.cpp
+         debug_box.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\dirt_math.obj
          Debug\often_use.obj
@@ -24,10 +11,12 @@
          Debug\camera_2d.obj
          Debug\camera_game_main.obj
          Debug\camera_game_player.obj
+         Debug\camera_title.obj
          Debug\camera_manager.obj
          Debug\collision_system.obj
          Debug\command_fire.obj
          Debug\command_handler.obj
+         Debug\command_move.obj
          Debug\command_move_back.obj
          Debug\command_move_down.obj
          Debug\command_move_front.obj
@@ -84,6 +73,9 @@
          Debug\PBL_static_shader.obj
          Debug\screen_2d_shader.obj
          Debug\screen_shader.obj
+         Debug\toon_building_shader.obj
+         Debug\toon_player_shader.obj
+         Debug\toon_weapon_shader.obj
          Debug\water_back_shader.obj
          Debug\water_shader.obj
          Debug\water_spray_shader.obj
@@ -96,6 +88,7 @@
          Debug\main.obj
          Debug\application.obj
          Debug\system_flow.obj
+         Debug\dummy_ui.obj
          Debug\aim.obj
          Debug\aim_draw.obj
          Debug\aim_line.obj
@@ -103,7 +96,14 @@
          Debug\building.obj
          Debug\bullet.obj
          Debug\dirt.obj
+         Debug\map.obj
+         Debug\map_back.obj
+         Debug\map_character.obj
+         Debug\meter.obj
+         Debug\meter_frame.obj
+         Debug\meter_water.obj
          Debug\player.obj
+         Debug\score_back.obj
          Debug\water_back.obj
          Debug\water_bullet.obj
          Debug\water_spray.obj
@@ -120,6 +120,7 @@
          Debug\logo.obj
          Debug\logo_bg.obj
          Debug\text.obj
+         Debug\ui.obj
          Debug\unit.obj
          Debug\window.obj
          Debug\window_operation_wrapper.obj
@@ -132,4 +133,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:05.68
+経過時間 00:00:02.48

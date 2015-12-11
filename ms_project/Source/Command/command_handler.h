@@ -23,11 +23,15 @@ class InputManager;
 class CommandHandler
 {
 public:
+
 	CommandHandler();
 	virtual ~CommandHandler();
 
 	// 入力コマンド
-	Command* HandleInput(InputManager* input);
+	Command* HandleInput(InputManager* input, Command::CONTROLLER_TYPE type);
+
+	// 移動用コマンド
+	Command* HandleInputMove(InputManager* input, Command::CONTROLLER_TYPE type);
 
 private:
 	Command* _fire;
@@ -37,4 +41,5 @@ private:
 	Command* _move_left;
 	Command* _move_up;
 	Command* _move_down;
+	Command* _move;
 };

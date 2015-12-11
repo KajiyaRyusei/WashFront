@@ -18,6 +18,7 @@
 // 前方宣言
 class AimDrawUnit;
 class AimLineUnit;
+class PlayerUnit;
 
 //*****************************************************************************
 // クラス設計
@@ -25,7 +26,12 @@ class AimUnit : public Unit
 {
 public:
 
-	AimUnit(Application* application, World* world) : Unit(application, world)
+	AimUnit(Application* application, World* world) : Unit(application, world),
+		_aim_draw(nullptr),
+		_aim_line(nullptr),
+		_current_rotation(0.f, 0.f, 0.f),
+		_destination_rotation(_current_rotation),
+		_player(nullptr)
 	{
 		Initialize();
 	}
@@ -37,21 +43,29 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
 
-	// ラインの始点設定
-	void SetStartPosition(const D3DXVECTOR3& position);
+	// プレイヤーを設定
+	void SetPlayer(PlayerUnit* player){ _player = player; }
 
-	// ラインの終点設定
-	void SetEndPosition(const D3DXVECTOR3& position);
+	// 回転のセット
+	void SetRotation(const D3DXVECTOR3& rotation){ _destination_rotation = rotation; }
 
-	// ラインの始点を取得
-	D3DXVECTOR3& GetStartPosition();
-
-	// ラインの終点を取得
-	D3DXVECTOR3& GetEndPosition();
+	// 狙っている位置の取得
+	const D3DXVECTOR3& GetTargetPosition(){ return _position.current; }
 
 private:
 
 	// 描画用AIM
 	AimDrawUnit* _aim_draw;
 	AimLineUnit* _aim_line;
+
+	// 現在の回転具合
+	D3DXVECTOR3 _current_rotation;
+	D3DXVECTOR3 _destination_rotation;
+
+	// プレイヤー
+	PlayerUnit* _player;
+
+	// 位置の計算
+	void CalculatePosition();
+
 };

@@ -68,7 +68,7 @@ void DebugBox::Initialize()
 
 	for( u32 i = 0; i < kVertexMax; ++i )
 	{
-		vertices[i].color = D3DCOLOR_ARGB(255, 255, 255, 0);
+		vertices[i].color = D3DCOLOR_ARGB(200, 255, 255, 0);
 	}
 
 #endif

@@ -29,6 +29,7 @@ void ShaderPBLAnimation::Initialize()
 	InitializeDiffuseCubeMap(_effect_handle_holder->effect_handle());
 	InitializeSpecularCubeMap(_effect_handle_holder->effect_handle());
 	InitializeAlbedoTexture(_effect_handle_holder->effect_handle());
+	InitializeMetalnessMap(_effect_handle_holder->effect_handle());
 }
 
 void ShaderPBLAnimation::AssignExceptMaterial() const
@@ -45,4 +46,5 @@ void ShaderPBLAnimation::AssignExceptMaterial() const
 	SendDiffuseCubeMap(_effect_handle_holder->effect_handle());
 	SendSpecularCubeMap(_effect_handle_holder->effect_handle());
 	SendAlbedoTexture(_effect_handle_holder->effect_handle());
+	SendMetalnessMap(_effect_handle_holder->effect_handle());
 }

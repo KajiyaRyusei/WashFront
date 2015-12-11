@@ -2,7 +2,7 @@
 //
 // アプリケーション
 // 
-// Created by Ryusei Kajiya on 20151022
+// Created by Ryusei Kajiya on 20151130
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -61,6 +61,8 @@ public:
 	CameraManager* GetCameraManager()const { return _camera_manager; }
 	DevelopToolManager* GetDevelopToolManager()const{ return _develop_manager; }
 	XactManager* GetXactManager() const{ return _xact_manager; }
+	CommandBuffer* GetCommandBuffer() const { return _command_buffer; }
+	CommandProcessor* GetCommandProcessor() const { return _command_processor; }
 
 private:
 

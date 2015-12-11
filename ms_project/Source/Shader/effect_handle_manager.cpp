@@ -28,6 +28,10 @@
 #include "Shader/Shader/water_back_shader.h"
 #include "Shader/Shader/screen_2d_shader.h"
 #include "Shader/Shader/water_spray_shader.h"
+#include "Shader/Shader/toon_building_shader.h"
+#include "Shader/Shader/toon_player_shader.h"
+#include "Shader/Shader/toon_weapon_shader.h"
+
 
 //==============================================================================
 // コンストラクタ
@@ -53,6 +57,9 @@ EffectHandleManager::EffectHandleManager(RendererDevice* renderer_device)
 	EntryList<ShaderWaterBack>("Data/Shader/water_back.cso", renderer_device);
 	EntryList<Shader2D>("Data/Shader/shader_2d.cso", renderer_device);
 	EntryList<ShaderWaterSpray>("Data/Shader/water_spray.cso", renderer_device);
+	EntryList<ShaderToonBuilding>("Data/Shader/toon_building.cso", renderer_device);
+	EntryList<ShaderToonPlayer>("Data/Shader/toon_player.cso", renderer_device);
+	EntryList<ShaderToonWeapon>("Data/Shader/toon_weapon.cso", renderer_device);
 }
 
 //==============================================================================

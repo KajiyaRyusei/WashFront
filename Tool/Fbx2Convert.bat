@@ -1,1 +1,1 @@
-Fbx2Convert.exe oba_walk.fbx
+Fbx2Convert.exe new_oji_stance.fbx

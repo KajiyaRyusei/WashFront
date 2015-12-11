@@ -40,13 +40,14 @@ void AimDrawUnit::Finalize()
 // 更新
 void AimDrawUnit::Update()
 {
-	CalculatePosition();
+
 }
 
 //=============================================================================
 // 描画
 void AimDrawUnit::Draw()
 {
+	CalculatePosition();
 	// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_AIM, GetID());
 	S_GetCommandBuffer()->PushShader(_shader, GetID());
@@ -58,7 +59,7 @@ void AimDrawUnit::Draw()
 void AimDrawUnit::CalculatePosition()
 {
 	// カメラ取得
-	CameraGamePlayer* camera = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER));
+	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
 
 	// 回転を打ち消し
 	D3DXMATRIX view = camera->GetMatrixView();
@@ -72,11 +73,7 @@ void AimDrawUnit::CalculatePosition()
 	inverse_view._42 = 0.f;
 	inverse_view._43 = 0.f;
 
-	// カメラの視点と注視点から自分の座標を求める
-	D3DXVECTOR3 eye = camera->GetVectorEye();
-	D3DXVECTOR3 look_at = camera->GetVectorLookAt();
-	D3DXVec3Lerp(&_world.position, &eye, &look_at,0.5f);
-	_world.scale = D3DXVECTOR3(1.f, 1.f, 1.f);
+	_world.scale = D3DXVECTOR3(2.f, 2.f, 2.f);
 
 	D3DXMATRIX scaling_matrix, translation_matrix;
 
@@ -85,5 +82,4 @@ void AimDrawUnit::CalculatePosition()
 	_world.matrix = inverse_view * scaling_matrix * translation_matrix;
 	_matrix_world_view_projection = _world.matrix * view * projection;
 	_shader->SetWorldViewProjection(_matrix_world_view_projection);
-
 }

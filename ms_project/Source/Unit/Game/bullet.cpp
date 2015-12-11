@@ -18,7 +18,7 @@
 // íËêî
 namespace
 {
-	static const fx32 kBulletSize = 8.f;
+	static const fx32 kBulletSize = 5.f;
 }
 
 //=============================================================================

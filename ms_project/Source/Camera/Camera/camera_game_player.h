@@ -2,7 +2,7 @@
 //
 // プレイヤー用カメラ
 //
-// Created by Ryusei Kajiya on 20151029
+// Created by Ryusei Kajiya on 20151130
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -13,6 +13,7 @@
 //*****************************************************************************
 // include
 #include "camera.h"
+#include "Data/data_route.h"
 
 //*****************************************************************************
 // クラス設計
@@ -35,14 +36,22 @@ public:
 	// ローテーションを取得
 	D3DXVECTOR3& GetCameraRotation(){ return _rotation; }
 
+	// 視点のルートを設定
+	void SetRoute(std::vector<data::Route>&& route){ _route = route; }
+
+	// 現在のルートの取得
+	const data::Route& GetCurrentRoute(){ return _current_route; }
+
 private:
 
-	
-	void Chase();
-	void Input();
+	void PassRootDecision();
 
 	// プレイヤーの座標
 	D3DXVECTOR3 _player_position;
+	// 移動パス
+	std::vector<data::Route> _route;
+	data::Route _current_route;
+	fx32 _pass_frame;
 	// 回転関係
 	D3DXVECTOR3 _rotation;
 	D3DXVECTOR3 _destnation_rotation_velocity;

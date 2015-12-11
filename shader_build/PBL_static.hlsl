@@ -14,7 +14,8 @@ struct VertexShaderInput
 	float3 position	 : POSITION0;
 	float3 normal	 : NORMAL0;
 	float2 texcoord	 : TEXCOORD0;
-	float cleanliness: TEXCOORD1;
+	float3 tangent	 : TEXCOORD1;
+	float cleanliness: TEXCOORD2;
 };
 //-------------------------------------
 // 頂点シェーダ出力
@@ -258,7 +259,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	float3 dirty = tex2D(uniform_dirty_sampler, input.texcoord).xyz;
 	// アルベド色
 	float3 albedo = tex2D(uniform_albedo_sampler, input.texcoord).xyz;
-	albedo = lerp(albedo, dirty, input.cleanliness);
+	//albedo = lerp(albedo, dirty, input.cleanliness);
 	// メタルネス
 	float3 metalness = tex2D(uniform_metalness_sampler, input.texcoord).xyz;
 	// 拡散反射色
@@ -272,12 +273,14 @@ PixelShaderOutput PS(VertexShaderOutput input)
 
 	output.render_target0.xyz = (diffuse + specular) * albedo;
 	output.render_target0.xyz = lerp(diffuse_cube_ambient.xyz, specular_cube_ambient.xyz, metalness.x) * output.render_target0.xyz;
+	output.render_target0.xyz *= 2.0f;
+	output.render_target0.xyz = lerp(output.render_target0.xyz, dirty, input.cleanliness);
 	output.render_target0.a = uniform_ambient_color.w;
+
+	output.render_target0.xyz *= 2.f;
 
 	// ガンマ補正
 	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 2.2f);
-	output.render_target0.xyz *= 2.f;
-	
 
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);

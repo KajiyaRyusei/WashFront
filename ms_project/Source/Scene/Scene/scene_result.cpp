@@ -2,7 +2,7 @@
 //
 // シーン：リザルト
 //
-// Created by Ryusei Kajiya on 20151123
+// Created by Ryusei Kajiya on 20151130
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -29,6 +29,10 @@
 #include "Unit\Result\judge.h"
 #include "Unit/Result/score.h"
 #include "Unit/Game/water_spray_pool_dummy.h"
+
+// viewport
+#include "Renderer/directx9.h"
+#include "Windows/window.h"
 
 //=============================================================================
 // コンストラクタ
@@ -149,4 +153,24 @@ void SceneResult::Update()
 void SceneResult::Draw()
 {
 	_world->Draw();
+
+	D3DVIEWPORT9 viewport;
+	viewport.Height = _application->GetWindow()->GetSizeWindowHeight();
+	viewport.Width = _application->GetWindow()->GetSizeWindowWidth();
+	viewport.X = 0;
+	viewport.Y = 0;
+	viewport.MaxZ = 1.f;
+	viewport.MinZ = 0.f;
+
+	_application->GetRendererDevice()->GetDevice()->SetViewport(&viewport);
+
+	// コマンドにたまっているものを描画
+	_application->GetCommandBuffer()->Sort();
+	_application->GetCommandProcessor()->ProccessDefault();
+	_application->GetCommandProcessor()->ProccessField();
+	_application->GetCommandProcessor()->ProccessBackGround();
+	_application->GetCommandProcessor()->ProccessTranslucent();
+	_application->GetCommandProcessor()->ProccessAIM();
+	_application->GetCommandProcessor()->Proccess2D();
+	_application->GetCommandBuffer()->Clear();
 }

@@ -14,10 +14,11 @@
 // include
 #include "Unit/unit.h"
 #include "Data/data_world.h"
+#include "Data/data_dirt.h"
 
 //*****************************************************************************
 // 前方宣言
-class ShaderPBLStatic;
+class ShaderToonBuilding;
 class MeshBuffer;
 
 //*****************************************************************************
@@ -48,10 +49,13 @@ public:
 	virtual void CollisionUpdate() override;
 	virtual void CollisionMeshPoint(u32 point_index)override;
 
+	// 汚れのセット
+	void SettingDirty(std::vector<data::Dirt>& dirt_list);
+
 private:
 
 	// シェーダー
-	ShaderPBLStatic* _shader;
+	ShaderToonBuilding* _shader;
 	u32 _shader_size;
 	// シェーダパラメーターの設定
 	void SettingShaderParameter();

@@ -20,8 +20,10 @@ class Application;
 enum CAMERA_TYPE
 {
 	CAMERA_TYPE_GAME_MAIN = 0,
-	CAMERA_TYPE_GAME_PLAYER,
+	CAMERA_TYPE_GAME_PLAYER_1P,
+	CAMERA_TYPE_GAME_PLAYER_2P,
 	CAMERA_TYPE_2D,
+	CAMERA_TYPE_TITLE,
 	CAMERA_TYPE_MAX
 };
 
@@ -49,8 +51,14 @@ public:
 	// カメラのポインタ取得
 	Camera* GetCamera(CAMERA_TYPE type){ return _cameras[type]; }
 
+	// 現在のカメラの取得
+	Camera* GetCurrentCamera(){ return _current_camera; }
+	// カメラのセット
+	void SetCurrentCamera(Camera* camera){ _current_camera = camera; }
+
 private:
 
 	Camera* _cameras[CAMERA_TYPE_MAX];
+	Camera* _current_camera;
 	Application* _application;
 };

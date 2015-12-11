@@ -12,6 +12,23 @@
 #include "Unit/Game/aim_draw.h"
 #include "Unit/Game/aim_line.h"
 
+// カメラ
+#include "Camera/camera_manager.h"
+#include "Camera/Camera/camera_game_player.h"
+
+// プレイヤー
+#include "Unit/Game/player.h"
+
+#include "Data/data_route.h"
+
+//*****************************************************************************
+// 定数
+namespace
+{
+	static const fx32 kRotationCoefficient = 0.001f;
+	static const D3DXVECTOR3 kTargetLength(0.f,0.f,30.f);
+}
+
 //=============================================================================
 // 初期化
 void AimUnit::Initialize()
@@ -19,6 +36,8 @@ void AimUnit::Initialize()
 	// 描画用AIMの作成
 	_aim_draw = new AimDrawUnit(_application,_game_world);
 	_aim_line = new AimLineUnit(_application, _game_world);
+
+	_current_rotation = D3DXVECTOR3(0.f,0.f,0.f);
 }
 
 //=============================================================================
@@ -48,34 +67,43 @@ void AimUnit::CollisionUpdate()
 // 描画
 void AimUnit::Draw()
 {
+	CalculatePosition();
 	_aim_line->Draw();
 	_aim_draw->Draw();
 }
 
 //=============================================================================
-// ラインの始点設定
-void AimUnit::SetStartPosition(const D3DXVECTOR3& position)
+// 位置の計算
+void AimUnit::CalculatePosition()
 {
-	_aim_line->SetStartPosition(position);
-}
+	_current_rotation += (_destination_rotation - _current_rotation) * kRotationCoefficient;
+	data::Route route = _player->GetPlayerCamera()->GetCurrentRoute();
+	D3DXMATRIX quaternion_matrix,rotation_matrix;
+	D3DXMatrixRotationQuaternion(&quaternion_matrix, &route.eye_quaternion);
 
-//=============================================================================
-// ラインの終点設定
-void AimUnit::SetEndPosition(const D3DXVECTOR3& position)
-{
-	_aim_line->SetEndPosition(position);
-}
+	if( _current_rotation.x < -0.3f )
+	{
+		_current_rotation.x = -0.3f;
+	}
+	else if( _current_rotation.x > 0.3f )
+	{
+		_current_rotation.x = 0.3f;
+	}
 
-//=============================================================================
-// ラインの始点を取得
-D3DXVECTOR3& AimUnit::GetStartPosition()
-{
-	return _aim_line->GetStartPosition();
-}
+	if( _current_rotation.y < -1.f )
+	{
+		_current_rotation.y = -1.f;
+	}
+	else if( _current_rotation.y > 1.f )
+	{
+		_current_rotation.y = 1.f;
+	}
 
-//=============================================================================
-// ラインの終点を取得
-D3DXVECTOR3& AimUnit::GetEndPosition()
-{
-	return _aim_line->GetEndPosition();
+	D3DXMatrixRotationYawPitchRoll(&rotation_matrix, _current_rotation.y, _current_rotation.x, _current_rotation.z);
+	rotation_matrix *= quaternion_matrix;
+	D3DXVec3TransformCoord(&_position.current, &kTargetLength, &rotation_matrix);
+	_position.current += _player->GetPlayerCamera()->GetVectorEye();
+	_aim_line->SetStartPosition(_player->GetPosition());
+	_aim_line->SetEndPosition(_position.current);
+	_aim_draw->SetEndPosition(_position.current);
 }

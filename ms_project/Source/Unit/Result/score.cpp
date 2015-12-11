@@ -48,7 +48,7 @@ void ScoreUnit::Initialize()
 {
 	for( int i = 0; i < digit; i++ )
 	{
-		_score[ i ] = new NumberUnit( _app, _world);
+		_score[ i ] = new NumberUnit( _application, _game_world);
 		_score[ i ]->SetPosition( D3DXVECTOR3( position[ _num ].x - ( ( float )i * scaling.x ) , position[ _num ].y , 0.0f ) );
 		_score[ i ]->SetScaling( scaling );
 	}

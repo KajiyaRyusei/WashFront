@@ -12,7 +12,7 @@
 #include "Camera/camera_manager.h"
 #include "Camera/Camera/camera_game_player.h"
 #include "Algorithm/often_use.h"
-#include "Shader/Shader/PBL_animation_shader.h"
+#include "Shader/Shader/toon_weapon_shader.h"
 #include "World/collision_grid.h"
 #include "Unit/Game/bullet.h"
 #include "Unit/Game/water_bullet.h"
@@ -21,6 +21,8 @@
 #include "Resource/cube_texture_resource.h"
 #include "Resource/texture_resource.h"
 #include "Resource/animation_mesh_resource.h"
+
+
 
 //*****************************************************************************
 // 定数
@@ -38,14 +40,17 @@ void WeaponUnit::Initialize()
 	auto mesh_list = _game_world->GetAnimationMeshResource()->Get(ANIMATION_MESH_RESOURE_GRANDPA);
 	// テクスチャ
 	
-	LPDIRECT3DTEXTURE9 albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_WATER_BALL_TEXTURE);
+	LPDIRECT3DTEXTURE9 albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_TEXTURE);
 	LPDIRECT3DCUBETEXTURE9 diffuse_cube_map = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE);
 	LPDIRECT3DCUBETEXTURE9 specular_cube_map = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_SPECULAR);
+	LPDIRECT3DTEXTURE9 toon_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_TOON_TEXTURE);
+
 	// シェーダの作成
-	_sahder_size = mesh_list.size();
-	_shader = new ShaderPBLAnimation[mesh_list.size()];
-	for( u32 shader_index = 0; shader_index < _sahder_size; ++shader_index )
+	_shader_size = mesh_list.size();
+	_shader = new ShaderToonWeapon[mesh_list.size()];
+	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
 	{
+		_shader[shader_index].SetToonTexture(toon_map);
 		_shader[shader_index].SetAlbedoTexture(albedo_map);
 		_shader[shader_index].SetDiffuseCubeMap(diffuse_cube_map);
 		_shader[shader_index].SetSpecularCubeMap(specular_cube_map);
@@ -60,7 +65,7 @@ void WeaponUnit::Initialize()
 	_position.current.y = 5.f;
 	_position.previous = _position.current;
 	_world.position = _position.current;
-	_world.scale = D3DXVECTOR3(0.02f, 0.02f, 0.02f);
+	_world.scale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
 	_world.rotation = D3DXVECTOR3(0.f, 0.f, 0.f);
 
 	// 弾
@@ -92,8 +97,8 @@ void WeaponUnit::Draw()
 	SettingShaderParameter();
 
 	auto mesh_list = _game_world->GetAnimationMeshResource()->Get(ANIMATION_MESH_RESOURE_WEAPON_01);
-	D3DXMATRIX animation_matrix_list[ShaderPBLAnimation::kMatrixMax];
-	for( u8 i = 0; i < ShaderPBLAnimation::kMatrixMax; ++i )
+	D3DXMATRIX animation_matrix_list[ShaderToonWeapon::kMatrixMax];
+	for( u8 i = 0; i < ShaderToonWeapon::kMatrixMax; ++i )
 	{
 		D3DXMatrixIdentity(&animation_matrix_list[i]);
 	}
@@ -129,27 +134,21 @@ void WeaponUnit::CollisionUpdate()
 void WeaponUnit::SettingShaderParameter()
 {
 	// カメラ取得
-	CameraGamePlayer* camera = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER));
+	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
 	// 行列の作成
-	_world.position = _position.current;
-	algo::CreateWorld(_world.matrix, _world.position, _world.rotation, _world.scale);
 	algo::CreateWVP(_matrix_world_view_projection, _world.matrix, camera);
 	// ライトの方向作成
 	D3DXVECTOR4 light_direction(0.2f, -0.8f, 0.5f, 0.f);
 	D3DXVECTOR4 ambient(0.97f, 0.8f, 0.75f, 1.f);
 	D3DXVECTOR4 eye(camera->GetVectorEye(), 0.f);
 
-	for( u32 shader_index = 0; shader_index < _sahder_size; ++shader_index )
+	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
 	{
 		// シェーダの設定
 		_shader[shader_index].SetWorldViewProjection(_matrix_world_view_projection);
 		_shader[shader_index].SetWorld(_world.matrix);
 		_shader[shader_index].SetLightDirection(light_direction);
-		_shader[shader_index].SetAmbientColor(ambient);
 		_shader[shader_index].SetEyePosition(eye);
-		_shader[shader_index].SetFresnel(0.3f);
-		_shader[shader_index].SetMetalness(0.0f);
-		_shader[shader_index].SetRoughness(1.0f);
 		_shader[shader_index].SetWorld(_world.matrix);
 	}
 }
@@ -160,17 +159,23 @@ void WeaponUnit::Fire(
 	const D3DXVECTOR3& start,
 	const D3DXVECTOR3& end)
 {
-
 	_bullet->Fire(start, end, kBulletVelocity);
-	_water_bullet->Fire(start, end);
+	_water_bullet->Fire(end);
 }
 
 //=============================================================================
 // 行列の設定
 void WeaponUnit::SetPosition(
-	const D3DXVECTOR3& position,
+	const D3DXMATRIX& world,
 	const D3DXMATRIX& animation)
 {
-	_position.current = position;
+	_world.matrix = world;
 	_animation_matrix = animation;
+}
+
+//=============================================================================
+// プレイヤーの設定
+void WeaponUnit::SetPlayer(PlayerUnit* player)
+{
+	_water_bullet->SetPlayer(player);
 }

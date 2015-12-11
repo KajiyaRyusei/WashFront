@@ -20,6 +20,8 @@ enum CUBE_TEXTURE_RESOURE_ID
 {// 2で割り切れるのはディフューズ割り切れないのはスペキュラ
 	CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE = 0,
 	CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_SPECULAR,
+	CUBE_TEXTURE_RESOURE_GRID_ZERO_ONE_DIFFUSE,
+	CUBE_TEXTURE_RESOURE_GRID_ZERO_ONE_SPECULAR,
 };
 
 //*****************************************************************************

@@ -25,6 +25,7 @@
 #include "Shader/Component/diffuse_cube_texture.h"
 #include "Shader/Component/specular_cube_texture.h"
 #include "Shader/Component/albedo_texture.h"
+#include "Shader/Component/metalness_texture.h"
 
 class ShaderPBLAnimation : public ShaderBase,
 	public component::WorldViewProjection,
@@ -38,7 +39,8 @@ class ShaderPBLAnimation : public ShaderBase,
 	public component::AmbientColor,
 	public component::DiffuseCubeMap,
 	public component::SpecularCubeMap,
-	public component::AlbedoMap
+	public component::AlbedoMap,
+	public component::MetalnessMap
 {
 public:
 	ShaderPBLAnimation() : ShaderBase(s_effect_id) { Initialize(); }

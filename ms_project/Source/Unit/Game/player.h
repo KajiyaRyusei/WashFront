@@ -2,8 +2,12 @@
 //
 // プレイヤー
 // 
-// Created by Ryusei Kajiya on 20151029
+// Created by Ryusei Kajiya on 20151207
 //
+//<やること>
+// カメラのルートに合わせる
+// アニメーションに水を合わせる：CPUで計算
+// シェーダのスペキュラ削除
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //*****************************************************************************
@@ -15,15 +19,19 @@
 #include "Unit/unit.h"
 #include "Data/data_oaf.h"
 #include "Data/data_world.h"
+#include "Data/data_velocity.h"
+
+#include "Command/command_handler.h"
 
 //*****************************************************************************
 // 前方宣言
-class ShaderPBLAnimation;
+class ShaderToonPlayer;
 class AnimationSystem;
 class AimUnit;
 class CommandHandler;
 class WeaponUnit;
 class WaterBackUnit;
+class CameraGamePlayer;
 
 //*****************************************************************************
 // クラス設計
@@ -36,10 +44,12 @@ class PlayerUnit : public Unit
 	friend class CommandMoveUp;
 	friend class CommandMoveDown;
 	friend class CommandFire;
+	friend class CommandMove;
 
 public:
 
-	PlayerUnit(Application* application, World* world) : Unit(application, world)
+	PlayerUnit(Application* application, World* world, CameraGamePlayer* camera) : Unit(application, world),
+		_player_camera(camera)
 	{
 		Initialize();
 	}
@@ -51,13 +61,18 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
 
-	// デバッグ用移動
-	void DebugMove(const float velocity);
+	// プレイヤーの座標を取得：いろいろと計算がいるバージョン
+	// ちょい手前
+	const D3DXVECTOR3 GetPosition();
+
+	void SetControllerType(Command::CONTROLLER_TYPE type){ _controller_type = type; }
+
+	CameraGamePlayer* GetPlayerCamera()const{ return _player_camera; }
 
 private:
 
 	// シェーダー
-	ShaderPBLAnimation* _shader;
+	ShaderToonPlayer* _shader;
 	// シェーダ数:メッシュ数に合わせる
 	u32 _shader_size;
 	// アニメーション
@@ -68,31 +83,23 @@ private:
 	void SettingShaderParameter();
 	data::World _world;
 	D3DXMATRIX _matrix_world_view_projection;
-
 	// aim
 	AimUnit* _aim;
 	void AimUpdate();
-
 	// コマンド
 	CommandHandler* _command_handler;
-
 	// 武器
 	WeaponUnit* _weapon;
-
 	// 後ろ水
 	WaterBackUnit* _back_water;
+	// プレイヤー用カメラ
+	CameraGamePlayer* _player_camera;
+	// コントローラータイプ
+	Command::CONTROLLER_TYPE _controller_type;
 
-	// 移動パス
-	static const s32 kMaxPass = 4;
-	D3DXVECTOR3 _pass_point_list[kMaxPass];
-	fx32 _pass_frame;
-	fx32 _lower_body_rotation;
-	// パス計算
+	// 水とアニメーションを合わせる
+	void CompositionWater2Animation(const D3DXMATRIX* matrices);
+	// 座標と向き設定
 	void PassRootDecision();
 
-	// 下半身の方向を制御
-	D3DXVECTOR3 _front_vector;
-	void LowerBodyControl();
-
-	
 };

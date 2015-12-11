@@ -14,6 +14,7 @@
 #include "Camera/camera_game_main.h"
 #include "Camera/camera_game_player.h"
 #include "Camera/camera_2d.h"
+#include "Camera/camera_title.h"
 
 // アプリケーション
 #include "System/application.h"
@@ -24,8 +25,15 @@
 void CameraManager::Initialize()
 {
 	_cameras[CAMERA_TYPE_GAME_MAIN] = new CameraGameMain(_application);
-	_cameras[CAMERA_TYPE_GAME_PLAYER] = new CameraGamePlayer(_application);
+	_cameras[CAMERA_TYPE_GAME_PLAYER_1P] = new CameraGamePlayer(_application);
+	_cameras[CAMERA_TYPE_GAME_PLAYER_1P]->SetAspect(static_cast<fx32>(16.f / 4.5f));
+	_cameras[CAMERA_TYPE_GAME_PLAYER_2P] = new CameraGamePlayer(_application);
+	_cameras[CAMERA_TYPE_GAME_PLAYER_2P]->SetAspect(static_cast<fx32>(16.f / 4.5f));
 	_cameras[CAMERA_TYPE_2D] = new Camera2D(_application);
+	_cameras[CAMERA_TYPE_TITLE] = new CameraTitle(_application);
+
+	// 現在のカメラ
+	_current_camera = _cameras[CAMERA_TYPE_GAME_PLAYER_1P];
 }
 //=============================================================================
 // 終了

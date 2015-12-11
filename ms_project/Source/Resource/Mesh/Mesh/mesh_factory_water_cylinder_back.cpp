@@ -19,7 +19,7 @@ namespace
 	// メッシュのサイズと分割数
 	static const s32 kNumberBlockY = 10;
 	static const s32 kNumberBlockX = 10;
-	static const fx32 kSizeBlockY =0.3f;
+	static const fx32 kSizeBlockY =0.4f;
 	static const fx32 kSizeBlockX =0.1f;
 }
 
@@ -116,8 +116,8 @@ void MeshFactoryWaterCylinderBack::PositionCompute(MeshBuffer* mesh)
 	fx32 one_texcoord_x = 1.f / kNumberBlockX;
 	fx32 one_texcoord_y = 1.f / kNumberBlockY;
 	fx32 one_sita = D3DX_PI / kNumberBlockX * 2.f;
-	u16 one_alpha = 255/kNumberBlockY;
-	u16 alpha = 255;
+	u16 one_alpha = 255 / kNumberBlockY ;
+	s16 alpha = 255;
 	fx32 circule_length_add = 0.f;
 
 	for( s32 y = 0; y <= kNumberBlockY; ++y )
@@ -142,8 +142,12 @@ void MeshFactoryWaterCylinderBack::PositionCompute(MeshBuffer* mesh)
 			vertex_index++;
 			sita += one_sita;
 		}
-		circule_length_add += kSizeBlockX;
+		circule_length_add += kSizeBlockX;// *sinf(static_cast<fx32>(sita *0.1f* y));
 		alpha -= one_alpha;
+		if( alpha < 0)
+		{
+			alpha = 0;
+		}
 	}
 
 	mesh->GetVertexBuffer(0)->Unlock();

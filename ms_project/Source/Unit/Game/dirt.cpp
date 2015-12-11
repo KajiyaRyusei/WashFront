@@ -58,7 +58,6 @@ void DirtUnit::Finalize()
 // 更新
 void DirtUnit::Update()
 {
-	SettingShaderParameter();
 
 	if( _is_invisible == true )
 	{
@@ -89,6 +88,8 @@ void DirtUnit::CollisionSphere()
 // 描画
 void DirtUnit::Draw()
 {
+	SettingShaderParameter();
+
 	if( _is_invisible == false )
 	{
 		// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
@@ -105,7 +106,8 @@ void DirtUnit::Draw()
 void DirtUnit::SettingShaderParameter()
 {
 	// カメラ取得
-	CameraGamePlayer* camera = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER));
+	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
+
 	// 行列の作成
 	_world.position = _position.current;
 	_world.rotation.x = D3DX_PI*0.5f;

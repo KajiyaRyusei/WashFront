@@ -17,9 +17,10 @@
 
 //*****************************************************************************
 // 前方宣言
-class ShaderPBLAnimation;
+class ShaderToonWeapon;
 class BulletUnit;
 class WaterBulletUnit;
+class PlayerUnit;
 
 //*****************************************************************************
 // クラス設計
@@ -41,7 +42,7 @@ public:
 
 	// 座標の設定
 	void SetPosition(
-		const D3DXVECTOR3& position,
+		const D3DXMATRIX& world,
 		const D3DXMATRIX& animation);
 
 	// 発射
@@ -49,10 +50,13 @@ public:
 		const D3DXVECTOR3& start,
 		const D3DXVECTOR3& end);
 
+	// セットプレイヤー
+	void SetPlayer(PlayerUnit* player);
+
 private:
 
-	ShaderPBLAnimation* _shader;
-	u32 _sahder_size;
+	ShaderToonWeapon* _shader;
+	u32 _shader_size;
 	data::World _world;
 	D3DXMATRIX _matrix_world_view_projection;
 	D3DXMATRIX _animation_matrix;

@@ -36,6 +36,11 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override{};
 
+	void SetEndPosition(const D3DXVECTOR3& position)
+	{
+		_world.position = position;
+	}
+
 private:
 
 	// シェーダー
@@ -44,6 +49,7 @@ private:
 	// ワールド
 	data::World _world;
 	D3DXMATRIX _matrix_world_view_projection;
+
 	// 自分の位置を算出
 	void CalculatePosition();
 };

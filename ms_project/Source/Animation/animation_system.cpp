@@ -36,7 +36,6 @@ void AnimationSystem::ComputeHumanPose(
 	const u32 matrix_count,
 	const data::ObjectAnimationFile& oaf,
 	D3DXVECTOR3& upper_body_rotation,
-	const D3DXVECTOR3& lower_body_rotation ,
 	const u32 mesh_id)
 {
 	if( _frame >= oaf.end_frame )
@@ -60,11 +59,8 @@ void AnimationSystem::ComputeHumanPose(
 	}
 
 	_upper_rotation += (upper_body_rotation - _upper_rotation) * kCoefficientOfPurposeUpper;
-	_lower_rotation += (upper_body_rotation - _lower_rotation) * kCoefficientOfPurposeLower;
-	UNREFERENCED_PARAMETER(lower_body_rotation);
 
 	D3DXMatrixRotationYawPitchRoll(&_upper_rotation_matrix, _upper_rotation.y, _upper_rotation.x, _upper_rotation.z);
-	D3DXMatrixRotationYawPitchRoll(&_lower_rotation_matrix, _lower_rotation.y, _lower_rotation.x, _lower_rotation.z);
 
 	switch( mesh_id )
 	{
@@ -126,13 +122,6 @@ void AnimationSystem::ComputeHumanPoseMeshFive(D3DXMATRIX* matrix_list, const da
 {
 	for( u32 cluster_index = 0; cluster_index < oaf.animation[4].number_cluster; ++cluster_index )
 	{
-		if( cluster_index < 5 )
-		{
-			matrix_list[cluster_index] = oaf.animation[4].frame[_frame].matrix_animation[cluster_index] * _lower_rotation_matrix;
-		}
-		else
-		{
-			matrix_list[cluster_index] = oaf.animation[4].frame[_frame].matrix_animation[cluster_index] * _upper_rotation_matrix;
-		}
+		matrix_list[cluster_index] = oaf.animation[4].frame[_frame].matrix_animation[cluster_index] * _upper_rotation_matrix;
 	}
 }

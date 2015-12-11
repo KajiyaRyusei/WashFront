@@ -2,7 +2,7 @@
 //
 // ビル
 // 
-// Created by Ryusei Kajiya on 20151102
+// Created by Ryusei Kajiya on 20151201
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -12,7 +12,7 @@
 #include "Camera/camera_manager.h"
 #include "Camera/Camera/camera_game_player.h"
 #include "Algorithm/often_use.h"
-#include "Shader/Shader/PBL_static_shader.h"
+#include "Shader/Shader/toon_building_shader.h"
 #include "World/collision_grid.h"
 
 //リソース
@@ -24,11 +24,14 @@
 #include "Resource/Mesh/Mesh/mesh_factory_smo.h"
 #include "Unit/Game/water_spray_pool.h"
 
+// 衝突用
+#include "Collision/collision_system.h"
+
 //*****************************************************************************
 // 定数
 namespace
 {
-	static const fx32 kCleanVelocity = 0.02f;
+	static const fx32 kCleanVelocity = 0.035f;
 }
 
 //=============================================================================
@@ -40,15 +43,17 @@ void BuildingUnit::Initialize(
 {
 	// シェーダの作成
 	MeshFactorySMO mesh_factory;
-	mesh_factory.Create(_application->GetRendererDevice(), "Data/StaticModel/biru_1.smo", _mesh_list);
+	mesh_factory.Create(_application->GetRendererDevice(), "Data/StaticModel/new_biru_1.smo", _mesh_list);
 	_shader_size = _mesh_list.size();
-	_shader = new ShaderPBLStatic[_mesh_list.size()];
+	_shader = new ShaderToonBuilding[_mesh_list.size()];
 
 	LPDIRECT3DTEXTURE9 albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE);
 	LPDIRECT3DTEXTURE9 metalness_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_METALNESS_TEXTURE);
 	LPDIRECT3DTEXTURE9 dirt_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_DIRTY_TEXTURE);
 	LPDIRECT3DCUBETEXTURE9 diffuse_cube_map = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE);
 	LPDIRECT3DCUBETEXTURE9 specular_cube_map = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_SPECULAR);
+	LPDIRECT3DTEXTURE9 toon_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_TOON_TEXTURE);
+	LPDIRECT3DTEXTURE9 normal_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_NORMAL_TEXTURE);
 
 	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
 	{
@@ -57,17 +62,19 @@ void BuildingUnit::Initialize(
 		_shader[shader_index].SetMetalnessMap(metalness_map);
 		_shader[shader_index].SetDiffuseCubeMap(diffuse_cube_map);
 		_shader[shader_index].SetSpecularCubeMap(specular_cube_map);
+		_shader[shader_index].SetToonTexture(toon_map);
+		_shader[shader_index].SetNormalTexture(normal_map);
 	}
 
 	// 座標の設定
 	_position.current = position;
 	_position.previous = _position.current;
 	_world.position = _position.current;
-	_world.scale = scale;
+	_world.scale = scale * 10.f;
 	_world.rotation = rotaiton;
 
-	D3DXVECTOR3 mesh_point_array[1000];
-	D3DXVECTOR3 mesh_normal_array[1000];
+	D3DXVECTOR3 mesh_point_array[2000];
+	D3DXVECTOR3 mesh_normal_array[2000];
 	u32 vertex_count = 0;
 	for( auto it = _mesh_list.begin(); it != _mesh_list.end(); ++it)
 	{
@@ -86,7 +93,7 @@ void BuildingUnit::Initialize(
 
 	// ボリュームの作成
 	CreateVolumeMeshPoint(_world.position, _world.scale, _world.rotation, vertex_count, mesh_point_array, mesh_normal_array);
-	D3DXVECTOR3 volume_box_size(_world.scale*100.f);
+	D3DXVECTOR3 volume_box_size(_world.scale*10.f);
 	volume_box_size.y *= 10.f;
 	CreateVolumeBox(_world.position, volume_box_size, _world.rotation);
 
@@ -109,8 +116,6 @@ void BuildingUnit::Finalize()
 // 更新
 void BuildingUnit::Update()
 {
-	// シェーダパラメーターの更新
-	SettingShaderParameter();
 	CleanUp();
 }
 //=============================================================================
@@ -127,12 +132,19 @@ void BuildingUnit::CollisionUpdate()
 // 描画
 void BuildingUnit::Draw()
 {
-	u32 mesh_id = 0;
-	for( auto it = _mesh_list.begin(); it != _mesh_list.end(); ++it, ++mesh_id )
+	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
+	D3DXVECTOR3 culling_point(_box->position);
+	if( camera->GetFrustumCulling().ClipCheck(_position.current, _box->size.x) )
 	{
-		S_GetCommandBuffer()->PushRenderState(RENDER_STATE_DEFAULT, GetID());
-		S_GetCommandBuffer()->PushShader(&_shader[mesh_id], GetID());
-		S_GetCommandBuffer()->PushMesh((*it), GetID());
+		SettingShaderParameter();
+
+		u32 mesh_id = 0;
+		for( auto it = _mesh_list.begin(); it != _mesh_list.end(); ++it, ++mesh_id )
+		{
+			S_GetCommandBuffer()->PushRenderState(RENDER_STATE_DEFAULT, GetID());
+			S_GetCommandBuffer()->PushShader(&_shader[mesh_id], GetID());
+			S_GetCommandBuffer()->PushMesh((*it), GetID());
+		}
 	}
 
 	_box->DebugDraw();
@@ -143,16 +155,19 @@ void BuildingUnit::Draw()
 void BuildingUnit::SettingShaderParameter()
 {
 	// カメラ取得
-	CameraGamePlayer* camera = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER));
-	
+	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
+
 	// 行列の作成
 	_world.position = _position.current;
 	algo::CreateWorld(_world.matrix, _world.position, _world.rotation, _world.scale);
 	algo::CreateWVP(_matrix_world_view_projection, _world.matrix, camera);
 	// ライトの方向作成
 	D3DXVECTOR4 light_direction(0.2f, -0.8f, 0.5f, 0.f);
-	D3DXVECTOR4 ambient(1.0f, 1.0f, 1.0f, 1.f);
+	D3DXVECTOR4 ambient(0.2f, 0.2f, 0.2f, 1.f);
 	D3DXVECTOR4 eye(camera->GetVectorEye(), 0.f);
+	static D3DXVECTOR2 texcoord_move(0.f,0.f);
+	texcoord_move.y -= 0.0002f;
+
 	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
 	{
 		_shader[shader_index].SetWorldViewProjection(_matrix_world_view_projection);
@@ -160,10 +175,7 @@ void BuildingUnit::SettingShaderParameter()
 		_shader[shader_index].SetLightDirection(light_direction);
 		_shader[shader_index].SetAmbientColor(ambient);
 		_shader[shader_index].SetEyePosition(eye);
-		_shader[shader_index].SetFresnel(1.0f);
-		_shader[shader_index].SetMetalness(1.0f);
-		_shader[shader_index].SetRoughness(1.0f);
-		_shader[shader_index].SetWorld(_world.matrix);
+		_shader[shader_index].SetTexcoordMove(texcoord_move);
 	}
 }
 
@@ -176,27 +188,65 @@ void BuildingUnit::CollisionMeshPoint(u32 point_index)
 }
 
 //=============================================================================
+// 叙述関数
+bool Pred_Func(int value) {
+	if( value == 5 )
+		return true;
+	return false;
+}
+
+//=============================================================================
 // 衝突している点をお掃除
 void BuildingUnit::CleanUp()
 {
-
 	for( auto it = _mesh_list.begin(); it != _mesh_list.end(); ++it )
 	{
 		VERTEX_SMO* vertex = nullptr;
 		(*it)->GetVertexBuffer(0)->Lock(0, 0, (void**)&vertex, 0);
 
-		for( auto index : _clean_index_list)
+		std::list<u32>::iterator index_it;
+		for( index_it = _clean_index_list.begin(); index_it != _clean_index_list.end(); )
 		{
-			if( vertex[index].cleanliness > 0.f)
+			if( vertex[*index_it].cleanliness < 1.5f )
 			{
-				vertex[index].cleanliness -= kCleanVelocity;
+				vertex[*index_it].cleanliness += kCleanVelocity;
 			}
 			else
 			{
-				//_clean_index_list.erase(std::remove_if(_clean_index_list.begin(), _clean_index_list.end(),index), _clean_index_list.end());
+				//_clean_index_list.remove(*index_it);
+				index_it = _clean_index_list.erase(index_it);
+				continue;
 			}
+			++index_it;
 		}
 
+		(*it)->GetVertexBuffer(0)->Unlock();
+	}
+}
+
+//=============================================================================
+// 汚れのセット
+void BuildingUnit::SettingDirty(std::vector<data::Dirt>& dirt_list)
+{
+	for( auto it = _mesh_list.begin(); it != _mesh_list.end(); ++it )
+	{
+		u32 vertex_count = (*it)->GetVertexCount(0);
+		VERTEX_SMO* vertex = nullptr;
+		(*it)->GetVertexBuffer(0)->Lock(0, 0, (void**)&vertex, 0);
+
+		for( u32 vertex_id = 0; vertex_id < vertex_count; ++vertex_id )
+		{
+			for( auto it : dirt_list )
+			{
+				if( collision::Sphrere2Point(
+					it.point,
+					_volume_mesh_point->points[vertex_id],
+					it.radius) )
+				{
+					vertex[vertex_id].cleanliness = 0.f;
+				}
+			}
+		}
 		(*it)->GetVertexBuffer(0)->Unlock();
 	}
 }

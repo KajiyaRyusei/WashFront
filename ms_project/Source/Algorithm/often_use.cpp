@@ -118,20 +118,32 @@ namespace algo
 
 			if( abc .x == 0.f)
 			{// èkëﬁ
-				*tangent = D3DXVECTOR3(0.f, 0.f, 0.f);
-				*binormal = D3DXVECTOR3(0.f, 0.f, 0.f);
+				if( tangent != nullptr)
+				{
+					*tangent = D3DXVECTOR3(0.f, 0.f, 0.f);
+				}
+				
+				if( binormal != nullptr )
+				{
+					*binormal = D3DXVECTOR3(0.f, 0.f, 0.f);
+				}
+				
 				return;
 			}
 			u[i] = -abc.y / abc.x;
 			v[i] = -abc.z / abc.x;
 		}
 
-		*tangent = D3DXVECTOR3(u[0], u[1], u[2]);
-		*binormal = D3DXVECTOR3(v[0], v[1], v[2]);
+		if( tangent != nullptr )
+		{
+			*tangent = D3DXVECTOR3(u[0], u[1], u[2]);
+			D3DXVec3Normalize(tangent, tangent);
+		}
 
-		// ê≥ãKâª
-		D3DXVec3Normalize(tangent,tangent);
-		D3DXVec3Normalize(binormal, binormal);
+		if( binormal != nullptr )
+		{
+			*binormal = D3DXVECTOR3(v[0], v[1], v[2]);
+			D3DXVec3Normalize(binormal, binormal);
+		}
 	}
-
 }

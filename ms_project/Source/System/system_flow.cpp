@@ -88,7 +88,7 @@ void SystemFlow::MessageLoop()
 				frame_count = 0;
 			}
 
-			if (current_time - exec_last_time >= 1000 / 60)
+			if( current_time - exec_last_time >= kFrameRate )
 			{// fps’²®
 				exec_last_time = current_time;
 

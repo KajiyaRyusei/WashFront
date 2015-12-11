@@ -17,5 +17,5 @@
 // ŽwŽ¦
 void CommandFire::Execute(PlayerUnit* player)
 {
-	player->_weapon->Fire(player->_aim->GetStartPosition() + (player->_front_vector*2.f), player->_aim->GetEndPosition());
+	player->_weapon->Fire(player->GetPosition(), player->_aim->GetTargetPosition());
 }

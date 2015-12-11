@@ -46,5 +46,14 @@
     <FxCompile Include="water_spray.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
+    <FxCompile Include="toon_building.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="toon_player.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="toon_weapon.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

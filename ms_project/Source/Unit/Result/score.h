@@ -31,8 +31,6 @@ public:
 
 	ScoreUnit(Application* application, World* world ) : Unit( application , world )
 	{
-		_app	= application;
-		_world	= world;
 		Initialize();
 	}
 	virtual ~ScoreUnit(){ Finalize(); }
@@ -62,9 +60,6 @@ private:
 
 	// keta suu bun Instance wo kakuho
 	NumberUnit*		_score[ digit ];
-	// 
-	Application*	_app;
-	World*			_world;
 	// gennzai no atai
 	int				_score_value;
 	// mokuhyou no atai

@@ -85,6 +85,17 @@ uniform sampler uniform_albedo_sampler = sampler_state {
 	AddressV = WRAP;
 };
 
+uniform texture uniform_metalness_texture;
+uniform sampler uniform_metalness_sampler = sampler_state {
+	Texture = <uniform_metalness_texture>;
+	MinFilter = ANISOTROPIC;
+	MagFilter = LINEAR;
+	MipFilter = LINEAR;
+	MaxAnisotropy = 16;
+	AddressU = WRAP;
+	AddressV = WRAP;
+};
+
 //-------------------------------------
 // ベックマン分布関数 : 材質の粗さを定義するもの
 float Beckmann(float roughness, float dot_normal_half)
@@ -235,7 +246,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	PixelShaderOutput output = (PixelShaderOutput)0;
 
 	// ライトベクトル
-	float3 light_direction = uniform_light_direction.xyz;
+	float3 light_direction = -uniform_light_direction.xyz;
 	// 視線ベクトル
 	float3 eye = normalize(uniform_eye_position - input.world_position);
 	// アルベド色
@@ -244,18 +255,20 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	float3 diffuse = OrenNayar(light_direction, eye, input.normal, uniform_ambient_color.xyz);
 	// 鏡面反射色
 	float3 specular = CookTorrance(light_direction, eye, input.normal);
+	// メタルネス
+	float3 metalness = tex2D(uniform_metalness_sampler, input.texcoord).xyz;
 	// 環境光色
 	float3 R = reflect(eye, input.normal);
 	float4 specular_cube_ambient = texCUBE(uniform_specular_cube_sampler, -R);
 	float4 diffuse_cube_ambient = texCUBE(uniform_diffuse_cube_sampler, input.normal);
 
 	output.render_target0.xyz = (diffuse + specular) * albedo;
-	output.render_target0.xyz = lerp(diffuse_cube_ambient.xyz, specular_cube_ambient.xyz, uniform_metalness) * output.render_target0.xyz;
+	//output.render_target0.xyz = lerp(diffuse_cube_ambient.xyz, specular_cube_ambient.xyz, metalness.x) * output.render_target0.xyz;
 	output.render_target0.a = uniform_ambient_color.w;
 
 	// ガンマ補正
 	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 2.2f);
-	output.render_target0.xyz *= 2.f;
+	output.render_target0.xyz *= 1.8f;
 
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);

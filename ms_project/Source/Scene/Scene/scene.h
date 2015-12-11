@@ -14,6 +14,11 @@
 // include
 #include "System/application.h"
 
+// ï`âÊ
+#include "DrawCommand/command_processor.h"
+#include "DrawCommand/command_buffer.h"
+#include "DrawCommand/command_buffer_holder.h"
+
 //*****************************************************************************
 // ÉNÉâÉXê›åv
 class Scene

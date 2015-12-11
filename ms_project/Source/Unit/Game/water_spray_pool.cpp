@@ -35,9 +35,10 @@ WaterSprayPool::WaterSprayPool(Application* application, World* world) : Unit(ap
 	_mesh = factory.Create(application->GetRendererDevice(), kPoolSize);
 
 	_shader = new ShaderWaterSpray();
-	D3DXCreateTextureFromFileA(application->GetRendererDevice()->GetDevice(), "Data/Texture/water_spray.png", &_albedo_map);
+	D3DXCreateTextureFromFileA(application->GetRendererDevice()->GetDevice(), "Data/Texture/water_spray2.png", &_albedo_map);
 	_shader->SetAlbedoTexture(_albedo_map);
 }
+
 //=============================================================================
 // デストラクタ
 WaterSprayPool::~WaterSprayPool()
@@ -79,7 +80,7 @@ void WaterSprayPool::Animate()
 	MeshFactorySpriteInstance factory;
 	factory.RegisterMatrix(_spray_matrices, kPoolSize,_mesh);
 
-	CameraGamePlayer* camera = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER));
+	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
 	D3DXMATRIX view_projection = camera->GetMatrixView() * camera->GetMatrixProjection();
 
 	_shader->SetViewProjection(view_projection);

@@ -16,7 +16,7 @@ namespace
 {
 	static const char* kStaticMeshResourceNames[] =
 	{
-		"Data/StaticModel/biru_1.smo"
+		"Data/StaticModel/new_biru_1.smo"
 	};
 }
 

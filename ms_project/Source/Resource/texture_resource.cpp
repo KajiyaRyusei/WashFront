@@ -18,13 +18,19 @@ namespace
 	static const LPCWSTR kTextureResourceNames[] =
 	{
 		L"Data/Texture/oji_body.jpg",
-		L"Data/Texture/window.png",
+		L"Data/Texture/window3.png",
 		L"Data/Texture/aim.png",
 		L"Data/Texture/mud-normal.jpg",
 		L"Data/Texture/water.jpg",
 		L"Data/Texture/water-normal003.jpg",
-		L"Data/Texture/window_spec.png",
-		L"Data/Texture/dirty_000.jpg"
+		L"Data/Texture/window3_spec.png",
+		L"Data/Texture/mud-normal_2.jpg",
+		L"Data/Texture/new_oji_soubi.jpg",
+		L"Data/Texture/new_oji_body_spec.jpg",
+		L"Data/Texture/new_oji_sobi_spec.jpg",
+		L"Data/Texture/toon.png",
+		L"Data/Texture/window3_normal.png",
+		L"Data/Texture/oji_face.jpg"
 	};
 }
 

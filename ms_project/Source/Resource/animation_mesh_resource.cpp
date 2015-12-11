@@ -17,7 +17,7 @@ namespace
 {
 	static const char* kAnimationMeshResourceNames[] =
 	{
-		"Data/AnimationModel/ojianime.amo",
+		"Data/AnimationModel/new_oji_stance.amo",
 		"Data/AnimationModel/weapon_01.amo"
 	};
 }
