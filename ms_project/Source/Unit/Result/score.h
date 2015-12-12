@@ -31,6 +31,10 @@ public:
 
 	ScoreUnit(Application* application, World* world ) : Unit( application , world )
 	{
+		for( int i = 0; i < digit; i++ )
+		{
+			_score[ i ] = nullptr;
+		}
 		Initialize();
 	}
 	virtual ~ScoreUnit(){ Finalize(); }
@@ -41,6 +45,8 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
 
+	void CountUp( float grade );
+	void Move( void );
 	// スコアセット
 	void SetDestScore( int value )
 	{
@@ -53,24 +59,40 @@ public:
 		return _finish_flg;
 	}
 
+	static void SetFlg( bool flg )
+	{
+		_finish_flg = flg;
+	}
+
+	// 
+	void SetPos( D3DXVECTOR3 pos );
+
+
+	// 
+	void SetScale( D3DXVECTOR3 scale );
+
+
+
 private:
 
 	// 累乗
 	int Pow( int num , int mulutipiler );
+	//
+	int CheckDigit( int value );
 
 	// keta suu bun Instance wo kakuho
 	NumberUnit*		_score[ digit ];
+	// 
 	// gennzai no atai
 	int				_score_value;
 	// mokuhyou no atai
 	int				_dest_score;
-	// hokan you no atai
-	float			_grade;
-	// time
-	int				_timeCnt;
+	//
+	D3DXVECTOR3		_pos;
+	D3DXVECTOR3		_fPos;
 	// 
-	int				_id;
-	
+	D3DXVECTOR3		_scale;
+
 	// このクラスのインスタンスの数
 	static int		_num;
 	// 

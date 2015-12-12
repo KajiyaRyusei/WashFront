@@ -1,5 +1,33 @@
-<サウンドの使い方>
-今回はXactという機能を使用しているので、通常のサウンド再生と勝手が異なります。
-詳しくは
-http://kocoon-memo.hateblo.jp/archive/category/XACT
-をチェックしてください。
+﻿<サウンドの使い方>
+
+学校で習ったものに差し替えました。
+
+使用例
+// 再生
+// sound.hに記述してあるラベルが引数
+_application->GetSound()->Play( ラベル );
+
+// 停止
+// 上記ラベルで指定した曲の停止
+_application->GetSound()->Stop( ラベル );
+// 全ての曲停止
+_application->GetSound()->Stop();
+
+// 曲データの追加方法
+ ① sound.hのenum SOUND_LABELの中身を追加
+	sound.h
+		enum SOUND_LABEL
+		{
+			BGM_TEST = 0 ,
+			// ここにBGM追加
+			SE_TEST ,
+			// ここにSE追加
+			SOUND_LABEL_MAX
+		}
+ ② sound.cppのc_param[ SOUND_LABEL_MAX ]の中身追加
+	PARAM c_param[ SOUND_LABEL_MAX ] =
+	{
+		{ L"ファイルパス" , ループフラグ } ,
+		// こんな感じ
+		{ L"Data/Sound/SE/se.wav" , false }
+	}

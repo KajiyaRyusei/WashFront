@@ -17,6 +17,9 @@
 //*****************************************************************************
 // 前方宣言
 
+//*****************************************************************************
+// const
+const int disp_time	= 60;
 
 //*****************************************************************************
 // クラス設計
@@ -36,7 +39,15 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
 
+	void SetTime( int time )
+	{
+		_timeCnt = time;
+	}
 
+	int GetTime( void )
+	{
+		return _timeCnt;
+	}
 
 private:
 

@@ -14,49 +14,24 @@
 
 //*****************************************************************************
 // const
-const D3DXVECTOR3	position[ 8 ] =
+const float			moveDistance[ 2 ]
 {
-	D3DXVECTOR3( 430.0f , 670.0f , 0.0f ) ,
-	D3DXVECTOR3( 430.0f , 730.0f , 0.0f ) ,
-	D3DXVECTOR3( 430.0f , 790.0f , 0.0f ) ,
-	D3DXVECTOR3( 430.0f , 850.0f , 0.0f ) ,
-	D3DXVECTOR3( 830.0f , 670.0f , 0.0f ) ,
-	D3DXVECTOR3( 830.0f , 730.0f , 0.0f ) ,
-	D3DXVECTOR3( 830.0f , 790.0f , 0.0f ) ,
-	D3DXVECTOR3( 830.0f , 850.0f , 0.0f )
+	550.0f ,
+	980.0f
 };
-
-const float			dest_pos_Y[ 4 ] =
-{
-	120.0f ,
-	180.0f ,
-	240.0f ,
-	300.0f
-};
-
-const D3DXVECTOR3	scaling			= D3DXVECTOR3( 30.0f , 50.0f , 0.0f );
-const int			countUpTime		= 120;
-const float			countTimeSpeed	= 1.0f / countUpTime;
 
 //*****************************************************************************
 // static
-int ScoreUnit::_num = 0;
 bool ScoreUnit::_finish_flg = false;
+
 //=============================================================================
 // 初期化
 void ScoreUnit::Initialize()
 {
-	for( int i = 0; i < digit; i++ )
-	{
-		_score[ i ] = new NumberUnit( _application, _game_world);
-		_score[ i ]->SetPosition( D3DXVECTOR3( position[ _num ].x - ( ( float )i * scaling.x ) , position[ _num ].y , 0.0f ) );
-		_score[ i ]->SetScaling( scaling );
-	}
-	_grade			= 0.0f;
-	_timeCnt		= 0;
+	
+	_score[ 0 ]		= new NumberUnit( _application, _game_world);
 	_score_value	= 0;
-	_id				= _num;
-	_num++;
+	_finish_flg		= false;
 }
 
 //=============================================================================
@@ -65,7 +40,6 @@ void ScoreUnit::Finalize()
 {
 	for( int i = 0; i < digit; i++ )
 	{
-		
 		SafeDelete( _score[ i ] );
 	}
 }
@@ -74,43 +48,28 @@ void ScoreUnit::Finalize()
 // 更新
 void ScoreUnit::Update()
 {
-	if( BulletinUnit::GetUpdateFlg() )
+	for( int i = 0; i < digit; i++ )
 	{
-		for( int i = 0; i < digit; i++ )
+		int a = CheckDigit( _score_value );
+		if( a > i )
 		{
-			D3DXVECTOR3 pos = _score[ i ]->GetPosition();
-			if( pos.y > dest_pos_Y[ _id % 4 ] )
+			if( _score[ i ] == nullptr )
 			{
-				_score[ i ]->SetPosition( D3DXVECTOR3( pos.x , pos.y - 10 , pos.z ) );
+				_score[ i ] = new NumberUnit( _application , _game_world );
+				D3DXVECTOR3 pos = _score[ 0 ]->GetPosition();
+				_score[ i ]->SetPosition( D3DXVECTOR3( pos.x - ( i * _scale.x ) , pos.y , pos.z ) );
+				_score[ i ]->SetScaling( _scale );
 			}
 		}
-	}
-	if( BulletinUnit::GetDispFlg() )
-	{
-		_timeCnt++;
-		if( _timeCnt > ( _id % 4 ) * countUpTime + countUpTime )
+		if( _score[ i ] != nullptr )
 		{
-			_grade += countTimeSpeed;
-			if( _grade >= 1.0f )
-			{
-				_grade = 1.0f;
-			}
-			_score_value = ( int )( _dest_score * _grade );
+			// mokuteki no atai wo okuru( ex 12345 no baai score[ 2 ] ha 3 )
+			_score[ i ]->SetValue( _score_value / Pow( 10 , i ) );
+			// hanei
+			_score[ i ]->Update();
 		}
 	}
 
-	for( int i = 0; i < digit; i++ )
-	{
-		// mokuteki no atai wo okuru( ex 12345 no baai score[ 2 ] ha 3 )
-		_score[ i ]->SetValue( _score_value / Pow( 10 , i ) );
-		// hanei
-		_score[ i ]->Update();
-	}
-	
-	if( _id == 7 && _grade >= 1.0f )
-	{
-		_finish_flg = true;
-	}
 }
 
 //=============================================================================
@@ -126,7 +85,10 @@ void ScoreUnit::Draw()
 {
 	for( int i = 0; i < digit; i++ )
 	{
-		_score[ i ]->Draw();
+		if( _score[ i ] != nullptr )
+		{
+			_score[ i ]->Draw();
+		}
 	}
 }
 
@@ -144,4 +106,62 @@ int ScoreUnit::Pow( int num , int mulutiplier )
 	}
 	// リターン
 	return f;
+}
+
+void ScoreUnit::CountUp( float grade )
+{
+	if( grade >= 0.0f )
+	{
+		if( grade >= 1.0f )
+		{
+			grade = 1.0f;
+		}
+
+		_score_value = ( int )( _dest_score * grade );
+	}
+}
+
+void ScoreUnit::Move( void )
+{
+	float destPosY = _fPos.y - moveDistance[ windowSizeID ];
+
+	for( int i = 0; i < digit; i++ )
+	{
+		if( _score[ i ] != nullptr )
+		{
+			D3DXVECTOR3 pos = _score[ i ]->GetPosition();
+			if( pos.y > destPosY )
+			{
+				float y = BulletinUnit::Easing( _fPos.y , destPosY );
+				_score[ i ]->SetPosition( D3DXVECTOR3( pos.x , y , pos.z ) );
+			}
+		}
+	}
+}
+
+int ScoreUnit::CheckDigit( int value )
+{
+	int ans = 0;
+	for( int i = 0; i <= digit; i++ )
+	{
+		if( value / Pow( 10 , i ) == 0 && value != 0 && value > 10 )
+		{
+			return ans;
+		}
+		ans++;	
+	}
+	return 1;
+}
+
+void ScoreUnit::SetPos( D3DXVECTOR3 pos )
+{
+	_pos	= pos;
+	_fPos	= pos;
+	_score[ 0 ]->SetPosition( _pos );
+}
+
+void ScoreUnit::SetScale( D3DXVECTOR3 scale )
+{
+	_scale = scale;
+	_score[ 0 ]->SetScaling( scale );
 }

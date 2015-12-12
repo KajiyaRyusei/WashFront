@@ -40,6 +40,7 @@ public:
 
 private:
 
+	int _timeCnt;
 	// a’l‚Ì•Ï‰»‘¬“x
 	float _a_speed;
 

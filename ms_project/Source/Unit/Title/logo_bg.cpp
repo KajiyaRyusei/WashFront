@@ -14,7 +14,6 @@
 // const
 const D3DXVECTOR3	position	= D3DXVECTOR3( 480.0f , 150.0f , 0.0 );
 const D3DXVECTOR3	scaling		= D3DXVECTOR3( 500.0f , 250.0f , 0.0f );
-const int			exsist_time = 90;
 
 //=============================================================================
 // èâä˙âª

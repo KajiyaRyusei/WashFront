@@ -25,11 +25,11 @@
 #include "Unit\Title\text.h"
 #include "Unit\Title/logo_bg.h"
 #include "Unit\Title\logo.h"
-#include "Unit/Game/player.h"
+#include "Unit/Title/title_player.h"
 #include "Unit/Game/back_ground.h"
 #include "Unit/Game/building.h"
-#include "Unit/Game/water_spray_pool_dummy.h"
 #include "World/collision_grid.h"
+#include "Unit/Game/water_spray_pool.h"
 
 // resource
 #include "Resource/animation_mesh_resource.h"
@@ -37,6 +37,7 @@
 #include "Resource/cube_texture_resource.h"
 #include "Resource/texture_resource.h"
 #include "Resource/mesh_resource.h"
+#include "Resource/animation_resource.h"
 
 // viewport
 #include "Renderer/directx9.h"
@@ -50,8 +51,67 @@
 // 汚れ
 #include "Data/data_dirt.h"
 
+
 // ルート
 #include "Data/data_route.h"
+
+//=============================================================================
+// const
+const int windowSizeID = 0;
+
+const D3DXVECTOR3 WindowPos[2][3] =
+{
+	// 960 : 540
+	{
+		// logo_bg
+		D3DXVECTOR3(480.0f, 150.0f, 0.0),
+
+		// logo
+		D3DXVECTOR3(480.0f, 150.0f, 0.0),
+
+		// text
+		D3DXVECTOR3(480.0f, 500.0f, 0.0)
+	},
+
+	// 1280 : 720
+	{
+		// logo_bg
+		D3DXVECTOR3(640.0f, 200.0f, 0.0),
+
+		// logo
+		D3DXVECTOR3(640.0f, 200.0f, 0.0),
+
+		// text
+		D3DXVECTOR3(640.0f, 650.0f, 0.0)
+	}
+};
+
+const D3DXVECTOR3 WindowScl[2][3] =
+{
+	// 960 : 540
+	{
+		// logo_bg
+		D3DXVECTOR3(500.0f, 250.0f, 0.0f),
+
+		// logo
+		D3DXVECTOR3(400.0f, 200.0f, 0.0f),
+
+		// text
+		D3DXVECTOR3(500.0f, 50.0f, 0.0f)
+	},
+
+	// 1280 : 720
+	{
+		// logo_bg
+		D3DXVECTOR3(600.0f, 350.0f, 0.0f),
+
+		// logo
+		D3DXVECTOR3(500.0f, 300.0f, 0.0f),
+
+		// text
+		D3DXVECTOR3(600.0f, 70.0f, 0.0f)
+	}
+};
 
 //=============================================================================
 // コンストラクタ
@@ -127,21 +187,31 @@ void SceneTitle::MapGeneration()
 	std::list<Unit*> unit_list;
 
 	// 2Dオブジェクト
-	unit_list.push_back(new TextUnit(_application, _world));
-	unit_list.push_back(new Logo_BGUnit(_application, _world));
-	unit_list.push_back(new LogoUnit(_application, _world));
+	TextUnit*		pText	= new TextUnit(_application, _world);
+	Logo_BGUnit*	pLogoBg = new Logo_BGUnit(_application, _world);
+	LogoUnit*		pLogo	= new LogoUnit(_application, _world);
+
+	pLogoBg->SetPosition(WindowPos[windowSizeID][0]);
+	pLogoBg->SetScaling(WindowScl[windowSizeID][0]);
+	pLogo->SetPosition(WindowPos[windowSizeID][1]);
+	pLogo->SetScaling(WindowScl[windowSizeID][1]);
+	pText->SetPosition(WindowPos[windowSizeID][2]);
+	pText->SetScaling(WindowScl[windowSizeID][2]);
+
+	unit_list.push_back(pText);
+	unit_list.push_back(pLogoBg);
+	unit_list.push_back(pLogo);
 
 	// プレイヤー
-	CameraGamePlayer* camera_1p = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER_1P));
-	PlayerUnit* player_1p = new PlayerUnit(_application, _world, camera_1p);
-	unit_list.push_back(player_1p);
+	TitlePlayerUnit* player = new TitlePlayerUnit(_application, _world);
+	unit_list.push_back(player);
 
 	// 背景
 	unit_list.push_back(new BackGroundUnit(_application, _world));
 
 	// マップファイル読み込み
 	FILE* file;
-	file = fopen("Data/Map/test.map", "rt");
+	file = fopen("Data/Map/debug3.map", "rt");
 
 	s32 object_number = 0;
 
@@ -177,18 +247,18 @@ void SceneTitle::MapGeneration()
 			{
 				s32 model_id = 0;
 				s32 texture_id = 0;
+				s32 static_id = 0;
 				D3DXVECTOR3 position;
 				D3DXVECTOR3 rotation;
 				D3DXVECTOR3 scale;
 
-				fscanf(file, "%d %d %f %f %f %f %f %f %f %f %f",
+				fscanf(file, "%d %d %f %f %f %f %f %f %f %f %f %d",
 					&model_id, &texture_id,
 					&position.x, &position.y, &position.z,
 					&rotation.x, &rotation.y, &rotation.z,
-					&scale.x, &scale.y, &scale.z);
+					&scale.x, &scale.y, &scale.z, &static_id);
 
 				BuildingUnit* bill = new BuildingUnit(_application, _world, position, rotation, scale);
-
 				unit_list.push_back(bill);
 			}
 		}
@@ -222,6 +292,9 @@ void SceneTitle::ResourceGeneration()
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_BAG_TEXTURE, _application->GetRendererDevice());
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_BAG_METALNESS_TEXTURE, _application->GetRendererDevice());
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_METALNESS_TEXTURE, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_TOON_TEXTURE, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_NORMAL_TEXTURE, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_FACE, _application->GetRendererDevice());
 
 	// キューブマップ
 	_world->GetCubeTextureResource()->Create(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE, _application->GetRendererDevice());
@@ -235,4 +308,8 @@ void SceneTitle::ResourceGeneration()
 	// AMO
 	_world->GetAnimationMeshResource()->Create(ANIMATION_MESH_RESOURE_WEAPON_01, _application->GetRendererDevice());
 	_world->GetAnimationMeshResource()->Create(ANIMATION_MESH_RESOURE_GRANDPA, _application->GetRendererDevice());
+
+	// アニメーション
+	auto mesh_list = _world->GetAnimationMeshResource()->Get(ANIMATION_MESH_RESOURE_GRANDPA);
+	_world->GetAnimationResource()->Create(ANIMATION_RESOURE_STANCE, mesh_list.size());
 }

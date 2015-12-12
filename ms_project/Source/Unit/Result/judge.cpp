@@ -14,8 +14,12 @@
 //*****************************************************************************
 // const
 const D3DXVECTOR3	position	= D3DXVECTOR3( 0.0f , 0.0f , 0.0f );
-const D3DXVECTOR3	scaling		= D3DXVECTOR3( 300.0f , 80.0f , 0.0f );
-const int			disp_time	= 60;
+const D3DXVECTOR3	scaling		= D3DXVECTOR3( 150.0f , 120.0f , 0.0f );
+
+
+//*****************************************************************************
+// static
+
 //=============================================================================
 // èâä˙âª
 void JudgeUnit::Initialize()
@@ -53,12 +57,13 @@ void JudgeUnit::Update()
 {
 	if( ScoreUnit::GetFlg() )
 	{
-		_timeCnt++;
+		
 		if( _timeCnt == disp_time )
 		{
 
 			_visible = true;
 		}
+		_timeCnt++;
 	}
 	ScreenUnit::Update();
 }

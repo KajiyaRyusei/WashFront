@@ -2,7 +2,7 @@
 //
 // シーン：リザルト
 // 
-// Created by Ryusei Kajiya on 20151130
+// Created by Ryusei Kajiya on 20151123
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -17,6 +17,9 @@
 //*****************************************************************************
 // 前方宣言
 class World;
+class ScoreUnit;
+class JudgeUnit;
+
 
 //*****************************************************************************
 // クラス設計
@@ -43,7 +46,10 @@ public:
 	virtual void Draw() override;
 
 private:
-	World* _world;
-	
+	World*		_world;
+	ScoreUnit*	_pScore[ 8 ];
+	JudgeUnit*	_pJudge[ 2 ];
+	float		_grade;
+
 };
 

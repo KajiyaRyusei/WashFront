@@ -18,7 +18,7 @@
 #include "Camera/camera_manager.h"
 #include "DevelopTool/develop_tool_manager.h"
 #include "Shader/effect_handle_manager.h"
-#include "Sound/xact/xact_manager.h"
+#include "Sound\sound.h"
 
 // リソースボックス
 #include "Resource/resource_box.h"
@@ -30,10 +30,6 @@
 
 // fade
 #include "Fade/fade.h"
-
-// test
-#include "Sound/speaker/speaker_3d.h"
-#include "Sound/speaker/speaker_bgm.h"
 
 //*****************************************************************************
 // 定数
@@ -67,6 +63,10 @@ void Application::Initalize(Window *window, RendererDevice *renderer_device)
 	// フェードの作成
 	_fade = new Fade(this);
 
+	// soundの作成
+	_sound = new CSound();
+	_sound->Init(window->GetHandleWindow());
+
 	// カメラマネージャーの作成
 	_camera_manager = new CameraManager(this);
 	Reference::GetInstance().SetCameraManager(_camera_manager);
@@ -80,14 +80,17 @@ void Application::Initalize(Window *window, RendererDevice *renderer_device)
 	_develop_manager = new DevelopToolManager();
 	Reference::GetInstance().SetDevelopToolManager(_develop_manager);
 
-	// Xactマネージャーの作成
-	_xact_manager = new XactManager(this);
+	
 }
 //=============================================================================
 // 終了
 void Application::Finalize()
 {
-	SafeDelete(_xact_manager);
+	if (_sound != nullptr)
+	{
+		_sound->Uninit();
+	}
+	SafeDelete(_sound);
 	SafeDelete(_fade);
 	SafeDelete(_camera_manager);
 	SafeDelete(_develop_manager);
@@ -108,7 +111,6 @@ void Application::Update(u64 fps)
 	_scene_manager->Update();
 	_camera_manager->Update();
 	_develop_manager->Update();
-	_xact_manager->Update();
 }
 //=============================================================================
 // 描画

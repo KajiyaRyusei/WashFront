@@ -17,6 +17,11 @@
 //*****************************************************************************
 // 前方宣言
 
+//*****************************************************************************
+// const
+// 960 : 540  → 0
+// 1280 : 720 → 1
+const int windowSizeID = 0;
 
 //*****************************************************************************
 // クラス設計
@@ -36,6 +41,12 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
 
+	void SetPosition( D3DXVECTOR3 pos )
+	{
+		_position	= pos;
+		_tempPos	= pos;
+	}
+
 	static bool GetDispFlg( void )
 	{
 		return _disp_flg;
@@ -46,11 +57,18 @@ public:
 		return _update_flg;
 	}
 
+	
+
+	static float Easing( float min , float max ); 
+
 private:
 
-	int _timeCnt;
+	int				_timeCnt;
+	D3DXVECTOR3		_tempPos;
 
-	static bool _disp_flg;
-	static bool _update_flg;
+	static float	_time;
+	static bool		_disp_flg;
+	static bool		_update_flg;
+
 
 };

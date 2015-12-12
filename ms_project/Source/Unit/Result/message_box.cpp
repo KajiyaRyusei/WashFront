@@ -13,8 +13,12 @@
 
 //*****************************************************************************
 // const
-const D3DXVECTOR3	scaling		= D3DXVECTOR3( 150.0f , 40.0f , 0.0f );
-const float			dest_pos_Y	= 550;
+const D3DXVECTOR3	scaling		= D3DXVECTOR3( 80.0f , 20.0f , 0.0f );
+const float			dest_pos_Y[ 2 ] =
+{
+	550.0f ,
+	980.0f 
+};
 
 //=============================================================================
 // èâä˙âª
@@ -49,9 +53,9 @@ void Message_BoxUnit::Update()
 {
 	if( BulletinUnit::GetUpdateFlg() )
 	{
-		if( _pos.y - dest_pos_Y < _position.y )
+		if( _pos.y - dest_pos_Y[ windowSizeID ] < _position.y )
 		{
-			_position.y -= 10;
+			_position.y = BulletinUnit::Easing( _pos.y , ( _pos.y - dest_pos_Y[ windowSizeID ] )  );
 		}
 	}
 	ScreenUnit::Update();
