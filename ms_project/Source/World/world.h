@@ -21,6 +21,7 @@ class CubeTextureResource;
 class MeshResource;
 class StaticMeshResource;
 class AnimationMeshResource;
+class AnimationResource;
 
 class WaterSprayPool;
 
@@ -53,6 +54,7 @@ public:
 	MeshResource* GetMeshResource(){ return _mesh_resource; }
 	StaticMeshResource* GetStaticMeshResource(){ return _static_mesh_resource; }
 	AnimationMeshResource* GetAnimationMeshResource(){ return _animation_mesh_resource; }
+	AnimationResource* GetAnimationResource(){ return _animation_resource; }
 
 	void SetWaterSprayPool(WaterSprayPool* water_spray_pool){ _water_spray_pool = water_spray_pool; }
 	WaterSprayPool* GetWaterSprayPool(){ return _water_spray_pool; }
@@ -66,5 +68,6 @@ private:
 	MeshResource* _mesh_resource;
 	StaticMeshResource* _static_mesh_resource;
 	AnimationMeshResource* _animation_mesh_resource;
+	AnimationResource* _animation_resource;
 	WaterSprayPool* _water_spray_pool;
 };

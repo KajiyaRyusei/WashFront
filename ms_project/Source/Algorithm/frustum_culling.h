@@ -134,6 +134,48 @@ public:
 		return true;
 	}
 
+	//=============================================================================
+	// 視錐台カリング チェック : box
+	inline bool ClipCheckBox(const D3DXVECTOR3& pos, const D3DXVECTOR3& size)
+	{
+
+		const D3DXPLANE& Top = _view_plane[ViewVolumePlaneTop];
+		const D3DXPLANE& Bottom = _view_plane[ViewVolumePlaneBottom];
+		const D3DXPLANE& Left = _view_plane[ViewVolumePlaneLeft];
+		const D3DXPLANE& Right = _view_plane[ViewVolumePlaneRight];
+		const D3DXPLANE& Front = _view_plane[ViewVolumePlaneFront];
+		const D3DXPLANE& Back = _view_plane[ViewVolumePlaneBack];
+
+		if( Top.a*pos.x + Top.b*pos.y + Top.c * pos.z + Top.d > size.y )
+		{
+			return false;
+		}
+		else if( Bottom.a*pos.x + Bottom.b*pos.y + Bottom.c * pos.z + Bottom.d > size .y)
+		{
+			return false;
+		}
+
+		if( Left.a*pos.x + Left.b*pos.y + Left.c * pos.z + Left.d > size.x )
+		{
+			return false;
+		}
+		else if( Right.a*pos.x + Right.b*pos.y + Right.c * pos.z + Right.d > size.x )
+		{
+			return false;
+		}
+
+		if( Front.a*pos.x + Front.b*pos.y + Front.c * pos.z + Front.d > size.z )
+		{
+			return false;
+		}
+		else if( Back.a*pos.x + Back.b*pos.y + Back.c * pos.z + Back.d > size.z )
+		{
+			return false;
+		}
+
+		return true;
+	}
+
 private:
 	D3DXPLANE _view_plane[ViewVolumePlaneMax];
 };

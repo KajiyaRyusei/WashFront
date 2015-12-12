@@ -28,7 +28,7 @@ namespace
 		L"Data/Texture/new_oji_soubi.jpg",
 		L"Data/Texture/new_oji_body_spec.jpg",
 		L"Data/Texture/new_oji_sobi_spec.jpg",
-		L"Data/Texture/toon.png",
+		L"Data/Texture/toon_map.png",
 		L"Data/Texture/window3_normal.png",
 		L"Data/Texture/oji_face.jpg"
 	};

@@ -27,6 +27,8 @@ namespace
 {
 	static const fx32 kRotationCoefficient = 0.001f;
 	static const D3DXVECTOR3 kTargetLength(0.f,0.f,30.f);
+	static const fx32 kRotationLimitX = 0.6f;
+	static const fx32 kRotationLimitY = 1.2f;
 }
 
 //=============================================================================
@@ -52,6 +54,7 @@ void AimUnit::Finalize()
 // XV
 void AimUnit::Update()
 {
+	CalculatePosition();
 	_aim_line->Update();
 	_aim_draw->Update();
 }
@@ -61,13 +64,14 @@ void AimUnit::Update()
 void AimUnit::CollisionUpdate()
 {
 	_aim_line->CollisionUpdate();
+	_aim_draw->SetEndPosition(_aim_line->GetEndPosition());
+	_aim_draw->SetHit(_aim_line->IsHit());
 }
 
 //=============================================================================
 // •`‰æ
 void AimUnit::Draw()
 {
-	CalculatePosition();
 	_aim_line->Draw();
 	_aim_draw->Draw();
 }
@@ -81,22 +85,22 @@ void AimUnit::CalculatePosition()
 	D3DXMATRIX quaternion_matrix,rotation_matrix;
 	D3DXMatrixRotationQuaternion(&quaternion_matrix, &route.eye_quaternion);
 
-	if( _current_rotation.x < -0.3f )
+	if( _current_rotation.x < -kRotationLimitX )
 	{
-		_current_rotation.x = -0.3f;
+		_current_rotation.x = -kRotationLimitX;
 	}
-	else if( _current_rotation.x > 0.3f )
+	else if( _current_rotation.x > kRotationLimitX )
 	{
-		_current_rotation.x = 0.3f;
+		_current_rotation.x = kRotationLimitX;
 	}
 
-	if( _current_rotation.y < -1.f )
+	if( _current_rotation.y < -kRotationLimitY )
 	{
-		_current_rotation.y = -1.f;
+		_current_rotation.y = -kRotationLimitY;
 	}
-	else if( _current_rotation.y > 1.f )
+	else if( _current_rotation.y > kRotationLimitY )
 	{
-		_current_rotation.y = 1.f;
+		_current_rotation.y = kRotationLimitY;
 	}
 
 	D3DXMatrixRotationYawPitchRoll(&rotation_matrix, _current_rotation.y, _current_rotation.x, _current_rotation.z);
@@ -105,5 +109,19 @@ void AimUnit::CalculatePosition()
 	_position.current += _player->GetPlayerCamera()->GetVectorEye();
 	_aim_line->SetStartPosition(_player->GetPosition());
 	_aim_line->SetEndPosition(_position.current);
-	_aim_draw->SetEndPosition(_position.current);
+	
+}
+
+//=============================================================================
+// ‘_‚Á‚Ä‚¢‚éˆÊ’u‚ÌŽæ“¾
+const D3DXVECTOR3& AimUnit::GetTargetPosition()
+{
+	return _aim_line->GetEndPosition();
+}
+
+//=============================================================================
+// Õ“Ë‚µ‚Ä‚¢‚é‚©
+const bool AimUnit::IsHit() const
+{
+	return _aim_line->IsHit();
 }

@@ -37,7 +37,8 @@ struct PixelShaderOutput
 
 //=============================================================================
 // ユニフォーム
-float4x4 uniform_world_view_projection;
+uniform float4x4 uniform_world_view_projection;
+uniform float4 uniform_ambient_color;
 
 uniform texture uniform_albedo_texture;
 uniform sampler uniform_albedo_sampler = sampler_state {
@@ -75,7 +76,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 
 	float4 albedo = tex2D(uniform_albedo_sampler, input.texcoord);
 
-	output.render_target0 = albedo*0.8f;
+	output.render_target0 = albedo * uniform_ambient_color;
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);
 	output.render_target3 = float4(1, 1, 1, 1);

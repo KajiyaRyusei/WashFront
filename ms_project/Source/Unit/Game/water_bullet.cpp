@@ -85,8 +85,7 @@ void WaterBulletUnit::Draw()
 {
 	_start_point = _player->GetPosition();
 	_rotation_y = atan2f(_end_point.x - _start_point.x, _end_point.z - _start_point.z);
-	_control_point = (_start_point + _end_point) / 2;
-	_control_point.y += 5.f;
+	_start_point += D3DXVECTOR3(sinf(_rotation_y) * 1.f, 0.f, cosf(_rotation_y) * 1.f);
 
 	// シェーダパラメーターの更新
 	SettingShaderParameter();
@@ -124,7 +123,6 @@ void WaterBulletUnit::SettingShaderParameter()
 	_shader->SetRoughness(0.3f);
 	_shader->SetWorld(_world.matrix);
 	static D3DXVECTOR2 texcoord_move(0.f,0.f);
-	//texcoord_move.x += 0.01f;
 	texcoord_move.y -= 0.04f;
 	_shader->SetTexcoordMove(texcoord_move);
 
@@ -143,9 +141,9 @@ void WaterBulletUnit::SettingShaderParameter()
 	D3DXMatrixRotationYawPitchRoll(&matrix_rotation[1], _rotation_y, 0.f, 0.f);
 	D3DXMatrixRotationYawPitchRoll(&matrix_rotation[2], _rotation_y, 0.f, 0.f);
 
-	D3DXMatrixScaling(&matrix_scale[0], _release_of*0.1f, _release_of*0.1f, _release_of);
-	D3DXMatrixScaling(&matrix_scale[1], _release_of*0.5f, _release_of*0.5f, _release_of);
-	D3DXMatrixScaling(&matrix_scale[2], _release_of* 3.f, _release_of * 3.f, _release_of);
+	D3DXMatrixScaling(&matrix_scale[0], _release_of*0.01f, _release_of*0.01f, _release_of);
+	D3DXMatrixScaling(&matrix_scale[1], _release_of*0.4f, _release_of*0.4f, _release_of);
+	D3DXMatrixScaling(&matrix_scale[2], _release_of*2.5f, _release_of*2.5f, _release_of);
 
 	for( int i = 0; i < 3; ++i )
 	{
@@ -161,7 +159,7 @@ void WaterBulletUnit::Fire(const D3DXVECTOR3& end)
 {
 	_start_point = _player->GetPosition();
 	_end_point = end;
-	_control_point = (_start_point + end) / 2;
+	D3DXVec3Lerp(&_control_point, &_start_point, &_end_point,0.001f);
 	_control_point.y += 5.f;
 	_destination_release_of = 1.f;
 }

@@ -41,6 +41,11 @@ public:
 		_world.position = position;
 	}
 
+	void SetHit(const bool is_hit)
+	{
+		_is_hit = is_hit;
+	}
+
 private:
 
 	// シェーダー
@@ -49,6 +54,8 @@ private:
 	// ワールド
 	data::World _world;
 	D3DXMATRIX _matrix_world_view_projection;
+
+	bool _is_hit;
 
 	// 自分の位置を算出
 	void CalculatePosition();

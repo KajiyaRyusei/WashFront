@@ -21,6 +21,7 @@
 #include "Resource/mesh_resource.h"
 #include "Resource/static_mesh_resource.h"
 #include "Resource/animation_mesh_resource.h"
+#include "Resource/animation_resource.h"
 
 //=============================================================================
 // èâä˙âª
@@ -32,12 +33,14 @@ void World::Initialize()
 	_mesh_resource = new MeshResource;
 	_static_mesh_resource = new StaticMeshResource;
 	_animation_mesh_resource = new AnimationMeshResource;
+	_animation_resource = new AnimationResource;
 }
 
 //=============================================================================
 // èIóπ
 void World::Finalize()
 {
+	SafeDelete(_animation_resource);
 	SafeDelete(_animation_mesh_resource);
 	SafeDelete(_static_mesh_resource);
 	SafeDelete(_mesh_resource);

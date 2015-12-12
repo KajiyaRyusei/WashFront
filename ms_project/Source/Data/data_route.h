@@ -42,12 +42,19 @@ namespace data
 			const Route& route_two,
 			const fx32 frame)
 		{
+			float t2;
+			if( frame < 0.5f )
+				t2 = 2 * frame * 2 * frame * 0.5f;
+			else
+				t2 = -1 * (2 * frame - 2) * (2 * frame - 2) * 0.5f + 1.0f;
+
+
 			this->state = route_one.state;
 			this->velocity = route_one.velocity;
 			D3DXVec3Lerp(&this->point, &route_one.point, &route_two.point, frame);
-			D3DXQuaternionSlerp(&this->eye_quaternion, &route_one.eye_quaternion, &route_two.eye_quaternion, frame *frame);
+			D3DXQuaternionSlerp(&this->eye_quaternion, &route_one.eye_quaternion, &route_two.eye_quaternion, t2);
 			D3DXVec3Lerp(&this->player_rotation, &route_one.player_rotation, &route_two.player_rotation, frame);
-			D3DXQuaternionSlerp(&this->player_quaternion, &route_one.player_quaternion, &route_two.player_quaternion, frame);
+			D3DXQuaternionSlerp(&this->player_quaternion, &route_one.player_quaternion, &route_two.player_quaternion, t2);
 		}
 	};
 };

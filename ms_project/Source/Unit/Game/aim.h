@@ -50,7 +50,10 @@ public:
 	void SetRotation(const D3DXVECTOR3& rotation){ _destination_rotation = rotation; }
 
 	// ‘_‚Á‚Ä‚¢‚éˆÊ’u‚Ìæ“¾
-	const D3DXVECTOR3& GetTargetPosition(){ return _position.current; }
+	const D3DXVECTOR3& GetTargetPosition();
+
+	// Õ“Ë‚µ‚Ä‚¢‚é‚©
+	const bool IsHit() const;
 
 private:
 

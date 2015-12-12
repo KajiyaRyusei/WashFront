@@ -23,6 +23,15 @@ class WaterBulletUnit;
 class PlayerUnit;
 
 //*****************************************************************************
+// 武器レベル
+enum WEAPON_LEVEL
+{
+	WEAPON_LEVEL_ONE =0,
+	WEAPON_LEVEL_TWO,
+	WEAPON_LEVEL_THREE,
+};
+
+//*****************************************************************************
 // クラス設計
 class WeaponUnit : public Unit
 {
@@ -53,6 +62,9 @@ public:
 	// セットプレイヤー
 	void SetPlayer(PlayerUnit* player);
 
+	// 武器レベルアップ
+	void WeaponLevel(WEAPON_LEVEL level);
+
 private:
 
 	ShaderToonWeapon* _shader;
@@ -66,5 +78,6 @@ private:
 	// 弾
 	BulletUnit* _bullet;
 	WaterBulletUnit* _water_bullet;
+	WEAPON_LEVEL _level;
 
 };

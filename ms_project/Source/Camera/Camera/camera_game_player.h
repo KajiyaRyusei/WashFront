@@ -42,6 +42,9 @@ public:
 	// 現在のルートの取得
 	const data::Route& GetCurrentRoute(){ return _current_route; }
 
+	// フレームの初期化
+	void InitializeFrame(){ _pass_frame = 0.f; }
+
 private:
 
 	void PassRootDecision();

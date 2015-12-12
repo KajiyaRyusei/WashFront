@@ -18,7 +18,9 @@
 // 定数
 namespace
 {
-	static const fx32 kBulletSize = 5.f;
+	static const fx32 kLevelOneBulletSize = 3.f;
+	static const fx32 kLevelTwoBulletSize = 5.f;
+	static const fx32 kLevelThreeBulletSize = 7.f;
 }
 
 //=============================================================================
@@ -29,7 +31,7 @@ void BulletUnit::Initialize()
 	_position.current = D3DXVECTOR3(0.f, 0.f, 0.f);
 	_position.previous = _position.current;
 	_world.position = _position.current;
-	_world.scale = D3DXVECTOR3(kBulletSize, kBulletSize, kBulletSize);
+	_world.scale = D3DXVECTOR3(_bullet_size, _bullet_size, _bullet_size);
 	_world.rotation = D3DXVECTOR3(0.f, 0.f, 0.f);
 
 	// 弾の設定
@@ -41,6 +43,8 @@ void BulletUnit::Initialize()
 
 	// ボリュームの作成
 	CreateVolumeShpre(_world.position, _world.scale.x);
+
+	ReNewBulletSize(kLevelOneBulletSize);
 
 	// 空間に突っ込む
 	_game_world->GetCollisionGrid()->AddUnit(this, _position);
@@ -120,4 +124,13 @@ void BulletUnit::Move()
 {
 	algo::BezierCurve2D(_position.current,_start_point,_end_point,_control_point,_frame);
 	_frame += _frame_velocity;
+}
+
+//=============================================================================
+// バレットサイズ更新
+void BulletUnit::ReNewBulletSize(const fx32 size)
+{
+	_bullet_size = size;
+	_shpere->radius = _bullet_size;
+	_world.scale = D3DXVECTOR3(_bullet_size, _bullet_size, _bullet_size);
 }

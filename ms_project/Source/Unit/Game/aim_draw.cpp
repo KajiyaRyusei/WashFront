@@ -40,7 +40,7 @@ void AimDrawUnit::Finalize()
 // XV
 void AimDrawUnit::Update()
 {
-
+	
 }
 
 //=============================================================================
@@ -73,7 +73,7 @@ void AimDrawUnit::CalculatePosition()
 	inverse_view._42 = 0.f;
 	inverse_view._43 = 0.f;
 
-	_world.scale = D3DXVECTOR3(2.f, 2.f, 2.f);
+	_world.scale = D3DXVECTOR3(3.f, 3.f,3.f);
 
 	D3DXMATRIX scaling_matrix, translation_matrix;
 
@@ -82,4 +82,17 @@ void AimDrawUnit::CalculatePosition()
 	_world.matrix = inverse_view * scaling_matrix * translation_matrix;
 	_matrix_world_view_projection = _world.matrix * view * projection;
 	_shader->SetWorldViewProjection(_matrix_world_view_projection);
+
+	static D3DXVECTOR4 s_ambient_color(0.f,1.f,0.f,1.f);
+
+	if( _is_hit )
+	{
+		s_ambient_color = D3DXVECTOR4(0.f, 1.f, 0.f, 1.f);
+	}
+	else
+	{
+		s_ambient_color = D3DXVECTOR4(1.f, 1.f, 1.f, 1.f);
+	}
+
+	_shader->SetAmbientColor(s_ambient_color);
 }

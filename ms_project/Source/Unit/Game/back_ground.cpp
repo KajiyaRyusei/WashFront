@@ -54,6 +54,7 @@ void BackGroundUnit::Draw()
 	D3DXMatrixScaling(&matrix_scaling, kScaling, kScaling, kScaling);
 	D3DXMATRIX matrix_world_view_projection = matrix_scaling * camera->GetMatrixView() * camera->GetMatrixProjection();
 	_shader->SetWorldViewProjection(matrix_world_view_projection);
+	_shader->SetWorld(matrix_scaling);
 
 	// •`‰æ‚·‚éî•ñ‚ð‰Ÿ‚µž‚ÞF‚P“x‚Ì•`‰æ‚É‚P“x‚µ‚©ŒÄ‚Î‚È‚¢‚±‚Æ
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_BACKGROUND,GetID());

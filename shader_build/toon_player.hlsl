@@ -150,9 +150,9 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	float4 color = (float4)0;
 	float3 light_direction = -normalize(uniform_light_direction.xyz);
 	float power = HalfLambert(normal, light_direction);
-	float3 toon_color = tex2D(uniform_toon_sampler, float2(power, 0.5f)).xyz;
+	float3 toon_color = tex2D(uniform_toon_sampler, float2(power, 0.01f)).xyz;
 
-	color.xyz = toon_color * albedo;
+	color.xyz = toon_color * albedo + (diffuse_cube_ambient.xyz*0.22f);
 	color.w = 1.f;
 	output.render_target0 = color;
 

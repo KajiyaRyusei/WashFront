@@ -36,6 +36,7 @@
 #include "Resource/cube_texture_resource.h"
 #include "Resource/texture_resource.h"
 #include "Resource/mesh_resource.h"
+#include "Resource/animation_resource.h"
 
 // viewport
 #include "Renderer/directx9.h"
@@ -189,10 +190,12 @@ void SceneGame::MapGeneration()
 
 	std::list<Unit*> unit_list;
 	CameraGamePlayer* camera_1p = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER_1P));
+	camera_1p->InitializeFrame();
 	PlayerUnit* player_1p = new PlayerUnit(_application, _world, camera_1p);
 	player_1p->SetControllerType(Command::CONTROLLER_TYPE_1P);
 
 	CameraGamePlayer* camera_2p = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER_2P));
+	camera_2p->InitializeFrame();
 	PlayerUnit* player_2p = new PlayerUnit(_application, _world, camera_2p);
 	player_2p->SetControllerType(Command::CONTROLLER_TYPE_2P);
 
@@ -303,6 +306,11 @@ void SceneGame::ResourceGeneration()
 	// AMO
 	_world->GetAnimationMeshResource()->Create(ANIMATION_MESH_RESOURE_WEAPON_01, _application->GetRendererDevice());
 	_world->GetAnimationMeshResource()->Create(ANIMATION_MESH_RESOURE_GRANDPA, _application->GetRendererDevice());
+
+	// アニメーション
+	auto mesh_list = _world->GetAnimationMeshResource()->Get(ANIMATION_MESH_RESOURE_GRANDPA);
+	_world->GetAnimationResource()->Create(ANIMATION_RESOURE_STANCE, mesh_list.size());
+	_world->GetAnimationResource()->Create(ANIMATION_RESOURE_SHOT, mesh_list.size());
 }
 
 //=============================================================================
@@ -310,7 +318,7 @@ void SceneGame::ResourceGeneration()
 void SceneGame::RouteRead()
 {
 	FILE* inputFile;
-	inputFile = fopen("Data/Map/debug7.rt", "rt");
+	inputFile = fopen("Data/Map/debug8.rt", "rt");
 
 	int num = 0;
 	fx32 length = 0.f;

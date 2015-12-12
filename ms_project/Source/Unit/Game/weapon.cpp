@@ -22,12 +22,13 @@
 #include "Resource/texture_resource.h"
 #include "Resource/animation_mesh_resource.h"
 
-
-
 //*****************************************************************************
 // 定数
 namespace
 {
+	static const fx32 kLevelOneBulletSize = 3.f;
+	static const fx32 kLevelTwoBulletSize = 5.f;
+	static const fx32 kLevelThreeBulletSize = 7.f;
 	static const fx32 kBulletVelocity = 0.08f;
 }
 
@@ -178,4 +179,24 @@ void WeaponUnit::SetPosition(
 void WeaponUnit::SetPlayer(PlayerUnit* player)
 {
 	_water_bullet->SetPlayer(player);
+}
+
+//=============================================================================
+// 武器レベルアップ
+void WeaponUnit::WeaponLevel(WEAPON_LEVEL level)
+{
+	switch( level )
+	{
+	case WEAPON_LEVEL_ONE:
+		_bullet->ReNewBulletSize(kLevelOneBulletSize);
+		break;
+	case WEAPON_LEVEL_TWO:
+		_bullet->ReNewBulletSize(kLevelTwoBulletSize);
+		break;
+	case WEAPON_LEVEL_THREE:
+		_bullet->ReNewBulletSize(kLevelThreeBulletSize);
+		break;
+	default:
+		break;
+	}
 }

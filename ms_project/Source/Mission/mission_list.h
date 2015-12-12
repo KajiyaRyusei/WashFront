@@ -66,5 +66,4 @@ protected:
 
 private:
 	Mission* _head;
-
 };

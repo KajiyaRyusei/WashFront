@@ -15,9 +15,10 @@
 #include "Shader/shader_base.h"
 #include "Shader/Component/albedo_texture.h"
 #include "Shader/Component/world_view_projection.h"
+#include "Shader/Component/ambient_color.h"
 
 
-class ShaderAim : public ShaderBase, public component::AlbedoMap, public component::WorldViewProjection
+class ShaderAim : public ShaderBase, public component::AlbedoMap, public component::WorldViewProjection, public component::AmbientColor
 {
 public:
 	ShaderAim() : ShaderBase(s_effect_id) { Initialize(); }

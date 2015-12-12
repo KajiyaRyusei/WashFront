@@ -26,6 +26,7 @@
 #include "Resource/animation_mesh_resource.h"
 #include "Resource/Mesh/mesh_buffer.h"
 #include "Resource/Mesh/Mesh/mesh_factory_amo.h"
+#include "Resource/animation_resource.h"
 // ルート
 #include "Data/data_route.h"
 
@@ -34,18 +35,22 @@
 namespace
 {
 	static const D3DXVECTOR3 kVectorFromCamera(0.f, 0.f, 5.f);
+	static const fx32 kBlendyCoefficient = 0.1f;
 }
 
 //=============================================================================
 // 初期化
 void PlayerUnit::Initialize()
 {
-	// アニメーションモデルの読み込み
+	// メッシュの取得
 	auto mesh_list = _game_world->GetAnimationMeshResource()->Get(ANIMATION_MESH_RESOURE_GRANDPA);
-	_animation.LoadAnimationFile("Data/Animation/new_standby60.oaf", mesh_list.size());
+	// アニメーションの取得
+	_statnce_animation = _game_world->GetAnimationResource()->Get(ANIMATION_RESOURE_STANCE);
+	_shot_animation = _game_world->GetAnimationResource()->Get(ANIMATION_RESOURE_SHOT);
 
 	// アニメーションシステムの作成
-	_animation_system = new AnimationSystem();
+	_statnce_animation_system = new AnimationSystem();
+	_shot_animation_system = new AnimationSystem();
 
 	LPDIRECT3DTEXTURE9 albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_TEXTURE);
 	LPDIRECT3DTEXTURE9 albedo_map2 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_TEXTURE);
@@ -69,6 +74,7 @@ void PlayerUnit::Initialize()
 	}
 
 	_shader[0].SetAlbedoTexture(albedo_map3);
+	_shader[2].SetAlbedoTexture(albedo_map3);
 
 
 	_shader[3].SetDiffuseCubeMap(diffuse_cube_map2);
@@ -95,6 +101,10 @@ void PlayerUnit::Initialize()
 
 	// 後ろ水
 	_back_water = new WaterBackUnit(_application, _game_world);
+
+	// ブレンド率
+	_destination_shot_animation_blend = 0.f;
+	_shot_animation_blend = _destination_shot_animation_blend;
 }
 
 //=============================================================================
@@ -104,8 +114,8 @@ void PlayerUnit::Finalize()
 	SafeDelete(_weapon);
 	
 	SafeDelete(_aim);
-	SafeDelete(_animation_system);
-	_animation.UnLoadAnimationFile();
+	SafeDelete(_statnce_animation_system);
+	SafeDelete(_shot_animation_system);
 	SafeDeleteArray(_shader);
 	SafeDelete(_command_handler);
 	SafeDelete(_back_water);
@@ -117,11 +127,11 @@ void PlayerUnit::Update()
 {
 	// プレイヤーの座標変更
 	PassRootDecision();
-
 	AimUpdate();
 	_weapon->Update();
 	_back_water->Update();
-	_animation_system->AdvanceFrame(1);
+	_statnce_animation_system->AdvanceFrame(1);
+	_shot_animation_system->AdvanceFrame(1);
 }
 //=============================================================================
 // 衝突判定用更新
@@ -134,11 +144,19 @@ void PlayerUnit::CollisionUpdate()
 	Command* command = _command_handler->HandleInput(_application->GetInputManager(), _controller_type);
 	if( command != nullptr )
 	{
+		_destination_shot_animation_blend = 1.f;
 		command->Execute(this);
 	}
+	else
+	{
+		_destination_shot_animation_blend = 0.f;
+	}
+
+	_shot_animation_blend += (_destination_shot_animation_blend - _shot_animation_blend) * kBlendyCoefficient;
 
 	// プレイヤーのポジションを教える
 	_player_camera->SetPlayerPosition(_position.current);
+
 }
 
 //=============================================================================
@@ -153,11 +171,9 @@ void PlayerUnit::Draw()
 		SettingShaderParameter();
 
 		// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
+		D3DXMATRIX statnce_animation_matrix_list[ShaderToonPlayer::kMatrixMax];
+		D3DXMATRIX shot_animation_matrix_list[ShaderToonPlayer::kMatrixMax];
 		D3DXMATRIX animation_matrix_list[ShaderToonPlayer::kMatrixMax];
-		for( u8 i = 0; i < ShaderToonPlayer::kMatrixMax; ++i )
-		{
-			D3DXMatrixIdentity(&animation_matrix_list[i]);
-		}
 
 		auto mesh_list = _game_world->GetAnimationMeshResource()->Get(ANIMATION_MESH_RESOURE_GRANDPA);
 
@@ -165,15 +181,19 @@ void PlayerUnit::Draw()
 		for( auto it = mesh_list.begin(); it != mesh_list.end(); ++it, ++mesh_id )
 		{
 			UNREFERENCED_PARAMETER(it);
-			_animation_system->ComputeHumanPose(animation_matrix_list, ShaderToonPlayer::kMatrixMax, _animation, _player_camera->GetCameraRotation(), mesh_id);
+			_statnce_animation_system->ComputeHumanPose(statnce_animation_matrix_list, ShaderToonPlayer::kMatrixMax, *_statnce_animation, _player_camera->GetCameraRotation(), mesh_id);
+			_shot_animation_system->ComputeHumanPose(shot_animation_matrix_list, ShaderToonPlayer::kMatrixMax, *_shot_animation, _player_camera->GetCameraRotation(), mesh_id);
+
+			for( u32 i = 0; i < ShaderToonPlayer::kMatrixMax;++i )
+			{
+				animation_matrix_list[i] = statnce_animation_matrix_list[i] * (1 - _shot_animation_blend) + shot_animation_matrix_list[i] * _shot_animation_blend;
+			}
+
 			_shader[mesh_id].SetAnimationMatrix(animation_matrix_list);
 
-			//if( mesh_id  == 3)
-			{
-				S_GetCommandBuffer()->PushRenderState(RENDER_STATE_DEFAULT, GetID());
-				S_GetCommandBuffer()->PushShader(&_shader[mesh_id], GetID());
-				S_GetCommandBuffer()->PushMesh((*it), GetID());
-			}
+			S_GetCommandBuffer()->PushRenderState(RENDER_STATE_DEFAULT, GetID());
+			S_GetCommandBuffer()->PushShader(&_shader[mesh_id], GetID());
+			S_GetCommandBuffer()->PushMesh((*it), GetID());
 			
 		}
 
@@ -200,9 +220,6 @@ void PlayerUnit::SettingShaderParameter()
 	// 行列の作成
 	_world.position = _position.current;
 
-	// HAKC
-	//_world.rotation.y += 0.01f;
-
 	algo::CreateWorld(_world.matrix, _world.position, _world.rotation, _world.scale);
 	algo::CreateWVP(_matrix_world_view_projection, _world.matrix, camera);
 
@@ -226,14 +243,15 @@ void PlayerUnit::SettingShaderParameter()
 // Aimの更新
 void PlayerUnit::AimUpdate()
 {
-
 	Command* command = _command_handler->HandleInputMove(_application->GetInputManager(), _controller_type);
 	if( command != nullptr )
 	{
+		
 		command->Execute(this);
 	}
 	else
 	{
+		
 		D3DXVECTOR3 zero_vector(0.f,0.f,0.f);
 		_aim->SetRotation(zero_vector);
 	}
@@ -281,9 +299,11 @@ void PlayerUnit::CompositionWater2Animation(const D3DXMATRIX* matrices)
 
 	D3DXMATRIX offset_matrix;
 	D3DXVECTOR3 temp_water_position = static_cast<D3DXVECTOR3>(back_water_position);
-	D3DXMatrixTranslation(&offset_matrix, 296, -533.f, -465.f);
+	D3DXVECTOR3 stans_vector(296, -533.f, -465.f);
+	D3DXVECTOR3 shot_vector(339, -573.f, -390.f);
+	D3DXVECTOR3 offset_translation_vector = stans_vector * (1 - _shot_animation_blend) + shot_vector * _shot_animation_blend;
+	D3DXMatrixTranslation(&offset_matrix, offset_translation_vector.x, offset_translation_vector.y, offset_translation_vector.z);
 	D3DXVec3Transform(&back_water_position, &temp_water_position, &offset_matrix);
-	
 
 	temp_water_position = static_cast<D3DXVECTOR3>(back_water_position);
 	D3DXVec3Transform(&back_water_position, &temp_water_position, &_world.matrix);

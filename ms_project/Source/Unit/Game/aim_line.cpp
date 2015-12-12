@@ -44,6 +44,7 @@ void AimLineUnit::Update()
 // 衝突更新
 void AimLineUnit::CollisionUpdate()
 {
+	_is_hit = false;
 	s32 cell_x = 0;
 	s32 cell_z = 0;
 	_game_world->GetCollisionGrid()->SelfCoordinatesCell(&cell_x, &cell_z, _position);
@@ -53,6 +54,7 @@ void AimLineUnit::CollisionUpdate()
 // 線とボックスが衝突していた時の処理
 void AimLineUnit::CollisionLine(const D3DXVECTOR3& impact_point)
 {
+	_is_hit = true;
 	_line->end_point = impact_point;
 }
 

@@ -75,6 +75,11 @@ void CameraGamePlayer::CreateMatrix()
 // ルートに沿って
 void CameraGamePlayer::PassRootDecision()
 {
+	if( _route.empty() == true )
+	{
+		return;
+	}
+
 	// ルート補間
 	fx32 floating_index = 0;
 	fx32 frame = modf(_pass_frame, &floating_index);
@@ -85,7 +90,7 @@ void CameraGamePlayer::PassRootDecision()
 	D3DXVECTOR3 length_vector(_route[index].point - _route[index2].point);
 	fx32 length_frame = 1 / D3DXVec3Length(&length_vector);
 	// フレーム加算
-	_pass_frame += length_frame * 0.1f;
+	_pass_frame += length_frame * 0.1f + _current_route.velocity;
 
 	// ルートの最大数超えていたらまた１から
 	if( _pass_frame >= static_cast<fx32>(_route.size()) )

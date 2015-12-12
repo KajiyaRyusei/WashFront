@@ -17,10 +17,10 @@ namespace
 {
 	static const LPCWSTR kCubeTextureResourceNames[] =
 	{
-		L"Data/CubeTexture/bill_cube_texture.dds",
-		L"Data/CubeTexture/bill_cube_texture.dds",
-		L"Data/CubeTexture/sky_cube.dds",
-		L"Data/CubeTexture/sky_cube.dds"
+		L"Data/CubeTexture/sky_cube_map_002.dds",
+		L"Data/CubeTexture/sky_cube_map_002.dds",
+		L"Data/CubeTexture/sky_cube_map_002.dds",
+		L"Data/CubeTexture/sky_cube_map_002.dds"
 	};
 }
 

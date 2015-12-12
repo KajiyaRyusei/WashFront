@@ -48,10 +48,8 @@ void BuildingUnit::Initialize(
 	_shader = new ShaderToonBuilding[_mesh_list.size()];
 
 	LPDIRECT3DTEXTURE9 albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE);
-	LPDIRECT3DTEXTURE9 metalness_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_METALNESS_TEXTURE);
 	LPDIRECT3DTEXTURE9 dirt_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_DIRTY_TEXTURE);
 	LPDIRECT3DCUBETEXTURE9 diffuse_cube_map = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE);
-	LPDIRECT3DCUBETEXTURE9 specular_cube_map = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_SPECULAR);
 	LPDIRECT3DTEXTURE9 toon_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_TOON_TEXTURE);
 	LPDIRECT3DTEXTURE9 normal_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_NORMAL_TEXTURE);
 
@@ -59,9 +57,7 @@ void BuildingUnit::Initialize(
 	{
 		_shader[shader_index].SetAlbedoTexture(albedo_map);
 		_shader[shader_index].SetDirtyTexture(dirt_map);
-		_shader[shader_index].SetMetalnessMap(metalness_map);
 		_shader[shader_index].SetDiffuseCubeMap(diffuse_cube_map);
-		_shader[shader_index].SetSpecularCubeMap(specular_cube_map);
 		_shader[shader_index].SetToonTexture(toon_map);
 		_shader[shader_index].SetNormalTexture(normal_map);
 	}
@@ -93,7 +89,7 @@ void BuildingUnit::Initialize(
 
 	// ボリュームの作成
 	CreateVolumeMeshPoint(_world.position, _world.scale, _world.rotation, vertex_count, mesh_point_array, mesh_normal_array);
-	D3DXVECTOR3 volume_box_size(_world.scale*10.f);
+	D3DXVECTOR3 volume_box_size(_world.scale*6.f);
 	volume_box_size.y *= 10.f;
 	CreateVolumeBox(_world.position, volume_box_size, _world.rotation);
 
@@ -134,13 +130,15 @@ void BuildingUnit::Draw()
 {
 	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
 	D3DXVECTOR3 culling_point(_box->position);
-	if( camera->GetFrustumCulling().ClipCheck(_position.current, _box->size.x) )
+	culling_point.y += 10.f;
+	if( camera->GetFrustumCulling().ClipCheckBox(culling_point, _box->size*2.5) )
 	{
 		SettingShaderParameter();
 
 		u32 mesh_id = 0;
 		for( auto it = _mesh_list.begin(); it != _mesh_list.end(); ++it, ++mesh_id )
 		{
+			UNREFERENCED_PARAMETER(it);
 			S_GetCommandBuffer()->PushRenderState(RENDER_STATE_DEFAULT, GetID());
 			S_GetCommandBuffer()->PushShader(&_shader[mesh_id], GetID());
 			S_GetCommandBuffer()->PushMesh((*it), GetID());
@@ -161,17 +159,30 @@ void BuildingUnit::SettingShaderParameter()
 	_world.position = _position.current;
 	algo::CreateWorld(_world.matrix, _world.position, _world.rotation, _world.scale);
 	algo::CreateWVP(_matrix_world_view_projection, _world.matrix, camera);
+
 	// ライトの方向作成
 	D3DXVECTOR4 light_direction(0.2f, -0.8f, 0.5f, 0.f);
-	D3DXVECTOR4 ambient(0.2f, 0.2f, 0.2f, 1.f);
+	static D3DXVECTOR4 basic_ambient(0.8f, 0.5f, 0.2f, 1.f);
+	static D3DXVECTOR4 dirt_ambient(0.8f*0.5f, 0.5f*0.5f, 0.2f*0.5f, 1.f);
+	static D3DXVECTOR4 ambient(1.0f, 0.3f, 0.2f, 1.f);
+	static D3DXVECTOR3 ambient_bezier(0.0f, 0.0f, 0.0f);
+	static fx32 ambient_coefficient = 0.f;
+	ambient_coefficient += 0.002f;
+	static fx32 ambient_coefficient_floating = 0.f;
+	static fx32 ambient_coefficient_floating_2 = 0.f;
+	ambient_coefficient_floating_2 = modf(ambient_coefficient, &ambient_coefficient_floating);
+	algo::BezierCurve2D(ambient_bezier, (D3DXVECTOR3)basic_ambient, (D3DXVECTOR3)basic_ambient, (D3DXVECTOR3)dirt_ambient, ambient_coefficient_floating_2);
+	ambient = D3DXVECTOR4(ambient_bezier.x, ambient_bezier.y, ambient_bezier.z,1.f);
+
 	D3DXVECTOR4 eye(camera->GetVectorEye(), 0.f);
 	static D3DXVECTOR2 texcoord_move(0.f,0.f);
-	texcoord_move.y -= 0.0002f;
+	texcoord_move.y -= 0.0001f;
 
 	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
 	{
 		_shader[shader_index].SetWorldViewProjection(_matrix_world_view_projection);
 		_shader[shader_index].SetWorld(_world.matrix);
+		_shader[shader_index].SetView(camera->GetMatrixView());
 		_shader[shader_index].SetLightDirection(light_direction);
 		_shader[shader_index].SetAmbientColor(ambient);
 		_shader[shader_index].SetEyePosition(eye);
@@ -184,15 +195,9 @@ void BuildingUnit::SettingShaderParameter()
 void BuildingUnit::CollisionMeshPoint(u32 point_index)
 {
 	_clean_index_list.push_back(point_index);
-	_game_world->GetWaterSprayPool()->Create(_volume_mesh_point->points[point_index], _volume_mesh_point->attitudes[point_index]);
-}
 
-//=============================================================================
-// 叙述関数
-bool Pred_Func(int value) {
-	if( value == 5 )
-		return true;
-	return false;
+	D3DXVECTOR3 front_vector(sinf(_volume_mesh_point->attitudes[point_index]) *1.f, 0.f, cosf(_volume_mesh_point->attitudes[point_index]) *1.f);
+	_game_world->GetWaterSprayPool()->Create(_volume_mesh_point->points[point_index] + front_vector, _volume_mesh_point->attitudes[point_index]);
 }
 
 //=============================================================================
@@ -213,7 +218,6 @@ void BuildingUnit::CleanUp()
 			}
 			else
 			{
-				//_clean_index_list.remove(*index_it);
 				index_it = _clean_index_list.erase(index_it);
 				continue;
 			}

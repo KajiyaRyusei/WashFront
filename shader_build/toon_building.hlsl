@@ -29,6 +29,7 @@ struct VertexShaderOutput
 	float3 world_position: TEXCOORD2;
 	float3 world_tangent : TEXCOORD3;
 	float cleanliness : TEXCOORD4;
+	float depth : TEXCOORD5;
 };
 
 //-------------------------------------
@@ -56,31 +57,9 @@ uniform sampler uniform_diffuse_cube_sampler = sampler_state
 	AddressV = WRAP;
 };
 
-uniform texture uniform_specular_cube_texture;
-uniform sampler uniform_specular_cube_sampler = sampler_state {
-	Texture = <uniform_specular_cube_texture>;
-	MinFilter = ANISOTROPIC;
-	MagFilter = LINEAR;
-	MipFilter = LINEAR;
-	MaxAnisotropy = 16;
-	AddressU = WRAP;
-	AddressV = WRAP;
-};
-
 uniform texture uniform_albedo_texture;
 uniform sampler uniform_albedo_sampler = sampler_state {
 	Texture = <uniform_albedo_texture>;
-	MinFilter = ANISOTROPIC;
-	MagFilter = LINEAR;
-	MipFilter = LINEAR;
-	MaxAnisotropy = 16;
-	AddressU = WRAP;
-	AddressV = WRAP;
-};
-
-uniform texture uniform_metalness_texture;
-uniform sampler uniform_metalness_sampler = sampler_state {
-	Texture = <uniform_metalness_texture>;
 	MinFilter = ANISOTROPIC;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
@@ -123,6 +102,7 @@ uniform sampler uniform_toon_sampler = sampler_state {
 
 uniform float4x4 uniform_world_view_projection;
 uniform float4x4 uniform_world;
+uniform float4x4 uniform_view;
 uniform float4 uniform_light_direction;
 uniform float3 uniform_eye_position;
 uniform float4 uniform_ambient_color;
@@ -156,21 +136,6 @@ float HalfLambert(
 	power = dot(light_direction, normal) * 0.5f + 0.5f;
 	return power;
 }
-//=====================================
-// フォン
-float Fon(
-	float3 directionLight,
-	float3 normal,
-	float3 toEye)
-{
-	// ピクセルフォン
-	float3 L = -directionLight;
-	float3 N = normal;
-	float3 R = reflect(L, N);
-	float power = pow(max(dot(R, toEye), 0.0f), 10.f);
-	return power;
-}
-
 //=============================================================================
 // 頂点シェーダ
 VertexShaderOutput VS(VertexShaderInput input)
@@ -184,6 +149,10 @@ VertexShaderOutput VS(VertexShaderInput input)
 	// ワールド変換頂点を送る
 	output.world_position = mul(float4(input.position, 1.0f), uniform_world).xyz;
 
+	// ビュー変換頂点
+	float3 world_view_position = mul(float4(output.world_position, 1.0f), uniform_view).xyz;
+	output.depth = world_view_position.z / (5.f - 100.f);
+
 	// 法線
 	float4 normal = float4(input.normal.x, input.normal.y, input.normal.z, 0.f);
 	output.normal = mul(normal, uniform_world).xyz;
@@ -192,9 +161,9 @@ VertexShaderOutput VS(VertexShaderInput input)
 	output.texcoord = input.texcoord;
 
 	// ワールド接線
-	float4 tangent = float4(input.tangent.x, input.tangent.y, input.tangent.z, 0.f);
+	float4 tangent = float4(input.tangent.x, input.tangent.y, input.tangent.z, 1.f);
 	output.world_tangent = mul(tangent, uniform_world).xyz;
-
+	output.world_tangent = normalize(output.world_tangent);
 	// 汚れ具合
 	output.cleanliness = input.cleanliness;
 
@@ -208,17 +177,21 @@ PixelShaderOutput PS(VertexShaderOutput input)
 {
 	PixelShaderOutput output = (PixelShaderOutput)0;
 
+	float fog_amount = 1.f - smoothstep(0, 20, input.world_position.y);
+
 	// 法線
 	float3 normal = normalize(input.normal);
 	float3 normal_sampler = lerp(tex2D(uniform_dirty_sampler, input.texcoord + uniform_texcoord_move), tex2D(uniform_normal_sampler, input.texcoord), input.cleanliness).xyz;
-	//float3 normal_sampler = lerp(tex2D(uniform_dirty_sampler, input.texcoord), tex2D(uniform_normal_sampler, input.texcoord), input.cleanliness).xyz;
+	//normal_sampler = normalize(normal_sampler);
+	input.world_tangent = normalize(input.world_tangent);
 	normal = NormalSampler2WorldSpace(normal_sampler, normal, input.world_tangent);
+	normal = normalize(normal);
 
 	// 環境光
 	float3 diffuse_cube_ambient = texCUBE(uniform_diffuse_cube_sampler, input.normal).xyz;
 
 	// アルベド
-	float3 albedo = lerp(uniform_ambient_color.xyz, tex2D(uniform_albedo_sampler, input.texcoord).xyz + (diffuse_cube_ambient*0.5f), input.cleanliness);
+	float3 albedo = lerp(uniform_ambient_color.xyz, tex2D(uniform_albedo_sampler, input.texcoord).xyz + (diffuse_cube_ambient.xyz*0.5f), input.cleanliness);
 
 	// 色
 	float4 color = (float4)0;
@@ -227,11 +200,13 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	// 拡散照明
 	float power = HalfLambert(normal, light_direction);
 
-	float3 toon_color = tex2D(uniform_toon_sampler, float2(power, 0.5f)).xyz;
+	// toon
+	float3 toon_color = tex2D(uniform_toon_sampler, float2(power, 0.01f)).xyz;
 
 	color.xyz = toon_color * albedo;
 	color.a = uniform_ambient_color.a;
-	output.render_target0 = color;
+	output.render_target0= color;
+	output.render_target0.xyz = lerp(color.xyz, float3(0.6f, 0.8f, 0.95f), fog_amount);
 
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);

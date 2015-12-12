@@ -48,7 +48,7 @@ namespace component
 			}
 		}
 
-		static const u8 kMatrixMax = 40;
+		static const u8 kMatrixMax = 18;
 
 	private:
 		D3DXHANDLE _handle_animation_matrix;

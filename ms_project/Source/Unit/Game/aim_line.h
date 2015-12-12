@@ -56,5 +56,10 @@ public:
 		return _line->end_point;
 	}
 
-	
+	// Õ“Ë‚µ‚Ä‚¢‚é‚©
+	const bool IsHit()const{ return _is_hit; }
+
+private:
+
+	bool _is_hit;
 };

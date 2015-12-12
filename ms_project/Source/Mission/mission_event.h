@@ -14,5 +14,6 @@
 // —ñ‹“
 enum MISSION_EVENT
 {
+	MISSION_EVENT_,
 	MISSION_EVENT_MAX
 };

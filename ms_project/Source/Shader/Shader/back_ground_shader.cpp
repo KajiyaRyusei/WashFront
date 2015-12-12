@@ -19,10 +19,12 @@ void ShaderBackGround::Initialize()
 {
 	InitializeWorldViewProjection(_effect_handle_holder->effect_handle());
 	InitializeAlbedoCubeTexture(_effect_handle_holder->effect_handle());
+	InitializeWorld(_effect_handle_holder->effect_handle());
 }
 
 void ShaderBackGround::AssignExceptMaterial() const
 {
 	SendAlbedoCubeTexture(_effect_handle_holder->effect_handle());
 	SendWorldViewProjection(_effect_handle_holder->effect_handle());
+	SendWorld(_effect_handle_holder->effect_handle());
 }

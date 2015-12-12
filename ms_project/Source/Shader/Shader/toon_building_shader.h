@@ -19,13 +19,12 @@
 #include "Shader/Component/eye_position.h"
 #include "Shader/Component/ambient_color.h"
 #include "Shader/Component/diffuse_cube_texture.h"
-#include "Shader/Component/specular_cube_texture.h"
 #include "Shader/Component/albedo_texture.h"
-#include "Shader/Component/metalness_texture.h"
 #include "Shader/Component/dirty_texture.h"
 #include "Shader/Component/normal_texture.h"
 #include "Shader/Component/toon_texture.h"
 #include "Shader/Component/texcoord_move.h"
+#include "Shader/Component/view.h"
 
 class ShaderToonBuilding : public ShaderBase,
 	public component::WorldViewProjection,
@@ -34,13 +33,12 @@ class ShaderToonBuilding : public ShaderBase,
 	public component::EyePosition,
 	public component::AmbientColor,
 	public component::DiffuseCubeMap,
-	public component::SpecularCubeMap,
 	public component::AlbedoMap,
-	public component::MetalnessMap,
 	public component::DirtyMap,
 	public component::NormalMap,
 	public component::ToonTexture,
-	public component::TexcoordMove
+	public component::TexcoordMove,
+	public component::View
 {
 public:
 	ShaderToonBuilding() : ShaderBase(s_effect_id) { Initialize(); }

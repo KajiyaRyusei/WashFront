@@ -25,11 +25,11 @@
 #include "Unit\Title\text.h"
 #include "Unit\Title/logo_bg.h"
 #include "Unit\Title\logo.h"
-#include "Unit/Game/player.h"
+#include "Unit/Title/title_player.h"
 #include "Unit/Game/back_ground.h"
 #include "Unit/Game/building.h"
-#include "Unit/Game/water_spray_pool_dummy.h"
 #include "World/collision_grid.h"
+#include "Unit/Game/water_spray_pool.h"
 
 // resource
 #include "Resource/animation_mesh_resource.h"
@@ -37,6 +37,7 @@
 #include "Resource/cube_texture_resource.h"
 #include "Resource/texture_resource.h"
 #include "Resource/mesh_resource.h"
+#include "Resource/animation_resource.h"
 
 // viewport
 #include "Renderer/directx9.h"
@@ -49,6 +50,7 @@
 
 // 汚れ
 #include "Data/data_dirt.h"
+
 
 // ルート
 #include "Data/data_route.h"
@@ -132,16 +134,15 @@ void SceneTitle::MapGeneration()
 	unit_list.push_back(new LogoUnit(_application, _world));
 
 	// プレイヤー
-	CameraGamePlayer* camera_1p = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER_1P));
-	PlayerUnit* player_1p = new PlayerUnit(_application, _world, camera_1p);
-	unit_list.push_back(player_1p);
+	TitlePlayerUnit* player = new TitlePlayerUnit(_application, _world);
+	unit_list.push_back(player);
 
 	// 背景
 	unit_list.push_back(new BackGroundUnit(_application, _world));
 
 	// マップファイル読み込み
 	FILE* file;
-	file = fopen("Data/Map/test.map", "rt");
+	file = fopen("Data/Map/debug3.map", "rt");
 
 	s32 object_number = 0;
 
@@ -177,18 +178,18 @@ void SceneTitle::MapGeneration()
 			{
 				s32 model_id = 0;
 				s32 texture_id = 0;
+				s32 static_id = 0;
 				D3DXVECTOR3 position;
 				D3DXVECTOR3 rotation;
 				D3DXVECTOR3 scale;
 
-				fscanf(file, "%d %d %f %f %f %f %f %f %f %f %f",
+				fscanf(file, "%d %d %f %f %f %f %f %f %f %f %f %d",
 					&model_id, &texture_id,
 					&position.x, &position.y, &position.z,
 					&rotation.x, &rotation.y, &rotation.z,
-					&scale.x, &scale.y, &scale.z);
+					&scale.x, &scale.y, &scale.z, &static_id);
 
 				BuildingUnit* bill = new BuildingUnit(_application, _world, position, rotation, scale);
-
 				unit_list.push_back(bill);
 			}
 		}
@@ -222,6 +223,9 @@ void SceneTitle::ResourceGeneration()
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_BAG_TEXTURE, _application->GetRendererDevice());
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_BAG_METALNESS_TEXTURE, _application->GetRendererDevice());
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_METALNESS_TEXTURE, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_TOON_TEXTURE, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_NORMAL_TEXTURE, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_FACE, _application->GetRendererDevice());
 
 	// キューブマップ
 	_world->GetCubeTextureResource()->Create(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE, _application->GetRendererDevice());
@@ -235,4 +239,8 @@ void SceneTitle::ResourceGeneration()
 	// AMO
 	_world->GetAnimationMeshResource()->Create(ANIMATION_MESH_RESOURE_WEAPON_01, _application->GetRendererDevice());
 	_world->GetAnimationMeshResource()->Create(ANIMATION_MESH_RESOURE_GRANDPA, _application->GetRendererDevice());
+
+	// アニメーション
+	auto mesh_list = _world->GetAnimationMeshResource()->Get(ANIMATION_MESH_RESOURE_GRANDPA);
+	_world->GetAnimationResource()->Create(ANIMATION_RESOURE_STANCE, mesh_list.size());
 }

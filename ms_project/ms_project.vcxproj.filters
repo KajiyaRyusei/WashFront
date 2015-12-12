@@ -369,6 +369,15 @@
     <ClCompile Include="Source\Shader\Shader\toon_weapon_shader.cpp">
       <Filter>Shader\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Resource\animation_resource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Title\title_player.cpp">
+      <Filter>Unit\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Title\title_weapon.cpp">
+      <Filter>Unit\Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdafx.h" />
@@ -904,6 +913,18 @@
     <ClInclude Include="Source\Shader\Shader\toon_weapon_shader.h">
       <Filter>Shader\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Resource\animation_resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\view.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Title\title_player.h">
+      <Filter>Unit\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Title\title_weapon.h">
+      <Filter>Unit\Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1022,6 +1043,9 @@
     </Filter>
     <Filter Include="Mission">
       <UniqueIdentifier>{4acd9332-8972-4816-b50d-a23429d194c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mission\List">
+      <UniqueIdentifier>{b1a7339f-cf95-4167-97e5-87b49b247fda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

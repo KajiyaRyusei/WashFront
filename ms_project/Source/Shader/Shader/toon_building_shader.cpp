@@ -23,13 +23,12 @@ void ShaderToonBuilding::Initialize()
 	InitializeEyePosition(_effect_handle_holder->effect_handle());
 	InitializeAmbientColor(_effect_handle_holder->effect_handle());
 	InitializeDiffuseCubeMap(_effect_handle_holder->effect_handle());
-	InitializeSpecularCubeMap(_effect_handle_holder->effect_handle());
 	InitializeAlbedoTexture(_effect_handle_holder->effect_handle());
-	InitializeMetalnessMap(_effect_handle_holder->effect_handle());
 	InitializeDirtyTexture(_effect_handle_holder->effect_handle());
 	InitializeNormalTexture(_effect_handle_holder->effect_handle());
 	InitializeToonTexture(_effect_handle_holder->effect_handle());
 	InitializeTexcoordMove(_effect_handle_holder->effect_handle());
+	InitializeView(_effect_handle_holder->effect_handle());
 }
 
 void ShaderToonBuilding::AssignExceptMaterial() const
@@ -40,11 +39,10 @@ void ShaderToonBuilding::AssignExceptMaterial() const
 	SendEyePosition(_effect_handle_holder->effect_handle());
 	SendAmbientColor(_effect_handle_holder->effect_handle());
 	SendDiffuseCubeMap(_effect_handle_holder->effect_handle());
-	SendSpecularCubeMap(_effect_handle_holder->effect_handle());
 	SendAlbedoTexture(_effect_handle_holder->effect_handle());
-	SendMetalnessMap(_effect_handle_holder->effect_handle());
 	SendDirtyTexture(_effect_handle_holder->effect_handle());
 	SendNormalTexture(_effect_handle_holder->effect_handle());
 	SendToonTexture(_effect_handle_holder->effect_handle());
 	SendTexcoordMove(_effect_handle_holder->effect_handle());
+	SendView(_effect_handle_holder->effect_handle());
 }

@@ -166,6 +166,7 @@
     <ClCompile Include="Source\Input\xinput\input_x.cpp" />
     <ClCompile Include="Source\Renderer\directx9.cpp" />
     <ClCompile Include="Source\Resource\animation_mesh_resource.cpp" />
+    <ClCompile Include="Source\Resource\animation_resource.cpp" />
     <ClCompile Include="Source\Resource\cube_texture_resource.cpp" />
     <ClCompile Include="Source\Resource\Mesh\index_buffer.cpp" />
     <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_2d_sprite.cpp" />
@@ -249,6 +250,8 @@
     <ClCompile Include="Source\Unit\Title\logo.cpp" />
     <ClCompile Include="Source\Unit\Title\logo_bg.cpp" />
     <ClCompile Include="Source\Unit\Title\text.cpp" />
+    <ClCompile Include="Source\Unit\Title\title_player.cpp" />
+    <ClCompile Include="Source\Unit\Title\title_weapon.cpp" />
     <ClCompile Include="Source\Unit\ui.cpp" />
     <ClCompile Include="Source\Unit\unit.cpp" />
     <ClCompile Include="Source\Windows\window.cpp" />
@@ -318,6 +321,7 @@
     <ClInclude Include="Source\Mission\mission_list.h" />
     <ClInclude Include="Source\Renderer\directx9.h" />
     <ClInclude Include="Source\Resource\animation_mesh_resource.h" />
+    <ClInclude Include="Source\Resource\animation_resource.h" />
     <ClInclude Include="Source\Resource\cube_texture_resource.h" />
     <ClInclude Include="Source\Resource\Mesh\index_buffer.h" />
     <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory.h" />
@@ -365,6 +369,7 @@
     <ClInclude Include="Source\Shader\Component\specular_cube_texture.h" />
     <ClInclude Include="Source\Shader\Component\texcoord_move.h" />
     <ClInclude Include="Source\Shader\Component\toon_texture.h" />
+    <ClInclude Include="Source\Shader\Component\view.h" />
     <ClInclude Include="Source\Shader\Component\view_projection.h" />
     <ClInclude Include="Source\Shader\Component\water_matrix.h" />
     <ClInclude Include="Source\Shader\Component\world.h" />
@@ -430,6 +435,8 @@
     <ClInclude Include="Source\Unit\Title\logo.h" />
     <ClInclude Include="Source\Unit\Title\logo_bg.h" />
     <ClInclude Include="Source\Unit\Title\text.h" />
+    <ClInclude Include="Source\Unit\Title\title_player.h" />
+    <ClInclude Include="Source\Unit\Title\title_weapon.h" />
     <ClInclude Include="Source\Unit\ui.h" />
     <ClInclude Include="Source\Unit\unit.h" />
     <ClInclude Include="Source\Windows\window.h" />

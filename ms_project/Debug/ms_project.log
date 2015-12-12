@@ -1,8 +1,32 @@
-﻿2015/12/11 15:45:10 にビルドを開始しました。
+﻿2015/12/13 0:26:41 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\DevelopTool\DevelopTool\debug_box.cpp
-         debug_box.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Camera\Camera\camera_game_player.cpp Source\Camera\camera_manager.cpp Source\Command\command_move.cpp Source\Command\command_move_back.cpp Source\Command\command_move_front.cpp Source\Command\command_move_left.cpp Source\Command\command_move_right.cpp Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_title.cpp Source\Unit\Game\aim.cpp Source\Unit\Game\aim_draw.cpp Source\Unit\Game\aim_line.cpp Source\Unit\Game\back_ground.cpp Source\Unit\Game\building.cpp Source\Unit\Game\bullet.cpp Source\Unit\Game\dirt.cpp Source\Unit\Game\player.cpp Source\Unit\Game\water_back.cpp Source\Unit\Game\water_bullet.cpp Source\Unit\Game\water_spray_pool.cpp Source\Unit\Game\weapon.cpp Source\Unit\Title\title_weapon.cpp
+         camera_game_player.cpp
+         camera_manager.cpp
+         command_move.cpp
+         command_move_back.cpp
+         command_move_front.cpp
+         command_move_left.cpp
+         command_move_right.cpp
+         scene_game.cpp
+         scene_title.cpp
+         aim.cpp
+         aim_draw.cpp
+         aim_line.cpp
+         back_ground.cpp
+         building.cpp
+         bullet.cpp
+         dirt.cpp
+         player.cpp
+         water_back.cpp
+         water_bullet.cpp
+         water_spray_pool.cpp
+         コードを生成中...
+         コンパイル中...
+         weapon.cpp
+         title_weapon.cpp
+         コードを生成中...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\dirt_math.obj
          Debug\often_use.obj
@@ -41,6 +65,7 @@
          Debug\input_x.obj
          Debug\directx9.obj
          Debug\animation_mesh_resource.obj
+         Debug\animation_resource.obj
          Debug\cube_texture_resource.obj
          Debug\index_buffer.obj
          Debug\mesh_factory_2d_sprite.obj
@@ -120,6 +145,8 @@
          Debug\logo.obj
          Debug\logo_bg.obj
          Debug\text.obj
+         Debug\title_player.obj
+         Debug\title_weapon.obj
          Debug\ui.obj
          Debug\unit.obj
          Debug\window.obj
@@ -133,4 +160,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:02.48
+経過時間 00:00:05.66

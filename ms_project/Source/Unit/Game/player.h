@@ -19,7 +19,6 @@
 #include "Unit/unit.h"
 #include "Data/data_oaf.h"
 #include "Data/data_world.h"
-#include "Data/data_velocity.h"
 
 #include "Command/command_handler.h"
 
@@ -76,9 +75,15 @@ private:
 	// シェーダ数:メッシュ数に合わせる
 	u32 _shader_size;
 	// アニメーション
-	data::ObjectAnimationFile _animation;
+	data::ObjectAnimationFile* _statnce_animation;
+	data::ObjectAnimationFile* _shot_animation;
 	// アニメーションシステム
-	AnimationSystem* _animation_system;
+	AnimationSystem* _statnce_animation_system;
+	AnimationSystem* _shot_animation_system;
+	// ブレンド率
+	fx32 _shot_animation_blend;
+	fx32 _destination_shot_animation_blend;
+
 	// シェーダパラメーターの設定
 	void SettingShaderParameter();
 	data::World _world;
