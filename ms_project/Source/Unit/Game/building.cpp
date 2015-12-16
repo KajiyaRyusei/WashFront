@@ -39,11 +39,12 @@ namespace
 void BuildingUnit::Initialize(
 	const D3DXVECTOR3& position,
 	const D3DXVECTOR3& rotaiton,
-	const D3DXVECTOR3& scale)
+	const D3DXVECTOR3& scale,
+	std::string file_name)
 {
 	// シェーダの作成
 	MeshFactorySMO mesh_factory;
-	mesh_factory.Create(_application->GetRendererDevice(), "Data/StaticModel/new_biru_1.smo", _mesh_list);
+	mesh_factory.Create(_application->GetRendererDevice(), file_name, _mesh_list);
 	_shader_size = _mesh_list.size();
 	_shader = new ShaderToonBuilding[_mesh_list.size()];
 
@@ -66,11 +67,11 @@ void BuildingUnit::Initialize(
 	_position.current = position;
 	_position.previous = _position.current;
 	_world.position = _position.current;
-	_world.scale = scale * 10.f;
+	_world.scale = scale;
 	_world.rotation = rotaiton;
 
-	D3DXVECTOR3 mesh_point_array[2000];
-	D3DXVECTOR3 mesh_normal_array[2000];
+	D3DXVECTOR3 mesh_point_array[3000];
+	D3DXVECTOR3 mesh_normal_array[3000];
 	u32 vertex_count = 0;
 	for( auto it = _mesh_list.begin(); it != _mesh_list.end(); ++it)
 	{
@@ -130,8 +131,8 @@ void BuildingUnit::Draw()
 {
 	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
 	D3DXVECTOR3 culling_point(_box->position);
-	culling_point.y += 10.f;
-	if( camera->GetFrustumCulling().ClipCheckBox(culling_point, _box->size*2.5) )
+	culling_point.y += _box->size.y + 10.f;
+	if( camera->GetFrustumCulling().ClipCheckBox(culling_point, _box->size*3.f) )
 	{
 		SettingShaderParameter();
 
@@ -163,7 +164,7 @@ void BuildingUnit::SettingShaderParameter()
 	// ライトの方向作成
 	D3DXVECTOR4 light_direction(0.2f, -0.8f, 0.5f, 0.f);
 	static D3DXVECTOR4 basic_ambient(0.8f, 0.5f, 0.2f, 1.f);
-	static D3DXVECTOR4 dirt_ambient(0.8f*0.5f, 0.5f*0.5f, 0.2f*0.5f, 1.f);
+	static D3DXVECTOR4 dirt_ambient(0.8f*0.35f, 0.5f*0.2f, 0.2f*0.2f, 1.f);
 	static D3DXVECTOR4 ambient(1.0f, 0.3f, 0.2f, 1.f);
 	static D3DXVECTOR3 ambient_bezier(0.0f, 0.0f, 0.0f);
 	static fx32 ambient_coefficient = 0.f;

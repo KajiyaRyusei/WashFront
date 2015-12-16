@@ -30,6 +30,8 @@
 #include "Unit/Game/building.h"
 #include "World/collision_grid.h"
 #include "Unit/Game/water_spray_pool.h"
+#include "Unit/Game/clouds.h"
+#include "Unit/Game/static_building.h"
 
 // resource
 #include "Resource/animation_mesh_resource.h"
@@ -54,6 +56,64 @@
 
 // ルート
 #include "Data/data_route.h"
+
+//=============================================================================
+// const
+const int windowSizeID = 0;
+
+const D3DXVECTOR3 WindowPos[2][3] =
+{
+	// 960 : 540
+	{
+		// logo_bg
+		D3DXVECTOR3(480.0f, 150.0f, 0.0),
+
+		// logo
+		D3DXVECTOR3(480.0f, 150.0f, 0.0),
+
+		// text
+		D3DXVECTOR3(480.0f, 500.0f, 0.0)
+	},
+
+	// 1280 : 720
+	{
+		// logo_bg
+		D3DXVECTOR3(640.0f, 200.0f, 0.0),
+
+		// logo
+		D3DXVECTOR3(640.0f, 200.0f, 0.0),
+
+		// text
+		D3DXVECTOR3(640.0f, 650.0f, 0.0)
+	}
+};
+
+const D3DXVECTOR3 WindowScl[2][3] =
+{
+	// 960 : 540
+	{
+		// logo_bg
+		D3DXVECTOR3(500.0f, 250.0f, 0.0f),
+
+		// logo
+		D3DXVECTOR3(400.0f, 200.0f, 0.0f),
+
+		// text
+		D3DXVECTOR3(500.0f, 50.0f, 0.0f)
+	},
+
+	// 1280 : 720
+	{
+		// logo_bg
+		D3DXVECTOR3(600.0f, 350.0f, 0.0f),
+
+		// logo
+		D3DXVECTOR3(500.0f, 300.0f, 0.0f),
+
+		// text
+		D3DXVECTOR3(600.0f, 70.0f, 0.0f)
+	}
+};
 
 //=============================================================================
 // コンストラクタ
@@ -129,9 +189,20 @@ void SceneTitle::MapGeneration()
 	std::list<Unit*> unit_list;
 
 	// 2Dオブジェクト
-	unit_list.push_back(new TextUnit(_application, _world));
-	unit_list.push_back(new Logo_BGUnit(_application, _world));
-	unit_list.push_back(new LogoUnit(_application, _world));
+	TextUnit*		pText = new TextUnit(_application, _world);
+	Logo_BGUnit*	pLogoBg = new Logo_BGUnit(_application, _world);
+	LogoUnit*		pLogo = new LogoUnit(_application, _world);
+
+	pLogoBg->SetPosition(WindowPos[windowSizeID][0]);
+	pLogoBg->SetScaling(WindowScl[windowSizeID][0]);
+	pLogo->SetPosition(WindowPos[windowSizeID][1]);
+	pLogo->SetScaling(WindowScl[windowSizeID][1]);
+	pText->SetPosition(WindowPos[windowSizeID][2]);
+	pText->SetScaling(WindowScl[windowSizeID][2]);
+
+	unit_list.push_back(pText);
+	unit_list.push_back(pLogoBg);
+	unit_list.push_back(pLogo);
 
 	// プレイヤー
 	TitlePlayerUnit* player = new TitlePlayerUnit(_application, _world);
@@ -140,9 +211,12 @@ void SceneTitle::MapGeneration()
 	// 背景
 	unit_list.push_back(new BackGroundUnit(_application, _world));
 
+	// 雲
+	unit_list.push_back(new CloudsUnit(_application, _world));
+
 	// マップファイル読み込み
 	FILE* file;
-	file = fopen("Data/Map/debug3.map", "rt");
+	file = fopen("Data/Map/pre.map", "rt");
 
 	s32 object_number = 0;
 
@@ -189,7 +263,35 @@ void SceneTitle::MapGeneration()
 					&rotation.x, &rotation.y, &rotation.z,
 					&scale.x, &scale.y, &scale.z, &static_id);
 
-				BuildingUnit* bill = new BuildingUnit(_application, _world, position, rotation, scale);
+				std::string file_name;
+				STATIC_MESH_RESOURE_ID id = STATIC_MESH_RESOURE_BILL_000;
+				switch( model_id )
+				{
+				case STATIC_MESH_RESOURE_BILL_000:
+					file_name = "Data/StaticModel/new_biru_1.smo";
+					id = STATIC_MESH_RESOURE_BILL_000;
+					break;
+				case STATIC_MESH_RESOURE_BILL_001:
+					file_name = "Data/StaticModel/new_biru_2.smo";
+					id = STATIC_MESH_RESOURE_BILL_001;
+					break;
+				case STATIC_MESH_RESOURE_BILL_002:
+					file_name = "Data/StaticModel/new_biru_3.smo";
+					id = STATIC_MESH_RESOURE_BILL_002;
+					break;
+				case STATIC_MESH_RESOURE_BILL_003:
+					file_name = "Data/StaticModel/new_biru_4.smo";
+					id = STATIC_MESH_RESOURE_BILL_003;
+					break;
+				case STATIC_MESH_RESOURE_BILL_HAIKEI:
+					file_name = "Data/StaticModel/new_biru_haikei.smo";
+					id = STATIC_MESH_RESOURE_BILL_HAIKEI;
+					break;
+				default:
+					break;
+				}
+
+				StaticBuildingUnit* bill = new StaticBuildingUnit(_application, _world, position, rotation, scale, id);
 				unit_list.push_back(bill);
 			}
 		}
@@ -234,7 +336,11 @@ void SceneTitle::ResourceGeneration()
 	_world->GetCubeTextureResource()->Create(CUBE_TEXTURE_RESOURE_GRID_ZERO_ONE_SPECULAR, _application->GetRendererDevice());
 
 	// SMO
-	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_000, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_001, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_002, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_003, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_HAIKEI, _application->GetRendererDevice());
 
 	// AMO
 	_world->GetAnimationMeshResource()->Create(ANIMATION_MESH_RESOURE_WEAPON_01, _application->GetRendererDevice());

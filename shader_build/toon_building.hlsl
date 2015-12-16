@@ -164,6 +164,7 @@ VertexShaderOutput VS(VertexShaderInput input)
 	float4 tangent = float4(input.tangent.x, input.tangent.y, input.tangent.z, 1.f);
 	output.world_tangent = mul(tangent, uniform_world).xyz;
 	output.world_tangent = normalize(output.world_tangent);
+
 	// ‰˜‚ê‹ï‡
 	output.cleanliness = input.cleanliness;
 
@@ -177,7 +178,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 {
 	PixelShaderOutput output = (PixelShaderOutput)0;
 
-	float fog_amount = 1.f - smoothstep(0, 20, input.world_position.y);
+	float fog_amount = 1.f - smoothstep(0, 10, input.world_position.y);
 
 	// –@ü
 	float3 normal = normalize(input.normal);

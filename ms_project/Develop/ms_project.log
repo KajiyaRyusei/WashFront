@@ -1,8 +1,46 @@
-﻿2015/12/12 23:00:29 にビルドを開始しました。
+﻿2015/12/14 15:43:33 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /Zi /nologo /W4 /WX /MP /O2 /Oy- /D WIN32 /D _DEVELOP /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Develop\ms_project_develop.pch" /Fo"Develop\\" /Fd"Develop\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Unit\Game\building.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /Zi /nologo /W4 /WX /MP /O2 /Oy- /D WIN32 /D _DEVELOP /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Develop\ms_project_develop.pch" /Fo"Develop\\" /Fd"Develop\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Camera\Camera\camera_game_player.cpp Source\Camera\Camera\camera_title.cpp Source\Camera\camera_manager.cpp Source\Command\command_fire.cpp Source\Command\command_move.cpp Source\Command\command_move_back.cpp Source\Command\command_move_down.cpp Source\Command\command_move_front.cpp Source\Command\command_move_left.cpp Source\Command\command_move_right.cpp Source\Command\command_move_up.cpp Source\Fade\fade.cpp Source\Renderer\directx9.cpp Source\Resource\Mesh\Mesh\mesh_factory_circle.cpp Source\Resource\Mesh\Mesh\mesh_factory_sprite.cpp Source\Resource\Mesh\Mesh\mesh_factory_water_cylinder.cpp Source\Resource\mesh_resource.cpp Source\Resource\texture_resource.cpp Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Scene\scene_manager.cpp Source\Shader\effect_handle_manager.cpp Source\Shader\Shader\water_back_shader.cpp Source\System\application.cpp Source\Unit\Game\aim.cpp Source\Unit\Game\aim_draw.cpp Source\Unit\Game\aim_line.cpp Source\Unit\Game\back_ground.cpp Source\Unit\Game\building.cpp Source\Unit\Game\bullet.cpp Source\Unit\Game\dirt.cpp Source\Unit\Game\player.cpp Source\Unit\Game\water_back.cpp Source\Unit\Game\water_bullet.cpp Source\Unit\Game\water_spray_pool.cpp Source\Unit\Game\weapon.cpp Source\Unit\Title\title_player.cpp Source\Unit\Title\title_weapon.cpp
+         camera_game_player.cpp
+         camera_title.cpp
+         camera_manager.cpp
+         command_fire.cpp
+         command_move.cpp
+         command_move_back.cpp
+         command_move_down.cpp
+         command_move_front.cpp
+         command_move_left.cpp
+         command_move_right.cpp
+         command_move_up.cpp
+         fade.cpp
+         directx9.cpp
+         mesh_factory_circle.cpp
+         mesh_factory_sprite.cpp
+         mesh_factory_water_cylinder.cpp
+         mesh_resource.cpp
+         texture_resource.cpp
+         scene_game.cpp
+         scene_result.cpp
+         scene_title.cpp
+         scene_manager.cpp
+         effect_handle_manager.cpp
+         water_back_shader.cpp
+         application.cpp
+         aim.cpp
+         aim_draw.cpp
+         aim_line.cpp
+         back_ground.cpp
          building.cpp
+         bullet.cpp
+         dirt.cpp
+         player.cpp
+         water_back.cpp
+         water_bullet.cpp
+         water_spray_pool.cpp
+         weapon.cpp
+         title_player.cpp
+         title_weapon.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_develop.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_develop.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_develop.lib" /MACHINE:X86 /SAFESEH Develop\dirt_math.obj
          Develop\often_use.obj
@@ -46,6 +84,7 @@
          Develop\index_buffer.obj
          Develop\mesh_factory_2d_sprite.obj
          Develop\mesh_factory_amo.obj
+         Develop\mesh_factory_circle.obj
          Develop\mesh_factory_cube.obj
          Develop\mesh_factory_mesh_field.obj
          Develop\mesh_factory_smo.obj
@@ -121,6 +160,8 @@
          Develop\logo.obj
          Develop\logo_bg.obj
          Develop\text.obj
+         Develop\title_player.obj
+         Develop\title_weapon.obj
          Develop\ui.obj
          Develop\unit.obj
          Develop\window.obj
@@ -134,4 +175,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:01.04
+経過時間 00:00:12.64

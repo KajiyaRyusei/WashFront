@@ -70,6 +70,8 @@ private:
 	Application* _application;
 	// フェードカラー
 	D3DXVECTOR4 _fade_color;
+	// テクスチャ
+	LPDIRECT3DTEXTURE9 _texture;
 	// フェードフラグ
 	bool _is_fade_in;
 	bool _is_fade_out;

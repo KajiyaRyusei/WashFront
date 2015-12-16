@@ -27,6 +27,7 @@ void ShaderWaterBack::Initialize()
 	InitializeAlbedoTexture(_effect_handle_holder->effect_handle());
 	InitializeTexcoordMove(_effect_handle_holder->effect_handle());
 	InitializeNormalTexture(_effect_handle_holder->effect_handle());
+	InitializeAmbientColor(_effect_handle_holder->effect_handle());
 }
 
 void ShaderWaterBack::AssignExceptMaterial() const
@@ -41,4 +42,5 @@ void ShaderWaterBack::AssignExceptMaterial() const
 	SendAlbedoTexture(_effect_handle_holder->effect_handle());
 	SendTexcoordMove(_effect_handle_holder->effect_handle());
 	SendNormalTexture(_effect_handle_holder->effect_handle());
+	SendAmbientColor(_effect_handle_holder->effect_handle());
 }

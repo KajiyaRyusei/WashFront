@@ -20,6 +20,8 @@ void ShaderFade::Initialize()
 	InitializeScreenMatrix(_effect_handle_holder->effect_handle());
 	InitializeScreenSize(_effect_handle_holder->effect_handle());
 	InitializeAmbientColor(_effect_handle_holder->effect_handle());
+	InitializeAlbedoTexture(_effect_handle_holder->effect_handle());
+	InitializeTexcoordMatrix(_effect_handle_holder->effect_handle());
 }
 
 void ShaderFade::AssignExceptMaterial() const
@@ -27,4 +29,6 @@ void ShaderFade::AssignExceptMaterial() const
 	SendScreenMatrix(_effect_handle_holder->effect_handle());
 	SendScreenSize(_effect_handle_holder->effect_handle());
 	SendAmbientColor(_effect_handle_holder->effect_handle());
+	SendAlbedoTexture(_effect_handle_holder->effect_handle());
+	SendTexcoordMatrix(_effect_handle_holder->effect_handle());
 }

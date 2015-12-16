@@ -52,6 +52,7 @@ uniform float uniform_roughness;
 uniform float uniform_metalness;
 uniform float uniform_fresnel;
 uniform float2 uniform_texcoord_move;
+uniform float4 uniform_ambient_color;
 
 uniform texture uniform_albedo_texture;
 uniform sampler uniform_albedo_sampler = sampler_state {
@@ -242,13 +243,13 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	// ‹¾–Ê”½ËF
 	float3 specular = CookTorrance(light_direction, eye, normal);
 
-	output.render_target0.xyz = (diffuse + specular) * albedo;
+	output.render_target0.xyz = (diffuse + specular) * albedo + ((1 - input.color.a) * uniform_ambient_color.xyz);
 	output.render_target0.xyz = output.render_target0.xyz * 2.f;
 	output.render_target0.a = input.color.a;
 
 	// ƒKƒ“ƒ}•â³
 	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 1.4f);
-	output.render_target0.xyz *= 2.f;
+	//output.render_target0.xyz *= 2.f;
 
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);

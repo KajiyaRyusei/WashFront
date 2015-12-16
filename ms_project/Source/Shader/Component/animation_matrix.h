@@ -35,7 +35,7 @@ namespace component
 		 // シェーダーに送信
 		void SendAnimationMatrix(LPD3DXEFFECT effect) const
 		{
-			effect->SetMatrixArray(_handle_animation_matrix, _animation_matrix_list, 40);
+			effect->SetMatrixArray(_handle_animation_matrix, _animation_matrix_list, kMatrixMax);
 		}
 
 		// ミューテータ

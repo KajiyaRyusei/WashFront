@@ -32,9 +32,10 @@ public:
 		World* world,
 		const D3DXVECTOR3& position,
 		const D3DXVECTOR3& rotaiton,
-		const D3DXVECTOR3& scale) : Unit(application, world)
+		const D3DXVECTOR3& scale,
+		std::string file_name) : Unit(application, world)
 	{
-		Initialize(position,rotaiton,scale);
+		Initialize(position, rotaiton, scale, file_name);
 	}
 	virtual ~BuildingUnit(){ Finalize(); }
 
@@ -42,7 +43,8 @@ public:
 	void Initialize(
 		const D3DXVECTOR3& position,
 		const D3DXVECTOR3& rotaiton,
-		const D3DXVECTOR3& scale);
+		const D3DXVECTOR3& scale,
+		std::string file_name);
 	virtual void Finalize() override;
 	virtual void Update() override;
 	virtual void Draw() override;

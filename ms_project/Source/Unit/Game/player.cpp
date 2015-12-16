@@ -157,6 +157,8 @@ void PlayerUnit::CollisionUpdate()
 	// プレイヤーのポジションを教える
 	_player_camera->SetPlayerPosition(_position.current);
 
+	_application->GetDevelopToolManager()->GetDebugPrint().Print("プレイヤーの座標 %f %f %f\n", _position.current.x, _position.current.y, _position.current.z);
+
 }
 
 //=============================================================================

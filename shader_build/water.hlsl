@@ -250,7 +250,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	output.render_target0.a = uniform_ambient_color.w;
 
 	// ƒKƒ“ƒ}•â³
-	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 1.4f);
+	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 1.8f);
 	output.render_target0.xyz *= 2.f;
 
 	output.render_target1 = float4(1, 1, 1, 1);

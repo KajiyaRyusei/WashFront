@@ -37,12 +37,12 @@ public:
 	virtual void CollisionUpdate() override;
 
 	// ”’lİ’è
-	void SetValue( int value );
+	void SetValue(int value);
 
 private:
 
 	// ”’l”½‰f
-	void Reflection( void );
+	void Reflection(void);
 
 	// ”š
 	int		_value;

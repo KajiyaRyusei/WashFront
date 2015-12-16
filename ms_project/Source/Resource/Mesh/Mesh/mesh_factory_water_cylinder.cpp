@@ -18,8 +18,8 @@
 namespace
 {
 	// メッシュのサイズと分割数
-	static const s32 kNumberBlockY = 10;
-	static const s32 kNumberBlockX = 10;
+	static const s32 kNumberBlockY = 20;
+	static const s32 kNumberBlockX = 20;
 	static const fx32 kSizeBlockY =1.2f;
 	static const fx32 kSizeBlockX =1.5f;
 }

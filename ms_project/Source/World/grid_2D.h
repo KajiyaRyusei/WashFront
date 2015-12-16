@@ -76,8 +76,8 @@ public:
 
 protected:
 
-	static const s32 kMaxCell = 5;
-	static const s32 kSizeCell = 30;
+	static const s32 kMaxCell = 10;
+	static const s32 kSizeCell = 50;
 
 	Unit* _cells[kMaxCell][kMaxCell];
 

@@ -1,8 +1,8 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
-// Score_Board
+// 円メッシュ
 // 
-// Created by Toshiki Mochizuki on 20151123
+// Created by Ryusei Kajiya on 20151213
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -12,32 +12,21 @@
 
 //*****************************************************************************
 // include
-#include "Unit\screen_unit.h"
+#include "mesh_factory.h"
 
 //*****************************************************************************
-// 前方宣言
-
+// 3D用頂点フォーマット
+struct VERTEX_CIRCLE
+{
+	D3DXVECTOR3	position;	// 頂点
+	D3DXVECTOR3	normal;		// 法線ベクトル
+	D3DXVECTOR2	texcoord;	// テクスチャ座標
+};
 
 //*****************************************************************************
 // クラス設計
-class Score_BoardUnit : public ScreenUnit
+class MeshFactoryCircle : MeshFactory
 {
 public:
-
-	Score_BoardUnit(Application* application, World* world) : ScreenUnit(application, world)
-	{
-		Initialize();
-	}
-	virtual ~Score_BoardUnit(){ Finalize(); }
-
-	virtual void Initialize() override;
-	virtual void Finalize() override;
-	virtual void Update() override;
-	virtual void Draw() override;
-	virtual void CollisionUpdate() override;
-
-
-
-private:
-
+	virtual MeshBuffer* Create(RendererDevice* renderer_device) override;
 };

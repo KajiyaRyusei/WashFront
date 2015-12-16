@@ -87,11 +87,11 @@ void AimDrawUnit::CalculatePosition()
 
 	if( _is_hit )
 	{
-		s_ambient_color = D3DXVECTOR4(0.f, 1.f, 0.f, 1.f);
+		s_ambient_color = D3DXVECTOR4(1.f, 0.f, 0.f, 0.8f);
 	}
 	else
 	{
-		s_ambient_color = D3DXVECTOR4(1.f, 1.f, 1.f, 1.f);
+		s_ambient_color = D3DXVECTOR4(0.f, 1.f, 0.f, 0.8f);
 	}
 
 	_shader->SetAmbientColor(s_ambient_color);

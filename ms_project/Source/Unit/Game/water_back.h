@@ -45,7 +45,7 @@ private:
 	// シェーダー
 	ShaderWaterBack* _shader;
 	// シェーダパラメーターの設定
-	void SettingShaderParameter();
+	void SettingShaderParameter(const D3DXVECTOR4& ambient, const fx32 scale);
 	data::World _world;
 	D3DXMATRIX _matrix_world_view_projection;
 	D3DXMATRIX _animation_matrix;

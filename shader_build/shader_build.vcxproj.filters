@@ -55,5 +55,11 @@
     <FxCompile Include="toon_weapon.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
+    <FxCompile Include="static_toon_building.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="static_toon_clouds.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

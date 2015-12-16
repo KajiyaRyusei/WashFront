@@ -40,6 +40,18 @@ struct PixelShaderOutput
 float2 uniform_screen_size;
 float4x4 uniform_screen_matrix;
 float4 uniform_ambient_color;
+float4x4 uniform_texcoord_matrix;
+
+uniform texture uniform_albedo_texture;
+uniform sampler uniform_albedo_sampler = sampler_state {
+	Texture = <uniform_albedo_texture>;
+	MinFilter = ANISOTROPIC;
+	MagFilter = LINEAR;
+	MipFilter = LINEAR;
+	MaxAnisotropy = 16;
+	AddressU = CLAMP;
+	AddressV = CLAMP;
+};
 
 //=============================================================================
 // 頂点シェーダ
@@ -60,7 +72,10 @@ VertexShaderOutput VS(VertexShaderInput input)
 		1.0f);
 
 	// テクセル座標
-	output.texcoord = input.texcoord;
+	float3 texcoord_work = float3(input.texcoord,0.f);
+	output.texcoord.xy = mul(texcoord_work, uniform_texcoord_matrix).xy;
+	output.texcoord.x += uniform_texcoord_matrix._41;
+	output.texcoord.y += uniform_texcoord_matrix._42;
 
 	return output;
 }
@@ -72,7 +87,15 @@ PixelShaderOutput PS(VertexShaderOutput input)
 {
 	PixelShaderOutput output = (PixelShaderOutput)0;
 
+
 	output.render_target0 = uniform_ambient_color;
+
+	float4 texture_color = tex2D(uniform_albedo_sampler, input.texcoord);
+
+	int a = (int)uniform_ambient_color.a;
+
+	output.render_target0.a = 1 - texture_color.a + uniform_ambient_color.a;
+
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);
 	output.render_target3 = float4(1, 1, 1, 1);
@@ -88,7 +111,8 @@ technique Techniques
 	pass P0
 	{
 		ZENABLE = FALSE;
-		VertexShader = compile vs_2_0 VS();
-		PixelShader = compile ps_2_0 PS();
+		ALPHAREF = 0;
+		VertexShader = compile vs_3_0 VS();
+		PixelShader = compile ps_3_0 PS();
 	}
 }

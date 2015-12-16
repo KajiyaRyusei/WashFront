@@ -36,10 +36,10 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
 
-	void SetPosition( D3DXVECTOR3 pos )
+	void SetPosition(D3DXVECTOR3 pos)
 	{
-		_position	= pos;
-		_pos		= pos;
+		_position = pos;
+		_pos = pos;
 	}
 
 private:

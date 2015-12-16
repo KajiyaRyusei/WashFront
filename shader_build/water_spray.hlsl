@@ -57,6 +57,7 @@ sampler uniform_albedo_sampler = sampler_state {
 	AddressU = WRAP;
 	AddressV = WRAP;
 };
+
 //=============================================================================
 // 頂点シェーダ
 VertexShaderOutput VS(VertexShaderInput input)
@@ -123,6 +124,7 @@ technique Techniques
 	pass P0
 	{
 		CullMode = NONE;
+		ALPHAREF = 50;
 		VertexShader = compile vs_3_0 VS();
 		PixelShader = compile ps_3_0 PS();
 	}

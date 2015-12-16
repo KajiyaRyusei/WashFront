@@ -35,7 +35,8 @@ class ShaderWaterBack : public ShaderBase,
 	public component::Fresnel,
 	public component::AlbedoMap,
 	public component::TexcoordMove,
-	public component::NormalMap
+	public component::NormalMap,
+	public component::AmbientColor
 {
 public:
 	ShaderWaterBack() : ShaderBase(s_effect_id) { Initialize(); }

@@ -2,7 +2,7 @@
 //
 // シーン：リザルト
 //
-// Created by Ryusei Kajiya on 20151130
+// Created by Ryusei Kajiya on 20151123
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -23,7 +23,6 @@
 // unit
 #include "Unit/Result/result_bg.h"
 #include "Unit\Result\bulletin_board.h"
-#include "Unit\Result\score_board.h"
 #include "Unit\Title\text.h"
 #include "Unit\Result\message_box.h"
 #include "Unit\Result\judge.h"
@@ -33,6 +32,137 @@
 // viewport
 #include "Renderer/directx9.h"
 #include "Windows/window.h"
+
+// sound
+#include "Sound\sound.h"
+
+//*****************************************************************************
+// const
+const int			countUpTime = 60;
+const float			countTimeSpeed = 1.0f / countUpTime;
+
+
+const D3DXVECTOR3	WindowPos[2][21] =
+{
+	// 960 : 540
+	{
+		// Bg
+		D3DXVECTOR3(480.0f, 270.0f, 0.0f),
+
+		// keiji
+		D3DXVECTOR3(480.0f, 790.0f, 0.0),
+
+		// text
+		D3DXVECTOR3(680.0f, 500.0f, 0.0f),
+
+		// mesBox
+		D3DXVECTOR3(400.0f, 700.0f, 0.0f),
+		D3DXVECTOR3(400.0f, 730.0f, 0.0f),
+		D3DXVECTOR3(400.0f, 760.0f, 0.0f),
+		D3DXVECTOR3(400.0f, 790.0f, 0.0f),
+		D3DXVECTOR3(400.0f, 850.0f, 0.0f),
+		D3DXVECTOR3(400.0f, 880.0f, 0.0f),
+		D3DXVECTOR3(400.0f, 910.0f, 0.0f),
+		D3DXVECTOR3(400.0f, 940.0f, 0.0f),
+
+		// score
+		D3DXVECTOR3(600.0f, 700.0f, 0.0f),
+		D3DXVECTOR3(600.0f, 730.0f, 0.0f),
+		D3DXVECTOR3(600.0f, 760.0f, 0.0f),
+		D3DXVECTOR3(600.0f, 790.0f, 0.0f),
+		D3DXVECTOR3(600.0f, 850.0f, 0.0f),
+		D3DXVECTOR3(600.0f, 880.0f, 0.0f),
+		D3DXVECTOR3(600.0f, 910.0f, 0.0f),
+		D3DXVECTOR3(600.0f, 940.0f, 0.0f),
+
+		// judge
+		D3DXVECTOR3(700.0f, 185.0f, 0.0f),
+		D3DXVECTOR3(700.0f, 347.0f, 0.0f)
+	},
+
+	// 1280 : 720
+	{
+		// Bg
+		D3DXVECTOR3(640.0f, 360.0f, 0.0f),
+
+		// keiji
+		D3DXVECTOR3(640.0f, 1300.0f, 0.0),
+
+		// text
+		D3DXVECTOR3(980.0f, 670.0f, 0.0f),
+
+		// mesBox
+		D3DXVECTOR3(520.0f, 1170.0f, 0.0f),
+		D3DXVECTOR3(520.0f, 1210.0f, 0.0f),
+		D3DXVECTOR3(520.0f, 1250.0f, 0.0f),
+		D3DXVECTOR3(520.0f, 1290.0f, 0.0f),
+		D3DXVECTOR3(520.0f, 1400.0f, 0.0f),
+		D3DXVECTOR3(520.0f, 1440.0f, 0.0f),
+		D3DXVECTOR3(520.0f, 1480.0f, 0.0f),
+		D3DXVECTOR3(520.0f, 1520.0f, 0.0f),
+
+		// score
+		D3DXVECTOR3(850.0f, 1170.0f, 0.0f),
+		D3DXVECTOR3(850.0f, 1210.0f, 0.0f),
+		D3DXVECTOR3(850.0f, 1250.0f, 0.0f),
+		D3DXVECTOR3(850.0f, 1290.0f, 0.0f),
+		D3DXVECTOR3(850.0f, 1400.0f, 0.0f),
+		D3DXVECTOR3(850.0f, 1440.0f, 0.0f),
+		D3DXVECTOR3(850.0f, 1480.0f, 0.0f),
+		D3DXVECTOR3(850.0f, 1520.0f, 0.0f),
+
+		// judge
+		D3DXVECTOR3(1000.0f, 250.0f, 0.0f),
+		D3DXVECTOR3(1000.0f, 475.0f, 0.0f)
+	}
+};
+
+const D3DXVECTOR3 WindowScale[2][6] =
+{
+	// 960 : 540
+	{
+		// Bg
+		D3DXVECTOR3(960.0f, 540.0f, 0.0f),
+
+		// keiji
+		D3DXVECTOR3(800.0f, 430.0f, 0.0f),
+
+		// text
+		D3DXVECTOR3(500.0f, 50.0f, 0.0f),
+
+		// mesBox
+		D3DXVECTOR3(80.0f, 20.0f, 0.0f),
+
+		// score
+		D3DXVECTOR3(20.0f, 30.0f, 0.0f),
+
+		// judge
+		D3DXVECTOR3(150.0f, 120.0f, 0.0f)
+	},
+
+	// 1280 : 720
+	{
+		// Bg
+		D3DXVECTOR3(1280.0f, 720.0f, 0.0f),
+
+		// keiji
+		D3DXVECTOR3(1200.0f, 620.0f, 0.0f),
+
+		// text
+		D3DXVECTOR3(500.0f, 60.0f, 0.0f),
+
+		// mesBox
+		D3DXVECTOR3(120.0f, 30.0f, 0.0f),
+
+		// score
+		D3DXVECTOR3(30.0f, 35.0f, 0.0f),
+
+		// judge
+		D3DXVECTOR3(190.0f, 170.0f, 0.0f)
+	}
+};
+
+
 
 //=============================================================================
 // コンストラクタ
@@ -54,20 +184,23 @@ void SceneResult::Initialize()
 	std::list<Unit*> unit_list;
 
 	// 背景
-	unit_list.push_back(new Result_BGUnit(_application, _world));
+	Result_BGUnit* pBg = new Result_BGUnit(_application, _world);
+	pBg->SetPosition(WindowPos[windowSizeID][0]);
+	pBg->SetScaling(WindowScale[windowSizeID][0]);
+	unit_list.push_back(pBg);
+
 	// 掲示板
-	unit_list.push_back(new BulletinUnit(_application, _world));
-	// スコアボード
-	Score_BoardUnit* board1 = new Score_BoardUnit(_application, _world);
-	Score_BoardUnit* board2 = new Score_BoardUnit(_application, _world);
-	board1->SetPosition(D3DXVECTOR3(280.0f, 240.0f, 0.0f));
-	board2->SetPosition(D3DXVECTOR3(677.0f, 240.0f, 0.0f));
-	unit_list.push_back(board1);
-	unit_list.push_back(board2);
+	BulletinUnit* pBulletin = new BulletinUnit(_application, _world);
+	pBulletin->SetPosition(WindowPos[windowSizeID][1]);
+	pBulletin->SetScaling(WindowScale[windowSizeID][1]);
+	unit_list.push_back(pBulletin);
+
 	// 点滅文字
 	TextUnit* text = new TextUnit(_application, _world);
-	text->SetPosition(D3DXVECTOR3(680.0f, 500.0f, 0.0f));
+	text->SetPosition(WindowPos[windowSizeID][2]);
+	text->SetScaling(WindowScale[windowSizeID][2]);
 	unit_list.push_back(text);
+
 	// メッセージボックス
 	Message_BoxUnit* box1 = new Message_BoxUnit(_application, _world);
 	Message_BoxUnit* box2 = new Message_BoxUnit(_application, _world);
@@ -77,14 +210,25 @@ void SceneResult::Initialize()
 	Message_BoxUnit* box6 = new Message_BoxUnit(_application, _world);
 	Message_BoxUnit* box7 = new Message_BoxUnit(_application, _world);
 	Message_BoxUnit* box8 = new Message_BoxUnit(_application, _world);
-	box1->SetPosition(D3DXVECTOR3(200.0f, 120.0f, 0.0f));
-	box2->SetPosition(D3DXVECTOR3(200.0f, 180.0f, 0.0f));
-	box3->SetPosition(D3DXVECTOR3(200.0f, 240.0f, 0.0f));
-	box4->SetPosition(D3DXVECTOR3(200.0f, 300.0f, 0.0f));
-	box5->SetPosition(D3DXVECTOR3(600.0f, 120.0f, 0.0f));
-	box6->SetPosition(D3DXVECTOR3(600.0f, 180.0f, 0.0f));
-	box7->SetPosition(D3DXVECTOR3(600.0f, 240.0f, 0.0f));
-	box8->SetPosition(D3DXVECTOR3(600.0f, 300.0f, 0.0f));
+
+	box1->SetPosition(WindowPos[windowSizeID][3]);
+	box2->SetPosition(WindowPos[windowSizeID][4]);
+	box3->SetPosition(WindowPos[windowSizeID][5]);
+	box4->SetPosition(WindowPos[windowSizeID][6]);
+	box5->SetPosition(WindowPos[windowSizeID][7]);
+	box6->SetPosition(WindowPos[windowSizeID][8]);
+	box7->SetPosition(WindowPos[windowSizeID][9]);
+	box8->SetPosition(WindowPos[windowSizeID][10]);
+
+	box1->SetScaling(WindowScale[windowSizeID][3]);
+	box2->SetScaling(WindowScale[windowSizeID][3]);
+	box3->SetScaling(WindowScale[windowSizeID][3]);
+	box4->SetScaling(WindowScale[windowSizeID][3]);
+	box5->SetScaling(WindowScale[windowSizeID][3]);
+	box6->SetScaling(WindowScale[windowSizeID][3]);
+	box7->SetScaling(WindowScale[windowSizeID][3]);
+	box8->SetScaling(WindowScale[windowSizeID][3]);
+
 	unit_list.push_back(box1);
 	unit_list.push_back(box2);
 	unit_list.push_back(box3);
@@ -96,36 +240,53 @@ void SceneResult::Initialize()
 	// キャプション
 
 	// スコア
-	ScoreUnit* score1 = new ScoreUnit(_application, _world);
-	ScoreUnit* score2 = new ScoreUnit(_application, _world);
-	ScoreUnit* score3 = new ScoreUnit(_application, _world);
-	ScoreUnit* score4 = new ScoreUnit(_application, _world);
-	ScoreUnit* score5 = new ScoreUnit(_application, _world);
-	ScoreUnit* score6 = new ScoreUnit(_application, _world);
-	ScoreUnit* score7 = new ScoreUnit(_application, _world);
-	ScoreUnit* score8 = new ScoreUnit(_application, _world);
+	for( int i = 0; i < 8; i++ )
+	{
+		_pScore[i] = new ScoreUnit(_application, _world);
+		_pScore[i]->SetScale(WindowScale[windowSizeID][4]);
+	}
 
-	unit_list.push_back(score1);
-	unit_list.push_back(score2);
-	unit_list.push_back(score3);
-	unit_list.push_back(score4);
-	unit_list.push_back(score5);
-	unit_list.push_back(score6);
-	unit_list.push_back(score7);
-	unit_list.push_back(score8);
+	_pScore[0]->SetPos(WindowPos[windowSizeID][11]);
+	_pScore[1]->SetPos(WindowPos[windowSizeID][12]);
+	_pScore[2]->SetPos(WindowPos[windowSizeID][13]);
+	_pScore[3]->SetPos(WindowPos[windowSizeID][14]);
+	_pScore[4]->SetPos(WindowPos[windowSizeID][15]);
+	_pScore[5]->SetPos(WindowPos[windowSizeID][16]);
+	_pScore[6]->SetPos(WindowPos[windowSizeID][17]);
+	_pScore[7]->SetPos(WindowPos[windowSizeID][18]);
+
+	_pScore[0]->SetDestScore(43786);
+	_pScore[1]->SetDestScore(99999);
+	_pScore[2]->SetDestScore(1732);
+	_pScore[3]->SetDestScore(6887);
+	_pScore[4]->SetDestScore(32526);
+	_pScore[5]->SetDestScore(9);
+	_pScore[6]->SetDestScore(35247);
+	_pScore[7]->SetDestScore(78);
+
+	for( int i = 0; i < 8; i++ )
+	{
+		unit_list.push_back(_pScore[i]);
+	}
 
 
 	// 勝敗
-	JudgeUnit* judge1 = new JudgeUnit(_application, _world);
-	JudgeUnit* judge2 = new JudgeUnit(_application, _world);
-	judge1->SetPosition(D3DXVECTOR3(280.0f, 390.0f, 0.0f));
-	judge2->SetPosition(D3DXVECTOR3(677.0f, 390.0f, 0.0f));
-	unit_list.push_back(judge1);
-	unit_list.push_back(judge2);
+	_pJudge[0] = new JudgeUnit(_application, _world);
+	_pJudge[1] = new JudgeUnit(_application, _world);
+	_pJudge[0]->SetPosition(WindowPos[windowSizeID][19]);
+	_pJudge[1]->SetPosition(WindowPos[windowSizeID][20]);
 
+	_pJudge[0]->SetScaling(WindowScale[windowSizeID][5]);
+	_pJudge[1]->SetScaling(WindowScale[windowSizeID][5]);
 
+	unit_list.push_back(_pJudge[0]);
+	unit_list.push_back(_pJudge[1]);
+
+	_grade = 0;
 
 	_world->PushUnit(std::move(unit_list));
+
+	_application->GetSound()->Play(BGM_TEST);
 
 }
 //=============================================================================
@@ -141,9 +302,60 @@ void SceneResult::Update()
 {
 	Reference::GetInstance().GetDevelopToolManager()->GetDebugPrint().Print("リザルトシーンですよ\n");
 
-	if( _application->GetInputManager()->CheckTrigger(INPUT_EVENT_RETURN) )
+	if( _pJudge[1]->GetTime() > disp_time )
 	{
-		_application->GetSceneManager()->SetNextScene(new SpawnerForScene<SceneTitle>);
+		if( _application->GetInputManager()->CheckTrigger(INPUT_EVENT_Z) )
+		{
+			_application->GetSceneManager()->SetNextScene(new SpawnerForScene<SceneTitle>);
+		}
+	}
+
+	if( ScoreUnit::GetFlg() == true )
+	{
+		if( _application->GetInputManager()->CheckTrigger(INPUT_EVENT_Z) )
+		{
+			_pJudge[0]->SetTime(disp_time);
+			_pJudge[1]->SetTime(disp_time);
+		}
+	}
+
+	if( BulletinUnit::GetUpdateFlg() )
+	{
+		for( int i = 0; i < 8; i++ )
+		{
+			_pScore[i]->Move();
+		}
+	}
+
+	if( BulletinUnit::GetDispFlg() )
+	{
+
+		if( _application->GetInputManager()->CheckTrigger(INPUT_EVENT_Z) )
+		{
+			_grade = 4.0f;
+			ScoreUnit::SetFlg(true);
+		}
+
+		_grade += countTimeSpeed;
+
+		_pScore[0]->CountUp(_grade);
+		_pScore[4]->CountUp(_grade);
+
+		_pScore[1]->CountUp(_grade - 1.0f);
+		_pScore[5]->CountUp(_grade - 1.0f);
+
+		_pScore[2]->CountUp(_grade - 2.0f);
+		_pScore[6]->CountUp(_grade - 2.0f);
+
+		_pScore[3]->CountUp(_grade - 3.0f);
+		_pScore[7]->CountUp(_grade - 3.0f);
+
+		if( _grade >= 4.0f )
+		{
+			ScoreUnit::SetFlg(true);
+		}
+
+
 	}
 
 	_world->Update();

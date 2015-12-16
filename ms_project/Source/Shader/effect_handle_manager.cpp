@@ -31,6 +31,8 @@
 #include "Shader/Shader/toon_building_shader.h"
 #include "Shader/Shader/toon_player_shader.h"
 #include "Shader/Shader/toon_weapon_shader.h"
+#include "Shader/Shader/static_toon_building_shader.h"
+#include "Shader/Shader/static_toon_cloud_shader.h"
 
 
 //==============================================================================
@@ -60,6 +62,8 @@ EffectHandleManager::EffectHandleManager(RendererDevice* renderer_device)
 	EntryList<ShaderToonBuilding>("Data/Shader/toon_building.cso", renderer_device);
 	EntryList<ShaderToonPlayer>("Data/Shader/toon_player.cso", renderer_device);
 	EntryList<ShaderToonWeapon>("Data/Shader/toon_weapon.cso", renderer_device);
+	EntryList<ShaderStaticToonBuilding>("Data/Shader/static_toon_building.cso", renderer_device);
+	EntryList<ShaderStaticToonCloud>("Data/Shader/static_toon_clouds.cso", renderer_device);
 }
 
 //==============================================================================

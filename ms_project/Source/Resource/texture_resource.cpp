@@ -19,7 +19,7 @@ namespace
 	{
 		L"Data/Texture/oji_body.jpg",
 		L"Data/Texture/window3.png",
-		L"Data/Texture/aim.png",
+		L"Data/Texture/aim_000.png",
 		L"Data/Texture/mud-normal.jpg",
 		L"Data/Texture/water.jpg",
 		L"Data/Texture/water-normal003.jpg",

@@ -22,7 +22,7 @@ class EffectHandleManager;
 class CommandBuffer;
 class CommandProcessor;
 class Fade;
-class XactManager;
+class CSound;
 
 //*****************************************************************************
 // ÉNÉâÉXê›åv
@@ -60,7 +60,7 @@ public:
 	SceneManager* GetSceneManager()const { return _scene_manager; }
 	CameraManager* GetCameraManager()const { return _camera_manager; }
 	DevelopToolManager* GetDevelopToolManager()const{ return _develop_manager; }
-	XactManager* GetXactManager() const{ return _xact_manager; }
+	CSound*	GetSound()const { return _sound; }
 	CommandBuffer* GetCommandBuffer() const { return _command_buffer; }
 	CommandProcessor* GetCommandProcessor() const { return _command_processor; }
 
@@ -76,5 +76,5 @@ private:
 	CommandBuffer* _command_buffer;
 	CommandProcessor* _command_processor;
 	Fade* _fade;
-	XactManager* _xact_manager;
+	CSound* _sound;
 };

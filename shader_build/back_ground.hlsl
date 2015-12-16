@@ -77,7 +77,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 {
 	PixelShaderOutput output = (PixelShaderOutput)0;
 
-	float fog_amount = 1.f - smoothstep(-100, 0, input.world_position.y);
+	float fog_amount = 1.f - smoothstep(-100, 200, input.world_position.y);
 
 	output.render_target0 = texCUBE(uniform_albedo_cube_sampler, input.normal);
 

@@ -69,7 +69,7 @@ void TitlePlayerUnit::Initialize()
 	_shader[3].SetAlbedoTexture(albedo_map2);
 
 	// ç¿ïW
-	_position.current = D3DXVECTOR3(-39.5f, 48.5f, -37.2f);
+	_position.current = D3DXVECTOR3(100.3f, 98.0f, 102.2f);
 	_position.previous = _position.current;
 	_world.position = _position.current;
 	_world.rotation = D3DXVECTOR3(0.f, D3DX_PI, 0.f);

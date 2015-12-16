@@ -60,6 +60,8 @@
     <FxCompile Include="PBL_static.hlsl" />
     <FxCompile Include="screen_shader.hlsl" />
     <FxCompile Include="shader_2d.hlsl" />
+    <FxCompile Include="static_toon_building.hlsl" />
+    <FxCompile Include="static_toon_clouds.hlsl" />
     <FxCompile Include="toon_building.hlsl" />
     <FxCompile Include="toon_player.hlsl" />
     <FxCompile Include="toon_weapon.hlsl" />

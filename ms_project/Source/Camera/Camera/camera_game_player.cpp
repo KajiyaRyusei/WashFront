@@ -46,7 +46,7 @@ void CameraGamePlayer::Initialize()
 	_projection.fov = D3DXToRadian(60);
 	_projection.aspect = static_cast<fx32>(16.f / 9.f);
 	_projection.camera_near = 1.f;
-	_projection.camera_far = 1000.f;
+	_projection.camera_far = 1300.f;
 	_view.eye = D3DXVECTOR3(0.f, -1.f, -10.f);
 	_view.look_at = D3DXVECTOR3(0.f, 0.f, 0.f);
 	_view.up = D3DXVECTOR3(0.f, 1.f, 0.f);
@@ -90,7 +90,7 @@ void CameraGamePlayer::PassRootDecision()
 	D3DXVECTOR3 length_vector(_route[index].point - _route[index2].point);
 	fx32 length_frame = 1 / D3DXVec3Length(&length_vector);
 	// ƒtƒŒ[ƒ€‰ÁŽZ
-	_pass_frame += length_frame * 0.1f + _current_route.velocity;
+	_pass_frame += length_frame * 0.1f + _current_route.velocity* 0.01f;
 
 	// ƒ‹[ƒg‚ÌÅ‘å”’´‚¦‚Ä‚¢‚½‚ç‚Ü‚½‚P‚©‚ç
 	if( _pass_frame >= static_cast<fx32>(_route.size()) )

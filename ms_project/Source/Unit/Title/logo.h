@@ -40,8 +40,6 @@ public:
 
 private:
 
-	// ägèk
-	D3DXVECTOR3 _scale_max;
 	// ägèkë¨ìx
 	D3DXVECTOR3 _scale_speed;
 };

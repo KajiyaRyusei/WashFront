@@ -126,18 +126,6 @@
     <ClCompile Include="Source\Animation\animation_system.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Sound\speaker\speaker.cpp">
-      <Filter>Sound\speaker</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Sound\speaker\speaker_3d.cpp">
-      <Filter>Sound\speaker</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Sound\speaker\speaker_bgm.cpp">
-      <Filter>Sound\speaker</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Sound\xact\xact_manager.cpp">
-      <Filter>Sound\xact</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Unit\Game\player.cpp">
       <Filter>Unit\Game</Filter>
     </ClCompile>
@@ -294,9 +282,6 @@
     <ClCompile Include="Source\Unit\Result\score.cpp">
       <Filter>Unit\Result</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Unit\Result\score_board.cpp">
-      <Filter>Unit\Result</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Unit\Result\bulletin_board.cpp">
       <Filter>Unit\Result</Filter>
     </ClCompile>
@@ -377,6 +362,27 @@
     </ClCompile>
     <ClCompile Include="Source\Unit\Title\title_weapon.cpp">
       <Filter>Unit\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_circle.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\static_building.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\clouds.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\static_toon_building_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader\Shader\static_toon_cloud_shader.cpp">
+      <Filter>Shader\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\Mesh\Mesh\mesh_factory_smo_instance.cpp">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Sound\sound.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -558,18 +564,6 @@
     </ClInclude>
     <ClInclude Include="Source\Animation\animation_system.h">
       <Filter>Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Sound\speaker\speaker.h">
-      <Filter>Sound\speaker</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Sound\speaker\speaker_3d.h">
-      <Filter>Sound\speaker</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Sound\speaker\speaker_bgm.h">
-      <Filter>Sound\speaker</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Sound\xact\xact_manager.h">
-      <Filter>Sound\xact</Filter>
     </ClInclude>
     <ClInclude Include="Source\Unit\Game\player.h">
       <Filter>Unit\Game</Filter>
@@ -802,9 +796,6 @@
     <ClInclude Include="Source\Unit\Result\score.h">
       <Filter>Unit\Result</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Unit\Result\score_board.h">
-      <Filter>Unit\Result</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Unit\Result\bulletin_board.h">
       <Filter>Unit\Result</Filter>
     </ClInclude>
@@ -925,6 +916,30 @@
     <ClInclude Include="Source\Unit\Title\title_weapon.h">
       <Filter>Unit\Title</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_circle.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Component\texcoord_matrix.h">
+      <Filter>Shader\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\static_building.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\clouds.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\static_toon_building_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader\Shader\static_toon_cloud_shader.h">
+      <Filter>Shader\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Mesh\Mesh\mesh_factory_smo_instance.h">
+      <Filter>Resource\Mesh\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Sound\sound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1016,12 +1031,6 @@
     </Filter>
     <Filter Include="Sound">
       <UniqueIdentifier>{36d1cb52-2ec8-45df-834a-09a4485080eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sound\xact">
-      <UniqueIdentifier>{1c6d1ee1-b2fa-4684-84e9-32dae61e89f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sound\speaker">
-      <UniqueIdentifier>{0e89fd09-d4d7-4bd1-9a42-510344d9b9b8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Unit\Game">
       <UniqueIdentifier>{13990803-9f83-4f8c-bf84-55bcb7b1d695}</UniqueIdentifier>

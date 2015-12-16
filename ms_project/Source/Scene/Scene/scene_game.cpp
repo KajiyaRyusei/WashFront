@@ -26,6 +26,8 @@
 #include "Unit/Game/building.h"
 #include "Unit/Game/dirt.h"
 #include "Unit/Game/water_spray_pool.h"
+#include "Unit/Game/clouds.h"
+#include "Unit/Game/static_building.h"
 
 // ‹óŠÔ
 #include "World/collision_grid.h"
@@ -204,11 +206,15 @@ void SceneGame::MapGeneration()
 	unit_list.push_back(player_1p);
 	unit_list.push_back(player_2p);
 
+	// ”wŒi
 	unit_list.push_back(new BackGroundUnit(_application, _world));
+
+	// ‰_
+	unit_list.push_back(new CloudsUnit(_application, _world));
 
 	// ƒ}ƒbƒvƒtƒ@ƒCƒ‹“Ç‚Ýž‚Ý
 	FILE* file;
-	file = fopen("Data/Map/debug3.map", "rt");
+	file = fopen("Data/Map/pre.map", "rt");
 
 	s32 object_number = 0;
 
@@ -255,9 +261,44 @@ void SceneGame::MapGeneration()
 					&rotation.x, &rotation.y, &rotation.z,
 					&scale.x, &scale.y, &scale.z, &static_id);
 
-				BuildingUnit* bill = new BuildingUnit(_application, _world, position, rotation, scale);
-				bill->SettingDirty(dirty_list);
-				unit_list.push_back(bill);
+				std::string file_name;
+				STATIC_MESH_RESOURE_ID id = STATIC_MESH_RESOURE_BILL_000;
+				switch( model_id )
+				{
+				case STATIC_MESH_RESOURE_BILL_000:
+					file_name = "Data/StaticModel/new_biru_1.smo";
+					id = STATIC_MESH_RESOURE_BILL_000;
+					break;
+				case STATIC_MESH_RESOURE_BILL_001:
+					file_name = "Data/StaticModel/new_biru_2.smo";
+					id = STATIC_MESH_RESOURE_BILL_001;
+					break;
+				case STATIC_MESH_RESOURE_BILL_002:
+					file_name = "Data/StaticModel/new_biru_3.smo";
+					id = STATIC_MESH_RESOURE_BILL_002;
+					break;
+				case STATIC_MESH_RESOURE_BILL_003:
+					file_name = "Data/StaticModel/new_biru_4.smo";
+					id = STATIC_MESH_RESOURE_BILL_003;
+					break;
+				case STATIC_MESH_RESOURE_BILL_HAIKEI:
+					file_name = "Data/StaticModel/new_biru_haikei.smo";
+					id = STATIC_MESH_RESOURE_BILL_HAIKEI;
+					break;
+				default:
+					break;
+				}
+				if( static_id)
+				{
+					BuildingUnit* bill = new BuildingUnit(_application, _world, position, rotation, scale, file_name);
+					bill->SettingDirty(dirty_list);
+					unit_list.push_back(bill);
+				}
+				else
+				{
+					StaticBuildingUnit* bill = new StaticBuildingUnit(_application, _world, position, rotation, scale,id);
+					unit_list.push_back(bill);
+				}
 			}
 		}
 	}
@@ -301,7 +342,11 @@ void SceneGame::ResourceGeneration()
 	_world->GetCubeTextureResource()->Create(CUBE_TEXTURE_RESOURE_GRID_ZERO_ONE_SPECULAR, _application->GetRendererDevice());
 
 	// SMO
-	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_000, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_001, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_002, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_003, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_HAIKEI, _application->GetRendererDevice());
 
 	// AMO
 	_world->GetAnimationMeshResource()->Create(ANIMATION_MESH_RESOURE_WEAPON_01, _application->GetRendererDevice());
@@ -318,7 +363,7 @@ void SceneGame::ResourceGeneration()
 void SceneGame::RouteRead()
 {
 	FILE* inputFile;
-	inputFile = fopen("Data/Map/debug8.rt", "rt");
+	inputFile = fopen("Data/Map/pre.rt", "rt");
 
 	int num = 0;
 	fx32 length = 0.f;
@@ -473,3 +518,4 @@ std::vector<data::Dirt> SceneGame::DirtyRead()
 
 	return dirty_list;
 }
+
