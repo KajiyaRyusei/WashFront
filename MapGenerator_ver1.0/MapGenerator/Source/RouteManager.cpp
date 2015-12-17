@@ -209,7 +209,7 @@ void RouteManager::OutputData(FILE *outputFile)
 			D3DXMatrixRotationYawPitchRoll(&rotationMatrix, rotation.y, rotation.x, rotation.z);
 			D3DXQuaternionRotationMatrix(&rotationQuaternion, &rotationMatrix);
 			D3DXMatrixIdentity(&directionMatrix);
-			D3DXMatrixRotationYawPitchRoll(&directionMatrix, rotation.y, rotation.x, rotation.z);
+			D3DXMatrixRotationYawPitchRoll(&directionMatrix, playerDirection.y + rotation.y, playerDirection.x + rotation.x, playerDirection.z + rotation.z);
 			D3DXQuaternionRotationMatrix(&directionQuaternion, &directionMatrix);
 
 

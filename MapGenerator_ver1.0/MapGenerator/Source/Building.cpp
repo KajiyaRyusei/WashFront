@@ -115,6 +115,8 @@ void Building::Draw()
 	D3DXMatrixTranslation(&mtxTranslate, position_.x, position_.y, position_.z);
 	D3DXMatrixMultiply(&worldMatrix_, &worldMatrix_, &mtxTranslate);  // s—ñ‚Ì‚©‚¯‡‚í‚¹
 
+
+	device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	device->SetTransform(D3DTS_WORLD, &worldMatrix_);  // s—ñ‚ÌÝ’è
 
 	switch (state_) {
@@ -132,6 +134,7 @@ void Building::Draw()
 	}
 	model_->Draw(worldMatrix_);
 	device->SetTexture(0, nullptr);
+	device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 

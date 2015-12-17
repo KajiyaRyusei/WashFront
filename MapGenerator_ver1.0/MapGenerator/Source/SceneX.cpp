@@ -30,6 +30,8 @@ SceneX::SceneX(int priority) : Scene(priority)
 //=============================================================================
 SceneX::~SceneX()
 {
+	SafeRelease(materialBuffer_);
+	SafeRelease(mesh_);
 }
 
 //=============================================================================
@@ -43,7 +45,19 @@ HRESULT SceneX::Init()
 HRESULT SceneX::Init(char *modelFileName)
 {
 	// モデルの取得
-	model_ = Manager::GetInstance()->GetModelFactory()->GetModel(modelFileName);
+	// Xファイルの読み込み
+	if (FAILED(D3DXLoadMeshFromX(
+		modelFileName,
+		D3DXMESH_SYSTEMMEM,
+		Manager::GetInstance()->GetRenderer()->GetDevice(),
+		nullptr,
+		&materialBuffer_,
+		nullptr,
+		&materialNum_,
+		&mesh_))) {
+		return false;
+	}
+
 
 	return S_OK;
 }
@@ -92,9 +106,33 @@ void SceneX::Draw()
 	device->SetTransform(D3DTS_WORLD, &worldMatrix_);  // 行列の設定
 
 
-	// 描画
-	//model_->Draw();
+	//device->SetRenderState(D3DRS_LIGHTING, FALSE);
 
+	// 描画
+	D3DXMATERIAL *material;
+	D3DMATERIAL9 materialDefault;
+
+
+
+	// マテリアルの取り出し
+	device->GetMaterial(&materialDefault);
+	material = (D3DXMATERIAL *)materialBuffer_->GetBufferPointer();
+
+
+	for (int count = 0; static_cast<unsigned>(count) < materialNum_; ++count) {
+		// テクスチャの設定
+		device->SetTexture(0, nullptr);
+		// マテリアルの設定
+		device->SetMaterial(&material[count].MatD3D);
+		// 描画
+		mesh_->DrawSubset(count);
+	}
+
+	device->SetTexture(0, nullptr);
+	device->SetMaterial(&materialDefault);
+
+
+	device->SetRenderState(D3DRS_LIGHTING, TRUE);
 
 	// ワールドマトリックスの設定
 	D3DXMatrixIdentity(&worldMatrix_);  // 単位行列で初期化

@@ -457,6 +457,11 @@ BOOL CALLBACK ObjectDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 			Manager::GetInstance()->GetObjectManager()->CopyBuilding();
 			break;
 
+		// 削除
+		case IDC_BUTTON4:
+			Manager::GetInstance()->GetObjectManager()->DeleteBuilding();
+			break;
+
 		// 座標 : X軸
 		case IDC_EDIT2:
 			if (HIWORD(wParam) == EN_UPDATE) {
@@ -833,7 +838,7 @@ void ImportTextureFile(HWND windowHandle)
 		ofn.lpstrInitialDir = szPath;	// 初期フォルダ位置
 		ofn.lpstrFile = g_szFile;		// 選択ファイル格納
 		ofn.nMaxFile = MAX_PATH;
-		ofn.lpstrFilter = "JPEG(*.jpg)\0*.jpg\0PNG(*.png)\0*.png";
+		ofn.lpstrFilter = "PNG(*.png)\0*.png\0JPEG(*.jpg)\0*.jpg";
 		ofn.lpstrTitle = "テクスチャのインポート";
 		ofn.Flags = OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
 	}
@@ -1578,6 +1583,15 @@ BOOL CALLBACK DirtDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 			0										// 0固定
 			);
 
+		SendMessage(
+			(HWND)GetDlgItem(hDlg, IDC_SPIN8),		// スピンコントロールのハンドル
+			(UINT)UDM_SETBUDDY,
+			(WPARAM)GetDlgItem(hDlg, IDC_EDIT6),	// 関連付けるコントロールのハンドル
+			0										// 0固定
+			);
+
+
+
 		// モードの設定
 		HWND radio = GetDlgItem(hDlg, IDC_RADIO6);
 		SendMessage(
@@ -1619,6 +1633,7 @@ BOOL CALLBACK DirtDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 				D3DXVECTOR3 position = Manager::GetInstance()->GetDirtManager()->GetPosition();
 				float radius = Manager::GetInstance()->GetDirtManager()->GetRadius();
+				int level = Manager::GetInstance()->GetDirtManager()->GetLevel();
 				// 座標エディットボックス
 				char str[4096] = {};
 				sprintf(str, "%.3f", position.x);
@@ -1644,6 +1659,13 @@ BOOL CALLBACK DirtDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT5),		// スライダーのハンドル
 					str		// 追加する項目の文字列
 					);
+
+				sprintf(str, "%d", level);
+				SetWindowText(
+					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT6),		// スライダーのハンドル
+					str		// 追加する項目の文字列
+					);
+
 			}
 			break;
 
@@ -1715,6 +1737,17 @@ BOOL CALLBACK DirtDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
+			// 半径
+		case IDC_EDIT6:
+			if (HIWORD(wParam) == EN_UPDATE) {
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(g_dirtDialogHandle, IDC_EDIT6),		// スライダーのハンドル
+					str, 4096);
+				int level = atoi(str);
+				Manager::GetInstance()->GetDirtManager()->SetLevel(level);
+			}
+			break;
 
 		default:
 			break;
@@ -1810,6 +1843,29 @@ BOOL CALLBACK DirtDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 				}
 				sprintf(str, "%.3f", positionX);
 				SetDlgItemText(hDlg, IDC_EDIT5, (LPCTSTR)str);
+			}
+		}
+
+		if (wParam == (WPARAM)IDC_SPIN8)
+		{
+			LPNMUPDOWN lpnmud = (LPNMUPDOWN)lParam;
+			if (lpnmud->hdr.code == UDN_DELTAPOS)
+			{
+				char str[4096] = {};
+				GetWindowText(
+					(HWND)GetDlgItem(hDlg, IDC_EDIT6),		// スライダーのハンドル
+					str, 4096);
+				int level = atoi(str);
+				if ((lpnmud->iDelta) < 0)
+				{
+					level++;
+				}
+				else if ((lpnmud->iDelta) > 0)
+				{
+					level--;
+				}
+				sprintf(str, "%d", level);
+				SetDlgItemText(hDlg, IDC_EDIT6, (LPCTSTR)str);
 			}
 		}
 		break;

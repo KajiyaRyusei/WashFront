@@ -1,60 +1,63 @@
-﻿2015/10/15 15:32:38 にビルドを開始しました。
-     1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\ms_project.vcxproj" (Build ターゲット)。
+﻿2015/12/14 15:09:14 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\Source" /ZI /nologo /W4 /WX /sdl /MP /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\ms_project.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Animation\animation_system.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /MP /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\ms_project.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Animation\animation_system.cpp Source\Camera\Camera\camera_2d.cpp Source\Camera\Camera\camera_game_main.cpp Source\Camera\camera_manager.cpp Source\DevelopTool\develop_tool_manager.cpp Source\DevelopTool\DevelopTool\debug_print.cpp Source\DrawCommand\command_buffer.cpp Source\DrawCommand\command_buffer_holder.cpp Source\DrawCommand\command_processor.cpp Source\Error\assert.cpp Source\Fade\fade.cpp Source\Input\input.cpp Source\Input\input_event_buffer.cpp Source\Input\input_manager.cpp Source\Input\keyboard\input_keyboard.cpp Source\Renderer\directx9.cpp Source\Resource\Mesh\index_buffer.cpp Source\Resource\Mesh\Mesh\mesh_factory_amo.cpp Source\Resource\Mesh\Mesh\mesh_factory_cube.cpp Source\Resource\Mesh\Mesh\mesh_factory_smo.cpp Source\Resource\Mesh\Mesh\mesh_factory_sprite.cpp Source\Resource\Mesh\mesh_buffer.cpp Source\Resource\Mesh\vertex_buffer.cpp Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Scene\scene_manager.cpp Source\Shader\effect_handle_holder.cpp Source\Shader\effect_handle_manager.cpp Source\Shader\PostEffect\fade_shader.cpp Source\Shader\PostEffect\screen_shader.cpp Source\Shader\Shader\lambert.cpp Source\Shader\Shader\animation_shader.cpp Source\Shader\shader_base.cpp source\stdafx.cpp source\main.cpp Source\System\application.cpp Source\System\system_flow.cpp Source\Unit\animation_model_unit.cpp Source\Unit\screen_unit.cpp Source\Unit\static_model_unit.cpp Source\Unit\test_unit.cpp Source\Unit\unit.cpp Source\Windows\window.cpp Source\Windows\window_operation_wrapper.cpp Source\Windows\window_procedure.cpp Source\World\space_grid.cpp Source\World\world.cpp
+     1>cl : コマンド ライン warning D9030: '/Yc' はマルチプロセシングと互換性がありません。/MP スイッチを無視します
          animation_system.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\ms_project\Debug\ms_project.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\ms_project\Debug\ms_project.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\ms_project\Debug\ms_project.lib" /MACHINE:X86 Debug\animation_system.obj
-         Debug\camera_2d.obj
-         Debug\camera_game_main.obj
-         Debug\camera_manager.obj
-         Debug\develop_tool_manager.obj
-         Debug\debug_print.obj
-         Debug\command_buffer.obj
-         Debug\command_buffer_holder.obj
-         Debug\command_processor.obj
-         Debug\assert.obj
-         Debug\fade.obj
-         Debug\input.obj
-         Debug\input_event_buffer.obj
-         Debug\input_manager.obj
-         Debug\input_keyboard.obj
-         Debug\directx9.obj
-         Debug\index_buffer.obj
-         Debug\mesh_factory_amo.obj
-         Debug\mesh_factory_cube.obj
-         Debug\mesh_factory_smo.obj
-         Debug\mesh_factory_sprite.obj
-         Debug\mesh_buffer.obj
-         Debug\vertex_buffer.obj
-         Debug\scene_game.obj
-         Debug\scene_result.obj
-         Debug\scene_title.obj
-         Debug\scene_manager.obj
-         Debug\effect_handle_holder.obj
-         Debug\effect_handle_manager.obj
-         Debug\fade_shader.obj
-         Debug\screen_shader.obj
-         Debug\lambert.obj
-         Debug\animation_shader.obj
-         Debug\shader_base.obj
-         Debug\stdafx.obj
-         Debug\main.obj
-         Debug\application.obj
-         Debug\system_flow.obj
-         Debug\animation_model_unit.obj
-         Debug\screen_unit.obj
-         Debug\static_model_unit.obj
-         Debug\test_unit.obj
-         Debug\unit.obj
-         Debug\window.obj
-         Debug\window_operation_wrapper.obj
-         Debug\window_procedure.obj
-         Debug\space_grid.obj
-         Debug\world.obj
-         ms_project.vcxproj -> C:\Users\龍成\Documents\fourth\MS\ms_project\Debug\ms_project.exe
-     1>プロジェクト "C:\Users\龍成\Documents\fourth\MS\ms_project\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが完了しました。
+         camera_2d.cpp
+         camera_game_main.cpp
+         camera_manager.cpp
+         develop_tool_manager.cpp
+         debug_print.cpp
+         command_buffer.cpp
+         command_buffer_holder.cpp
+         command_processor.cpp
+         assert.cpp
+         fade.cpp
+         input.cpp
+         input_event_buffer.cpp
+         input_manager.cpp
+         input_keyboard.cpp
+         directx9.cpp
+         index_buffer.cpp
+         mesh_factory_amo.cpp
+         mesh_factory_cube.cpp
+         mesh_factory_smo.cpp
+         mesh_factory_sprite.cpp
+         mesh_buffer.cpp
+         vertex_buffer.cpp
+         scene_game.cpp
+         scene_result.cpp
+         scene_title.cpp
+         scene_manager.cpp
+         effect_handle_holder.cpp
+         effect_handle_manager.cpp
+         fade_shader.cpp
+         screen_shader.cpp
+         lambert.cpp
+         animation_shader.cpp
+         shader_base.cpp
+         stdafx.cpp
+         main.cpp
+         application.cpp
+         system_flow.cpp
+         animation_model_unit.cpp
+         screen_unit.cpp
+         static_model_unit.cpp
+         test_unit.cpp
+         unit.cpp
+         window.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\ms_project\source\windows\window.cpp : fatal error C1041: プログラム データベース 'c:\users\keita\documents\th44\ms展\プログラム\washfront\ms_project\debug\vc120.pdb' を開けません。複数の CL.EXE が同じ .PDB ファイルに書き込む場合、/FS を使用してください。
+         window_operation_wrapper.cpp
+     1>c1xx : fatal error C1083: コンパイラの中間生成物 ファイルを開けません。'Debug\ms_project.pch':Permission denied
+         window_procedure.cpp
+     1>c1xx : fatal error C1083: コンパイラの中間生成物 ファイルを開けません。'Debug\ms_project.pch':Permission denied
+         space_grid.cpp
+     1>c1xx : fatal error C1083: コンパイラの中間生成物 ファイルを開けません。'Debug\ms_project.pch':Permission denied
+         world.cpp
+     1>c1xx : fatal error C1083: コンパイラの中間生成物 ファイルを開けません。'Debug\ms_project.pch':Permission denied
+     1>プロジェクト "C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット) のビルドが終了しました -- 失敗。
 
-ビルドに成功しました。
+ビルドに失敗しました。
 
-経過時間 00:00:04.56
+経過時間 00:00:20.89

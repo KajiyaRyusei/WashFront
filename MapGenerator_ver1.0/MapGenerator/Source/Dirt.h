@@ -33,7 +33,7 @@ public:
 	//=========================================================================
 	// 描画処理
 	//=========================================================================
-	void Draw();
+	void Draw(bool flag);
 
 
 
@@ -45,6 +45,8 @@ public:
 	// 半径の取得
 	//=========================================================================
 	float GetRadius() { return radius_; };
+
+	int GetLevel() { return level_; }
 
 
 	//=========================================================================
@@ -69,11 +71,14 @@ public:
 	//=========================================================================
 	void SetRadius(float radius) { radius_ = radius; };
 
+	void SetLevel(int level) { level_ = level; }
+
 
 
 private:
 	D3DXVECTOR3	position_;		// 座標
 	float		radius_;		// 半径
+	int			level_;
 	D3DXMATRIX	worldMatrix_;	// ワールドマトリクス
 
 	static VERTEX_3D vertexBuffer_[9];

@@ -14,6 +14,7 @@
 
 
 class SceneBillboard;
+class SceneX;
 
 //-----------------------------------------------------------------------------
 // ƒNƒ‰ƒX’è‹`
@@ -38,6 +39,7 @@ public:
 	//=========================================================================
 	void Update();
 
+	void Set();
 
 private:
 	float		length_;
@@ -45,7 +47,8 @@ private:
 	RoutePoint	*currentPoint_;
 	RoutePoint	*nextPoint_;
 	int			index_;
-	SceneBillboard *player_;
+//	SceneBillboard *player_;
+	SceneX *mplayer_;
 };
 
 

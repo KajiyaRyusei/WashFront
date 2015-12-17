@@ -79,6 +79,7 @@ public:
 	void SetPositionY(float positionY);
 	void SetPositionZ(float positionZ);
 	void SetRadius(float radius);
+	void SetLevel(int level);
 
 	//=========================================================================
 	// ‘I‘ğ’†‚Ì“_‚ğİ’è
@@ -94,6 +95,7 @@ public:
 	// ”¼Œa‚Ìæ“¾
 	//=========================================================================
 	float GetRadius();
+	int GetLevel();
 
 
 private:

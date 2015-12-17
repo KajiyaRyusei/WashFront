@@ -13,6 +13,8 @@
 #include "Mouse.h"
 #include "RouteManager.h"
 #include "SceneBillboard.h"
+#include "SceneX.h"
+#include "../resource.h"
 
 
 //-----------------------------------------------------------------------------
@@ -38,7 +40,7 @@ PreviewCamera::PreviewCamera() :
 time_(0),
 length_(0),
 index_(0),
-player_(nullptr)
+mplayer_(nullptr)
 {
 	// メンバ変数の初期化
 	position_ = D3DXVECTOR3(0.0f, 0.0f, 0.0f);  // 視点の座標
@@ -55,7 +57,7 @@ player_(nullptr)
 //=========================================================================
 PreviewCamera::~PreviewCamera()
 {
-	SafeDelete(player_);
+	SafeDelete(mplayer_);
 }
 
 //=========================================================================
@@ -63,34 +65,91 @@ PreviewCamera::~PreviewCamera()
 //=========================================================================
 HRESULT PreviewCamera::Init()
 {
-	time_ = 0.0f;
+	HWND hCombo1 = 0;
+	int time = 0;
+	if (Manager::GetInstance()->GetRouteManager()->GetRouteMode()
+		== ROUTE_MODE_1P_CAMERA) {
+		hCombo1 = GetDlgItem(GetRouteDialogHandle(), IDC_COMBO4);
+		time = SendMessage(
+			(HWND)hCombo1,			// コンボボックスのハンドル
+			(UINT)CB_GETCURSEL,		// 選択中のインデックス取得
+			0,						// ０固定
+			0						// 追加する項目の文字列
+			);
+	}
+	else {
+		hCombo1 = GetDlgItem(GetRouteDialogHandle(), IDC_COMBO2);
+		time = SendMessage(
+			(HWND)hCombo1,			// コンボボックスのハンドル
+			(UINT)CB_GETCURSEL,		// 選択中のインデックス取得
+			0,						// ０固定
+			0						// 追加する項目の文字列
+			);
+	}
+
+	time_ = (float)time;
 	length_ = 3.0f;
 
 	currentPoint_ = Manager::GetInstance()->GetRouteManager()->GetRoutePoint(index_, (int)time_);
 	nextPoint_ = Manager::GetInstance()->GetRouteManager()->GetRoutePoint(index_, (int)time_ + 1);
 
 
-	if (!player_) {
-		player_ = new SceneBillboard();
-		player_->Init(D3DXVECTOR2(1.0f, 2.0f), D3DXCOLOR(1, 1, 1, 1));
-		player_->SetTexture("./Resource/Texture/Game/Bullet000.png");
+	//if (!player_) {
+	//	player_ = new SceneBillboard();
+	//	player_->Init(D3DXVECTOR2(1.0f, 2.0f), D3DXCOLOR(1, 1, 1, 1));
+	//	player_->SetTexture("./Resource/Texture/Game/Bullet000.png");
+	//}
+
+	if (!mplayer_) {
+		mplayer_ = new SceneX();
+		mplayer_->Init("./Resource/Model/Game/new_standby.fbx");
+//		mplayer_->SetTexture("");
 	}
+
 
 
 	return S_OK;
 }
 HRESULT PreviewCamera::Init(int index)
 {
-	time_ = 0.0f;
+
+	HWND hCombo1 = 0;
+	int time = 0;
+	if (Manager::GetInstance()->GetRouteManager()->GetRouteMode()
+		== ROUTE_MODE_1P_CAMERA) {
+		hCombo1 = GetDlgItem(GetRouteDialogHandle(), IDC_COMBO4);
+		time = SendMessage(
+			(HWND)hCombo1,			// コンボボックスのハンドル
+			(UINT)CB_GETCURSEL,		// 選択中のインデックス取得
+			0,						// ０固定
+			0						// 追加する項目の文字列
+			);
+	} else {
+		hCombo1 = GetDlgItem(GetRouteDialogHandle(), IDC_COMBO2);
+		time = SendMessage(
+			(HWND)hCombo1,			// コンボボックスのハンドル
+			(UINT)CB_GETCURSEL,		// 選択中のインデックス取得
+			0,						// ０固定
+			0						// 追加する項目の文字列
+			);
+	}
+
+	time_ = (float)time;
 	length_ = 3.0f;
 	index_ = index;
 
 	currentPoint_ = Manager::GetInstance()->GetRouteManager()->GetRoutePoint(index_, (int)time_);
 	nextPoint_ = Manager::GetInstance()->GetRouteManager()->GetRoutePoint(index_, (int)time_ + 1);
 
-	if (!player_) {
-		player_ = new SceneBillboard();
-		player_->Init(D3DXVECTOR2(1.0f, 2.0f), D3DXCOLOR(1, 1, 1, 1));
+	//if (!player_) {
+	//	player_ = new SceneBillboard();
+	//	player_->Init(D3DXVECTOR2(1.0f, 1.5f), D3DXCOLOR(1, 1, 1, 1));
+	//	player_->SetTexture("./Resource/Texture/Game/Bullet000.png");
+	//}
+
+	if (!mplayer_) {
+		mplayer_ = new SceneX();
+		mplayer_->Init("./Resource/Model/Game/Player.x");
 	}
 
 	return S_OK;
@@ -102,7 +161,7 @@ HRESULT PreviewCamera::Init(int index)
 void PreviewCamera::Update()
 {
 	D3DXVECTOR3 cameraDirection(0, 0, length_);
-	D3DXVECTOR3 playerDirection(0, 0, 3.0f);
+	D3DXVECTOR3 playerDirection(0, 0, 5.0f);
 
 	int cursor = (int)time_;
 	currentPoint_ = Manager::GetInstance()->GetRouteManager()->GetRoutePoint(index_, cursor);
@@ -112,9 +171,17 @@ void PreviewCamera::Update()
 		return;
 
 
-
 	// 小数点以下
 	float t = time_ - cursor;
+
+	// 2次イージング
+	float t2;
+	if (t < 0.5f)
+		t2 = 2 * t * 2 * t * 0.5f;
+	else
+		t2 = -1 * (2 * t - 2) * (2 * t - 2) * 0.5f + 1.0f;
+
+
 
 	D3DXQUATERNION q, q1, q2;
 	D3DXMATRIX m, m1, m2;
@@ -125,12 +192,7 @@ void PreviewCamera::Update()
 	D3DXQuaternionRotationMatrix(&q1, &m1);
 	D3DXQuaternionRotationMatrix(&q2, &m2);
 
-	// 2次イージング
-	float t2;
-	if (t < 0.5f)
-		t2 = 2 * t * 2 * t * 0.5f;
-	else
-		t2 = -1 * (2 * t - 2) * (2 * t - 2) * 0.5f + 1.0f;
+
 
 	// 補間
 	D3DXQuaternionSlerp(&q, &q1, &q2, t2);
@@ -138,10 +200,19 @@ void PreviewCamera::Update()
 
 	D3DXVec3TransformCoord(&cameraDirection, &cameraDirection, &m);
 
-	// 視点注視点
-	position_ = currentPoint_->position * (1 - t) + nextPoint_->position * t;
-	lookPosition_ = position_ + cameraDirection;
 
+	//if (nextPoint_->state == 0) {
+		// 視点注視点
+		position_ = currentPoint_->position * (1 - t) + nextPoint_->position * t;
+		D3DXVec3Lerp(&position_, &currentPoint_->position, &nextPoint_->position, t);
+		lookPosition_ = position_ + cameraDirection;
+	/*} else if (nextPoint_->state == 1) {
+		D3DXVECTOR3 v = nextPoint_->position - currentPoint_->position;
+		D3DXVec3Normalize(&v, &v);
+		v = v * length_;
+		lookPosition_ = currentPoint_->position * (1 - t) + nextPoint_->position * t + v;
+		position_ = lookPosition_ - cameraDirection;
+	}*/
 
 	
 	D3DXMatrixIdentity(&m1);
@@ -163,15 +234,57 @@ void PreviewCamera::Update()
 	
 	D3DXVec3TransformCoord(&playerDirection, &playerDirection, &m);
 
-	player_->SetPosition(position_ + playerDirection);
 
+	D3DXVECTOR3 v = nextPoint_->position - currentPoint_->position;
+
+	//if (currentPoint_->state == 0 && nextPoint_->state == 0) {
+	float rot = atan2f(v.x, v.z);
+		mplayer_->SetPosition(position_ + playerDirection);
+		mplayer_->SetRotation(D3DXVECTOR3(0.0f, rot, 0.0f));
+	//} else if (nextPoint_->state == 0 && nextPoint_->state == 1) {
+
+	//}
 
 	// 時間を加算
-	D3DXVECTOR3 v = nextPoint_->position - currentPoint_->position;
 	float l = D3DXVec3Length(&v);
 
-	time_ += 0.1f * 1 / l;
+	time_ += currentPoint_->speed * 1 / l;
 
+}
+
+//=========================================================================
+// 描画処理
+//=========================================================================
+void PreviewCamera::Set()
+{
+	Renderer *renderer = Manager::GetInstance()->GetRenderer();
+	LPDIRECT3DDEVICE9 device = renderer->GetDevice();
+
+	// ビューマトリクスの設定
+	D3DXMatrixIdentity(&viewMatrix_);  // 単位行列で初期化
+	D3DXMatrixLookAtLH(&viewMatrix_, &position_, &lookPosition_, &upperVector_);
+	device->SetTransform(D3DTS_VIEW, &viewMatrix_);
+
+
+	// プロジェクションマトリクスの設定
+	D3DXMatrixIdentity(&projectionMatrix_);  // 単位行列で初期化
+	D3DXMatrixPerspectiveFovLH(
+		&projectionMatrix_,  // プロジェクションマトリクスの生成
+		D3DX_PI / 4.0f,  // 視野角(π/4)
+		(float)SCREEN_WIDTH / (float)(SCREEN_HEIGHT / 2),  // アスペクト比(幅 / 高さ)
+		0.1f,  // near値
+		1000.0f);  // far値
+	device->SetTransform(D3DTS_PROJECTION, &projectionMatrix_);
+
+
+	D3DVIEWPORT9 viewport;
+	viewport.X = 0;
+	viewport.Y = 0;
+	viewport.Width = SCREEN_WIDTH;
+	viewport.Height = SCREEN_HEIGHT / 2;
+	viewport.MinZ = 0.0f;
+	viewport.MaxZ = 1.0f;
+	device->SetViewport(&viewport);
 }
 
 

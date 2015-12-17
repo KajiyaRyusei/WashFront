@@ -1,0 +1,86 @@
+﻿2015/12/11 15:53:15 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\MapGenerator\MapGenerator.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\BoxAndBox.cpp Source\BoxAndSphere.cpp Source\Building.cpp Source\Camera.cpp Source\CameraManager.cpp Source\CollisionManager.cpp Source\Cursor.cpp Source\Debug.cpp Source\Dirt.cpp Source\DirtManager.cpp Source\EditorCamera.cpp Source\fbx.cpp Source\ImportFileManager.cpp Source\Input.cpp Source\Keyboard.cpp Source\Light.cpp Source\Main.cpp Source\Manager.cpp Source\MeshCylinder.cpp Source\MeshDome.cpp Source\MeshField.cpp Source\Model.cpp Source\ModelFactory.cpp Source\Mouse.cpp Source\ObjectManager.cpp Source\Player.cpp Source\Renderer.cpp Source\RouteManager.cpp Source\Scene.cpp Source\Scene2D.cpp Source\Scene3D.cpp Source\SceneAnimation2D.cpp Source\SceneBillboard.cpp Source\SceneX.cpp Source\SphereAndSphere.cpp Source\StencilShadow.cpp Source\TextureFactory.cpp Source\PreviewCamera.cpp
+         BoxAndBox.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         BoxAndSphere.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Building.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Camera.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         CameraManager.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         CollisionManager.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Cursor.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Debug.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Dirt.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         DirtManager.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         EditorCamera.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         fbx.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         ImportFileManager.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Input.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Keyboard.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Light.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Main.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Manager.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         MeshCylinder.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         MeshDome.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         コンパイル中...
+         MeshField.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Model.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         ModelFactory.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Mouse.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         ObjectManager.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Player.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Renderer.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         RouteManager.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Scene.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Scene2D.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         Scene3D.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         SceneAnimation2D.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         SceneBillboard.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         SceneX.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         SphereAndSphere.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         StencilShadow.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         TextureFactory.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+         PreviewCamera.cpp
+     1>c:\users\keita\documents\th44\ms展\プログラム\washfront\mapgenerator_ver1.0\mapgenerator\source\Renderer.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+     1>プロジェクト "C:\Users\Keita\Documents\TH44\MS展\プログラム\WashFront\MapGenerator_ver1.0\MapGenerator\MapGenerator.vcxproj" (Build ターゲット) のビルドが終了しました -- 失敗。
+
+ビルドに失敗しました。
+
+経過時間 00:00:44.86

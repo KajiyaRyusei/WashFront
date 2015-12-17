@@ -214,6 +214,22 @@ Building *ObjectManager::CopyBuilding()
 	return CreateBuilding(modelPath, texturePath, position, rotation, scale, collision);
 }
 
+void ObjectManager::DeleteBuilding()
+{
+	try {
+		buildingList_.at(buildingListCursor_);
+	}
+	catch (const out_of_range& oor) {
+		return;
+	}
+
+	auto itr = buildingList_.begin();
+	for (int i = 0; i < buildingListCursor_; i++)
+		itr++;
+	SafeDelete(*itr);
+	buildingList_.erase(itr);
+}
+
 
 Building *ObjectManager::GetSelectBuilding()
 {

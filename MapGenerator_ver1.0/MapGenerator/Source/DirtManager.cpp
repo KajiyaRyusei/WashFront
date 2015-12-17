@@ -53,8 +53,17 @@ void DirtManager::Update()
 //=========================================================================
 void DirtManager::Draw()
 {
-	for (auto itr = dirtList_.begin(); itr != dirtList_.end(); itr++)
-		(*itr)->Draw();
+	int i = 0;
+	bool flag = false;
+	for (auto itr = dirtList_.begin(); itr != dirtList_.end(); itr++) {
+		if (i == dirtListCursor_)
+			flag = true;
+		else
+			flag = false;
+
+		(*itr)->Draw(flag);
+		i++;
+	}
 }
 
 
@@ -80,10 +89,12 @@ void DirtManager::OutputData(FILE *outputFile)
 	for (auto itr = dirtList_.begin(); itr != dirtList_.end(); itr++) {
 		D3DXVECTOR3 position = (*itr)->GetPosition();
 		float radius = (*itr)->GetRadius();
+		int level = (*itr)->GetLevel();
 
 		fprintf(outputFile, "%d ", i);
 		fprintf(outputFile, "%f %f %f ", position.x, position.y, position.z);
-		fprintf(outputFile, "%f", radius);
+		fprintf(outputFile, "%f ", radius);
+		fprintf(outputFile, "%d", level);
 		fprintf(outputFile, "\n");
 
 		i++;
@@ -126,16 +137,18 @@ void DirtManager::InputData(FILE *inputFile)
 				int ID;
 				D3DXVECTOR3 position;
 				float radius;
+				int level;
 
-				fscanf(inputFile, "%d %f %f %f %f",
+				fscanf(inputFile, "%d %f %f %f %f %d",
 					&ID,
 					&position.x, &position.y, &position.z,
-					&radius
+					&radius, &level
 					);
 
 				Dirt *d = new Dirt();
 				d->SetPosition(position);
 				d->SetRadius(radius);
+				d->SetLevel(level);
 
 				dirtList_.push_back(d);
 
@@ -279,6 +292,17 @@ void DirtManager::SetRadius(float radius)
 	d->SetRadius(radius);
 }
 
+void DirtManager::SetLevel(int level)
+{
+	Dirt *d = nullptr;
+	try {
+		d = dirtList_.at(dirtListCursor_);
+	}
+	catch (const out_of_range& oor) {
+		return;
+	}
+	d->SetLevel(level);
+}
 
 //=========================================================================
 // À•W‚ÌŽæ“¾
@@ -310,5 +334,20 @@ float DirtManager::GetRadius()
 
 	return d->GetRadius();
 }
+
+
+int DirtManager::GetLevel()
+{
+	Dirt *d = nullptr;
+	try {
+		d = dirtList_.at(dirtListCursor_);
+	}
+	catch (const out_of_range& oor) {
+		return 0;
+	}
+
+	return d->GetLevel();
+}
+
 
 // End of file

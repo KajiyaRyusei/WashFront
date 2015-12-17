@@ -29,7 +29,8 @@ VERTEX_3D Dirt::vertexBuffer_[9] = {
 //=========================================================================
 Dirt::Dirt() :
 position_(D3DXVECTOR3(0, 0, 0)),
-radius_(0)
+radius_(0),
+level_(0)
 {
 }
 
@@ -61,11 +62,19 @@ void Dirt::Update()
 //=========================================================================
 // 描画処理
 //=========================================================================
-void Dirt::Draw()
+void Dirt::Draw(bool flag)
 {
 	LPDIRECT3DDEVICE9 device = Manager::GetInstance()->GetRenderer()->GetDevice();
 	device->SetRenderState(D3DRS_LIGHTING, false);
 
+
+	if (flag) {
+		for (int i = 0; i < 9; i++)
+			vertexBuffer_[i].diffuse = D3DXCOLOR(0, 0, 1, 1);
+	} else {
+		for (int i = 0; i < 9; i++)
+			vertexBuffer_[i].diffuse = D3DXCOLOR(1, 0, 0, 1);
+	}
 
 	device->SetFVF(FVF_VERTEX_3D);		// 頂点フォーマットの設定
 	device->SetTexture(0, nullptr);

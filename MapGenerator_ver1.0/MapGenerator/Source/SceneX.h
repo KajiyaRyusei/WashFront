@@ -59,10 +59,13 @@ public:
 	// 回転の取得
 	//=========================================================================
 	D3DXVECTOR3 GetRotation() { return rotation_; };
+	void SetRotation(D3DXVECTOR3 rotation) { rotation_ = rotation; };
 	//=========================================================================
 	// マトリクスの設定
 	//=========================================================================
 	void SetWorldMatrix(D3DXMATRIX matrix) { worldMatrix_ = matrix; };
+
+
 
 protected:
 	Model		*model_;
@@ -70,6 +73,9 @@ protected:
 	D3DXMATRIX	worldMatrix_;  // ワールドマトリックス
 	D3DXVECTOR3	scale_;  // 大きさ
 	D3DXVECTOR3	rotation_;  // 向き
+	LPD3DXBUFFER			materialBuffer_;
+	DWORD					materialNum_;
+	LPD3DXMESH				mesh_;
 };
 
 

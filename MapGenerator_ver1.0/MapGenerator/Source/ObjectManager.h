@@ -76,6 +76,7 @@ public:
 	Building *CreateBuilding(const char *fileName, const char *textureFilePath,
 		D3DXVECTOR3 position, D3DXVECTOR3 rotation, D3DXVECTOR3 scale, bool collision);
 	Building *CopyBuilding();
+	void DeleteBuilding();
 
 	//=========================================================================
 	// インスタンスの全削除
