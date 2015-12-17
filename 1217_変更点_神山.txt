@@ -1,0 +1,39 @@
+追加、変更ファイル(すべてcpp、h両方あり)
+
+
+world	//Uiクラスの追加
+
+scene_game //Uiクラスの作成、初期化など
+
+ui	　//Ui要素の追加
+dummy_ui　//要素の追加。タイトルでつかうプレイヤーがゲームと違うものだったらいらないかも
+
+//マップ。要素の追加、変更
+map
+map_character
+map_back
+
+//水メーター。要素追加変更
+meter
+meter_water
+meter_frame
+meter_level
+meter_gear
+
+//ミッションゲージ。全部新規ファイル
+mission_ui
+mission_frame
+mission_meter
+mission_ui_title
+
+//ゲーム内スコア。リザルトとのスコアの受け渡しはまだできてないです。
+game_score
+game_score_character
+
+
+
+メーター水量、メーターレベルアップ、スコア加算は実装済み。
+uiクラスの関数を参照してください。
+ミッションメーターはおいてあるだけです。
+マップに関してはマップ一周の距離、プレイヤースタート地点をSetMap関数に渡してくれれば、
+周回用（左から右、右まで行ったらまた左から出てくる）でマップのおじいちゃんが動くはずです。

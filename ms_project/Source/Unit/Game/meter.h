@@ -2,7 +2,7 @@
 //
 // メーター
 // 
-// Created by Ryusei Kajiya on 20151029
+// Created by Chiharu Kamiyama on 20151029
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -18,7 +18,18 @@
 // 前方宣言
 class MeterFrame;
 class MeterWater;
+class MeterGear;
+class MeterLevel;
 
+
+typedef struct
+{
+	MeterFrame *_meter_frame;
+	MeterWater *_meter_water;
+	MeterGear *_meter_gear;
+	MeterLevel *_meter_level;
+
+}METER;
 
 //*****************************************************************************
 // クラス設計
@@ -39,8 +50,14 @@ public:
 	virtual void CollisionUpdate() override;
 
 	void SetMeterCharacterList(std::list<Unit*> *list);
-	
+
+	//メーター水量更新
+	void UpdateMeterWater(int player_id, float amount);
+	//メーターレベル更新
+	void UpdateMeterLevel(int player_id, int level, float water_max);
+	//メーター水量取得
+	float GetCurrentMeterWater(int player_id);
+
 private:
-	MeterFrame *_meter_frame;
-	MeterWater *_meter_water;
+	METER _meter[2];
 };

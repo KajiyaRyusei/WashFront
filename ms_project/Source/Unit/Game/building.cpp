@@ -27,6 +27,9 @@
 // Õ“Ë—p
 #include "Collision/collision_system.h"
 
+//UI
+#include "Unit/ui.h"
+
 //*****************************************************************************
 // ’è”
 namespace
@@ -216,6 +219,7 @@ void BuildingUnit::CleanUp()
 			if( vertex[*index_it].cleanliness < 1.5f )
 			{
 				vertex[*index_it].cleanliness += kCleanVelocity;
+
 			}
 			else
 			{
@@ -227,6 +231,7 @@ void BuildingUnit::CleanUp()
 
 		(*it)->GetVertexBuffer(0)->Unlock();
 	}
+
 }
 
 //=============================================================================

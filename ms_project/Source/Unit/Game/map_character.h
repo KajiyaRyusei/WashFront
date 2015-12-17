@@ -41,6 +41,11 @@ public:
 
 	void SetId(int id){ _id = id; }
 
+	//マップ総距離セット
+	void SetMapAllDistance(float distance){ _map_distance = distance; }
+	//マップキャラクター初期位置セット
+	void InitMapCharacterPosition(D3DXVECTOR3 position);
+
 private:
 	float _map_distance;
 	float _character_distance;

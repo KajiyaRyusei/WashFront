@@ -20,7 +20,7 @@ const float			speed = 1.0f / 5.0f;
 void NumberUnit::Initialize()
 {
 	// テクスチャ
-	CreateTexture(TEXT("Data/Texture/number.png"));
+	CreateTexture(TEXT("Data/Texture/number_color_yellow.png"));
 	// UV値
 	_texture_uv = D3DXVECTOR2(1.0f, 0.1f);
 	// オフセット

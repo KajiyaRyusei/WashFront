@@ -36,6 +36,15 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override{}
 
-private:
+	void UpdateMeterWater(float amount);
+	void LevelUpMeterWater(float water_max);
 
+	void SetInitPosition(D3DXVECTOR3 position){ _start_position = position; }
+	float GetCurrentWater(void){ return _current_water; }
+
+
+private:
+	float _water_max;
+	float _current_water;
+	D3DXVECTOR3 _start_position;
 };

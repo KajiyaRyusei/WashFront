@@ -14,6 +14,7 @@
 #include "Renderer/directx9.h"
 
 #include "Unit/Game/water_spray_pool.h"
+#include "Unit/ui.h"
 
 // ƒŠƒ\[ƒX
 #include "Resource/texture_resource.h"
@@ -34,6 +35,7 @@ void World::Initialize()
 	_static_mesh_resource = new StaticMeshResource;
 	_animation_mesh_resource = new AnimationMeshResource;
 	_animation_resource = new AnimationResource;
+	_ui = NULL;
 }
 
 //=============================================================================
@@ -53,6 +55,7 @@ void World::Finalize()
 	}
 	SafeDelete(_collision_grid);
 	SafeDelete(_water_spray_pool);
+	SafeDelete(_ui);
 }
 
 //=============================================================================
@@ -68,6 +71,11 @@ void World::Update()
 	{
 		it->CollisionUpdate();
 	}
+
+	if (_ui != NULL)
+	{
+		_ui->Update();
+	}
 }
 
 //=============================================================================
@@ -80,4 +88,9 @@ void World::Draw()
 	}
 	_water_spray_pool->Animate();
 	_collision_grid->DebugDraw();
+
+	if (_ui != NULL)
+	{
+		_ui->Draw();
+	}
 }

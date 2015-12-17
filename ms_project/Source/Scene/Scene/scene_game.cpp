@@ -28,6 +28,7 @@
 #include "Unit/Game/water_spray_pool.h"
 #include "Unit/Game/clouds.h"
 #include "Unit/Game/static_building.h"
+#include "Unit/ui.h"
 
 // 空間
 #include "World/collision_grid.h"
@@ -68,6 +69,9 @@ void SceneGame::Initialize()
 	_world = new World();
 	WaterSprayPool* water_spray_pool = new WaterSprayPool(_application,_world);
 	_world->SetWaterSprayPool(water_spray_pool);
+	
+	Ui *ui = new Ui(_application, _world);
+	_world->SetUi(ui);
 
 	ResourceGeneration();
 	MapGeneration();
@@ -172,6 +176,9 @@ void SceneGame::Draw()
 	// デバッグ描画
 	_application->GetDevelopToolManager()->Draw();
 
+	_world->Draw();
+
+
 	//------------------------------------
 	// 通常
 	_application->GetCommandBuffer()->Sort();
@@ -191,6 +198,9 @@ void SceneGame::MapGeneration()
 	std::vector<data::Dirt> dirty_list = DirtyRead();
 
 	std::list<Unit*> unit_list;
+
+	_world->GetUi()->SetList(&unit_list);
+
 	CameraGamePlayer* camera_1p = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER_1P));
 	camera_1p->InitializeFrame();
 	PlayerUnit* player_1p = new PlayerUnit(_application, _world, camera_1p);

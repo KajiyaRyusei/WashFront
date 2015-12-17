@@ -384,6 +384,30 @@
     <ClCompile Include="Source\Sound\sound.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Unit\Game\meter_gear.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\meter_level.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\mission_frame.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\mission_ui.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\mission_meter.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\mission_ui_title.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\game_score.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\game_score_character.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdafx.h" />
@@ -939,6 +963,30 @@
     </ClInclude>
     <ClInclude Include="Source\Sound\sound.h">
       <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\meter_gear.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\meter_level.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\mission_frame.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\mission_ui.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\mission_meter.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\mission_ui_title.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\game_score.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\game_score_character.h">
+      <Filter>Unit\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

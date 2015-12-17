@@ -22,6 +22,7 @@ class MeshResource;
 class StaticMeshResource;
 class AnimationMeshResource;
 class AnimationResource;
+class Ui;
 
 class WaterSprayPool;
 
@@ -59,6 +60,9 @@ public:
 	void SetWaterSprayPool(WaterSprayPool* water_spray_pool){ _water_spray_pool = water_spray_pool; }
 	WaterSprayPool* GetWaterSprayPool(){ return _water_spray_pool; }
 
+	void SetUi(Ui *ui){ _ui = ui; }
+	Ui *GetUi(void){ return _ui; }
+
 private:
 
 	std::list<Unit*> _unit_list;
@@ -70,4 +74,5 @@ private:
 	AnimationMeshResource* _animation_mesh_resource;
 	AnimationResource* _animation_resource;
 	WaterSprayPool* _water_spray_pool;
+	Ui* _ui;
 };
