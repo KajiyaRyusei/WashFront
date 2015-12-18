@@ -18,7 +18,7 @@
 #include "Camera/camera_manager.h"
 #include "DevelopTool/develop_tool_manager.h"
 #include "Shader/effect_handle_manager.h"
-#include "Sound\sound.h"
+#include "Sound/sound.h"
 
 // リソースボックス
 #include "Resource/resource_box.h"
@@ -86,17 +86,19 @@ void Application::Initalize(Window *window, RendererDevice *renderer_device)
 // 終了
 void Application::Finalize()
 {
-	if (_sound != nullptr)
-	{
-		_sound->Uninit();
-	}
-	SafeDelete(_sound);
+	
 	SafeDelete(_fade);
 	SafeDelete(_camera_manager);
 	SafeDelete(_develop_manager);
 	SafeDelete(_scene_manager);
 	SafeDelete(_effect_handle_manager);
 	SafeDelete(_input_manager);
+
+	if (_sound != nullptr)
+	{
+		_sound->Uninit();
+	}
+	SafeDelete(_sound);
 
 	SafeDelete(_command_buffer);
 	SafeDelete(_command_processor);

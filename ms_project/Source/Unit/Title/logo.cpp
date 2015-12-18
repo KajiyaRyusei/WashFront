@@ -12,10 +12,10 @@
 
 //*****************************************************************************
 // const
-const D3DXVECTOR3	position	= D3DXVECTOR3( 480.0f , 150.0f , 0.0 );
-const D3DXVECTOR3	scaling		= D3DXVECTOR3( 400.0f , 200.0f , 0.0f );
-const D3DXVECTOR3	scaling_max	= D3DXVECTOR3( 420.0f , 220.0f , 0.0f );
-const int			scale_time	= 60;
+const D3DXVECTOR3	position = D3DXVECTOR3(480.0f, 150.0f, 0.0);
+const D3DXVECTOR3	scaling = D3DXVECTOR3(400.0f, 200.0f, 0.0f);
+const D3DXVECTOR3	scaling_max = D3DXVECTOR3(420.0f, 220.0f, 0.0f);
+const int			scale_time = 60;
 const int			exsist_time = 90;
 
 //=============================================================================
@@ -23,21 +23,21 @@ const int			exsist_time = 90;
 void LogoUnit::Initialize()
 {
 	// テクスチャ
-	CreateTexture(TEXT("Data/Texture/black.jpg"));
+	CreateTexture(TEXT("Data/Texture/logo.png"));
 	// UV値
-	_texture_uv		= D3DXVECTOR2(1.0f, 1.0f);
+	_texture_uv = D3DXVECTOR2(1.0f, 1.0f);
 	// オフセット
 	_texture_offset = D3DXVECTOR2(0.0f, 0.0f);
 	// 透明値
-	_texture_alpha	= 1.0f;
+	_texture_alpha = 1.0f;
 	// 座標
-	_position		= position;
+	_position = position;
 	// 角度
-	_rotation		= 0.0f;
+	_rotation = 0.0f;
 	// 大きさ
-	_scaling		= scaling;
+	_scaling = scaling;
 	// 拡縮
-	_scale_speed	= ( scaling_max - scaling ) / ( float )scale_time;
+	_scale_speed = (scaling_max - scaling) / (float)scale_time;
 }
 
 //=============================================================================

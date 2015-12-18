@@ -14,10 +14,10 @@
 
 //*****************************************************************************
 // const
-const float			moveDistance[ 2 ]
+const float			moveDistance[2]
 {
-	550.0f ,
-	980.0f
+	550.0f,
+		980.0f
 };
 
 //*****************************************************************************
@@ -28,9 +28,10 @@ bool ScoreUnit::_finish_flg = false;
 // èâä˙âª
 void ScoreUnit::Initialize()
 {
-	
-	_score[ 0 ]		= new NumberUnit( _application, _game_world);
+
+	_score[0]		= new NumberUnit(_application, _game_world);
 	_score_value	= 0;
+	_fileName		= TEXT( "data/Texture/number.png " );
 	_finish_flg		= false;
 }
 
@@ -40,7 +41,7 @@ void ScoreUnit::Finalize()
 {
 	for( int i = 0; i < digit; i++ )
 	{
-		SafeDelete( _score[ i ] );
+		SafeDelete(_score[i]);
 	}
 }
 
@@ -50,23 +51,24 @@ void ScoreUnit::Update()
 {
 	for( int i = 0; i < digit; i++ )
 	{
-		int a = CheckDigit( _score_value );
+		int a = CheckDigit(_score_value);
 		if( a > i )
 		{
-			if( _score[ i ] == nullptr )
+			if( _score[i] == nullptr )
 			{
-				_score[ i ] = new NumberUnit( _application , _game_world );
-				D3DXVECTOR3 pos = _score[ 0 ]->GetPosition();
-				_score[ i ]->SetPosition( D3DXVECTOR3( pos.x - ( i * _scale.x ) , pos.y , pos.z ) );
-				_score[ i ]->SetScaling( _scale );
+				_score[i] = new NumberUnit(_application, _game_world);
+				D3DXVECTOR3 pos = _score[0]->GetPosition();
+				_score[i]->SetPosition(D3DXVECTOR3(pos.x - (i * _scale.x), pos.y, pos.z));
+				_score[i]->SetScaling(_scale);
+				_score[i]->ChangeTexture( _fileName );
 			}
 		}
-		if( _score[ i ] != nullptr )
+		if( _score[i] != nullptr )
 		{
 			// mokuteki no atai wo okuru( ex 12345 no baai score[ 2 ] ha 3 )
-			_score[ i ]->SetValue( _score_value / Pow( 10 , i ) );
+			_score[i]->SetValue(_score_value / Pow(10, i));
 			// hanei
-			_score[ i ]->Update();
+			_score[i]->Update();
 		}
 	}
 
@@ -85,16 +87,16 @@ void ScoreUnit::Draw()
 {
 	for( int i = 0; i < digit; i++ )
 	{
-		if( _score[ i ] != nullptr )
+		if( _score[i] != nullptr )
 		{
-			_score[ i ]->Draw();
+			_score[i]->Draw();
 		}
 	}
 }
 
 //=============================================================================
 // ó›èÊ
-int ScoreUnit::Pow( int num , int mulutiplier )
+int ScoreUnit::Pow(int num, int mulutiplier)
 {
 	// 0èÊÇçló∂
 	int f = 1;
@@ -108,7 +110,7 @@ int ScoreUnit::Pow( int num , int mulutiplier )
 	return f;
 }
 
-void ScoreUnit::CountUp( float grade )
+void ScoreUnit::CountUp(float grade)
 {
 	if( grade >= 0.0f )
 	{
@@ -117,51 +119,57 @@ void ScoreUnit::CountUp( float grade )
 			grade = 1.0f;
 		}
 
-		_score_value = ( int )( _dest_score * grade );
+		_score_value = (int)(_dest_score * grade);
 	}
 }
 
-void ScoreUnit::Move( void )
+void ScoreUnit::Move(void)
 {
-	float destPosY = _fPos.y - moveDistance[ windowSizeID ];
+	float destPosY = _fPos.y - moveDistance[windowSizeID];
 
 	for( int i = 0; i < digit; i++ )
 	{
-		if( _score[ i ] != nullptr )
+		if( _score[i] != nullptr )
 		{
-			D3DXVECTOR3 pos = _score[ i ]->GetPosition();
+			D3DXVECTOR3 pos = _score[i]->GetPosition();
 			if( pos.y > destPosY )
 			{
-				float y = BulletinUnit::Easing( _fPos.y , destPosY );
-				_score[ i ]->SetPosition( D3DXVECTOR3( pos.x , y , pos.z ) );
+				float y = BulletinUnit::Easing(_fPos.y, destPosY);
+				_score[i]->SetPosition(D3DXVECTOR3(pos.x, y, pos.z));
 			}
 		}
 	}
 }
 
-int ScoreUnit::CheckDigit( int value )
+int ScoreUnit::CheckDigit(int value)
 {
 	int ans = 0;
 	for( int i = 0; i <= digit; i++ )
 	{
-		if( value / Pow( 10 , i ) == 0 && value != 0 && value > 10 )
+		if( value / Pow(10, i) == 0 && value != 0 && value > 10 )
 		{
 			return ans;
 		}
-		ans++;	
+		ans++;
 	}
 	return 1;
 }
 
-void ScoreUnit::SetPos( D3DXVECTOR3 pos )
+void ScoreUnit::SetPos(D3DXVECTOR3 pos)
 {
-	_pos	= pos;
-	_fPos	= pos;
-	_score[ 0 ]->SetPosition( _pos );
+	_pos = pos;
+	_fPos = pos;
+	_score[0]->SetPosition(_pos);
 }
 
-void ScoreUnit::SetScale( D3DXVECTOR3 scale )
+void ScoreUnit::SetScale(D3DXVECTOR3 scale)
 {
 	_scale = scale;
-	_score[ 0 ]->SetScaling( scale );
+	_score[0]->SetScaling(scale);
+}
+
+void ScoreUnit::SetTexture( LPCWSTR fileName )
+{
+	_fileName = fileName;
+	_score[0]->ChangeTexture( fileName );
 }

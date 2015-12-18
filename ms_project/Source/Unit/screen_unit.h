@@ -39,7 +39,9 @@ public:
 
 	//テクスチャ作成
 	void CreateTexture( LPCWSTR texture_filename );
-	
+	void ChangeTexture( LPCWSTR texture_fileName );
+
+
 	// 座標セット
 	virtual void SetPosition(D3DXVECTOR3 pos)
 	{

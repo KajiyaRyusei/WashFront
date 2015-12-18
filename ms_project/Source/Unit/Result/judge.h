@@ -19,7 +19,7 @@
 
 //*****************************************************************************
 // const
-const int disp_time	= 60;
+const int disp_time = 1;
 
 //*****************************************************************************
 // ÉNÉâÉXê›åv
@@ -39,12 +39,12 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
 
-	void SetTime( int time )
+	void SetTime(int time)
 	{
 		_timeCnt = time;
 	}
 
-	int GetTime( void )
+	int GetTime(void)
 	{
 		return _timeCnt;
 	}

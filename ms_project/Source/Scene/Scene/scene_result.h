@@ -47,8 +47,8 @@ public:
 
 private:
 	World*		_world;
-	ScoreUnit*	_pScore[ 8 ];
-	JudgeUnit*	_pJudge[ 2 ];
+	ScoreUnit*	_pScore[8];
+	JudgeUnit*	_pJudge[2];
 	float		_grade;
 
 };
