@@ -45,6 +45,7 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
 
+
 	void CountUp(float grade);
 	void Move(void);
 	// スコアセット
@@ -63,6 +64,8 @@ public:
 	{
 		_finish_flg = flg;
 	}
+
+	void SetTexture(LPCWSTR fileName);
 
 	// 
 	void SetPos(D3DXVECTOR3 pos);
@@ -92,6 +95,8 @@ private:
 	D3DXVECTOR3		_fPos;
 	// 
 	D3DXVECTOR3		_scale;
+	//
+	LPCWSTR			_fileName;
 
 	// このクラスのインスタンスの数
 	static int		_num;

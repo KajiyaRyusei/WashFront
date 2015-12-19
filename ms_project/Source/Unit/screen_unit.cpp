@@ -109,6 +109,20 @@ void ScreenUnit::CreateTexture(LPCWSTR texture_filename)
 
 }
 
+void ScreenUnit::ChangeTexture(LPCWSTR texture_fileName)
+{
+	//デバイス
+	LPDIRECT3DDEVICE9 device = _application->GetRendererDevice()->GetDevice();
+	// siyouzumi wo kaihou
+	SafeRelease(_texture);
+	
+		//テクスチャ作成
+	D3DXCreateTextureFromFile(device, texture_fileName, &_texture);
+	
+	//テクスチャ登録
+	_shader->SetAlbedoTexture(_texture);
+}
+
 //=============================================================================
 // 色を選択
 void ScreenUnit::SelectColor(const D3DXVECTOR4& color)

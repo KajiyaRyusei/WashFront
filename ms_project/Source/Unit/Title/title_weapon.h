@@ -42,7 +42,7 @@ public:
 		const D3DXMATRIX& world,
 		const D3DXMATRIX& animation);
 
-
+	void SelectAlbedoTexture(bool _is_player_one);
 
 private:
 

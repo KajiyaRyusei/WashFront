@@ -15,13 +15,12 @@
 const D3DXVECTOR3	position = D3DXVECTOR3(0.0f, 0.0f, 0.0);
 const D3DXVECTOR3	scaling = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 const float			speed = 1.0f / 5.0f;
-
 //=============================================================================
 // 初期化
 void NumberUnit::Initialize()
 {
 	// テクスチャ
-	CreateTexture(TEXT("Data/Texture/number_color_yellow.png"));
+	CreateTexture(TEXT("Data/Texture/number2.png"));
 	// UV値
 	_texture_uv = D3DXVECTOR2(1.0f, 0.1f);
 	// オフセット

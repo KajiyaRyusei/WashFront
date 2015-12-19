@@ -123,3 +123,10 @@ fx32 Ui::GetWaterMeter(s32 player_id)
 {
 	return _meter->GetCurrentMeterWater(player_id);
 }
+
+//=============================================================================
+// …‚Ì—ÊŽæ“¾
+s32 Ui::GetScore(int player_id)
+{
+	return _game_score->GetScore(player_id);
+}

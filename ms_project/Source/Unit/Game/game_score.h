@@ -50,6 +50,9 @@ public:
 
 	void UpdateGameScore(int player_id, int addscore);
 
+	// ƒXƒRƒA‚Ìæ“¾
+	s32 GetScore(s32 player_id){ return _game_score[player_id].score; }
+
 private:
 	GAME_SCORE _game_score[2];
 };

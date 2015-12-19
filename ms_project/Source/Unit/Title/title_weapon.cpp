@@ -151,3 +151,23 @@ void TitleWeaponUnit::SetPosition(
 	_world.matrix = world;
 	_animation_matrix = animation;
 }
+//=============================================================================
+// テクスチャを選択
+void TitleWeaponUnit::SelectAlbedoTexture(bool _is_player_one)
+{
+	LPDIRECT3DTEXTURE9 albedo_map;
+
+	if( _is_player_one )
+	{
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_TEXTURE);
+	}
+	else
+	{
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_BAG);
+	}
+
+	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
+	{
+		_shader[shader_index].SetAlbedoTexture(albedo_map);
+	}
+}

@@ -393,6 +393,12 @@
     <ClCompile Include="Source\Unit\Game\game_score.cpp">
       <Filter>Unit\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Unit\Result\score_board.cpp">
+      <Filter>Unit\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Scene\scene.cpp">
+      <Filter>Scene\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdafx.h" />
@@ -957,6 +963,12 @@
     </ClInclude>
     <ClInclude Include="Source\Unit\Game\game_score.h">
       <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Result\score_board.h">
+      <Filter>Unit\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\scene_data.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

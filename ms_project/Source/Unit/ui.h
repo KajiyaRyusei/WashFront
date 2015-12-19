@@ -75,6 +75,9 @@ public:
 	//メーター水量更新（引数…プレイヤー番号、水量加算数）
 	void UpdateMeterAdd(int playe_id, float amount);
 
+	// スコアの取得
+	s32 GetScore(int player_id);
+
 private:
 	Map* _map;
 	Meter* _meter;

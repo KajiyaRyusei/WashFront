@@ -37,7 +37,9 @@ namespace
 		L"Data/Texture/window1.png",
 		L"Data/Texture/window2.png",
 		L"Data/Texture/window4.png",
-		L"Data/Texture/window5.png"
+		L"Data/Texture/window5.png",
+		L"Data/Texture/new_oji_soubi_green.jpg",
+		L"Data/Texture/new_oji_soubi_oragne.jpg"
 	};
 }
 

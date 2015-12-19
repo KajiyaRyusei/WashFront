@@ -13,7 +13,8 @@
 #include "Camera/Camera/camera_game_player.h"
 #include "Algorithm/often_use.h"
 #include "World/collision_grid.h"
-
+// sound
+#include "Sound/sound.h"
 //=============================================================================
 // 定数
 namespace
@@ -50,7 +51,14 @@ void BulletUnit::Initialize()
 // 終了
 void BulletUnit::Finalize()
 {
-
+	if( _shpere->is_player_one == true )
+	{
+		_application->GetSound()->Stop(SE_WATER_BULLET);
+	}
+	else
+	{
+		_application->GetSound()->Stop(SE_WATER_BULLET_2);
+	}
 }
 
 //=============================================================================
@@ -60,6 +68,14 @@ void BulletUnit::Update()
 	// シェーダパラメーターの更新
 	if( _frame >= 1.f)
 	{
+		if( _shpere->is_player_one == true )
+		{
+			_application->GetSound()->Stop(SE_WATER_BULLET);
+		}
+		else
+		{
+			_application->GetSound()->Stop(SE_WATER_BULLET_2);
+		}
 		_shpere->position = D3DXVECTOR3(100000.f, 100000.f, 100000.f);
 	}
 	else
@@ -79,12 +95,28 @@ void BulletUnit::CollisionUpdate()
 // 衝突判定時処理 : 球
 void BulletUnit::CollisionSphere()
 {
+	if( _shpere->is_player_one == true )
+	{
+		_application->GetSound()->Stop(SE_WATER_BULLET);
+	}
+	else
+	{
+		_application->GetSound()->Stop(SE_WATER_BULLET_2);
+	}
 	_frame = 1.f;
 }
 //=============================================================================
 // 衝突判定時処理 : ボックス
 void BulletUnit::CollisionBox()
 {
+	if( _shpere->is_player_one == true )
+	{
+		_application->GetSound()->Stop(SE_WATER_BULLET);
+	}
+	else
+	{
+		_application->GetSound()->Stop(SE_WATER_BULLET_2);
+	}
 	_frame = 1.f;
 }
 //=============================================================================
@@ -116,12 +148,14 @@ void BulletUnit::Fire(
 	if( controller_type == Command::CONTROLLER_TYPE_1P)
 	{
 		_shpere->is_player_one = true;
+		_application->GetSound()->Play(SE_WATER_BULLET);
 	}
 	else
 	{
 		_shpere->is_player_one = false;
+		_application->GetSound()->Play(SE_WATER_BULLET_2);
 	}
-
+	
 	
 }
 
@@ -138,5 +172,4 @@ void BulletUnit::Move()
 void BulletUnit::ReNewBulletSize(const u8 level)
 {
 	_shpere->level = level;
-
 }

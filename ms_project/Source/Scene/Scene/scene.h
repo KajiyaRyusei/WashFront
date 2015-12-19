@@ -2,7 +2,7 @@
 //
 // シーン
 // 
-// Created by Ryusei Kajiya on 20151006
+// Created by Ryusei Kajiya on 20151220
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -13,6 +13,7 @@
 //*****************************************************************************
 // include
 #include "System/application.h"
+#include "Scene/scene_data.h"
 
 // 描画
 #include "DrawCommand/command_processor.h"
@@ -46,5 +47,7 @@ protected:
 
 	// データ
 	Application *_application;
+
+	static SceneData s_scene_data;
 
 };

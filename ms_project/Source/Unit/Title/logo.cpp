@@ -23,7 +23,7 @@ const int			exsist_time = 90;
 void LogoUnit::Initialize()
 {
 	// テクスチャ
-	CreateTexture(TEXT("Data/Texture/black.jpg"));
+	CreateTexture(TEXT("Data/Texture/logo.png"));
 	// UV値
 	_texture_uv = D3DXVECTOR2(1.0f, 1.0f);
 	// オフセット

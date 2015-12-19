@@ -1,11 +1,8 @@
-﻿2015/12/19 20:36:18 にビルドを開始しました。
+﻿2015/12/20 0:31:44 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_title.cpp Source\Unit\Game\meter_water.cpp
-         scene_game.cpp
-         scene_title.cpp
-         meter_water.cpp
-         コードを生成中...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Scene\scene_manager.cpp
+         scene_manager.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\dirt_math.obj
          Debug\often_use.obj
@@ -58,6 +55,7 @@
          Debug\mesh_resource.obj
          Debug\static_mesh_resource.obj
          Debug\texture_resource.obj
+         Debug\scene.obj
          Debug\scene_game.obj
          Debug\scene_result.obj
          Debug\scene_title.obj
@@ -125,6 +123,7 @@
          Debug\message_box.obj
          Debug\result_bg.obj
          Debug\score.obj
+         Debug\score_board.obj
          Debug\screen_unit.obj
          Debug\logo.obj
          Debug\logo_bg.obj
@@ -144,4 +143,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:02.89
+経過時間 00:00:01.23

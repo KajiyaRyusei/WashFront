@@ -1,48 +1,8 @@
-﻿2015/12/19 20:38:12 にビルドを開始しました。
+﻿2015/12/20 0:31:53 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /Zi /nologo /W4 /WX /sdl /O2 /Oi /Oy- /GL /D _RELEASE /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\ms_project.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Command\command_change_water.cpp Source\Command\command_fire.cpp Source\Command\command_handler.cpp Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Scene\scene_manager.cpp Source\Shader\Shader\screen_2d_shader.cpp Source\Shader\effect_handle_manager.cpp Source\System\system_flow.cpp Source\Unit\Game\building.cpp Source\Unit\Game\game_score.cpp Source\Unit\Game\game_score_character.cpp Source\Unit\Game\map.cpp Source\Unit\Game\map_back.cpp Source\Unit\Game\map_character.cpp Source\Unit\Game\meter.cpp Source\Unit\Game\meter_frame.cpp Source\Unit\Game\meter_gear.cpp Source\Unit\Game\meter_level.cpp Source\Unit\Game\meter_water.cpp Source\Unit\Game\mission_frame.cpp Source\Unit\Game\mission_meter.cpp Source\Unit\Game\mission_ui.cpp Source\Unit\Game\mission_ui_title.cpp Source\Unit\Game\player.cpp Source\Unit\Game\score_back.cpp Source\Unit\Result\bulletin_board.cpp Source\Unit\Result\judge.cpp Source\Unit\Result\message_box.cpp Source\Unit\Result\result_bg.cpp Source\Unit\Result\score.cpp Source\Unit\Title\logo.cpp Source\Unit\Title\logo_bg.cpp Source\Unit\Title\text.cpp Source\Unit\dummy_ui.cpp Source\Unit\number.cpp Source\Unit\screen_unit.cpp Source\Unit\ui.cpp Source\World\world.cpp
-         command_change_water.cpp
-         command_fire.cpp
-         command_handler.cpp
-         scene_game.cpp
-         scene_result.cpp
-         scene_title.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /Zi /nologo /W4 /WX /sdl /O2 /Oi /Oy- /GL /D _RELEASE /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\ms_project.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Scene\scene_manager.cpp
          scene_manager.cpp
-         screen_2d_shader.cpp
-         effect_handle_manager.cpp
-         system_flow.cpp
-         building.cpp
-         game_score.cpp
-         game_score_character.cpp
-         map.cpp
-         map_back.cpp
-         map_character.cpp
-         meter.cpp
-         meter_frame.cpp
-         meter_gear.cpp
-         meter_level.cpp
-         コンパイル中...
-         meter_water.cpp
-         mission_frame.cpp
-         mission_meter.cpp
-         mission_ui.cpp
-         mission_ui_title.cpp
-         player.cpp
-         score_back.cpp
-         bulletin_board.cpp
-         judge.cpp
-         message_box.cpp
-         result_bg.cpp
-         score.cpp
-         logo.cpp
-         logo_bg.cpp
-         text.cpp
-         dummy_ui.cpp
-         number.cpp
-         screen_unit.cpp
-         ui.cpp
-         world.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.lib" /MACHINE:X86 /SAFESEH Release\dirt_math.obj
          Release\often_use.obj
@@ -95,6 +55,7 @@
          Release\mesh_resource.obj
          Release\static_mesh_resource.obj
          Release\texture_resource.obj
+         Release\scene.obj
          Release\scene_game.obj
          Release\scene_result.obj
          Release\scene_title.obj
@@ -162,6 +123,7 @@
          Release\message_box.obj
          Release\result_bg.obj
          Release\score.obj
+         Release\score_board.obj
          Release\screen_unit.obj
          Release\logo.obj
          Release\logo_bg.obj
@@ -183,4 +145,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:14.99
+経過時間 00:00:04.73

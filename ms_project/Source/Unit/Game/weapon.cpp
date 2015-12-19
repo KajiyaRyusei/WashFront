@@ -188,7 +188,7 @@ void WeaponUnit::WeaponLevel(WEAPON_LEVEL level)
 		break;
 	case WEAPON_LEVEL_TWO:
 		_bullet->ReNewBulletSize(WEAPON_LEVEL_TWO);
-		ambient = D3DXVECTOR4(0.45f, 0.3f, 0.2f, 1.f);
+		ambient = D3DXVECTOR4(0.45f, 0.7f, 0.2f, 1.f);
 		_water_bullet->ReNewAmbientColor(ambient);
 		break;
 	case WEAPON_LEVEL_THREE:
@@ -234,9 +234,19 @@ void WeaponUnit::SelectAlbedoTexture(bool _is_player_one)
 	}
 	else
 	{
-		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_TEXTURE);
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_BAG);
 	}
 
+	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
+	{
+		_shader[shader_index].SetAlbedoTexture(albedo_map);
+	}
+}
+
+//=============================================================================
+// テクスチャを選択
+void WeaponUnit::SelectWeaponTexture(LPDIRECT3DTEXTURE9 albedo_map)
+{
 	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
 	{
 		_shader[shader_index].SetAlbedoTexture(albedo_map);

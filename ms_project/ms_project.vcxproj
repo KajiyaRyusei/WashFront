@@ -180,6 +180,7 @@
     <ClCompile Include="Source\Resource\mesh_resource.cpp" />
     <ClCompile Include="Source\Resource\static_mesh_resource.cpp" />
     <ClCompile Include="Source\Resource\texture_resource.cpp" />
+    <ClCompile Include="Source\Scene\Scene\scene.cpp" />
     <ClCompile Include="Source\Scene\Scene\scene_game.cpp" />
     <ClCompile Include="Source\Scene\Scene\scene_result.cpp" />
     <ClCompile Include="Source\Scene\Scene\scene_title.cpp" />
@@ -251,6 +252,7 @@
     <ClCompile Include="Source\Unit\Result\message_box.cpp" />
     <ClCompile Include="Source\Unit\Result\result_bg.cpp" />
     <ClCompile Include="Source\Unit\Result\score.cpp" />
+    <ClCompile Include="Source\Unit\Result\score_board.cpp" />
     <ClCompile Include="Source\Unit\screen_unit.cpp" />
     <ClCompile Include="Source\Unit\Title\logo.cpp" />
     <ClCompile Include="Source\Unit\Title\logo_bg.cpp" />
@@ -347,6 +349,7 @@
     <ClInclude Include="Source\Scene\Scene\scene_game.h" />
     <ClInclude Include="Source\Scene\Scene\scene_result.h" />
     <ClInclude Include="Source\Scene\Scene\scene_title.h" />
+    <ClInclude Include="Source\Scene\scene_data.h" />
     <ClInclude Include="Source\Scene\scene_manager.h" />
     <ClInclude Include="Source\Scene\scene_spawner.h" />
     <ClInclude Include="Source\Shader\Component\albedo_cube_texture.h" />
@@ -442,6 +445,7 @@
     <ClInclude Include="Source\Unit\Result\message_box.h" />
     <ClInclude Include="Source\Unit\Result\result_bg.h" />
     <ClInclude Include="Source\Unit\Result\score.h" />
+    <ClInclude Include="Source\Unit\Result\score_board.h" />
     <ClInclude Include="Source\Unit\screen_unit.h" />
     <ClInclude Include="Source\Unit\Title\logo.h" />
     <ClInclude Include="Source\Unit\Title\logo_bg.h" />

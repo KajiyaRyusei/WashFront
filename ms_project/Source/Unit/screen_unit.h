@@ -66,6 +66,8 @@ public:
 	// F‚Ì‘I‘ğ
 	void SelectColor(const D3DXVECTOR4& color);
 
+	void ChangeTexture(LPCWSTR texture_fileName);
+
 protected:
 	//uv’l
 	D3DXVECTOR2 _texture_uv;

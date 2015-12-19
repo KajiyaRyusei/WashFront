@@ -41,6 +41,18 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override{};
 
+	// 座標と回転の変更
+	void ChangePositionAndRotation(
+		const D3DXVECTOR3& position,
+		const D3DXVECTOR3& rotation)
+	{
+		_world.position = position;
+		_world.rotation = rotation;
+	}
+
+	// テクスチャを選択
+	void SelectAlbedoTexture(bool is_player_one);
+
 private:
 
 	// シェーダー

@@ -18,10 +18,20 @@
 // 各音素材のパラメータ
 PARAM c_param[ SOUND_LABEL_MAX ] =
 {
-	//BGM
-	{ L"Data/Sound/BGM/Ylvis_-_The_Fox_Ver_1403529190.wav" , false },
-	//SE
-	{ L"Data/Sound/SE/hiyoko2SE.wav" , false },
+	{ L"Data/Sound/BGM/result_bgm.wav" , true },
+	{ L"Data/Sound/BGM/game_bgm.wav", true },
+	{ L"Data/Sound/BGM/title_bgm.wav", true },
+	{ L"Data/Sound/SE/decide_se.wav" , false },
+	{ L"Data/Sound/SE/count_se.wav", false },
+	{ L"Data/Sound/SE/reward_se.wav", false },
+	{ L"Data/Sound/SE/overheat_se.wav", false },
+	{ L"Data/Sound/SE/score_add.wav", false },
+	{ L"Data/Sound/SE/water_bullet.wav", false },
+	{ L"Data/Sound/SE/weapon_change_se.wav", false },
+	{ L"Data/Sound/SE/overheat_se.wav", false },
+	{ L"Data/Sound/SE/score_add.wav", false },
+	{ L"Data/Sound/SE/water_bullet.wav", false },
+	{ L"Data/Sound/SE/weapon_change_se.wav", false },
 };
 
 //*****************************************************************************
@@ -252,18 +262,19 @@ HRESULT CSound::Play( SOUND_LABEL label )
 	buffer.LoopCount  = 0;
 	if( c_param[ label ].bLoop )
 	{
-		buffer.LoopCount= XAUDIO2_LOOP_INFINITE;	
+		buffer.LoopCount= XAUDIO2_LOOP_INFINITE;
 	}
 
 	// 状態取得
 	m_pSourceVoice[ label ]->GetState( &xa2state );
-	if(xa2state.BuffersQueued != 0)
+	if(xa2state.BuffersQueued > 1)
 	{// 再生中
-		// 一時停止
-		m_pSourceVoice[ label ]->Stop(0);
 
+		return E_FAIL;
+		// 一時停止
+		//m_pSourceVoice[ label ]->Stop(0);
 		// オーディオバッファの削除
-		m_pSourceVoice[ label ]->FlushSourceBuffers();
+		//m_pSourceVoice[ label ]->FlushSourceBuffers();
 	}
 
 	// オーディオバッファの登録
@@ -283,6 +294,10 @@ void CSound::Stop( SOUND_LABEL label )
 	XAUDIO2_VOICE_STATE xa2state;
 
 	// 状態取得
+	if( m_pSourceVoice[label] ==nullptr)
+	{
+		return;
+	}
 	m_pSourceVoice[label]->GetState(&xa2state);
 	if( xa2state.BuffersQueued != 0 )
 	{// 再生中

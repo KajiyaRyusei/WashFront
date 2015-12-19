@@ -66,6 +66,9 @@ public:
 	// テクスチャを選択
 	void SelectAlbedoTexture(bool is_player_one);
 
+	// 装備のカラー変更
+	void SelectWeaponTexture(u16 texture_id);
+
 private:
 
 	// シェーダー

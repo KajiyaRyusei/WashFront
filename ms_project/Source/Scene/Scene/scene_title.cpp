@@ -53,9 +53,11 @@
 // 汚れ
 #include "Data/data_dirt.h"
 
-
 // ルート
 #include "Data/data_route.h"
+
+// サウンド
+#include "Sound/sound.h"
 
 //=============================================================================
 // const
@@ -81,7 +83,7 @@ const D3DXVECTOR3 WindowPos[2][3] =
 		D3DXVECTOR3(640.0f, 200.0f, 0.0),
 
 		// logo
-		D3DXVECTOR3(640.0f, 200.0f, 0.0),
+		D3DXVECTOR3(640.0f, 300.0f, 0.0),
 
 		// text
 		D3DXVECTOR3(640.0f, 650.0f, 0.0)
@@ -108,7 +110,7 @@ const D3DXVECTOR3 WindowScl[2][3] =
 		D3DXVECTOR3(600.0f, 350.0f, 0.0f),
 
 		// logo
-		D3DXVECTOR3(500.0f, 300.0f, 0.0f),
+		D3DXVECTOR3(16.f*70.f, 9.f*55.f, 0.0f),
 
 		// text
 		D3DXVECTOR3(600.0f, 70.0f, 0.0f)
@@ -131,12 +133,13 @@ void SceneTitle::Initialize()
 	_world->SetWaterSprayPool(water_spray_pool);
 	ResourceGeneration();
 	MapGeneration();
-
+	_application->GetSound()->Play(BGM_TITLE);
 }
 //=============================================================================
 // 終了
 void SceneTitle::Finalize()
 {
+	_application->GetSound()->Stop(BGM_TITLE);
 	SafeDelete(_world);
 	Unit::ResetID();
 }
@@ -146,8 +149,10 @@ void SceneTitle::Update()
 {
 	Reference::GetInstance().GetDevelopToolManager()->GetDebugPrint().Print("タイトルシーンですよ\n");
 
-	if( _application->GetInputManager()->CheckTrigger(INPUT_EVENT_RETURN) )
+	if( _application->GetInputManager()->CheckTrigger(INPUT_EVENT_RETURN) ||
+		_application->GetInputManager() ->CheckTrigger(INPUT_EVENT_PAD0_14))
 	{
+		_application->GetSound()->Play(SE_DECIDE);
 		_application->GetSceneManager()->SetNextScene(new SpawnerForScene<SceneGame>);
 	}
 
@@ -190,23 +195,34 @@ void SceneTitle::MapGeneration()
 
 	// 2Dオブジェクト
 	TextUnit*		pText = new TextUnit(_application, _world);
-	Logo_BGUnit*	pLogoBg = new Logo_BGUnit(_application, _world);
+	//Logo_BGUnit*	pLogoBg = new Logo_BGUnit(_application, _world);
 	LogoUnit*		pLogo = new LogoUnit(_application, _world);
 
-	pLogoBg->SetPosition(WindowPos[windowSizeID][0]);
-	pLogoBg->SetScaling(WindowScl[windowSizeID][0]);
+	//pLogoBg->SetPosition(WindowPos[windowSizeID][0]);
+	//pLogoBg->SetScaling(WindowScl[windowSizeID][0]);
 	pLogo->SetPosition(WindowPos[windowSizeID][1]);
 	pLogo->SetScaling(WindowScl[windowSizeID][1]);
 	pText->SetPosition(WindowPos[windowSizeID][2]);
 	pText->SetScaling(WindowScl[windowSizeID][2]);
 
 	unit_list.push_back(pText);
-	unit_list.push_back(pLogoBg);
+	//unit_list.push_back(pLogoBg);
 	unit_list.push_back(pLogo);
 
 	// プレイヤー
-	TitlePlayerUnit* player = new TitlePlayerUnit(_application, _world);
-	unit_list.push_back(player);
+	TitlePlayerUnit* player_one = new TitlePlayerUnit(_application, _world);
+	D3DXVECTOR3 position(100.3f, 98.0f, 102.2f);
+	D3DXVECTOR3 rotation(0.f, D3DX_PI, 0.f);
+	player_one->ChangePositionAndRotation(position, rotation);
+	player_one->SelectAlbedoTexture(true);
+	unit_list.push_back(player_one);
+
+	TitlePlayerUnit* player_two = new TitlePlayerUnit(_application, _world);
+	position = D3DXVECTOR3(102.0f, 98.0f, 100.2f);
+	rotation = D3DXVECTOR3(0.f, D3DX_PI + D3DX_PI/2, 0.f);
+	player_two->ChangePositionAndRotation(position, rotation);
+	player_two->SelectAlbedoTexture(false);
+	unit_list.push_back(player_two);
 
 	// 背景
 	unit_list.push_back(new BackGroundUnit(_application, _world));

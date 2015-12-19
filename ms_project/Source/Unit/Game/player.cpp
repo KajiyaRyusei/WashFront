@@ -32,6 +32,9 @@
 // ui
 #include "Unit/ui.h"
 
+// sound
+#include "Sound/sound.h"
+
 //*****************************************************************************
 // ’è”
 namespace
@@ -378,4 +381,46 @@ void PlayerUnit::SelectAlbedoTexture(bool is_player_one)
 	_shader[3].SetAlbedoTexture(albedo_map2);
 
 	_weapon->SelectAlbedoTexture(is_player_one);
+}
+
+//=============================================================================
+// ‘•”õ‚ÌƒJƒ‰[•ÏX
+void PlayerUnit::SelectWeaponTexture(u16 texture_id)
+{
+	LPDIRECT3DTEXTURE9 albedo_map;
+
+	if( _controller_type == Command::CONTROLLER_TYPE_1P )
+	{
+		switch( texture_id )
+		{
+		case 0:
+			albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_TEXTURE);
+			break;
+		case 1:
+			albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_GREEN);
+			break;
+		case 2:
+			albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_ORANGE);
+			break;
+		}
+	}
+	else
+	{
+		switch( texture_id )
+		{
+		case 0:
+			albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_BAG);
+			break;
+		case 1:
+			albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_ORANGE);
+			break;
+		case 2:
+			albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_GREEN);
+			break;
+		}
+	}
+
+	_shader[3].SetAlbedoTexture(albedo_map);
+
+	_weapon->SelectWeaponTexture(albedo_map);
 }

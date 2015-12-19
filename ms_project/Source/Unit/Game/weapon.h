@@ -73,7 +73,8 @@ public:
 	// テクスチャの選択
 	void SelectAlbedoTexture(bool _is_player_one);
 
-
+	// 装備のカラー変更
+	void SelectWeaponTexture(LPDIRECT3DTEXTURE9 albedo_map);
 
 private:
 

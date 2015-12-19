@@ -30,6 +30,9 @@
 // UI
 #include "Unit/ui.h"
 
+// sound
+#include "Sound/sound.h"
+
 //*****************************************************************************
 // ’è”
 namespace
@@ -243,7 +246,17 @@ void BuildingUnit::CollisionMeshPoint(u32 point_index, u8 level, bool is_player_
 			break;
 		}
 		_clean_index_list.push_back(point_index);
+		if( player_id  == 0)
+		{
+			_application->GetSound()->Play(SE_SCORE_ADD);
+		}
+		else
+		{
+			_application->GetSound()->Play(SE_SCORE_ADD_2);
+		}
+		
 	}
+
 
 	D3DXVECTOR3 front_vector(sinf(_volume_mesh_point->attitudes[point_index]) *2.f, 0.f, cosf(_volume_mesh_point->attitudes[point_index]) *2.f);
 	_game_world->GetWaterSprayPool()->Create(_volume_mesh_point->points[point_index] + front_vector, _volume_mesh_point->attitudes[point_index]);
@@ -304,7 +317,7 @@ void BuildingUnit::SettingDirty(std::vector<data::Dirt>& dirt_list)
 						break;
 					case 1:
 						_volume_mesh_point->dirt_level[vertex_id] = 1;
-						vertex[vertex_id].cleanliness = D3DXVECTOR4(0.45f, 0.3f, 0.2f, 0.f);
+						vertex[vertex_id].cleanliness = D3DXVECTOR4(0.45f, 0.7f, 0.2f, 0.f);
 						break;
 					case 2:
 						_volume_mesh_point->dirt_level[vertex_id] = 2;

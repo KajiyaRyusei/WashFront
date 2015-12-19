@@ -55,6 +55,9 @@
 // ルート
 #include "Data/data_route.h"
 
+// sound
+#include "Sound/sound.h"
+
 //*****************************************************************************
 // 定数
 namespace
@@ -82,11 +85,16 @@ void SceneGame::Initialize()
 
 	ResourceGeneration();
 	MapGeneration();
+	_application->GetSound()->Play(BGM_GAME);
 }
 //=============================================================================
 // 終了
 void SceneGame::Finalize()
 {
+	s_scene_data.score_player_1 = _world->GetUi()->GetScore(0);
+	s_scene_data.score_player_2 = _world->GetUi()->GetScore(1);
+
+	_application->GetSound()->Stop(BGM_GAME);
 	SafeDelete(_world);
 	Unit::ResetID();
 }
@@ -374,6 +382,9 @@ void SceneGame::ResourceGeneration()
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_002, _application->GetRendererDevice());
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_003, _application->GetRendererDevice());
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_004, _application->GetRendererDevice());
+
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_BAG_GREEN, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_BAG_ORANGE, _application->GetRendererDevice());
 
 	// キューブマップ
 	_world->GetCubeTextureResource()->Create(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE, _application->GetRendererDevice());

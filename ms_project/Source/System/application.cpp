@@ -49,6 +49,10 @@ void Application::Initalize(Window *window, RendererDevice *renderer_device)
 	_command_processor = new CommandProcessor(*_command_buffer);
 	CommandBufferHolder::S_SetCommandBuffer(_command_buffer);
 
+	// soundの作成
+	_sound = new CSound();
+	_sound->Init(window->GetHandleWindow());
+
 	//------------------------------------
 	// マネージャーの作成
 	//------------------------------------
@@ -76,9 +80,6 @@ void Application::Initalize(Window *window, RendererDevice *renderer_device)
 	_develop_manager = new DevelopToolManager();
 	Reference::GetInstance().SetDevelopToolManager(_develop_manager);
 
-	// soundの作成
-	_sound = new CSound();
-	_sound->Init(window->GetHandleWindow());
 }
 //=============================================================================
 // 終了
@@ -88,14 +89,14 @@ void Application::Finalize()
 	{
 		_sound->Uninit();
 	}
-	SafeDelete(_sound);
+	
 	SafeDelete(_fade);
 	SafeDelete(_camera_manager);
 	SafeDelete(_develop_manager);
 	SafeDelete(_scene_manager);
 	SafeDelete(_effect_handle_manager);
 	SafeDelete(_input_manager);
-
+	SafeDelete(_sound);
 	SafeDelete(_command_buffer);
 	SafeDelete(_command_processor);
 

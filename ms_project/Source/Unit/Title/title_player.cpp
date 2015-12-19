@@ -146,8 +146,6 @@ void TitlePlayerUnit::SettingShaderParameter()
 	Camera* camera = _application->GetCameraManager()->GetCamera(CAMERA_TYPE_TITLE);
 
 	// 行列の作成
-	_world.position = _position.current;
-
 	algo::CreateWorld(_world.matrix, _world.position, _world.rotation, _world.scale);
 	algo::CreateWVP(_matrix_world_view_projection, _world.matrix, camera);
 
@@ -199,4 +197,38 @@ void TitlePlayerUnit::CompositionWater2Animation(const D3DXMATRIX* matrices)
 
 	_back_water->SetPosition(static_cast<D3DXVECTOR3>(back_water_position));
 	_back_water->Draw();
+}
+
+//=============================================================================
+// テクスチャを選択
+void TitlePlayerUnit::SelectAlbedoTexture(bool is_player_one)
+{
+	LPDIRECT3DTEXTURE9 albedo_map;
+	LPDIRECT3DTEXTURE9 albedo_map2;
+	LPDIRECT3DTEXTURE9 albedo_map3;
+
+
+	if( is_player_one )
+	{
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_TEXTURE);
+		albedo_map2 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_TEXTURE);
+		albedo_map3 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_FACE);
+	}
+	else
+	{
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_TEXTURE);
+		albedo_map2 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_BAG);
+		albedo_map3 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_FACE);
+	}
+
+	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
+	{
+		_shader[shader_index].SetAlbedoTexture(albedo_map);
+	}
+	_shader[0].SetAlbedoTexture(albedo_map3);
+	_shader[1].SetAlbedoTexture(albedo_map);
+	_shader[2].SetAlbedoTexture(albedo_map3);
+	_shader[3].SetAlbedoTexture(albedo_map2);
+
+	_weapon->SelectAlbedoTexture(is_player_one);
 }

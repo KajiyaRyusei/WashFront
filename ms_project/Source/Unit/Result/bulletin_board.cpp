@@ -10,6 +10,7 @@
 // include
 #include "Unit\Result/bulletin_board.h"
 #include "Input\input_manager.h"
+#include "Sound\sound.h"
 
 //*****************************************************************************
 // const
@@ -87,9 +88,10 @@ void BulletinUnit::Update()
 			}
 			_position.y = Easing(_tempPos.y, dest_pos_Y[windowSizeID]);
 		}
-		else
+		else if( _disp_flg == false )
 		{
 			_disp_flg = true;
+			_application->GetSound()->Play(SE_COUNT);
 		}
 	}
 

@@ -31,6 +31,7 @@ void ScoreUnit::Initialize()
 
 	_score[0] = new NumberUnit(_application, _game_world);
 	_score_value = 0;
+	_fileName = TEXT("data/Texture/number2.png ");
 	_finish_flg = false;
 }
 
@@ -59,6 +60,7 @@ void ScoreUnit::Update()
 				D3DXVECTOR3 pos = _score[0]->GetPosition();
 				_score[i]->SetPosition(D3DXVECTOR3(pos.x - (i * _scale.x), pos.y, pos.z));
 				_score[i]->SetScaling(_scale);
+				_score[i]->ChangeTexture(_fileName);
 			}
 		}
 		if( _score[i] != nullptr )
@@ -164,4 +166,10 @@ void ScoreUnit::SetScale(D3DXVECTOR3 scale)
 {
 	_scale = scale;
 	_score[0]->SetScaling(scale);
+}
+
+void ScoreUnit::SetTexture(LPCWSTR fileName)
+{
+	_fileName = fileName;
+	_score[0]->ChangeTexture(fileName);
 }
