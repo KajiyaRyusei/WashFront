@@ -15,12 +15,12 @@
 // 定数
 namespace
 {
-	static const LPCWSTR kWindowClass = TEXT("ms_project");
-	static const LPCWSTR kWindowName = TEXT("ms_project");
-	//static const u32 kSizeWindowWidth = 1280;
-	//static const u32 kSizeWindowHeight = 720;
-	static const u32 kSizeWindowWidth = 960;
-	static const u32 kSizeWindowHeight = 540;
+	static const LPCWSTR kWindowClass = TEXT("Wash Front");
+	static const LPCWSTR kWindowName = TEXT("Wash Front");
+	 static const u32 kSizeWindowWidth = 1280;
+	 static const u32 kSizeWindowHeight = 720;
+	//static const u32 kSizeWindowWidth = 960;
+	//static const u32 kSizeWindowHeight = 540;
 };
 
 //=============================================================================
@@ -38,6 +38,7 @@ Window::Window(HINSTANCE handle_instance) :
 // 初期化
 void Window::Initialize()
 {
+
 	// ウィンドウクラス作成
 	WNDCLASSEX window_class;
 	window_class.cbSize = sizeof(WNDCLASSEX);				// 構造体のサイズ

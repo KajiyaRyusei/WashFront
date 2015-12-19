@@ -27,7 +27,7 @@ void SystemFlow::Initialize(const HINSTANCE handle_instance)
 	// ウィンドウの生成
 	_main_window = new Window(handle_instance);
 	// レンダラ―の生成
-	_renderer_device = new RendererDevice(_main_window->GetHandleWindow(), _main_window->GetSizeWindowWidth(), _main_window->GetSizeWindowHeight(),false);
+	_renderer_device = new RendererDevice(_main_window->GetHandleWindow(), _main_window->GetSizeWindowWidth(), _main_window->GetSizeWindowHeight(),true);
 	// 参照群に登録
 	Reference::GetInstance().SetRenderer(_renderer_device);
 	// アプリケーションの生成

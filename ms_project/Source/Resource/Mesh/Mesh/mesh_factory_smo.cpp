@@ -52,7 +52,7 @@ void MeshFactorySMO::Create(
 			file.read((char*)&vertex.position, sizeof(D3DXVECTOR3));
 			file.read((char*)&vertex.normal, sizeof(D3DXVECTOR3));
 			file.read((char*)&vertex.texcoord, sizeof(D3DXVECTOR2));
-			vertex.cleanliness = 1.0f;
+			vertex.cleanliness = D3DXVECTOR4(1.f,1.f,1.f,1.f);
 
 			vertices.push_back(vertex);
 		}
@@ -64,7 +64,7 @@ void MeshFactorySMO::Create(
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0);
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0);
 		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1);
-		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT1, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2);
+		mesh->RegisterVertexInformation(0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2);
 		// 頂点バッファの作成
 		mesh->CreateVertexBuffer(D3DUSAGE_WRITEONLY, D3DPOOL_MANAGED);
 

@@ -44,7 +44,7 @@ public:
 
 private:
 
-	static const u32 kPoolSize = 10;
+	static const u32 kPoolSize = 30;
 	WaterSpray _particles[kPoolSize];
 	WaterSpray* _first_available;
 	MeshBuffer* _mesh;

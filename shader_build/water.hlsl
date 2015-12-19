@@ -245,12 +245,12 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	// ‹¾–Ê”½ËF
 	float3 specular = CookTorrance(light_direction, eye, normal);
 
-	output.render_target0.xyz = (diffuse + specular) * albedo;
+	output.render_target0.xyz = (diffuse + specular) * albedo * uniform_ambient_color.xyz;
 	output.render_target0.xyz = output.render_target0.xyz;
-	output.render_target0.a = uniform_ambient_color.w;
+	output.render_target0.a = 1.0f;
 
 	// ƒKƒ“ƒ}•â³
-	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 1.8f);
+	output.render_target0.xyz = pow(output.render_target0.xyz, 1.f / 2.5f);
 	output.render_target0.xyz *= 2.f;
 
 	output.render_target1 = float4(1, 1, 1, 1);

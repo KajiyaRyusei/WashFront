@@ -45,7 +45,7 @@ void WaterBackUnit::Initialize()
 	_position.current = D3DXVECTOR3(50.f,10.f,50.f);
 	_position.previous = _position.current;
 	_world.position = _position.current;
-	_world.scale = D3DXVECTOR3(1.f, 1.f, 1.f);
+	_world.scale = D3DXVECTOR3(0.5f, 1.f, 0.5f);
 	_world.rotation = D3DXVECTOR3(0.f, 0.f, 0.f);
 }
 
@@ -76,16 +76,10 @@ void WaterBackUnit::Draw()
 	// 描画する情報を押し込む：１度の描画に１度しか呼ばないこと
 	auto mesh = _game_world->GetMeshResource()->Get(MESH_RESOURE_WATER_CYLINDER_BACK);
 	// シェーダパラメーターの更新
-	SettingShaderParameter(D3DXVECTOR4(0.3f, 0.3f, 0.7f, 1.0f), 1.0f);
+	SettingShaderParameter(D3DXVECTOR4(0.3f, 0.3f, 0.7f, 1.0f), 0.5f);
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_TRANSLUCENT, GetID());
 	S_GetCommandBuffer()->PushShader(_shader, GetID());
 	S_GetCommandBuffer()->PushMesh(mesh, GetID());
-	// シェーダパラメーターの更新
-	//SettingShaderParameter(D3DXVECTOR4(0.5f, 0.5f, 0.5f, 1.0f), 1.5f);
-	//S_GetCommandBuffer()->PushRenderState(RENDER_STATE_TRANSLUCENT, GetID());
-	//S_GetCommandBuffer()->PushShader(_shader, GetID());
-	//S_GetCommandBuffer()->PushMesh(mesh, GetID());
-
 }
 
 //=============================================================================
@@ -103,8 +97,6 @@ void WaterBackUnit::SettingShaderParameter(const D3DXVECTOR4& ambient, const fx3
 	// ライトの方向作成
 	D3DXVECTOR4 light_direction(0.2f, -0.8f, 0.5f, 0.f);
 	D3DXVECTOR4 eye(camera->GetVectorEye(), 0.f);
-
-	
 
 	// シェーダの設定
 	_shader->SetWorldViewProjection(_matrix_world_view_projection);

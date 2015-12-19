@@ -26,11 +26,18 @@ namespace
 		L"Data/Texture/window3_spec.png",
 		L"Data/Texture/mud-normal_2.jpg",
 		L"Data/Texture/new_oji_soubi.jpg",
-		L"Data/Texture/new_oji_body_spec.jpg",
+		L"Data/Texture/new_oji_body_2.jpg",
 		L"Data/Texture/new_oji_sobi_spec.jpg",
 		L"Data/Texture/toon_map.png",
 		L"Data/Texture/window3_normal.png",
-		L"Data/Texture/oji_face.jpg"
+		L"Data/Texture/oji_face.jpg",
+		L"Data/Texture/new_oji_body_2.jpg",
+		L"Data/Texture/new_oji_soubi_2.jpg",
+		L"Data/Texture/new_oji_face_2.jpg",
+		L"Data/Texture/window1.png",
+		L"Data/Texture/window2.png",
+		L"Data/Texture/window4.png",
+		L"Data/Texture/window5.png"
 	};
 }
 

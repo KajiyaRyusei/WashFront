@@ -23,13 +23,17 @@ namespace data
 	public:
 		Shpere() :
 			position(0.f, 0.f, 0.f),
-			radius(1.f)
+			radius(1.f),
+			level(0),
+			is_player_one(false)
 		{
 
 		}
 
 		D3DXVECTOR3 position;
 		fx32 radius;
+		u8 level;
+		bool is_player_one;
 
 		void DebugDraw()
 		{

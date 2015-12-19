@@ -14,6 +14,7 @@
 #include "Renderer/directx9.h"
 
 #include "Unit/Game/water_spray_pool.h"
+#include "Unit/ui.h"
 
 // リソース
 #include "Resource/texture_resource.h"
@@ -34,12 +35,14 @@ void World::Initialize()
 	_static_mesh_resource = new StaticMeshResource;
 	_animation_mesh_resource = new AnimationMeshResource;
 	_animation_resource = new AnimationResource;
+	_ui = nullptr;
 }
 
 //=============================================================================
 // 終了
 void World::Finalize()
 {
+	SafeDelete(_ui);
 	SafeDelete(_animation_resource);
 	SafeDelete(_animation_mesh_resource);
 	SafeDelete(_static_mesh_resource);
@@ -48,6 +51,10 @@ void World::Finalize()
 	SafeDelete(_texture_resource);
 
 	for( auto it : _unit_list )
+	{
+		SafeDelete(it);
+	}
+	for( auto it : _2d_unit_list )
 	{
 		SafeDelete(it);
 	}
@@ -64,9 +71,19 @@ void World::Update()
 		it->Update();
 	}
 
+	for( auto it : _2d_unit_list )
+	{
+		it->Update();
+	}
+
 	for( auto it : _unit_list )
 	{
 		it->CollisionUpdate();
+	}
+
+	if( _ui != NULL )
+	{
+		_ui->Update();
 	}
 }
 
@@ -80,4 +97,14 @@ void World::Draw()
 	}
 	_water_spray_pool->Animate();
 	_collision_grid->DebugDraw();
+}
+
+//=============================================================================
+// 2D描画
+void World::Draw2D()
+{
+	for( auto it : _2d_unit_list )
+	{
+		it->Draw();
+	}
 }

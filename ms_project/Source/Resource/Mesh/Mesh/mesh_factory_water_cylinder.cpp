@@ -121,9 +121,25 @@ void MeshFactoryWaterCylinder::PositionCompute(MeshBuffer* mesh)
 
 	for( s32 y = 0; y <= kNumberBlockY; ++y )
 	{
-		fx32 weight_zero = 1 - (one_weight*y);
-		fx32 weight_two = one_weight*y;
-		fx32 weight_one = 1 - fabs(weight_zero - weight_two);
+		//fx32 weight_zero = 1 - (one_weight*y);
+		//fx32 weight_two = one_weight*y;
+		//fx32 weight_one = 1 - fabs(weight_zero - weight_two);
+
+		fx32 weight_zero;
+		fx32 weight_two;
+		fx32 weight_one;
+		if( y < kNumberBlockY /2)
+		{
+			weight_zero = 1 - (one_weight*y*2.f);
+			weight_one = 1 - (1 - (one_weight*y*2.f));
+			weight_two = 0.f;
+		}
+		else
+		{
+			weight_zero = 0.f;
+			weight_one = 1 - (one_weight*(y - kNumberBlockY / 2)*2.f);
+			weight_two = 1 - weight_one;
+		}
 
 		fx32 sita = 0.f;
 		for( s32 x = 0; x <= kNumberBlockX; ++x )
@@ -134,7 +150,7 @@ void MeshFactoryWaterCylinder::PositionCompute(MeshBuffer* mesh)
 			vertex[vertex_index].position = D3DXVECTOR3(
 				block_size_z,
 				block_size_x,
-				y * kSizeBlockY );
+				0.f );
 
 			vertex[vertex_index].texcoord = D3DXVECTOR2(one_texcoord_x * x, one_texcoord_y * y);
 

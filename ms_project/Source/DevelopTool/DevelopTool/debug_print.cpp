@@ -21,7 +21,7 @@ void DebugPrint::Initialize()
 
 	D3DXCreateFont(
 		device,				// インタフェースへのポインタ
-		18, 0, 0,			// 高さ、幅、フォントの太さ
+		22, 10, 10,			// 高さ、幅、フォントの太さ
 		0,					// みっぷマップレベル
 		FALSE,				// インタリックフォントであるかどうか
 		SHIFTJIS_CHARSET,	// フォントの文字セット
@@ -55,7 +55,7 @@ void DebugPrint::Draw()
 
 	RECT rect = { 0, 0, width, height };
 
-	_d3dx_font->DrawTextA(nullptr,_string,-1,&rect,DT_RIGHT,D3DCOLOR_ARGB(0xff,0xff,0x00,0xff));
+	_d3dx_font->DrawTextA(nullptr,_string,-1,&rect,DT_RIGHT,0xfff00fff);
 
 	memset(_string, 0, sizeof(char)* kStringMax);
 

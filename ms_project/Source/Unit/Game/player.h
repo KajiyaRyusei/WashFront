@@ -36,14 +36,9 @@ class CameraGamePlayer;
 // クラス設計
 class PlayerUnit : public Unit
 {
-	friend class CommandMoveFront;
-	friend class CommandMoveBack;
-	friend class CommandMoveRight;
-	friend class CommandMoveLeft;
-	friend class CommandMoveUp;
-	friend class CommandMoveDown;
 	friend class CommandFire;
 	friend class CommandMove;
+	friend class CommandChangeWater;
 
 public:
 
@@ -67,6 +62,9 @@ public:
 	void SetControllerType(Command::CONTROLLER_TYPE type){ _controller_type = type; }
 
 	CameraGamePlayer* GetPlayerCamera()const{ return _player_camera; }
+
+	// テクスチャを選択
+	void SelectAlbedoTexture(bool is_player_one);
 
 private:
 

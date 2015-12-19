@@ -26,9 +26,9 @@
 namespace
 {
 	static const fx32 kRotationCoefficient = 0.001f;
-	static const D3DXVECTOR3 kTargetLength(0.f,0.f,30.f);
-	static const fx32 kRotationLimitX = 0.6f;
-	static const fx32 kRotationLimitY = 1.2f;
+	static const D3DXVECTOR3 kTargetLength(0.f,0.f,50.f);
+	static const fx32 kRotationLimitX = 0.4f;
+	static const fx32 kRotationLimitY = 1.0f;
 }
 
 //=============================================================================

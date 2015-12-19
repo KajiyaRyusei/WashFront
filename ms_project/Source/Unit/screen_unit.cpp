@@ -32,6 +32,9 @@ void ScreenUnit::Initialize()
 	MeshFactory2DSprite sprite_factory;
 	_mesh = sprite_factory.Create(_application->GetRendererDevice());
 
+	D3DXVECTOR4 ambient(1.f,1.f,1.f,1.f);
+	_shader->SetAmbientColor(ambient);
+
 	_visible = true;
 }
 
@@ -104,4 +107,11 @@ void ScreenUnit::CreateTexture(LPCWSTR texture_filename)
 	//テクスチャ登録
 	_shader->SetAlbedoTexture(_texture);
 
+}
+
+//=============================================================================
+// 色を選択
+void ScreenUnit::SelectColor(const D3DXVECTOR4& color)
+{
+	_shader->SetAmbientColor(color);
 }

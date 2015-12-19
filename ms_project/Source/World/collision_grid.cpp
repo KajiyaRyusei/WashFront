@@ -186,18 +186,21 @@ void CollisionGrid::Line2Box(Unit* unit, Unit* other_unit)
 void CollisionGrid::MeshPoint2Sphrere(Unit* unit, Unit* other_unit)
 {
 
+	static const fx32 kPointSize = 1.0f;
+
 	if( other_unit->_shpere != nullptr &&
 		unit->_volume_mesh_point!= nullptr )
 	{
 		for( u32 i = 0; i < unit->_volume_mesh_point->size_point; ++i )
 		{
-			if( collision::Sphrere2Point(
+			if( collision::Sphrere2Sphrere(
 				other_unit->_shpere->position,
 				unit->_volume_mesh_point->points[i],
-				other_unit->_shpere->radius) )
+				other_unit->_shpere->radius,
+				kPointSize) )
 			{
 				other_unit->CollisionSphere();
-				unit->CollisionMeshPoint(i);
+				unit->CollisionMeshPoint(i, other_unit->_shpere->level, other_unit->_shpere->is_player_one);
 			}
 		}
 	}
@@ -207,13 +210,14 @@ void CollisionGrid::MeshPoint2Sphrere(Unit* unit, Unit* other_unit)
 	{
 		for( u32 i = 0; i < other_unit->_volume_mesh_point->size_point; ++i )
 		{
-			if( collision::Sphrere2Point(
+			if( collision::Sphrere2Sphrere(
 				unit->_shpere->position,
 				other_unit->_volume_mesh_point->points[i],
-				unit->_shpere->radius) )
+				unit->_shpere->radius,
+				kPointSize) )
 			{
 				unit->CollisionSphere();
-				other_unit->CollisionMeshPoint(i);
+				other_unit->CollisionMeshPoint(i, unit->_shpere->level, unit->_shpere->is_player_one);
 			}
 		}
 	}

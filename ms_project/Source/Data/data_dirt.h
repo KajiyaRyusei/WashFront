@@ -2,7 +2,7 @@
 //
 // ‰˜‚ê
 //
-// Created by Ryusei Kajiya on 20151202
+// Created by Ryusei Kajiya on 20151217
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -19,13 +19,15 @@ namespace data
 	public:
 		Dirt() :
 			point(0.f, 0.f, 0.f),
-			radius(0.f)
+			radius(0.f),
+			level(0)
 		{
 
 		}
 
 		D3DXVECTOR3 point;
 		fx32 radius;
+		u8 level;
 	};
 };
 

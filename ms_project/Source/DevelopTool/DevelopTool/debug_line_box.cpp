@@ -116,7 +116,7 @@ void DebugLineBox::RegisteBox(
 #ifdef _DEBUG
 	if( _current_line_box_index >= kMaxBox )
 	{
-		OutputDebugStringA("デバックボックスの登録数を超えてます");
+		OutputDebugStringA("デバックラインボックスの登録数を超えてます");
 		return;
 	}
 

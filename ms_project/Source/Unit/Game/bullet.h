@@ -14,6 +14,7 @@
 // include
 #include "Unit/unit.h"
 #include "Data/data_world.h"
+#include "Command/command.h"
 
 //*****************************************************************************
 // クラス設計
@@ -40,10 +41,11 @@ public:
 	void Fire(
 		const D3DXVECTOR3& start,
 		const D3DXVECTOR3& end,
-		const fx32 velocity);
+		const fx32 velocity,
+		const Command::CONTROLLER_TYPE controller_type);
 
 	// バレットサイズ更新
-	void ReNewBulletSize(const fx32 size);
+	void ReNewBulletSize(const u8 level);
 
 private:
 
@@ -54,8 +56,6 @@ private:
 	D3DXVECTOR3 _control_point;
 	fx32 _frame_velocity;
 	fx32 _frame;
-
-	fx32 _bullet_size;
 
 	// 移動
 	void Move();

@@ -42,8 +42,12 @@ public:
 	//マップキャラクター位置設定
 	void SetMapCharacterPosition(D3DXVECTOR3 position);
 
+	//マップキャラクターリストセット
 	void SetMapCharacterList(std::list<Unit*> *list);
-	
+
+	//マップ初期化
+	void SetMap(float max_map_distance, D3DXVECTOR3 init_player_position);
+
 private:
 	MapBack *_map_back;
 	MapCharacter *_map_character[2];

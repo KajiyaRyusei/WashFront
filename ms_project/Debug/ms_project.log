@@ -1,8 +1,11 @@
-﻿2015/12/16 0:43:01 にビルドを開始しました。
+﻿2015/12/19 20:36:18 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Unit\Game\clouds.cpp
-         clouds.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /ZI /nologo /W4 /WX /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ms_project_debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_title.cpp Source\Unit\Game\meter_water.cpp
+         scene_game.cpp
+         scene_title.cpp
+         meter_water.cpp
+         コードを生成中...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project_debug.lib" /MACHINE:X86 Debug\dirt_math.obj
          Debug\often_use.obj
@@ -14,15 +17,10 @@
          Debug\camera_title.obj
          Debug\camera_manager.obj
          Debug\collision_system.obj
+         Debug\command_change_water.obj
          Debug\command_fire.obj
          Debug\command_handler.obj
          Debug\command_move.obj
-         Debug\command_move_back.obj
-         Debug\command_move_down.obj
-         Debug\command_move_front.obj
-         Debug\command_move_left.obj
-         Debug\command_move_right.obj
-         Debug\command_move_up.obj
          Debug\debug_box.obj
          Debug\debug_line.obj
          Debug\debug_line_box.obj
@@ -99,12 +97,20 @@
          Debug\bullet.obj
          Debug\clouds.obj
          Debug\dirt.obj
+         Debug\game_score.obj
+         Debug\game_score_character.obj
          Debug\map.obj
          Debug\map_back.obj
          Debug\map_character.obj
          Debug\meter.obj
          Debug\meter_frame.obj
+         Debug\meter_gear.obj
+         Debug\meter_level.obj
          Debug\meter_water.obj
+         Debug\mission_frame.obj
+         Debug\mission_meter.obj
+         Debug\mission_ui.obj
+         Debug\mission_ui_title.obj
          Debug\player.obj
          Debug\score_back.obj
          Debug\static_building.obj
@@ -138,4 +144,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:00.86
+経過時間 00:00:02.89

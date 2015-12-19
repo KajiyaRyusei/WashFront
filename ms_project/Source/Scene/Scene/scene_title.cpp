@@ -59,7 +59,7 @@
 
 //=============================================================================
 // const
-const int windowSizeID = 0;
+const int windowSizeID = 1;
 
 const D3DXVECTOR3 WindowPos[2][3] =
 {
@@ -216,7 +216,7 @@ void SceneTitle::MapGeneration()
 
 	// マップファイル読み込み
 	FILE* file;
-	file = fopen("Data/Map/pre.map", "rt");
+	file = fopen("Data/Map/pre001.map", "rt");
 
 	s32 object_number = 0;
 
@@ -273,11 +273,11 @@ void SceneTitle::MapGeneration()
 					break;
 				case STATIC_MESH_RESOURE_BILL_001:
 					file_name = "Data/StaticModel/new_biru_2.smo";
-					id = STATIC_MESH_RESOURE_BILL_001;
+					id = STATIC_MESH_RESOURE_BILL_001_LOW;
 					break;
 				case STATIC_MESH_RESOURE_BILL_002:
 					file_name = "Data/StaticModel/new_biru_3.smo";
-					id = STATIC_MESH_RESOURE_BILL_002;
+					id = STATIC_MESH_RESOURE_BILL_002_LOW;
 					break;
 				case STATIC_MESH_RESOURE_BILL_003:
 					file_name = "Data/StaticModel/new_biru_4.smo";
@@ -287,6 +287,8 @@ void SceneTitle::MapGeneration()
 					file_name = "Data/StaticModel/new_biru_haikei.smo";
 					id = STATIC_MESH_RESOURE_BILL_HAIKEI;
 					break;
+				case 5:
+					id = STATIC_MESH_RESOURE_ROAD;
 				default:
 					break;
 				}
@@ -329,6 +331,15 @@ void SceneTitle::ResourceGeneration()
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_NORMAL_TEXTURE, _application->GetRendererDevice());
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_FACE, _application->GetRendererDevice());
 
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_2_BAG, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_2_FACE, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_2_TEXTURE, _application->GetRendererDevice());
+
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_001, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_002, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_003, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_004, _application->GetRendererDevice());
+
 	// キューブマップ
 	_world->GetCubeTextureResource()->Create(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE, _application->GetRendererDevice());
 	_world->GetCubeTextureResource()->Create(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_SPECULAR, _application->GetRendererDevice());
@@ -341,6 +352,9 @@ void SceneTitle::ResourceGeneration()
 	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_002, _application->GetRendererDevice());
 	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_003, _application->GetRendererDevice());
 	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_HAIKEI, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_001_LOW, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_002_LOW, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_ROAD, _application->GetRendererDevice());
 
 	// AMO
 	_world->GetAnimationMeshResource()->Create(ANIMATION_MESH_RESOURE_WEAPON_01, _application->GetRendererDevice());
@@ -350,3 +364,4 @@ void SceneTitle::ResourceGeneration()
 	auto mesh_list = _world->GetAnimationMeshResource()->Get(ANIMATION_MESH_RESOURE_GRANDPA);
 	_world->GetAnimationResource()->Create(ANIMATION_RESOURE_STANCE, mesh_list.size());
 }
+

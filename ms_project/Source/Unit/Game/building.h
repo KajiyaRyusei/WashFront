@@ -49,7 +49,7 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override;
-	virtual void CollisionMeshPoint(u32 point_index)override;
+	virtual void CollisionMeshPoint(u32 point_index, u8 level, bool is_player_one)override;
 
 	// ‰˜‚ê‚ÌƒZƒbƒg
 	void SettingDirty(std::vector<data::Dirt>& dirt_list);

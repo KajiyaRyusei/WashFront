@@ -108,7 +108,9 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	PixelShaderOutput output = (PixelShaderOutput)0;
 
 	output.render_target0 = tex2D(uniform_albedo_sampler, input.texcoord);
-	//output.render_target0 = float4(1, 1, 1, 1);
+	float2 center_point = float2(0.5,0.5);
+	float distance_alpha = length(center_point - input.texcoord);
+	output.render_target0.a *= 1.f - distance_alpha * 3.f;
 	output.render_target1 = float4(1, 1, 1, 1);
 	output.render_target2 = float4(1, 1, 1, 1);
 	output.render_target3 = float4(1, 1, 1, 1);
@@ -124,7 +126,8 @@ technique Techniques
 	pass P0
 	{
 		CullMode = NONE;
-		ALPHAREF = 50;
+		ZENABLE = FALSE;
+		ALPHAREF = 25;
 		VertexShader = compile vs_3_0 VS();
 		PixelShader = compile ps_3_0 PS();
 	}

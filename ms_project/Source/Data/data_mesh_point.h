@@ -35,9 +35,11 @@ namespace data
 			size_point(vertex_size)
 		{
 			points = new D3DXVECTOR3[vertex_size];
+			dirt_level = new u8[vertex_size];
 			attitudes = new fx32[vertex_size];
 			for( u32 i = 0; i < size_point; ++i )
 			{
+				dirt_level[i] = 0;
 				points[i] = point_array[i];
 			}
 			CalculationPointAndAttitudes(normal_array);
@@ -46,6 +48,7 @@ namespace data
 		virtual ~MeshPoint()
 		{
 			SafeDeleteArray(points);
+			SafeDeleteArray(dirt_level);
 			SafeDeleteArray(attitudes);
 		}
 
@@ -55,6 +58,7 @@ namespace data
 		D3DXVECTOR3* points;
 		fx32* attitudes;
 		u32 size_point;
+		u8* dirt_level;
 
 		// 姿勢用クォータニオンと座標計算
 		void CalculationPointAndAttitudes(const D3DXVECTOR3* normal_array)

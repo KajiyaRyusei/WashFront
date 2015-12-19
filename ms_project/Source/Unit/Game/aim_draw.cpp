@@ -59,21 +59,21 @@ void AimDrawUnit::Draw()
 void AimDrawUnit::CalculatePosition()
 {
 	// ƒJƒƒ‰Žæ“¾
-	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
+	//Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
+	CameraGamePlayer* player_camera = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCurrentCamera());
 
 	// ‰ñ“]‚ð‘Å‚¿Á‚µ
-	D3DXMATRIX view = camera->GetMatrixView();
-	D3DXMATRIX projection = camera->GetMatrixProjection();
+	D3DXMATRIX view = player_camera->GetMatrixView();
+	D3DXMATRIX projection = player_camera->GetMatrixProjection();
 	D3DXMATRIX inverse_view;
 	D3DXMatrixInverse(&inverse_view, nullptr, &view);
-	D3DXMATRIX test_matrix = inverse_view * view;
 
 	// ‚²‚Ý‚ðíœ
 	inverse_view._41 = 0.f;
 	inverse_view._42 = 0.f;
 	inverse_view._43 = 0.f;
 
-	_world.scale = D3DXVECTOR3(3.f, 3.f,3.f);
+	_world.scale = D3DXVECTOR3(4.f, 4.f,4.f);
 
 	D3DXMATRIX scaling_matrix, translation_matrix;
 
@@ -82,6 +82,8 @@ void AimDrawUnit::CalculatePosition()
 	_world.matrix = inverse_view * scaling_matrix * translation_matrix;
 	_matrix_world_view_projection = _world.matrix * view * projection;
 	_shader->SetWorldViewProjection(_matrix_world_view_projection);
+
+	_application->GetDevelopToolManager()->GetDebugPrint().Print("aim‚ÌˆÊ’u %f %f %f \n", _world.position.x, _world.position.y, _world.position.z);
 
 	static D3DXVECTOR4 s_ambient_color(0.f,1.f,0.f,1.f);
 

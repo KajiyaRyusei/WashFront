@@ -23,7 +23,7 @@ void Shader2D::Initialize()
 	InitializeScreenTextureOffset(_effect_handle_holder->effect_handle());
 	InitializeScreenTextureAlpha(_effect_handle_holder->effect_handle());
 	InitializeAlbedoTexture(_effect_handle_holder->effect_handle());
-
+	InitializeAmbientColor(_effect_handle_holder->effect_handle());
 }
 
 void Shader2D::AssignExceptMaterial() const
@@ -34,6 +34,5 @@ void Shader2D::AssignExceptMaterial() const
 	SendScreenTextureOffset(_effect_handle_holder->effect_handle());
 	SendScreenTextureAlpha(_effect_handle_holder->effect_handle());
 	SendAlbedoTexture(_effect_handle_holder->effect_handle());
-
-	
+	SendAmbientColor(_effect_handle_holder->effect_handle());
 }

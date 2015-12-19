@@ -45,6 +45,9 @@ public:
 	// ƒtƒŒ[ƒ€‚Ì‰Šú‰»
 	void InitializeFrame(){ _pass_frame = 0.f; }
 
+	// ³“Š‰e‚Ìæ“¾
+	const D3DXMATRIX& GetMatrixOrthoProjection() const { return _ortho_projection.matrix; }
+
 private:
 
 	void PassRootDecision();
@@ -59,4 +62,6 @@ private:
 	D3DXVECTOR3 _rotation;
 	D3DXVECTOR3 _destnation_rotation_velocity;
 	D3DXVECTOR3 _rotation_velocity;
+
+	data::Projection _ortho_projection;
 };

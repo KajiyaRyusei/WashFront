@@ -49,8 +49,16 @@ void BackGroundUnit::Draw()
 {
 	// ƒJƒƒ‰æ“¾
 	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
+
+	fx32 camera_near = camera->GetNear();
+	fx32 camera_far = camera->GetFar();
+	//camera->SetNear(1.f);
+	camera->SetFar(2000.f);
+
+	camera->CreateMatrix();
+
 	D3DXMATRIX matrix_scaling;
-	static const float kScaling = 500.f;
+	static const float kScaling = 800.f;
 	D3DXMatrixScaling(&matrix_scaling, kScaling, kScaling, kScaling);
 	D3DXMATRIX matrix_world_view_projection = matrix_scaling * camera->GetMatrixView() * camera->GetMatrixProjection();
 	_shader->SetWorldViewProjection(matrix_world_view_projection);
@@ -60,4 +68,8 @@ void BackGroundUnit::Draw()
 	S_GetCommandBuffer()->PushRenderState(RENDER_STATE_BACKGROUND,GetID());
 	S_GetCommandBuffer()->PushShader(_shader, GetID());
 	S_GetCommandBuffer()->PushMesh(_game_world->GetMeshResource()->Get(MESH_RESOURE_BOX), GetID());
+
+	camera->SetNear(camera_near);
+	camera->SetFar(camera_far);
+	camera->CreateMatrix();
 }

@@ -14,8 +14,8 @@
 // íËêî
 namespace
 {
-	static const fx32 kAnimationVelocity = 0.02f;
-	static const fx32 kAnimationEnd = 0.7f;
+	static const fx32 kAnimationVelocity = 0.035f;
+	static const fx32 kAnimationEnd = 0.9f;
 }
 
 //=============================================================================

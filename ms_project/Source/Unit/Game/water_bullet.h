@@ -45,6 +45,9 @@ public:
 	// セットプレイヤー
 	void SetPlayer(PlayerUnit* player){ _player = player; }
 
+	// アンビエントカラー変更
+	void ReNewAmbientColor(const D3DXVECTOR4& ambient){ _ambient = ambient; }
+
 private:
 
 	// シェーダー
@@ -62,6 +65,7 @@ private:
 	fx32 _rotation_y;
 	fx32 _destination_release_of;
 	fx32 _release_of;
+	D3DXVECTOR4 _ambient;
 
 	// プレイヤー
 	PlayerUnit* _player;

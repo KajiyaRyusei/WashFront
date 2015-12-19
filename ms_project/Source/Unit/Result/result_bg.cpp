@@ -20,7 +20,7 @@ const D3DXVECTOR3	scaling		= D3DXVECTOR3( 960.0f , 540.0f , 0.0f );
 void Result_BGUnit::Initialize()
 {
 	// テクスチャ
-	CreateTexture(TEXT("Data/Texture/game.jpg"));
+	CreateTexture(TEXT("Data/Texture/result_bg.png"));
 	// UV値
 	_texture_uv		= D3DXVECTOR2(1.0f, 1.0f);
 	// オフセット

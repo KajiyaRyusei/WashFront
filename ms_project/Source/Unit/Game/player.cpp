@@ -29,6 +29,8 @@
 #include "Resource/animation_resource.h"
 // ルート
 #include "Data/data_route.h"
+// ui
+#include "Unit/ui.h"
 
 //*****************************************************************************
 // 定数
@@ -36,6 +38,8 @@ namespace
 {
 	static const D3DXVECTOR3 kVectorFromCamera(0.f, 0.f, 5.f);
 	static const fx32 kBlendyCoefficient = 0.1f;
+	static const fx32 kWaterMax = 100.f;
+	static const fx32 kAddWater = 1.5f;
 }
 
 //=============================================================================
@@ -52,13 +56,8 @@ void PlayerUnit::Initialize()
 	_statnce_animation_system = new AnimationSystem();
 	_shot_animation_system = new AnimationSystem();
 
-	LPDIRECT3DTEXTURE9 albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_TEXTURE);
-	LPDIRECT3DTEXTURE9 albedo_map2 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_TEXTURE);
-	LPDIRECT3DTEXTURE9 albedo_map3 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_FACE);
 	LPDIRECT3DCUBETEXTURE9 diffuse_cube_map = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ONE_DIFFUSE);
-	LPDIRECT3DCUBETEXTURE9 diffuse_cube_map2 = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE);
 	LPDIRECT3DCUBETEXTURE9 specular_cube_map = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ONE_SPECULAR);
-	LPDIRECT3DCUBETEXTURE9 specular_cube_map2 = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_SPECULAR);
 	LPDIRECT3DTEXTURE9 toon_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_TOON_TEXTURE);
 
 	// シェーダの作成
@@ -67,19 +66,11 @@ void PlayerUnit::Initialize()
 
 	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
 	{
-		_shader[shader_index].SetAlbedoTexture(albedo_map);
 		_shader[shader_index].SetToonTexture(toon_map);
 		_shader[shader_index].SetDiffuseCubeMap(diffuse_cube_map);
 		_shader[shader_index].SetSpecularCubeMap(specular_cube_map);
 	}
-
-	_shader[0].SetAlbedoTexture(albedo_map3);
-	_shader[2].SetAlbedoTexture(albedo_map3);
-
-
-	_shader[3].SetDiffuseCubeMap(diffuse_cube_map2);
-	_shader[3].SetSpecularCubeMap(specular_cube_map2);
-	_shader[3].SetAlbedoTexture(albedo_map2);
+	
 
 	// 座標
 	_position.current = D3DXVECTOR3(0.f,0.f,0.f);
@@ -126,12 +117,19 @@ void PlayerUnit::Finalize()
 void PlayerUnit::Update()
 {
 	// プレイヤーの座標変更
-	PassRootDecision();
 	AimUpdate();
 	_weapon->Update();
 	_back_water->Update();
 	_statnce_animation_system->AdvanceFrame(1);
 	_shot_animation_system->AdvanceFrame(1);
+
+	// 武器タイプ変更
+	Command* command = _command_handler->HandleInputEvent(_application->GetInputManager(), _controller_type);
+	if( command != nullptr )
+	{
+		command->Execute(this);
+	}
+
 }
 //=============================================================================
 // 衝突判定用更新
@@ -150,6 +148,16 @@ void PlayerUnit::CollisionUpdate()
 	else
 	{
 		_destination_shot_animation_blend = 0.f;
+		s32 player_id;
+		if( _controller_type == Command::CONTROLLER_TYPE_1P )
+		{
+			player_id = 1;
+		}
+		else
+		{
+			player_id = 0;
+		}
+		_game_world->GetUi()->UpdateMeterAdd(player_id, kAddWater);
 	}
 
 	_shot_animation_blend += (_destination_shot_animation_blend - _shot_animation_blend) * kBlendyCoefficient;
@@ -166,8 +174,12 @@ void PlayerUnit::CollisionUpdate()
 void PlayerUnit::Draw()
 {
 	Camera* camera = _application->GetCameraManager()->GetCurrentCamera();
+
+	PassRootDecision();
+
 	D3DXVECTOR3 culling_point(_position.current);
 
+	
 	if( camera->GetFrustumCulling().ClipCheck(_position.current, 10.f) )
 	{
 		SettingShaderParameter();
@@ -270,13 +282,19 @@ void PlayerUnit::PassRootDecision()
 
 	// 視点を中心に注視点を回転
 	D3DXMATRIX player_rotation_matrix;
+	D3DXMatrixIdentity(&player_rotation_matrix);
 	D3DXMatrixRotationQuaternion(&player_rotation_matrix, &route.player_quaternion);
 	D3DXVec3TransformCoord(&_position.current, &kVectorFromCamera, &player_rotation_matrix);
 	_position.current += eye_position;
 
 	_world.rotation.y = atan2f(_aim->GetTargetPosition().x - _position.current.x, _aim->GetTargetPosition().z - _position.current.z);
 	_world.rotation.x = atan2f(_position.current.y, _aim->GetTargetPosition().y);
-	_world.rotation.x += D3DX_PI * -0.3f;
+	_world.rotation.x += D3DX_PI * -0.4f;
+
+	if( _controller_type == Command::CONTROLLER_TYPE_1P)
+	{
+		_game_world->GetUi()->UpdateMap(_position.current);
+	}
 }
 
 //=============================================================================
@@ -326,4 +344,38 @@ const D3DXVECTOR3 PlayerUnit::GetPosition()
 	player_point.y += 1.2f;
 
 	return player_point;
+}
+
+//=============================================================================
+// テクスチャを選択
+void PlayerUnit::SelectAlbedoTexture(bool is_player_one)
+{
+	LPDIRECT3DTEXTURE9 albedo_map;
+	LPDIRECT3DTEXTURE9 albedo_map2;
+	LPDIRECT3DTEXTURE9 albedo_map3;
+
+
+	if( is_player_one )
+	{
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_TEXTURE);
+		albedo_map2 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_TEXTURE);
+		albedo_map3 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_FACE);
+	}
+	else
+	{
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_TEXTURE);
+		albedo_map2 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_BAG);
+		albedo_map3 = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_FACE);
+	}
+	
+	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
+	{
+		_shader[shader_index].SetAlbedoTexture(albedo_map);
+	}
+	_shader[0].SetAlbedoTexture(albedo_map3);
+	_shader[1].SetAlbedoTexture(albedo_map);
+	_shader[2].SetAlbedoTexture(albedo_map3);
+	_shader[3].SetAlbedoTexture(albedo_map2);
+
+	_weapon->SelectAlbedoTexture(is_player_one);
 }

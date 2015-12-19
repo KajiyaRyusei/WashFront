@@ -56,7 +56,9 @@ void WaterSprayPool::Create(
 {
 	if( _first_available == nullptr)
 	{
+#ifndef _RELEASE
 		OutputDebugStringA("…‚µ‚Ô‚«ƒv[ƒ‹‚ª‚¢‚Á‚Ï‚¢‚¾‚æ\n");
+#endif
 		return;
 	}
 

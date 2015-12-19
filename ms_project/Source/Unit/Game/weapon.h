@@ -14,6 +14,7 @@
 // include
 #include "Unit/unit.h"
 #include "Data/data_world.h"
+#include "Command/command.h"
 
 //*****************************************************************************
 // 前方宣言
@@ -57,13 +58,22 @@ public:
 	// 発射
 	void Fire(
 		const D3DXVECTOR3& start,
-		const D3DXVECTOR3& end);
+		const D3DXVECTOR3& end,
+		const Command::CONTROLLER_TYPE controller_type);
 
 	// セットプレイヤー
 	void SetPlayer(PlayerUnit* player);
 
 	// 武器レベルアップ
 	void WeaponLevel(WEAPON_LEVEL level);
+
+	// 武器レベルの取得
+	WEAPON_LEVEL GetWeaponLevel(){ return _level; }
+
+	// テクスチャの選択
+	void SelectAlbedoTexture(bool _is_player_one);
+
+
 
 private:
 
@@ -74,6 +84,10 @@ private:
 	D3DXMATRIX _animation_matrix;
 	// シェーダパラメーターの設定
 	void SettingShaderParameter();
+	// デバッグ用武器レベル選択
+#ifdef _DEBUG
+	void DebugWeaponLevelSelect();
+#endif
 
 	// 弾
 	BulletUnit* _bullet;

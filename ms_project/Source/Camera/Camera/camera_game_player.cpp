@@ -45,8 +45,8 @@ void CameraGamePlayer::Initialize()
 	//_projection.fov = D3DXToRadian(45);
 	_projection.fov = D3DXToRadian(60);
 	_projection.aspect = static_cast<fx32>(16.f / 9.f);
-	_projection.camera_near = 1.f;
-	_projection.camera_far = 1300.f;
+	_projection.camera_near = 2.f;
+	_projection.camera_far = 700.f;
 	_view.eye = D3DXVECTOR3(0.f, -1.f, -10.f);
 	_view.look_at = D3DXVECTOR3(0.f, 0.f, 0.f);
 	_view.up = D3DXVECTOR3(0.f, 1.f, 0.f);
@@ -54,6 +54,11 @@ void CameraGamePlayer::Initialize()
 	_rotation_velocity = D3DXVECTOR3(0.f, 0.f, 0.f);
 	_destnation_rotation_velocity = D3DXVECTOR3(0.f, 0.f, 0.f);
 	_pass_frame = 0.f;
+
+	_ortho_projection.volume_near = -200.f;
+	_ortho_projection.volume_far = 200.f;
+	_ortho_projection.volume_height = 100;
+	_ortho_projection.volume_width = 100;
 }
 
 //=============================================================================
@@ -65,6 +70,7 @@ void CameraGamePlayer::CreateMatrix()
 	//Chase();
 
 	D3DXMatrixPerspectiveFovLH(&_projection.matrix, _projection.fov, _projection.aspect, _projection.camera_near, _projection.camera_far);
+	D3DXMatrixOrthoLH(&_ortho_projection.matrix, _ortho_projection.volume_width, _projection.volume_height, _ortho_projection.volume_near, _ortho_projection.volume_far);
 	D3DXMatrixLookAtLH(&_view.matrix, &_view.eye, &_view.look_at, &_view.up);
 
 	_application->GetRendererDevice()->GetDevice()->SetTransform(D3DTS_VIEW, &_view.matrix);
@@ -88,9 +94,10 @@ void CameraGamePlayer::PassRootDecision()
 	_current_route.LerpRoute(_route[index], _route[index2], frame);
 	_view.eye = _current_route.point;
 	D3DXVECTOR3 length_vector(_route[index].point - _route[index2].point);
-	fx32 length_frame = 1 / D3DXVec3Length(&length_vector);
+	fx32 length_frame = D3DXVec3Length(&length_vector);
+
 	// ƒtƒŒ[ƒ€‰ÁŽZ
-	_pass_frame += length_frame * 0.1f + _current_route.velocity* 0.01f;
+	_pass_frame += _current_route.velocity / length_frame *0.3f;
 
 	// ƒ‹[ƒg‚ÌÅ‘å”’´‚¦‚Ä‚¢‚½‚ç‚Ü‚½‚P‚©‚ç
 	if( _pass_frame >= static_cast<fx32>(_route.size()) )

@@ -15,7 +15,7 @@ struct VertexShaderInput
 	float3 normal	 : NORMAL0;
 	float2 texcoord	 : TEXCOORD0;
 	float3 tangent	 : TEXCOORD1;
-	float cleanliness : TEXCOORD2;
+	float4 cleanliness : TEXCOORD2;
 };
 
 //-------------------------------------
@@ -28,7 +28,7 @@ struct VertexShaderOutput
 	float2 texcoord	: TEXCOORD1;
 	float3 world_position: TEXCOORD2;
 	float3 world_tangent : TEXCOORD3;
-	float cleanliness : TEXCOORD4;
+	float4 cleanliness : TEXCOORD4;
 	float depth : TEXCOORD5;
 };
 
@@ -182,7 +182,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 
 	// 法線
 	float3 normal = normalize(input.normal);
-	float3 normal_sampler = lerp(tex2D(uniform_dirty_sampler, input.texcoord + uniform_texcoord_move), tex2D(uniform_normal_sampler, input.texcoord), input.cleanliness).xyz;
+	float3 normal_sampler = lerp(tex2D(uniform_dirty_sampler, input.texcoord + uniform_texcoord_move), tex2D(uniform_normal_sampler, input.texcoord), input.cleanliness.w).xyz;
 	//normal_sampler = normalize(normal_sampler);
 	input.world_tangent = normalize(input.world_tangent);
 	normal = NormalSampler2WorldSpace(normal_sampler, normal, input.world_tangent);
@@ -192,7 +192,7 @@ PixelShaderOutput PS(VertexShaderOutput input)
 	float3 diffuse_cube_ambient = texCUBE(uniform_diffuse_cube_sampler, input.normal).xyz;
 
 	// アルベド
-	float3 albedo = lerp(uniform_ambient_color.xyz, tex2D(uniform_albedo_sampler, input.texcoord).xyz + (diffuse_cube_ambient.xyz*0.5f), input.cleanliness);
+	float3 albedo = lerp(uniform_ambient_color.xyz * input.cleanliness.xyz, tex2D(uniform_albedo_sampler, input.texcoord).xyz + (diffuse_cube_ambient.xyz*0.5f), input.cleanliness.w);
 
 	// 色
 	float4 color = (float4)0;

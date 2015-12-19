@@ -106,8 +106,8 @@ void Application::Update(u64 fps)
 {
 	_develop_manager->GetDebugPrint().Print("FPS : %d\n", fps);
 	_input_manager->Update();
-	_scene_manager->Update();
 	_camera_manager->Update();
+	_scene_manager->Update();
 	_develop_manager->Update();
 }
 //=============================================================================

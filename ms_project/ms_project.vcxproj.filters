@@ -189,24 +189,6 @@
     <ClCompile Include="Source\Command\command_handler.cpp">
       <Filter>Command</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Command\command_move_right.cpp">
-      <Filter>Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Command\command_move_up.cpp">
-      <Filter>Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Command\command_move_back.cpp">
-      <Filter>Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Command\command_move_down.cpp">
-      <Filter>Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Command\command_move_front.cpp">
-      <Filter>Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Command\command_move_left.cpp">
-      <Filter>Command</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Unit\Game\bullet.cpp">
       <Filter>Unit\Game</Filter>
     </ClCompile>
@@ -383,6 +365,33 @@
     </ClCompile>
     <ClCompile Include="Source\Sound\sound.cpp">
       <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Command\command_change_water.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\meter_level.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\mission_frame.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\mission_meter.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\mission_ui.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\mission_ui_title.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\meter_gear.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\game_score_character.cpp">
+      <Filter>Unit\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unit\Game\game_score.cpp">
+      <Filter>Unit\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -673,24 +682,6 @@
     <ClInclude Include="Source\Command\command_handler.h">
       <Filter>Command</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Command\command_move_right.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Command\command_move_up.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Command\command_move_back.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Command\command_move_down.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Command\command_move_front.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Command\command_move_left.h">
-      <Filter>Command</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Shader\Component\normal_texture.h">
       <Filter>Shader\Component</Filter>
     </ClInclude>
@@ -939,6 +930,33 @@
     </ClInclude>
     <ClInclude Include="Source\Sound\sound.h">
       <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Command\command_change_water.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\meter_level.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\mission_frame.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\mission_meter.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\mission_ui.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\mission_ui_title.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\meter_gear.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\game_score_character.h">
+      <Filter>Unit\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit\Game\game_score.h">
+      <Filter>Unit\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

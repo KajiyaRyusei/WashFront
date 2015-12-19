@@ -41,7 +41,7 @@ HRESULT RendererDevice::Initialize(
 	_present_parameters.BackBufferHeight = size_window_height;		// ゲーム画面サイズ(高さ)
 	_present_parameters.BackBufferFormat = display_mode.Format;		// バックバッファフォーマットはディスプレイモードに合わせて使う
 	_present_parameters.SwapEffect = D3DSWAPEFFECT_DISCARD;			// 映像信号に同期してフリップする
-	_present_parameters.Windowed = true;							// ウィンドウモード
+	_present_parameters.Windowed = is_full_screen;							// ウィンドウモード
 	_present_parameters.EnableAutoDepthStencil = TRUE;				// デプスバッファ（Ｚバッファ）とステンシルバッファを作成
 	_present_parameters.AutoDepthStencilFormat = D3DFMT_D24S8;		// デプスバッファとして24bit・ステンシルに8bit使用
 	_present_parameters.MultiSampleType = D3DMULTISAMPLE_4_SAMPLES;	// マルチサンプリング

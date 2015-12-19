@@ -1,72 +1,47 @@
-﻿2015/12/16 0:44:37 にビルドを開始しました。
+﻿2015/12/19 20:38:12 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\ms_project.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /Zi /nologo /W4 /WX /sdl /O2 /Oi /Oy- /GL /D _RELEASE /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\ms_project.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Camera\Camera\camera_game_player.cpp Source\Camera\Camera\camera_title.cpp Source\Camera\camera_manager.cpp Source\Command\command_fire.cpp Source\Command\command_move.cpp Source\Command\command_move_back.cpp Source\Command\command_move_down.cpp Source\Command\command_move_front.cpp Source\Command\command_move_left.cpp Source\Command\command_move_right.cpp Source\Command\command_move_up.cpp Source\Fade\fade.cpp Source\Resource\Mesh\Mesh\mesh_factory_smo.cpp Source\Resource\Mesh\Mesh\mesh_factory_smo_instance.cpp Source\Resource\Mesh\Mesh\mesh_factory_sprite_instance.cpp Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Scene\scene_manager.cpp Source\Shader\effect_handle_manager.cpp Source\Shader\Shader\static_toon_cloud_shader.cpp Source\Sound\sound.cpp Source\System\application.cpp Source\System\system_flow.cpp Source\Unit\dummy_ui.cpp Source\Unit\Game\aim.cpp Source\Unit\Game\aim_draw.cpp Source\Unit\Game\aim_line.cpp Source\Unit\Game\back_ground.cpp Source\Unit\Game\building.cpp Source\Unit\Game\bullet.cpp Source\Unit\Game\clouds.cpp Source\Unit\Game\dirt.cpp Source\Unit\Game\map.cpp Source\Unit\Game\map_back.cpp Source\Unit\Game\map_character.cpp Source\Unit\Game\meter.cpp Source\Unit\Game\meter_frame.cpp Source\Unit\Game\meter_water.cpp Source\Unit\Game\player.cpp Source\Unit\Game\score_back.cpp Source\Unit\Game\static_building.cpp Source\Unit\Game\water_back.cpp Source\Unit\Game\water_bullet.cpp Source\Unit\Game\water_spray_pool.cpp Source\Unit\Game\weapon.cpp Source\Unit\number.cpp Source\Unit\Result\bulletin_board.cpp Source\Unit\Result\judge.cpp Source\Unit\Result\message_box.cpp Source\Unit\Result\result_bg.cpp Source\Unit\Result\score.cpp Source\Unit\screen_unit.cpp Source\Unit\Title\logo.cpp Source\Unit\Title\logo_bg.cpp Source\Unit\Title\text.cpp Source\Unit\Title\title_player.cpp Source\Unit\Title\title_weapon.cpp Source\Unit\ui.cpp Source\Unit\unit.cpp Source\World\collision_grid.cpp Source\World\grid_2D.cpp Source\World\world.cpp
-         camera_game_player.cpp
-         camera_title.cpp
-         camera_manager.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\Source" /Zi /nologo /W4 /WX /sdl /O2 /Oi /Oy- /GL /D _RELEASE /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\ms_project.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Source\Command\command_change_water.cpp Source\Command\command_fire.cpp Source\Command\command_handler.cpp Source\Scene\Scene\scene_game.cpp Source\Scene\Scene\scene_result.cpp Source\Scene\Scene\scene_title.cpp Source\Scene\scene_manager.cpp Source\Shader\Shader\screen_2d_shader.cpp Source\Shader\effect_handle_manager.cpp Source\System\system_flow.cpp Source\Unit\Game\building.cpp Source\Unit\Game\game_score.cpp Source\Unit\Game\game_score_character.cpp Source\Unit\Game\map.cpp Source\Unit\Game\map_back.cpp Source\Unit\Game\map_character.cpp Source\Unit\Game\meter.cpp Source\Unit\Game\meter_frame.cpp Source\Unit\Game\meter_gear.cpp Source\Unit\Game\meter_level.cpp Source\Unit\Game\meter_water.cpp Source\Unit\Game\mission_frame.cpp Source\Unit\Game\mission_meter.cpp Source\Unit\Game\mission_ui.cpp Source\Unit\Game\mission_ui_title.cpp Source\Unit\Game\player.cpp Source\Unit\Game\score_back.cpp Source\Unit\Result\bulletin_board.cpp Source\Unit\Result\judge.cpp Source\Unit\Result\message_box.cpp Source\Unit\Result\result_bg.cpp Source\Unit\Result\score.cpp Source\Unit\Title\logo.cpp Source\Unit\Title\logo_bg.cpp Source\Unit\Title\text.cpp Source\Unit\dummy_ui.cpp Source\Unit\number.cpp Source\Unit\screen_unit.cpp Source\Unit\ui.cpp Source\World\world.cpp
+         command_change_water.cpp
          command_fire.cpp
-         command_move.cpp
-         command_move_back.cpp
-         command_move_down.cpp
-         command_move_front.cpp
-         command_move_left.cpp
-         command_move_right.cpp
-         command_move_up.cpp
-         fade.cpp
-         mesh_factory_smo.cpp
-         mesh_factory_smo_instance.cpp
-         mesh_factory_sprite_instance.cpp
+         command_handler.cpp
          scene_game.cpp
          scene_result.cpp
          scene_title.cpp
          scene_manager.cpp
+         screen_2d_shader.cpp
          effect_handle_manager.cpp
-         コンパイル中...
-         static_toon_cloud_shader.cpp
-         sound.cpp
-         application.cpp
          system_flow.cpp
-         dummy_ui.cpp
-         aim.cpp
-         aim_draw.cpp
-         aim_line.cpp
-         back_ground.cpp
          building.cpp
-         bullet.cpp
-         clouds.cpp
-         dirt.cpp
+         game_score.cpp
+         game_score_character.cpp
          map.cpp
          map_back.cpp
          map_character.cpp
          meter.cpp
          meter_frame.cpp
-         meter_water.cpp
-         player.cpp
+         meter_gear.cpp
+         meter_level.cpp
          コンパイル中...
+         meter_water.cpp
+         mission_frame.cpp
+         mission_meter.cpp
+         mission_ui.cpp
+         mission_ui_title.cpp
+         player.cpp
          score_back.cpp
-         static_building.cpp
-         water_back.cpp
-         water_bullet.cpp
-         water_spray_pool.cpp
-         weapon.cpp
-         number.cpp
          bulletin_board.cpp
          judge.cpp
          message_box.cpp
          result_bg.cpp
          score.cpp
-         screen_unit.cpp
          logo.cpp
          logo_bg.cpp
          text.cpp
-         title_player.cpp
-         title_weapon.cpp
+         dummy_ui.cpp
+         number.cpp
+         screen_unit.cpp
          ui.cpp
-         unit.cpp
-         コンパイル中...
-         collision_grid.cpp
-         grid_2D.cpp
          world.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\龍成\Documents\fourth\MS\WashFront\ms_project\\ms_project.lib" /MACHINE:X86 /SAFESEH Release\dirt_math.obj
@@ -79,15 +54,10 @@
          Release\camera_title.obj
          Release\camera_manager.obj
          Release\collision_system.obj
+         Release\command_change_water.obj
          Release\command_fire.obj
          Release\command_handler.obj
          Release\command_move.obj
-         Release\command_move_back.obj
-         Release\command_move_down.obj
-         Release\command_move_front.obj
-         Release\command_move_left.obj
-         Release\command_move_right.obj
-         Release\command_move_up.obj
          Release\debug_box.obj
          Release\debug_line.obj
          Release\debug_line_box.obj
@@ -164,12 +134,20 @@
          Release\bullet.obj
          Release\clouds.obj
          Release\dirt.obj
+         Release\game_score.obj
+         Release\game_score_character.obj
          Release\map.obj
          Release\map_back.obj
          Release\map_character.obj
          Release\meter.obj
          Release\meter_frame.obj
+         Release\meter_gear.obj
+         Release\meter_level.obj
          Release\meter_water.obj
+         Release\mission_frame.obj
+         Release\mission_meter.obj
+         Release\mission_ui.obj
+         Release\mission_ui_title.obj
          Release\player.obj
          Release\score_back.obj
          Release\static_building.obj
@@ -205,4 +183,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:13.97
+経過時間 00:00:14.99

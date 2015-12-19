@@ -51,6 +51,9 @@ void WaterBulletUnit::Initialize()
 	_world.rotation = D3DXVECTOR3(0.f, 0.f, 0.f);
 	_release_of = 0.f;
 	_destination_release_of = _release_of;
+
+	// 色の初期値
+	_ambient = D3DXVECTOR4(0.97f, 0.8f, 0.75f, 1.f);
 }
 
 //=============================================================================
@@ -85,7 +88,7 @@ void WaterBulletUnit::Draw()
 {
 	_start_point = _player->GetPosition();
 	_rotation_y = atan2f(_end_point.x - _start_point.x, _end_point.z - _start_point.z);
-	_start_point += D3DXVECTOR3(sinf(_rotation_y) * 1.f, 0.f, cosf(_rotation_y) * 1.f);
+	_start_point += D3DXVECTOR3(sinf(_rotation_y - 0.6f) * 0.35f, -0.25f, cosf(_rotation_y - 0.6f) * 0.35f);
 
 	// シェーダパラメーターの更新
 	SettingShaderParameter();
@@ -109,21 +112,19 @@ void WaterBulletUnit::SettingShaderParameter()
 	algo::CreateWVP(_matrix_world_view_projection, _world.matrix, camera);
 	// ライトの方向作成
 	D3DXVECTOR4 light_direction(0.2f, -0.8f, 0.5f, 0.f);
-	D3DXVECTOR4 ambient(1.0f, 1.0f, 1.0f, 1.0f);
 	D3DXVECTOR4 eye(camera->GetVectorEye(), 0.f);
 
 	// シェーダの設定
 	_shader->SetWorldViewProjection(_matrix_world_view_projection);
-	_shader->SetWorld(_world.matrix);
 	_shader->SetLightDirection(light_direction);
-	_shader->SetAmbientColor(ambient);
+	_shader->SetAmbientColor(_ambient);
 	_shader->SetEyePosition(eye);
 	_shader->SetFresnel(0.6f);
 	_shader->SetMetalness(0.2f);
 	_shader->SetRoughness(0.3f);
 	_shader->SetWorld(_world.matrix);
 	static D3DXVECTOR2 texcoord_move(0.f,0.f);
-	texcoord_move.y -= 0.04f;
+	texcoord_move.y -= 0.03f;
 	_shader->SetTexcoordMove(texcoord_move);
 
 
@@ -141,9 +142,16 @@ void WaterBulletUnit::SettingShaderParameter()
 	D3DXMatrixRotationYawPitchRoll(&matrix_rotation[1], _rotation_y, 0.f, 0.f);
 	D3DXMatrixRotationYawPitchRoll(&matrix_rotation[2], _rotation_y, 0.f, 0.f);
 
-	D3DXMatrixScaling(&matrix_scale[0], _release_of*0.01f, _release_of*0.01f, _release_of);
-	D3DXMatrixScaling(&matrix_scale[1], _release_of*0.4f, _release_of*0.4f, _release_of);
-	D3DXMatrixScaling(&matrix_scale[2], _release_of*2.5f, _release_of*2.5f, _release_of);
+	D3DXMatrixScaling(&matrix_scale[0], _release_of*0.03f, _release_of*0.03f, _release_of);
+	D3DXMatrixScaling(&matrix_scale[1], _release_of * 0.5f, _release_of* 0.5f, _release_of);
+	D3DXMatrixScaling(&matrix_scale[2], _release_of*2.0f, _release_of*2.0f, _release_of);
+
+	//D3DXMatrixScaling(&matrix_scale[0], 1.f, 1.f, 1.f);
+	//D3DXMatrixScaling(&matrix_scale[1], 1.f, 1.f, 1.f);
+	//D3DXMatrixScaling(&matrix_scale[2], 1.f, 1.f, 1.f);
+
+
+	_application->GetDevelopToolManager()->GetDebugPrint().Print("水の位置 : %f %f %f \n", _end_point.x, _end_point.y, _end_point.z);
 
 	for( int i = 0; i < 3; ++i )
 	{
@@ -159,7 +167,11 @@ void WaterBulletUnit::Fire(const D3DXVECTOR3& end)
 {
 	_start_point = _player->GetPosition();
 	_end_point = end;
-	D3DXVec3Lerp(&_control_point, &_start_point, &_end_point,0.001f);
-	_control_point.y += 5.f;
+	D3DXVec3Lerp(&_control_point, &_start_point, &_end_point,0.3f);
+	D3DXVECTOR3 control_point2;
+	D3DXVec3Lerp(&control_point2, &_start_point, &_end_point, 0.3f);
+	_control_point.y += 0.5f;
+	//_control_point.x = control_point2.x;
+	//_control_point.z = control_point2.z;
 	_destination_release_of = 1.f;
 }

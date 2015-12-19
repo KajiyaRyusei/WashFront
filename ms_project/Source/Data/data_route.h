@@ -51,10 +51,11 @@ namespace data
 
 			this->state = route_one.state;
 			this->velocity = route_one.velocity;
-			D3DXVec3Lerp(&this->point, &route_one.point, &route_two.point, frame);
+			//D3DXVec3Lerp(&this->point, &route_one.point, &route_two.point, t2);
+			this->point = route_one.point * (1 - frame) + route_two.point * frame;
 			D3DXQuaternionSlerp(&this->eye_quaternion, &route_one.eye_quaternion, &route_two.eye_quaternion, t2);
-			D3DXVec3Lerp(&this->player_rotation, &route_one.player_rotation, &route_two.player_rotation, frame);
-			D3DXQuaternionSlerp(&this->player_quaternion, &route_one.player_quaternion, &route_two.player_quaternion, t2);
+			D3DXVec3Lerp(&this->player_rotation, &route_one.player_rotation, &route_two.player_rotation, t2);
+			D3DXQuaternionSlerp(&this->player_quaternion, &route_one.player_quaternion, &route_two.player_quaternion, frame);
 		}
 	};
 };

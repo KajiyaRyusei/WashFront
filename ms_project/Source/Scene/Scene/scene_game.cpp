@@ -28,6 +28,7 @@
 #include "Unit/Game/water_spray_pool.h"
 #include "Unit/Game/clouds.h"
 #include "Unit/Game/static_building.h"
+#include "Unit/ui.h"
 
 // 空間
 #include "World/collision_grid.h"
@@ -54,6 +55,13 @@
 // ルート
 #include "Data/data_route.h"
 
+//*****************************************************************************
+// 定数
+namespace
+{
+	static const fx32 kWaterMax = 100.f;
+}
+
 //=============================================================================
 // コンストラクタ
 SceneGame::SceneGame(Application *application) :
@@ -68,6 +76,9 @@ void SceneGame::Initialize()
 	_world = new World();
 	WaterSprayPool* water_spray_pool = new WaterSprayPool(_application,_world);
 	_world->SetWaterSprayPool(water_spray_pool);
+
+	Ui *ui = new Ui(_application, _world);
+	_world->SetUi(ui);
 
 	ResourceGeneration();
 	MapGeneration();
@@ -173,11 +184,15 @@ void SceneGame::Draw()
 	_application->GetDevelopToolManager()->Draw();
 
 	//------------------------------------
-	// 通常
+	// 通常 : 2D
+	_world->Draw2D();
+
 	_application->GetCommandBuffer()->Sort();
 
 	_application->GetRendererDevice()->GetDevice()->SetViewport(&viewport);
+
 	// 2Dの描画
+	_application->GetCommandProcessor()->ProccessDefault();
 	_application->GetCommandProcessor()->Proccess2D();
 
 	_application->GetCommandBuffer()->Clear();
@@ -191,16 +206,29 @@ void SceneGame::MapGeneration()
 	std::vector<data::Dirt> dirty_list = DirtyRead();
 
 	std::list<Unit*> unit_list;
+
+	std::list<Unit*> unit_list_2d;
+
+
+	// プレイヤー１
 	CameraGamePlayer* camera_1p = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER_1P));
 	camera_1p->InitializeFrame();
 	PlayerUnit* player_1p = new PlayerUnit(_application, _world, camera_1p);
 	player_1p->SetControllerType(Command::CONTROLLER_TYPE_1P);
+	player_1p->SelectAlbedoTexture(true);
 
+	// プレイヤー２
 	CameraGamePlayer* camera_2p = static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER_2P));
 	camera_2p->InitializeFrame();
 	PlayerUnit* player_2p = new PlayerUnit(_application, _world, camera_2p);
 	player_2p->SetControllerType(Command::CONTROLLER_TYPE_2P);
+	player_2p->SelectAlbedoTexture(false);
 
+	_world->GetUi()->SetList(&unit_list_2d);
+	_world->GetUi()->MaxWaterMeter(0, kWaterMax);
+	_world->GetUi()->MaxWaterMeter(0, kWaterMax);
+	
+	
 	RouteRead();
 
 	unit_list.push_back(player_1p);
@@ -214,7 +242,7 @@ void SceneGame::MapGeneration()
 
 	// マップファイル読み込み
 	FILE* file;
-	file = fopen("Data/Map/pre.map", "rt");
+	file = fopen("Data/Map/pre001.map", "rt");
 
 	s32 object_number = 0;
 
@@ -271,11 +299,11 @@ void SceneGame::MapGeneration()
 					break;
 				case STATIC_MESH_RESOURE_BILL_001:
 					file_name = "Data/StaticModel/new_biru_2.smo";
-					id = STATIC_MESH_RESOURE_BILL_001;
+					id = STATIC_MESH_RESOURE_BILL_001_LOW;
 					break;
 				case STATIC_MESH_RESOURE_BILL_002:
 					file_name = "Data/StaticModel/new_biru_3.smo";
-					id = STATIC_MESH_RESOURE_BILL_002;
+					id = STATIC_MESH_RESOURE_BILL_002_LOW;
 					break;
 				case STATIC_MESH_RESOURE_BILL_003:
 					file_name = "Data/StaticModel/new_biru_4.smo";
@@ -285,6 +313,8 @@ void SceneGame::MapGeneration()
 					file_name = "Data/StaticModel/new_biru_haikei.smo";
 					id = STATIC_MESH_RESOURE_BILL_HAIKEI;
 					break;
+				case 5:
+					id = STATIC_MESH_RESOURE_ROAD;
 				default:
 					break;
 				}
@@ -306,6 +336,7 @@ void SceneGame::MapGeneration()
 	fclose(file);
 
 	_world->PushUnit(std::move(unit_list));
+	_world->PushUnit2D(std::move(unit_list_2d));
 }
 
 //=============================================================================
@@ -335,6 +366,15 @@ void SceneGame::ResourceGeneration()
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_NORMAL_TEXTURE, _application->GetRendererDevice());
 	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_FACE, _application->GetRendererDevice());
 
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_2_BAG, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_2_FACE, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_PLAYER_2_TEXTURE, _application->GetRendererDevice());
+
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_001, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_002, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_003, _application->GetRendererDevice());
+	_world->GetTextureResource()->Create(TEXTURE_RESOURE_BILL_TEXTURE_004, _application->GetRendererDevice());
+
 	// キューブマップ
 	_world->GetCubeTextureResource()->Create(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE, _application->GetRendererDevice());
 	_world->GetCubeTextureResource()->Create(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_SPECULAR, _application->GetRendererDevice());
@@ -347,6 +387,9 @@ void SceneGame::ResourceGeneration()
 	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_002, _application->GetRendererDevice());
 	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_003, _application->GetRendererDevice());
 	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_HAIKEI, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_001_LOW, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_BILL_002_LOW, _application->GetRendererDevice());
+	_world->GetStaticMeshResource()->Create(STATIC_MESH_RESOURE_ROAD, _application->GetRendererDevice());
 
 	// AMO
 	_world->GetAnimationMeshResource()->Create(ANIMATION_MESH_RESOURE_WEAPON_01, _application->GetRendererDevice());
@@ -363,7 +406,7 @@ void SceneGame::ResourceGeneration()
 void SceneGame::RouteRead()
 {
 	FILE* inputFile;
-	inputFile = fopen("Data/Map/pre.rt", "rt");
+	inputFile = fopen("Data/Map/pre001.rt", "rt");
 
 	int num = 0;
 	fx32 length = 0.f;
@@ -403,6 +446,7 @@ void SceneGame::RouteRead()
 			if( !strcmp(str, "#LEN") )
 			{
 				fscanf(inputFile, "%f", &length);
+				
 				break;
 			}
 		}
@@ -444,6 +488,8 @@ void SceneGame::RouteRead()
 
 		if( i == 0)
 		{
+			D3DXVECTOR3 point = route[0].point;
+			_world->GetUi()->SetMap(length, point);
 			static_cast<CameraGamePlayer*>(_application->GetCameraManager()->GetCamera(CAMERA_TYPE_GAME_PLAYER_1P))->SetRoute(std::move(route));
 		}
 		else if( i == 1 )
@@ -462,7 +508,7 @@ std::vector<data::Dirt> SceneGame::DirtyRead()
 	int num = 0;
 
 	FILE* inputFile;
-	inputFile = fopen("Data/Map/debug3.drt", "rt");
+	inputFile = fopen("Data/Map/pre001.drt", "rt");
 
 	fseek(inputFile, 0, SEEK_SET);
 
@@ -504,7 +550,7 @@ std::vector<data::Dirt> SceneGame::DirtyRead()
 				data::Dirt dirt;
 				int ID;
 
-				fscanf(inputFile, "%d %f %f %f %f", &ID, &dirt.point.x, &dirt.point.y, &dirt.point.z, &dirt.radius);
+				fscanf(inputFile, "%d %f %f %f %f %d", &ID, &dirt.point.x, &dirt.point.y, &dirt.point.z, &dirt.radius, &dirt.level);
 
 				dirty_list.push_back(dirt);
 

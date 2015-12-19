@@ -48,7 +48,6 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override{}
-	virtual void CollisionMeshPoint(u32 point_index)override{ UNREFERENCED_PARAMETER(point_index); }
 
 private:
 

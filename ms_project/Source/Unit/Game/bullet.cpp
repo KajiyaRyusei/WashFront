@@ -18,9 +18,7 @@
 // 定数
 namespace
 {
-	static const fx32 kLevelOneBulletSize = 3.f;
-	static const fx32 kLevelTwoBulletSize = 5.f;
-	static const fx32 kLevelThreeBulletSize = 7.f;
+	static const fx32 kBulletSize = 3.5f;
 }
 
 //=============================================================================
@@ -31,7 +29,7 @@ void BulletUnit::Initialize()
 	_position.current = D3DXVECTOR3(0.f, 0.f, 0.f);
 	_position.previous = _position.current;
 	_world.position = _position.current;
-	_world.scale = D3DXVECTOR3(_bullet_size, _bullet_size, _bullet_size);
+	_world.scale = D3DXVECTOR3(kBulletSize, kBulletSize, kBulletSize);
 	_world.rotation = D3DXVECTOR3(0.f, 0.f, 0.f);
 
 	// 弾の設定
@@ -43,8 +41,6 @@ void BulletUnit::Initialize()
 
 	// ボリュームの作成
 	CreateVolumeShpre(_world.position, _world.scale.x);
-
-	ReNewBulletSize(kLevelOneBulletSize);
 
 	// 空間に突っ込む
 	_game_world->GetCollisionGrid()->AddUnit(this, _position);
@@ -95,7 +91,7 @@ void BulletUnit::CollisionBox()
 // 描画
 void BulletUnit::Draw()
 {
-	//_shpere->DebugDraw();
+//	_shpere->DebugDraw();
 }
 
 //=============================================================================
@@ -103,7 +99,8 @@ void BulletUnit::Draw()
 void BulletUnit::Fire(
 	const D3DXVECTOR3& start,
 	const D3DXVECTOR3& end,
-	const fx32 velocity)
+	const fx32 velocity,
+	const Command::CONTROLLER_TYPE controller_type)
 {
 	if( _frame < 1.f )
 	{
@@ -116,6 +113,16 @@ void BulletUnit::Fire(
 	_frame_velocity = velocity;
 	_frame = 0.f;
 	_position.current = start;
+	if( controller_type == Command::CONTROLLER_TYPE_1P)
+	{
+		_shpere->is_player_one = true;
+	}
+	else
+	{
+		_shpere->is_player_one = false;
+	}
+
+	
 }
 
 //=============================================================================
@@ -128,9 +135,8 @@ void BulletUnit::Move()
 
 //=============================================================================
 // バレットサイズ更新
-void BulletUnit::ReNewBulletSize(const fx32 size)
+void BulletUnit::ReNewBulletSize(const u8 level)
 {
-	_bullet_size = size;
-	_shpere->radius = _bullet_size;
-	_world.scale = D3DXVECTOR3(_bullet_size, _bullet_size, _bullet_size);
+	_shpere->level = level;
+
 }

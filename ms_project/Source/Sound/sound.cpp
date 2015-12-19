@@ -19,9 +19,9 @@
 PARAM c_param[ SOUND_LABEL_MAX ] =
 {
 	//BGM
-	{ L"Data/Sound/BGM/Ylvis_-_The_Fox_Ver_1403529190.wav" , false } ,	
+	{ L"Data/Sound/BGM/Ylvis_-_The_Fox_Ver_1403529190.wav" , false },
 	//SE
-	{ L"Data/Sound/SE/hiyoko2SE.wav" , false },						
+	{ L"Data/Sound/SE/hiyoko2SE.wav" , false },
 };
 
 //*****************************************************************************

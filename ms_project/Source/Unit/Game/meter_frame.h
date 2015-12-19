@@ -36,6 +36,8 @@ public:
 	virtual void Draw() override;
 	virtual void CollisionUpdate() override{}
 
+	
+
 private:
 
 };

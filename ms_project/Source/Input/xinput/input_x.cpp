@@ -40,6 +40,7 @@ void InputX::Initialize()
 	{
 		// デバイス数分メモリ確保
 		_preview_state = new XINPUT_STATE[ _device_num ];
+		ZeroMemory(_preview_state, sizeof(XINPUT_STATE)*_device_num);
 		ASSERT( _preview_state != nullptr , "メモリ確保失敗" );
 	}
 	

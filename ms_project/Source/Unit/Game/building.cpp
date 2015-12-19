@@ -27,11 +27,14 @@
 // 衝突用
 #include "Collision/collision_system.h"
 
+// UI
+#include "Unit/ui.h"
+
 //*****************************************************************************
 // 定数
 namespace
 {
-	static const fx32 kCleanVelocity = 0.035f;
+	static const fx32 kCleanVelocity = 0.045f;
 }
 
 //=============================================================================
@@ -48,7 +51,34 @@ void BuildingUnit::Initialize(
 	_shader_size = _mesh_list.size();
 	_shader = new ShaderToonBuilding[_mesh_list.size()];
 
-	LPDIRECT3DTEXTURE9 albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE);
+	LPDIRECT3DTEXTURE9 albedo_map;
+
+	static u32 albedo_texture_id = 0;
+
+	switch( albedo_texture_id%5 )
+	{
+	case 0:
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE);
+		break;
+	case 1:
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE_001);
+		break;
+	case 2:
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE_002);
+		break;
+	case 3:
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE_003);
+		break;
+	case 4:
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE_004);
+		break;
+	default:
+		break;
+	}
+	++albedo_texture_id;
+	
+
+
 	LPDIRECT3DTEXTURE9 dirt_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_DIRTY_TEXTURE);
 	LPDIRECT3DCUBETEXTURE9 diffuse_cube_map = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE);
 	LPDIRECT3DTEXTURE9 toon_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_TOON_TEXTURE);
@@ -90,8 +120,8 @@ void BuildingUnit::Initialize(
 
 	// ボリュームの作成
 	CreateVolumeMeshPoint(_world.position, _world.scale, _world.rotation, vertex_count, mesh_point_array, mesh_normal_array);
-	D3DXVECTOR3 volume_box_size(_world.scale*6.f);
-	volume_box_size.y *= 10.f;
+	D3DXVECTOR3 volume_box_size(_world.scale*7.5f);
+	volume_box_size.y *= 9.f;
 	CreateVolumeBox(_world.position, volume_box_size, _world.rotation);
 
 	// 空間に突っ込む
@@ -163,8 +193,8 @@ void BuildingUnit::SettingShaderParameter()
 
 	// ライトの方向作成
 	D3DXVECTOR4 light_direction(0.2f, -0.8f, 0.5f, 0.f);
-	static D3DXVECTOR4 basic_ambient(0.8f, 0.5f, 0.2f, 1.f);
-	static D3DXVECTOR4 dirt_ambient(0.8f*0.35f, 0.5f*0.2f, 0.2f*0.2f, 1.f);
+	static D3DXVECTOR4 basic_ambient(1.0f, 1.0f, 1.0f, 1.f);
+	static D3DXVECTOR4 dirt_ambient(basic_ambient.x * 0.35f, basic_ambient.y*0.2f, basic_ambient.z*0.2f, 1.f);
 	static D3DXVECTOR4 ambient(1.0f, 0.3f, 0.2f, 1.f);
 	static D3DXVECTOR3 ambient_bezier(0.0f, 0.0f, 0.0f);
 	static fx32 ambient_coefficient = 0.f;
@@ -193,11 +223,29 @@ void BuildingUnit::SettingShaderParameter()
 
 //=============================================================================
 // 座標設定
-void BuildingUnit::CollisionMeshPoint(u32 point_index)
+void BuildingUnit::CollisionMeshPoint(u32 point_index, u8 level, bool is_player_one)
 {
-	_clean_index_list.push_back(point_index);
+	s32 player_id = is_player_one ? 0 : 1;
+	if( level == _volume_mesh_point->dirt_level[point_index] )
+	{
+		switch( level )
+		{
+		case 0:
+			_game_world->GetUi()->UpdateScore(player_id, 10);
+			break;
+		case 1:
+			_game_world->GetUi()->UpdateScore(player_id, 20);
+			break;
+		case 2:
+			_game_world->GetUi()->UpdateScore(player_id, 30);
+			break;
+		default:
+			break;
+		}
+		_clean_index_list.push_back(point_index);
+	}
 
-	D3DXVECTOR3 front_vector(sinf(_volume_mesh_point->attitudes[point_index]) *1.f, 0.f, cosf(_volume_mesh_point->attitudes[point_index]) *1.f);
+	D3DXVECTOR3 front_vector(sinf(_volume_mesh_point->attitudes[point_index]) *2.f, 0.f, cosf(_volume_mesh_point->attitudes[point_index]) *2.f);
 	_game_world->GetWaterSprayPool()->Create(_volume_mesh_point->points[point_index] + front_vector, _volume_mesh_point->attitudes[point_index]);
 }
 
@@ -213,9 +261,9 @@ void BuildingUnit::CleanUp()
 		std::list<u32>::iterator index_it;
 		for( index_it = _clean_index_list.begin(); index_it != _clean_index_list.end(); )
 		{
-			if( vertex[*index_it].cleanliness < 1.5f )
+			if( vertex[*index_it].cleanliness.w < 1.5f )
 			{
-				vertex[*index_it].cleanliness += kCleanVelocity;
+				vertex[*index_it].cleanliness.w += kCleanVelocity;
 			}
 			else
 			{
@@ -248,7 +296,23 @@ void BuildingUnit::SettingDirty(std::vector<data::Dirt>& dirt_list)
 					_volume_mesh_point->points[vertex_id],
 					it.radius) )
 				{
-					vertex[vertex_id].cleanliness = 0.f;
+					switch( it.level )
+					{
+					case 0:
+						_volume_mesh_point->dirt_level[vertex_id] = 0;
+						vertex[vertex_id].cleanliness = D3DXVECTOR4(0.2f, 0.2f, 0.55f, 0.f);
+						break;
+					case 1:
+						_volume_mesh_point->dirt_level[vertex_id] = 1;
+						vertex[vertex_id].cleanliness = D3DXVECTOR4(0.45f, 0.3f, 0.2f, 0.f);
+						break;
+					case 2:
+						_volume_mesh_point->dirt_level[vertex_id] = 2;
+						vertex[vertex_id].cleanliness = D3DXVECTOR4(1.0f, 0.4f, 0.15f, 0.f);
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		}

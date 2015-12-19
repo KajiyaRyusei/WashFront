@@ -33,13 +33,11 @@ public:
 	// 移動用コマンド
 	Command* HandleInputMove(InputManager* input, Command::CONTROLLER_TYPE type);
 
+	// InputEvent用コマンド
+	Command* HandleInputEvent(InputManager* input, Command::CONTROLLER_TYPE type);
+
 private:
 	Command* _fire;
-	Command* _move_front;
-	Command* _move_back;
-	Command* _move_right;
-	Command* _move_left;
-	Command* _move_up;
-	Command* _move_down;
 	Command* _move;
+	Command* _chage_level;
 };

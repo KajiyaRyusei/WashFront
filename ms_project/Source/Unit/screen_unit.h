@@ -57,6 +57,14 @@ public:
 		_scaling = scale;
 	}
 
+	// ローテーションの加算
+	void AddRotation(fx32 _add_rotation)
+	{
+		_rotation += _add_rotation;
+	}
+
+	// 色の選択
+	void SelectColor(const D3DXVECTOR4& color);
 
 protected:
 	//uv値
@@ -80,7 +88,8 @@ protected:
 	//
 	bool _visible;
 
-private:
+
+protected:
 
 	// シェーダー
 	Shader2D* _shader;

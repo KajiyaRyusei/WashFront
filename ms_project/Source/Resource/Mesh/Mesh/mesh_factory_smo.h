@@ -22,7 +22,7 @@ struct VERTEX_SMO
 	D3DXVECTOR3	normal;		// 法線ベクトル
 	D3DXVECTOR2	texcoord;	// テクスチャ座標
 	D3DXVECTOR3	tangent;	// 接ベクトル
-	fx32 cleanliness;		// 汚れ具合
+	D3DXVECTOR4 cleanliness;		// 汚れ具合
 };
 
 //*****************************************************************************

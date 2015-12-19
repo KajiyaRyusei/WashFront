@@ -19,7 +19,7 @@
 
 //*****************************************************************************
 // ÉNÉâÉXê›åv
-class DummyUi: public Ui
+class DummyUi : public Ui
 {
 public:
 

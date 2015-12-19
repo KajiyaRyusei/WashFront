@@ -26,9 +26,6 @@
 // 定数
 namespace
 {
-	static const fx32 kLevelOneBulletSize = 3.f;
-	static const fx32 kLevelTwoBulletSize = 5.f;
-	static const fx32 kLevelThreeBulletSize = 7.f;
 	static const fx32 kBulletVelocity = 0.08f;
 }
 
@@ -57,10 +54,6 @@ void WeaponUnit::Initialize()
 		_shader[shader_index].SetSpecularCubeMap(specular_cube_map);
 	}
 
-	_shader->SetAlbedoTexture(albedo_map);
-	_shader->SetDiffuseCubeMap(diffuse_cube_map);
-	_shader->SetSpecularCubeMap(specular_cube_map);
-
 	// 座標の設定
 	_position.current = _game_world->GetCollisionGrid()->CellCenterPoint(2, 1);
 	_position.current.y = 5.f;
@@ -72,6 +65,8 @@ void WeaponUnit::Initialize()
 	// 弾
 	_bullet = new BulletUnit(_application, _game_world);
 	_water_bullet = new WaterBulletUnit(_application, _game_world);
+
+	WeaponLevel(WEAPON_LEVEL_ONE);
 }
 
 //=============================================================================
@@ -89,6 +84,9 @@ void WeaponUnit::Update()
 {
 	_bullet->Update();
 	_water_bullet->Update();
+#ifdef _DEBUG
+	DebugWeaponLevelSelect();
+#endif
 }
 //=============================================================================
 // 描画
@@ -104,11 +102,6 @@ void WeaponUnit::Draw()
 		D3DXMatrixIdentity(&animation_matrix_list[i]);
 	}
 
-	D3DXMATRIX test_matrix;
-	D3DXMatrixIdentity(&test_matrix);
-	D3DXMatrixRotationYawPitchRoll(&test_matrix,0.0f,0.0f,0.1f);
-
-	//test_matrix._41 = 0.5f;
 	u32 mesh_id = 0;
 	animation_matrix_list[2] = _animation_matrix;
 
@@ -140,7 +133,6 @@ void WeaponUnit::SettingShaderParameter()
 	algo::CreateWVP(_matrix_world_view_projection, _world.matrix, camera);
 	// ライトの方向作成
 	D3DXVECTOR4 light_direction(0.2f, -0.8f, 0.5f, 0.f);
-	D3DXVECTOR4 ambient(0.97f, 0.8f, 0.75f, 1.f);
 	D3DXVECTOR4 eye(camera->GetVectorEye(), 0.f);
 
 	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
@@ -158,9 +150,10 @@ void WeaponUnit::SettingShaderParameter()
 // 発射
 void WeaponUnit::Fire(
 	const D3DXVECTOR3& start,
-	const D3DXVECTOR3& end)
+	const D3DXVECTOR3& end,
+	const Command::CONTROLLER_TYPE controller_type)
 {
-	_bullet->Fire(start, end, kBulletVelocity);
+	_bullet->Fire(start, end, kBulletVelocity, controller_type);
 	_water_bullet->Fire(end);
 }
 
@@ -185,18 +178,67 @@ void WeaponUnit::SetPlayer(PlayerUnit* player)
 // 武器レベルアップ
 void WeaponUnit::WeaponLevel(WEAPON_LEVEL level)
 {
+	D3DXVECTOR4 ambient;
 	switch( level )
 	{
 	case WEAPON_LEVEL_ONE:
-		_bullet->ReNewBulletSize(kLevelOneBulletSize);
+		_bullet->ReNewBulletSize(WEAPON_LEVEL_ONE);
+		ambient = D3DXVECTOR4(0.2f, 0.2f, 0.55f, 1.f);
+		_water_bullet->ReNewAmbientColor(ambient);
 		break;
 	case WEAPON_LEVEL_TWO:
-		_bullet->ReNewBulletSize(kLevelTwoBulletSize);
+		_bullet->ReNewBulletSize(WEAPON_LEVEL_TWO);
+		ambient = D3DXVECTOR4(0.45f, 0.3f, 0.2f, 1.f);
+		_water_bullet->ReNewAmbientColor(ambient);
 		break;
 	case WEAPON_LEVEL_THREE:
-		_bullet->ReNewBulletSize(kLevelThreeBulletSize);
+		_bullet->ReNewBulletSize(WEAPON_LEVEL_THREE);
+		ambient = D3DXVECTOR4(1.0f, 0.4f, 0.15f, 1.f);
+		_water_bullet->ReNewAmbientColor(ambient);
 		break;
 	default:
 		break;
+	}
+}
+
+//=============================================================================
+// デバッグ用武器レベル更新
+#ifdef _DEBUG
+#include "Input/input_manager.h"
+void WeaponUnit::DebugWeaponLevelSelect()
+{
+	if( _application->GetInputManager()->CheckTrigger(INPUT_EVENT_1) )
+	{
+		WeaponLevel(WEAPON_LEVEL_ONE);
+	}
+	else if( _application->GetInputManager()->CheckTrigger(INPUT_EVENT_2) )
+	{
+		WeaponLevel(WEAPON_LEVEL_TWO);
+	}
+	else if( _application->GetInputManager()->CheckTrigger(INPUT_EVENT_3) )
+	{
+		WeaponLevel(WEAPON_LEVEL_THREE);
+	}
+}
+#endif
+
+//=============================================================================
+// テクスチャを選択
+void WeaponUnit::SelectAlbedoTexture(bool _is_player_one)
+{
+	LPDIRECT3DTEXTURE9 albedo_map;
+
+	if( _is_player_one )
+	{
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_BAG_TEXTURE);
+	}
+	else
+	{
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_PLAYER_2_TEXTURE);
+	}
+
+	for( u32 shader_index = 0; shader_index < _shader_size; ++shader_index )
+	{
+		_shader[shader_index].SetAlbedoTexture(albedo_map);
 	}
 }

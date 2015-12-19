@@ -38,9 +38,9 @@ public:
 	virtual void Finalize() = 0;
 	virtual void Update() = 0;
 	virtual void CollisionUpdate() = 0;
-	virtual void CollisionSphere(){}
+	virtual void CollisionSphere(){ }
 	virtual void CollisionBox(){}
-	virtual void CollisionMeshPoint(u32 point_index){ UNREFERENCED_PARAMETER(point_index); }
+	virtual void CollisionMeshPoint(u32 point_index, u8 level, bool is_player_one){ UNREFERENCED_PARAMETER(point_index); UNREFERENCED_PARAMETER(level); UNREFERENCED_PARAMETER(is_player_one); }
 	virtual void CollisionLine(const D3DXVECTOR3& impact_point){ UNREFERENCED_PARAMETER(impact_point); }
 	virtual void Draw() = 0;
 

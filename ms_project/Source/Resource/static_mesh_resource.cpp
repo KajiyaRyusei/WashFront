@@ -23,7 +23,10 @@ namespace
 		"Data/StaticModel/new_biru_haikei.smo",
 		"Data/StaticModel/cloud_1.smo",
 		"Data/StaticModel/cloud_2.smo",
-		"Data/StaticModel/cloud_3.smo"
+		"Data/StaticModel/cloud_3.smo",
+		"Data/StaticModel/new_biru_2_low.smo",
+		"Data/StaticModel/new_biru_3_low.smo",
+		"Data/StaticModel/road_back.smo"
 	};
 }
 

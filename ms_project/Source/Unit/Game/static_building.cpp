@@ -35,7 +35,32 @@ void StaticBuildingUnit::Initialize(
 	_shader_size = _mesh_list.size();
 	_shader = new ShaderStaticToonBuilding[_shader_size];
 
-	LPDIRECT3DTEXTURE9 albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE);
+	LPDIRECT3DTEXTURE9 albedo_map;
+
+	static u32 albedo_texture_id = 0;
+
+	switch( albedo_texture_id % 5 )
+	{
+	case 0:
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE);
+		break;
+	case 1:
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE_001);
+		break;
+	case 2:
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE_002);
+		break;
+	case 3:
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE_003);
+		break;
+	case 4:
+		albedo_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_TEXTURE_004);
+		break;
+	default:
+		break;
+	}
+	++albedo_texture_id;
+
 	LPDIRECT3DCUBETEXTURE9 diffuse_cube_map = _game_world->GetCubeTextureResource()->Get(CUBE_TEXTURE_RESOURE_GRID_ZERO_ZERO_DIFFUSE);
 	LPDIRECT3DTEXTURE9 toon_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_TOON_TEXTURE);
 	LPDIRECT3DTEXTURE9 normal_map = _game_world->GetTextureResource()->Get(TEXTURE_RESOURE_BILL_NORMAL_TEXTURE);

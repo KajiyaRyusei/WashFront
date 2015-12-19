@@ -24,6 +24,7 @@ class AnimationMeshResource;
 class AnimationResource;
 
 class WaterSprayPool;
+class Ui;
 
 //*****************************************************************************
 // ÉNÉâÉXê›åv
@@ -43,9 +44,14 @@ public:
 	void Finalize();
 	void Update();
 	void Draw();
+	void Draw2D();
 	void PushUnit(std::list<Unit*>&& unit_list)
 	{
 		_unit_list = unit_list;
+	}
+	void PushUnit2D(std::list<Unit*>&& unit_list)
+	{
+		_2d_unit_list = unit_list;
 	}
 
 	CollisionGrid* GetCollisionGrid(){ return _collision_grid; }
@@ -59,9 +65,13 @@ public:
 	void SetWaterSprayPool(WaterSprayPool* water_spray_pool){ _water_spray_pool = water_spray_pool; }
 	WaterSprayPool* GetWaterSprayPool(){ return _water_spray_pool; }
 
+	void SetUi(Ui *ui){ _ui = ui; }
+	Ui *GetUi(void){ return _ui; }
+
 private:
 
 	std::list<Unit*> _unit_list;
+	std::list<Unit*> _2d_unit_list;
 	CollisionGrid* _collision_grid;
 	TextureResource* _texture_resource;
 	CubeTextureResource* _cube_texture_resource;
@@ -70,4 +80,5 @@ private:
 	AnimationMeshResource* _animation_mesh_resource;
 	AnimationResource* _animation_resource;
 	WaterSprayPool* _water_spray_pool;
+	Ui* _ui;
 };
