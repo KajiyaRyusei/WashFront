@@ -37,9 +37,21 @@
 // サウンドファイル
 enum SOUND_LABEL
 {
-	BGM_TEST = 0 ,
-	SE_TEST ,
-	SOUND_LABEL_MAX 
+	BGM_RESULT = 0,
+	BGM_GAME,
+	BGM_TITLE,
+	SE_DECIDE,
+	SE_COUNT,
+	SE_REWARD,
+	SE_OVERHEAT,
+	SE_SCORE_ADD,
+	SE_WATER_BULLET,
+	SE_WEAPON_CHANGE,
+	SE_OVERHEAT_2,
+	SE_SCORE_ADD_2,
+	SE_WATER_BULLET_2,
+	SE_WEAPON_CHANGE_2,
+	SOUND_LABEL_MAX
 };
 
 //*****************************************************************************
@@ -69,6 +81,8 @@ public:
 	void	Uninit( void );
 	// 再生
 	HRESULT Play( SOUND_LABEL label );
+	// 再生( 改変前 )
+	HRESULT PlaySE(SOUND_LABEL label);
 	// 停止( ラベル指定 )
 	void	Stop( SOUND_LABEL label );
 	// 停止( 全部 )

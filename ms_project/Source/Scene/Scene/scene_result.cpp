@@ -38,8 +38,8 @@
 
 //*****************************************************************************
 // const
-const int			countUpTime		= 60;
-const float			countTimeSpeed	= 1.0f / countUpTime;
+const int			countUpTime = 60;
+const float			countTimeSpeed = 1.0f / countUpTime;
 
 
 const D3DXVECTOR3	WindowPos[2][19] =
@@ -131,7 +131,7 @@ const D3DXVECTOR3 WindowScale[2][7] =
 
 		// score
 		D3DXVECTOR3(20.0f, 40.0f, 0.0f),
-		D3DXVECTOR3(40.0f , 70.0f, 0.0f ) ,
+		D3DXVECTOR3(40.0f, 70.0f, 0.0f),
 
 		// judge
 		D3DXVECTOR3(200.0f, 80.0f, 0.0f)
@@ -153,7 +153,7 @@ const D3DXVECTOR3 WindowScale[2][7] =
 
 		// score
 		D3DXVECTOR3(30.0f, 60.0f, 0.0f),
-		D3DXVECTOR3(50.0f , 105.0f, 0.0f ) ,
+		D3DXVECTOR3(50.0f, 105.0f, 0.0f),
 
 		// judge
 		D3DXVECTOR3(250.0f, 120.0f, 0.0f)
@@ -253,28 +253,28 @@ void SceneResult::Initialize()
 	_pScore[6]->SetPos(WindowPos[windowSizeID][15]);
 	_pScore[7]->SetPos(WindowPos[windowSizeID][16]);
 
-	_pScore[3]->SetTexture( TEXT( "data/Texture/number2.png" ) );
-	_pScore[7]->SetTexture( TEXT( "data/Texture/number2.png" ) );
+	_pScore[3]->SetTexture(TEXT("data/Texture/number2.png"));
+	_pScore[7]->SetTexture(TEXT("data/Texture/number2.png"));
 
-	_pScore[3]->SetScale( WindowScale[windowSizeID][ 5 ] );
-	_pScore[7]->SetScale( WindowScale[windowSizeID][ 5 ] );
+	_pScore[3]->SetScale(WindowScale[windowSizeID][5]);
+	_pScore[7]->SetScale(WindowScale[windowSizeID][5]);
 
 	// 1P のポイント１
-	_pScore[0]->SetDestScore(43786);
+	_pScore[0]->SetDestScore(s_scene_data.score_player_1);
 	// 1P のポイント２
-	_pScore[1]->SetDestScore(99999);
+	_pScore[1]->SetDestScore(0);
 	// 1P のポイント３
-	_pScore[2]->SetDestScore(1732);
+	_pScore[2]->SetDestScore(0);
 	// 1P の合計ポイント
-	_pScore[3]->SetDestScore(6887);
+	_pScore[3]->SetDestScore(s_scene_data.score_player_1);
 	// 2P のポイント１
-	_pScore[4]->SetDestScore(32526);
+	_pScore[4]->SetDestScore(s_scene_data.score_player_2);
 	// 2P のポイント２
-	_pScore[5]->SetDestScore(9);
+	_pScore[5]->SetDestScore(0);
 	// 2P のポイント３
-	_pScore[6]->SetDestScore(35247);
+	_pScore[6]->SetDestScore(0);
 	// 2P の合計ポイント
-	_pScore[7]->SetDestScore(78);
+	_pScore[7]->SetDestScore(s_scene_data.score_player_2);
 
 	for( int i = 0; i < 8; i++ )
 	{
@@ -292,8 +292,22 @@ void SceneResult::Initialize()
 	_pJudge[1]->SetScaling(WindowScale[windowSizeID][6]);
 
 	// 上のスコアでここのテクスチャを変える
-	_pJudge[0]->CreateTexture( L"data/texture/MS_win.png" );
-	_pJudge[1]->CreateTexture( L"data/texture/MS_lose.png" );
+	if (s_scene_data.score_player_2 == s_scene_data.score_player_1)
+	{
+		_pJudge[0]->CreateTexture(L"data/texture/white.png");
+		_pJudge[1]->CreateTexture(L"data/texture/white.png");
+	}
+	else if (s_scene_data.score_player_2 > s_scene_data.score_player_1)
+	{
+		_pJudge[0]->CreateTexture(L"data/texture/MS_lose.png");
+		_pJudge[1]->CreateTexture(L"data/texture/MS_win.png");
+	}
+	else
+	{
+		_pJudge[0]->CreateTexture(L"data/texture/MS_win.png");
+		_pJudge[1]->CreateTexture(L"data/texture/MS_lose.png");
+	}
+	
 
 	unit_list.push_back(_pJudge[0]);
 	unit_list.push_back(_pJudge[1]);
@@ -323,8 +337,9 @@ void SceneResult::Update()
 	{
 		if( _application->GetInputManager()->CheckTrigger(INPUT_EVENT_Z) )
 		{
-			_application->GetSound()->Play(SE_DECIDE);
+			_application->GetSound()->PlaySE(SE_DECIDE);
 			_application->GetSceneManager()->SetNextScene(new SpawnerForScene<SceneTitle>);
+			return;
 		}
 	}
 
@@ -352,6 +367,8 @@ void SceneResult::Update()
 		{
 			_grade = 4.0f;
 			ScoreUnit::SetFlg(true);
+			_application->GetSound()->Stop(SE_COUNT);
+			_application->GetSound()->PlaySE(SE_REWARD);
 		}
 
 		_grade += countTimeSpeed;
@@ -372,7 +389,7 @@ void SceneResult::Update()
 		{
 			ScoreUnit::SetFlg(true);
 			_application->GetSound()->Stop(SE_COUNT);
-			_application->GetSound()->Play(SE_REWARD);
+			_application->GetSound()->PlaySE(SE_REWARD);
 		}
 
 
